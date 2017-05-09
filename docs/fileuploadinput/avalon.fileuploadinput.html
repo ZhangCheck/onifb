@@ -1,0 +1,10 @@
+<div class="oni-fileuploadinput"  ms-mouseenter="mouseIn" ms-mouseleave="mouseOut"  ms-click="showDialog('fileuploadDialog-DIALOG_ID')">
+    <input readonly ms-class="oni-fileuploadinput-input {{focus?'oni-fileuploadinput-input-focus':''}}" ms-value="text"  ms-attr-name="field+'-name'" ms-css-width="{{width}}"  />
+    <input type="hidden" ms-value="value"  ms-attr-name="field+'-value'" />
+    <button type="button"  class="oni-fileuploadinput-button">
+        <i class="oni-fileuploadinput-icon oni-icon oni-icon-list"></i>
+    </button>
+    <div ms-widget="dialog,fileuploadDialog-DIALOG_ID,dialogOpts">
+        <div class="oni-fileuploadinput-fileupload" ms-widget="fileuploader,fileuploadUploader-UPLOADER_ID,fileuploaderOpts"></div>
+    </div>
+</div>

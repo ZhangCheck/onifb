@@ -1,0 +1,98 @@
+<div>
+    <!--<p ms-each="data">
+        {{el.label}}:<input ms-attr-type="el.type" />
+    </p>-->
+    <form ms-attr-action="options.action" ms-attr-method="options.method" data-repeat-rendered="rendered">
+        <table class="formLayout" width="100%">
+            <tr ms-repeat-row="rows" ms-each="row">
+                <td class="fl-label" ms-css-width="50/columnNum.toFixed(0)-5+'%'">
+                    {{el.label}}:
+                </td>
+                <td ms-attr-colspan="(el.place||1)*2-1" ms-css-width="((el.place||1)*2-1)*50/columnNum.toFixed(0)+5+'%'">
+                    <!--普通文本输入框-->
+                    <input ms-if="el.type=='text'" ms-widget="textbox" ms-attr-name="el.field" ms-duplex-handle="el.value" data-textbox-width="100%" />
+                    <!--日期输入框-->
+                    <input ms-if="el.type=='date'" ms-widget="datepicker" ms-attr-name="el.field" data-datapicker-width="100%"
+                           ms-duplex-handle="el.value"/>
+                    <!--下拉输入框-->
+                    <select ms-if="el.type=='dropdownlist'" ms-widget="dropdownlist" ms-attr-name="el.field" data-dropdown-width="100%"
+                            ms-duplex-handle="el.value">
+                        <option ms-repeat-option="el.options" ms-value="option.value"
+                                ms-attr-selected="el.value==option.value?'selected':''">{{option.text}}
+                        </option>
+                    </select>
+                    <!--日期范围输入框-->
+                    <div ms-if="el.type=='daterange'" ms-widget="coupledatepicker" data-coupledatepicker-width="100%"
+                         data-coupledatepicker-duplex="el.starttime, el.endtime"
+                         data-coupledatepicker-rules="el.options"></div>
+                    <input ms-if="el.type=='daterange'" type="hidden" ms-value="el.starttime"
+                           ms-attr-name="el.field+'-start'"/>
+                    <input ms-if="el.type=='daterange'" type="hidden" ms-value="el.endtime"
+                           ms-attr-name="el.field+'-end'"/>
+                    <!--多选框-->
+                    <ul ms-if="el.type=='check'" ms-widget="checkboxlist,$,el" data-checkboxlist-duplex="el.value"
+                        data-checkboxlist-alltext="全部" data-checkboxlist-vertical="false">
+                    </ul>
+                    <input ms-if="el.type=='check'" type="hidden" ms-value="el.value" ms-attr-name="el.field"/>
+                    <!--单选框-->
+                    <span ms-if="el.type=='radio'"><span ms-repeat-data="el.data"><input type="radio"
+                                                                                         ms-attr-name="el.field"
+                                                                                         ms-duplex-handle="el.value"
+                                                                                         ms-value="data.value"/>{{data.text}}</span></span>
+                    <!--树形输入框-->
+                    <div ms-if="el.type=='dropdowntree'" ms-widget="dropdowntree,$,el" ms-duplex-handle="el.value" data-dropdowntree-width="100%"></div>
+                    <input type="hidden" ms-if="el.type=='dropdowntree'" ms-value="el.value" ms-attr-name="el.field"/>
+                    <!--文件上传-->
+                    <div ms-if="el.type=='fileupload'" ms-widget="fileuploadinput,$,el"
+                         ms-duplex-handle="el.files"></div>
+                    <!--二级联动-->
+                    <div ms-if="el.type=='multilevel'" ms-duplex-handle="el.values" ms-widget="multilevel,$,el"></div>
+                    <!--textarea-->
+                    <textarea ms-if="el.type=='textarea'" ms-attr-name="el.field" ms-widget="textbox, $, el"
+                              ms-duplex-handle="el.value" ms-attr-cols="el.cols" placeholder="输入些什么吧"></textarea>
+                    <!--富文本编辑器-->
+                    <textarea ms-if="el.type=='kindeditor'" ms-attr-name="el.field" ms-widget="kindeditor, $, el"
+                              ms-duplex-handle="el.value" placeholder="输入些什么吧"></textarea>
+
+                    <!--display-->
+                    <div ms-if="el.type=='display'"><b>{{el.value}}</b></div>
+                    <!--rating-->
+                    <span ms-if="el.type=='rating'"><input ms-attr-name="el.field"  ms-duplex-handle="el.value" ms-widget="rating, $" /></span>
+                        <!--<ul style="display: inline-block;background-color: #F6C6CE;color: #bd362f;border:solid 1px #bd362f;border-radius: 3px"
+                          ms-if="el.validates.filter(function(v){return !v.pass}).length>0?false:true">
+                            <li ms-repeat-validate="el.validates" ms-if="validate.pass">{{validate.message}}</li>
+                        </ul>-->
+
+                    <!--doublelist-->
+                    <!--<div ms-if="el.type=='doublelist'" ms-widget="doublelist,$,el"  ms-duplex-handle="el.values"/>
+                    <input ms-if="el.type=='doublelist'" ms-attr-name="el.field" type="hidden" ms-value="el.values" />-->
+                    <!--,{
+      "type":"doublelist",
+      "label":"doublelist",
+      "field":"doublelist",
+      "place":2,
+      "data":[
+        {"name":"huang","value":"1"},
+        {"name":"xiao","value":"2"},
+        {"name":"ming","value":"3"},
+        {"name":"yin","value":"4"},
+        {"name":"yao","value":"5"}
+      ],
+      "values":["1","2"]
+    }-->
+                    <!--数字选择器-->
+                    <!--<input type="text" ms-if="el.type=='spinner'" ms-widget="spinner,$" ms-attr-name="el.field"  ms-duplex-handle="el.value"/>-->
+
+                </td>
+            </tr>
+        </table>
+        <div style="height:50px;width:100%">
+            <div ms-class="ctrl-buttons" style="float:right">
+                <input ms-widget="button" ms-attr-type="options.submit==='form'?'submit':'button'" ms-click="submit"
+                       value="提&nbsp;&nbsp;交" data-button-color="select" data-button-width="100" data-button-corner="10"/>
+                <input ms-widget="button"  ms-click="reset" type="button"
+                       value="重&nbsp;&nbsp;置" data-button-color="transparent"  data-button-width="100" data-button-corner="10"/>
+            </div>
+        </div>
+    </form>
+</div>

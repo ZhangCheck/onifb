@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>carousel组件</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="../avalon.js"></script>
+        <script src="../highlight/shCore.js"></script>
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"
+        />
+        <script>
+            require(["carousel/avalon.carousel"], function() {
+				avalon.define({
+					$id:"Carousel",
+					$opt:{
+						interface:{
+							remoteUrl:"",
+							localUrl:"ex9.json",
+							success:function(data){
+								//none
+							}},
+
+						pictureWidth:340,
+						pictureHeight:282,
+						alwaysShowArrow: false,
+						showDescription: true,
+						alwaysShowSelection: true
+					}
+				})
+				avalon.scan()
+			})
+        </script>
+    </head>
+    
+    <body ms-controller="Carousel">
+        <div class="wrapper">
+            <h1>图片轮播组件-从接口读取图片信息</h1>
+            <fieldset>
+                <legend>从接口读取图片信息</legend>
+                <div ms-widget="carousel,ca, $opt"></div>
+            </fieldset>
+            <pre ms-skip class="brush:html;gutter:false;toolbar:false">
+&lt!DOCTYPE html&gt
+&lthtml&gt
+
+    &lthead&gt
+        &lttitle&gtcarousel组件&lt/title&gt
+        &ltmeta charset="UTF-8"&gt
+        &ltmeta name="viewport" content="width=device-width"&gt
+        &ltscript src="../avalon.js"&gt&lt/script&gt
+        &ltscript src="../highlight/shCore.js"&gt&lt/script&gt
+        &ltlink type="text/css" rel="stylesheet" href="../style/avalon.doc.css"
+        /&gt
+        &ltscript&gt
+            require(["carousel/avalon.carousel"], function() {
+				avalon.define({
+					$id:"Carousel",
+					$opt:{
+						interface:{
+							remoteUrl:"",
+							localUrl:"ex9.json",
+							success:function(data){
+								//none
+							}},
+
+						pictureWidth:340,
+						pictureHeight:282,
+						alwaysShowArrow: false,
+						showDescription: true,
+						alwaysShowSelection: true
+					}
+				})
+				avalon.scan()
+			})
+        &lt/script&gt
+    &lt/head&gt
+
+    &ltbody ms-controller="Carousel"&gt
+        &ltdiv class="wrapper"&gt
+            &lth1&gt图片轮播组件-从接口读取图片信息&lt/h1&gt
+            &ltfieldset&gt
+                &ltlegend&gt从接口读取图片信息&lt/legend&gt
+                &ltdiv ms-widget="carousel,ca, $opt"&gt&lt/div&gt
+            &lt/fieldset&gt
+        &lt/div&gt
+    &lt/body&gt
+
+&lt/html&gt
+</pre>
+        </div>
+    </body>
+
+</html>

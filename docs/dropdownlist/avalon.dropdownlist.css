@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/*
+这是每个都组件都应该引用的部分
+*/
+.oni-dropdown .oni-textbox {
+  padding: 0.67861em 0.4em;
+  border: 1px solid #85b7d9;
+  border-radius: 0;
+  background-color: #ffffff; }
+.oni-dropdown .oni-textbox-focus {
+  border: 1px solid #85b7d9; }
+  .oni-dropdown .oni-textbox-focus .oni-textbox-icon {
+    color: #3775c0; }
+
+.oni-textbox-icon {
+  position: absolute;
+  right: 6px;
+  top: 3px; }
+
+/*# sourceMappingURL=avalon.dropdownlist.css.map */

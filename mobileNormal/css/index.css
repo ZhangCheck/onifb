@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../fonts/icomoon.eot?fz1fnq');
+    src:    url('../fonts/icomoon.eot?fz1fnq#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?fz1fnq') format('truetype'),
+    url('../fonts/icomoon.woff?fz1fnq') format('woff'),
+    url('../fonts/icomoon.svg?fz1fnq#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="oni-icon-"], [class*=" oni-icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.oni-icon-home:before {
+    content: "\e920";
+}
+.oni-icon-book:before {
+    content: "\e921";
+}
+.oni-icon-user:before {
+    content: "\e922";
+}
+.oni-icon-search:before {
+    content: "\e923";
+}
+.oni-icon-arrow-left2:before {
+    content: "\e924";
+    text-align: left;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+body[ms-controller="mainCtl"]{
+    display: none;
+}
+.head{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #4575d6 ;
+    text-align: center;
+    color: #ffffff;
+    margin:0 0 10px 0;
+}
+.bottomfixed{
+    position: fixed;
+    bottom: 40px;
+    width: 100%;
+    height: 30px;
+    background: #dfae36;
+    line-height: 30px;
+    text-indent: 10px;
+}
+.bottomfixed a{
+    display: block;
+    color: #2c2f34;
+}
+.bottom{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #4575d6 ;
+    text-align: center;
+    color: #ffffff;
+    position: fixed;
+    bottom: 0;
+}
+.bottom .singleMenu{
+    width: 25%;
+    float: left;
+    margin-top: 5px;
+}
+.singleMenu .words{
+    margin-top: -10px;
+}
+.content{
+    width: 94%;
+    margin:0 3%;
+}

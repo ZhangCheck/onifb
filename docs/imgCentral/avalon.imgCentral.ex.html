@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script src="../require.js"></script>
+</head>
+
+<body ms-controller="demo">
+    <style>
+        body{
+            min-width:0px;
+        }
+        .example{
+            width:100%;
+            height:300px;
+            background: #0a2b1d;
+            margin-top:20px;
+            color:#fff;
+        }
+    </style>
+    缩放窗口，可看到组件自适应能力：
+    <h4>例一：</h4>
+    <div class="example">
+        <div ms-widget="imgCentral,tt,$opt"></div>
+    </div>
+
+    <h4>例二：</h4>
+    <table class="example">
+        <tr>
+            <td width="20%">
+                20%
+            </td>
+            <td>80%</td>
+        </tr>
+        <tr>
+            <td width="20%">
+                <div ms-widget="imgCentral,gg,$opt"></div>
+            </td>
+            <td>bbb</td>
+        </tr>
+    </table>
+
+    <script>
+        require.config({
+            baseUrl:'../',
+            paths:{
+                avalon: 'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady',
+                fb:"avalon.fb"
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+        require(["avalon.fb","imgCentral/avalon.imgCentral"],function(){
+            var vm = avalon.define({
+                $id:"demo",
+                $opt:{
+                    src:'../../images/demo.jpg'
+                }
+            })
+            avalon.scan();
+        })
+    </script>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot;  href=&quot;../highlight/shCore.css&quot;/&gt;
+    &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;../style/avalon.doc.css&quot;/&gt;
+    &lt;script src=&quot;../highlight/shCore.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../require.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body ms-controller=&quot;demo&quot;&gt;
+    &lt;style&gt;
+        body{
+            min-width:0px;
+        }
+        .example{
+            width:100%;
+            height:300px;
+            background: #0a2b1d;
+            margin-top:20px;
+            color:#fff;
+        }
+    &lt;/style&gt;
+    缩放窗口，可看到组件自适应能力：
+    &lt;h4&gt;例一：&lt;/h4&gt;
+    &lt;div class=&quot;example&quot;&gt;
+        &lt;div ms-widget=&quot;imgCentral,tt,$opt&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;h4&gt;例二：&lt;/h4&gt;
+    &lt;table class=&quot;example&quot;&gt;
+        &lt;tr&gt;
+            &lt;td width=&quot;20%&quot;&gt;
+                20%
+            &lt;/td&gt;
+            &lt;td&gt;80%&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td width=&quot;20%&quot;&gt;
+                &lt;div ms-widget=&quot;imgCentral,gg,$opt&quot;&gt;&lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td&gt;bbb&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+
+    &lt;script&gt;
+        require.config({
+            baseUrl:&#39;../&#39;,
+            paths:{
+                avalon: &#39;avalon.shim&#39;,
+                echarts: &#39;echarts&#39;,
+                domReady:&#39;domReady&#39;,
+                fb:&quot;avalon.fb&quot;
+            },
+            map:{
+                &#39;*&#39;:{
+                    &#39;css&#39;:&#39;require.css&#39;,
+                    &#39;text&#39;:&#39;require.text&#39;
+                }
+            },
+            shim:{
+                avalon: { exports: &quot;avalon&quot; },
+                echarts:{exports:&quot;echarts&quot;}
+            }
+        });
+        require([&quot;avalon.fb&quot;,&quot;imgCentral/avalon.imgCentral&quot;],function(){
+            var vm = avalon.define({
+                $id:&quot;demo&quot;,
+                $opt:{
+                    src:&#39;../../images/demo.jpg&#39;
+                }
+            })
+            avalon.scan();
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </pre>
+</body>
+</html>

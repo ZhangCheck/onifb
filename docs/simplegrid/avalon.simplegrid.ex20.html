@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>simplegrid</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        <style>
+            html,body{
+                height:100%;
+            }
+        </style>
+        <script src="../require.js"></script>
+        <script src="../highlight/shCore.js"></script>
+       
+        <script>
+            require.config({
+                baseUrl:'../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+           require(["avalon.fb","./simplegrid/avalon.simplegrid"], function() {
+                function getData(n) {
+                    var ret = []
+                    for (var i = 0; i < n; i++) {
+                        ret.push({
+                            symbol: Math.random().toString(32).slice(4, 10),
+                            price: range(100, 200),
+                            change: Math.random().toFixed(2) * (Math.random() > 0.5 ? 1 : -1)
+                        })
+                    }
+                    return ret
+                }
+                function range(s, b) {
+                    return s + Math.floor((b - s) * Math.random())
+                }
+                var testVM = avalon.define("test", function(vm) {
+                    vm.$skipArray = ["pagerVM"]
+
+                    vm.$simplegridAOpts = {
+                        columns: ["symbol", "price", "change"],
+                        data: getData(20),
+                        pageable: true,
+                        scrollInPage:false,
+                        pager: {
+                            perPages : 20,
+                            totalItems: 50,
+                            options:[10,20,30],
+                            onOptionsChanged:function(perPages){
+                                avalon.vmodels['simplegridA'].showRows = perPages;
+                                avalon.vmodels['simplegridA'].reRender(getData(perPages),avalon.vmodels['simplegridA']);
+                            },
+                            onJump: function(e,page){
+                                var vm = avalon.vmodels['simplegridA'];
+                                var dataLength = vm.pager.perPages;
+                                if(vm.pager.currentPage==vm.pager.totalPages && vm.pager.totalItems%vm.pager.perPages!=0){
+                                    dataLength = vm.pager.totalItems%vm.pager.perPages;
+                                }
+                                vm.reRender(getData(dataLength),vm);
+                            }
+                        }
+                    }
+                    vm.$simplegridBOpts = {
+                        columns: ["symbol", "price", "change"],
+                        data: getData(20),
+                        pageable: true,
+                        scrollInPage:true,
+                        height:"500px",
+                        pager: {
+                            perPages : 20,
+                            totalItems: 50,
+                            options:[10,20,30],
+                            onOptionsChanged:function(perPages){
+                                avalon.vmodels['simplegridB'].showRows = perPages;
+                                avalon.vmodels['simplegridB'].reRender(getData(perPages),avalon.vmodels['simplegridB']);
+                            },
+                            onJump: function(e,page){
+                                var vm = avalon.vmodels['simplegridB'];
+                                var dataLength = vm.pager.perPages;
+                                if(vm.pager.currentPage==vm.pager.totalPages && vm.pager.totalItems%vm.pager.perPages!=0){
+                                    dataLength = vm.pager.totalItems%vm.pager.perPages;
+                                }
+                                vm.reRender(getData(dataLength),vm);
+                            }
+                        }
+                    }
+                    vm.$simplegridCOpts = {
+                        columns: ["symbol", "price", "change"],
+                        data: getData(20),
+                        pageable: true,
+                        scrollInPage:true,
+                        height:"30%",
+                        pager: {
+                            perPages : 20,
+                            totalItems: 50,
+                            options:[10,20,30],
+                            onOptionsChanged:function(perPages){
+                                avalon.vmodels['simplegridC'].showRows = perPages;
+                                avalon.vmodels['simplegridC'].reRender(getData(perPages),avalon.vmodels['simplegridB']);
+                            },
+                            onJump: function(e,page){
+                                var vm = avalon.vmodels['simplegridC'];
+                                var dataLength = vm.pager.perPages;
+                                if(vm.pager.currentPage==vm.pager.totalPages && vm.pager.totalItems%vm.pager.perPages!=0){
+                                    dataLength = vm.pager.totalItems%vm.pager.perPages;
+                                }
+                                vm.reRender(getData(dataLength),vm);
+                            }
+                        }
+                    }
+                    vm.resetData = function(id) {
+                        var data = getData(20);
+                        var vmodel = avalon.vmodels[id];
+                        vmodel.pager.totalItems = Math.round(20+Math.random()*115);
+                        console.log(vmodel.pager.totalItems)
+                        vmodel.reRender(data, vmodel)
+                    }
+                    vm.$skipArray = ["simplegrid"]
+                })
+                avalon.scan()
+            })
+        </script>
+    </head>
+    
+    <body ms-controller="test">
+            <h4>自动高度（按行数-20行）</h4>
+            <br/>
+            <div ms-widget="simplegrid, simplegridA, $simplegridAOpts"></div>
+            
+            <br/>
+            <h4>固定高度（固定像素-500px）</h4>
+            <br/>
+            <div ms-widget="simplegrid, simplegridB, $simplegridBOpts"></div>
+            
+            <br/>
+            <h4>自适应高度（百分比-100%）</h4>
+            <br/>
+            <a class="mlLg" href="avalon.simplegrid.ex21.html" style="color:red">点我查看 自适应实例</a>
+
+            <pre class="brush:html;gutter:false;toolbar:false;">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;simplegrid&lt;/title&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+        &lt;link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"&gt;
+        &lt;style&gt;
+            html,body{
+                height:100%;
+            }
+        &lt;/style&gt;
+        &lt;script src="../require.js"&gt;&lt;/script&gt;
+        &lt;script src="../highlight/shCore.js"&gt;&lt;/script&gt;
+       
+        &lt;script&gt;
+            require.config({
+                baseUrl:'../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+           require(["avalon.fb","./simplegrid/avalon.simplegrid"], function() {
+                function getData(n) {
+                    var ret = []
+                    for (var i = 0; i &lt; n; i++) {
+                        ret.push({
+                            symbol: Math.random().toString(32).slice(4, 10),
+                            price: range(100, 200),
+                            change: Math.random().toFixed(2) * (Math.random() &gt; 0.5 ? 1 : -1)
+                        })
+                    }
+                    return ret
+                }
+                function range(s, b) {
+                    return s + Math.floor((b - s) * Math.random())
+                }
+                var testVM = avalon.define("test", function(vm) {
+                    vm.$skipArray = ["pagerVM"]
+
+                    vm.$simplegridAOpts = {
+                        columns: ["symbol", "price", "change"],
+                        data: getData(20),
+                        pageable: true,
+                        scrollInPage:false,
+                        pager: {
+                            perPages : 20,
+                            totalItems: 50,
+                            options:[10,20,30],
+                            onOptionsChanged:function(perPages){
+                                avalon.vmodels['simplegridA'].showRows = perPages;
+                                avalon.vmodels['simplegridA'].reRender(getData(perPages),avalon.vmodels['simplegridA']);
+                            },
+                            onJump: function(e,page){
+                                var vm = avalon.vmodels['simplegridA'];
+                                var dataLength = vm.pager.perPages;
+                                if(vm.pager.currentPage==vm.pager.totalPages && vm.pager.totalItems%vm.pager.perPages!=0){
+                                    dataLength = vm.pager.totalItems%vm.pager.perPages;
+                                }
+                                vm.reRender(getData(dataLength),vm);
+                            }
+                        }
+                    }
+                    vm.$simplegridBOpts = {
+                        columns: ["symbol", "price", "change"],
+                        data: getData(20),
+                        pageable: true,
+                        scrollInPage:true,
+                        height:"500px",
+                        pager: {
+                            perPages : 20,
+                            totalItems: 50,
+                            options:[10,20,30],
+                            onOptionsChanged:function(perPages){
+                                avalon.vmodels['simplegridB'].showRows = perPages;
+                                avalon.vmodels['simplegridB'].reRender(getData(perPages),avalon.vmodels['simplegridB']);
+                            },
+                            onJump: function(e,page){
+                                var vm = avalon.vmodels['simplegridB'];
+                                var dataLength = vm.pager.perPages;
+                                if(vm.pager.currentPage==vm.pager.totalPages && vm.pager.totalItems%vm.pager.perPages!=0){
+                                    dataLength = vm.pager.totalItems%vm.pager.perPages;
+                                }
+                                vm.reRender(getData(dataLength),vm);
+                            }
+                        }
+                    }
+                    vm.$simplegridCOpts = {
+                        columns: ["symbol", "price", "change"],
+                        data: getData(20),
+                        pageable: true,
+                        scrollInPage:true,
+                        height:"30%",
+                        pager: {
+                            perPages : 20,
+                            totalItems: 50,
+                            options:[10,20,30],
+                            onOptionsChanged:function(perPages){
+                                avalon.vmodels['simplegridC'].showRows = perPages;
+                                avalon.vmodels['simplegridC'].reRender(getData(perPages),avalon.vmodels['simplegridB']);
+                            },
+                            onJump: function(e,page){
+                                var vm = avalon.vmodels['simplegridC'];
+                                var dataLength = vm.pager.perPages;
+                                if(vm.pager.currentPage==vm.pager.totalPages && vm.pager.totalItems%vm.pager.perPages!=0){
+                                    dataLength = vm.pager.totalItems%vm.pager.perPages;
+                                }
+                                vm.reRender(getData(dataLength),vm);
+                            }
+                        }
+                    }
+                    vm.resetData = function(id) {
+                        var data = getData(20);
+                        var vmodel = avalon.vmodels[id];
+                        vmodel.pager.totalItems = Math.round(20+Math.random()*115);
+                        console.log(vmodel.pager.totalItems)
+                        vmodel.reRender(data, vmodel)
+                    }
+                    vm.$skipArray = ["simplegrid"]
+                })
+                avalon.scan()
+            })
+        &lt;/script&gt;
+    &lt;/head&gt;
+    
+    &lt;body ms-controller="test"&gt;
+            &lt;h4&gt;自动高度（按行数-20行）&lt;/h4&gt;
+            &lt;br/&gt;
+            &lt;div ms-widget="simplegrid, simplegridA, $simplegridAOpts" &gt;&lt;/div&gt;
+            
+            &lt;br/&gt;
+            &lt;h4&gt;固定高度（固定像素-500px）&lt;/h4&gt;
+            &lt;br/&gt;
+            &lt;div ms-widget="simplegrid, simplegridB, $simplegridBOpts" &gt;&lt;/div&gt;
+            
+            &lt;br/&gt;
+            &lt;h4&gt;自适应高度（百分比-100%）&lt;/h4&gt;
+            &lt;br/&gt;
+            &lt;a class="mlLg" href="avalon.simplegrid.ex21.html"&gt;点击查看&lt;/a&gt;
+
+            &lt;pre class="brush:html;gutter:false;toolbar:false;"&gt;
+
+            &lt;/pre&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+
+            </pre>
+    </body>
+</html>

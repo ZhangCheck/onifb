@@ -1,0 +1,6 @@
+.selected,.selected>*{
+    color:red
+}
+.noselected,.noselected>*{
+    color:#a0a0a0;
+}

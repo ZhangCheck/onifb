@@ -1,0 +1,4 @@
+{
+  "data":[{"code":"01","value":"选择1"},{"code":"02","value":"选择2"},{"code":"03","value":"选择3"},{"code":"04","value":"选择4"},{"code":"05","value":"选择5"},{"code":"06","value":"选择6"},{"code":"07","value":"选择7"}],
+  "defaultValue":{"code":"02","value":"选择2"}
+}

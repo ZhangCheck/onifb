@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>折线图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/line","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm = avalon.define({
+                $id:"test",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.lineOptions);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                lineOptions:{
+                    title: {
+                        x:'center',
+                        text: '办理事项分析',
+                        padding:1/*,
+                         textStyle: {
+                         color: '#262626'
+                         }*/
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    toolbox: {
+                        show: false
+                    },
+                    grid:{
+                        borderWidth: 0
+                    },
+                    calculable: false,
+                    xAxis : [
+                        {
+                            name: '星期',
+                            type : 'category',
+                            splitLine: {
+                                show: false
+                            },
+                            boundaryGap : false,
+                            data : []
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            name:'办理数',
+                            type : 'value',
+                            splitLine: {
+                                show: false
+                            },
+                            splitArea : {show : false}
+                        }
+                    ],
+                    series :[]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson(/**@type fb.InterfaceStruct**/{
+                //remoteUrl:"http://192.168.0.236:8080/ntjmyj/item/sxfxModuleList",
+                remoteUrl:"./model/line.json",
+                localUrl:"./model/line.json",
+                success:function(data){
+                    var result=data.rows;
+                    var xz=[result[0].time1,result[0].time2,result[0].time3,result[0].time4,result[0].time5,result[0].time6,"今天"];
+                    var val=new Array();
+                    var tt=new Array();
+
+                    for(var i=0;i<result.length;i++){
+                        tt.push(result[i].type);
+                        val[i]=new Array();
+                        val[i].push(result[i].value1);
+                        val[i].push(result[i].value2);
+                        val[i].push(result[i].value3);
+                        val[i].push(result[i].value4);;
+                        val[i].push(result[i].value5);
+                        val[i].push(result[i].value6);
+                        val[i].push(result[i].value7);
+                    }
+
+                    myChart = echarts.init(document.getElementById('line'));
+
+                   var series=fb.getSeries(result);
+
+                    vm.lineOptions.xAxis[0].data=xz;
+                    for(var i=0;i<series.length;i++){
+                        series[i].name=tt[i];
+                        series[i].data=val[i];
+                    }
+                    vm.lineOptions.series=series;
+                    myChart.setOption(vm.lineOptions);
+                    window.onresize=function (){
+                        myChart.resize();
+                    };
+                }
+            });
+        });
+
+
+    </script>
+</head>
+<body ms-controller="test">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="line" style="width: 800px;height: 300px;"></div>
+
+</div>
+
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;堆积面积图&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body ms-controller="test"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="line" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+                &lt;script&gt;
+                    require(["echarts.fb","echarts/chart/line","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                        var vm = avalon.define({
+                            $id:"test",
+                            show:function(dialog){
+                                avalon.vmodels[dialog].toggle = true;
+                            },
+                            optionsStr:function(){
+                                return JSON.stringify(vm.lineOptions);
+                            },
+                            dialog:{
+                                title:"options的json格式"
+                            },
+                            lineOptions:{
+                                title: {
+                                    x:'center',
+                                    text: '办理事项分析',
+                                    padding:1/*,
+                                     textStyle: {
+                                     color: '#262626'
+                                     }*/
+                                },
+                                tooltip: {
+                                    trigger: 'axis'
+                                },
+                                toolbox: {
+                                    show: false
+                                },
+                                grid:{
+                                    borderWidth: 0
+                                },
+                                calculable: false,
+                                xAxis : [
+                                    {
+                                        name: '星期',
+                                        type : 'category',
+                                        splitLine: {
+                                            show: false
+                                        },
+                                        boundaryGap : false,
+                                        data : []
+                                    }
+                                ],
+                                yAxis : [
+                                    {
+                                        name:'办理数',
+                                        type : 'value',
+                                        splitLine: {
+                                            show: false
+                                        },
+                                        splitArea : {show : false}
+                                    }
+                                ],
+                                series :[]
+                            }
+                        });
+                        avalon.scan();
+
+                        fb.requestJson(/**@type fb.InterfaceStruct**/{
+                            //remoteUrl:"http://192.168.0.236:8080/ntjmyj/item/sxfxModuleList",
+                            remoteUrl:"./model/line.json",
+                            localUrl:"./model/line.json",
+                            success:function(data){
+                                var result=data.rows;
+                                var xz=[result[0].time1,result[0].time2,result[0].time3,result[0].time4,result[0].time5,result[0].time6,"今天"];
+                                var val=new Array();
+                                var tt=new Array();
+
+                                for(var i=0;i&lt;result.length;i++){
+                                    tt.push(result[i].type);
+                                    val[i]=new Array();
+                                    val[i].push(result[i].value1);
+                                    val[i].push(result[i].value2);
+                                    val[i].push(result[i].value3);
+                                    val[i].push(result[i].value4);;
+                                    val[i].push(result[i].value5);
+                                    val[i].push(result[i].value6);
+                                    val[i].push(result[i].value7);
+                                }
+
+                                myChart = echarts.init(document.getElementById('line'));
+
+                               var series=fb.getSeries(result);
+
+                                vm.lineOptions.xAxis[0].data=xz;
+                                for(var i=0;i&lt;series.length;i++){
+                                    series[i].name=tt[i];
+                                    series[i].data=val[i];
+                                }
+                                vm.lineOptions.series=series;
+                                myChart.setOption(vm.lineOptions);
+                                window.onresize=function (){
+                                    myChart.resize();
+                                };
+                            }
+                        });
+                    });
+                &lt;/script&gt;
+            &lt;/div&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

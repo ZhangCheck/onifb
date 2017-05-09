@@ -1,0 +1,13 @@
+{"success":true,"data":{"total":3,"rows":[
+ {"city":"江苏","fid":"32","count":"100","name":"季建业","estimate":"非常好","star":"☆☆☆☆☆","parentid":"","children":[
+  {"city":"南京","fid":"01","count":"100","name":"撸啊撸","estimate":"很好","star":"☆☆☆☆☆","parentid":"32","children":[
+   {"city":"建邺区","fid":"66","count":"66","name":"顺顺","estimate":"完美","star":"☆☆☆☆☆","parentid":"01","children":[]}
+  ]},
+  {"city":"苏州","fid":"02","count":"90","name":"是哒哒","estimate":"很好","star":"☆☆☆☆☆","parentid":"32","children":[]}
+ ]},
+ {"city":"浙江","fid":"33","count":"80","name":"夜间机","estimate":"一般般","star":"☆☆☆☆","parentid":"","expand":"true","children":[
+  {"city":"杭州","fid":"04","count":"70","name":"萨答复","estimate":"不错","star":"☆☆☆☆","parentid":"33","children":[]},
+  {"city":"金华","fid":"05","count":"60","name":"李开复","estimate":"还行","star":"☆☆☆","parentid":"33","children":[]}
+ ]},
+ {"city":"蒙古","fid":"00","count":"10","name":"忽必烈","estimate":"不了解","star":"☆","parentid":"","children":[]}
+]}}

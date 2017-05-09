@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>首页</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/fb_lib/require.js" data-main="js/project.core.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body ms-controller="mainCtl">
+<div class="m-top">
+    <div class="m-head">
+        <img src="images/oniicon.png"
+             style="margin-top: 50px;margin-left: 20px;">
+        <div style="float: right;margin-top: 60px;margin-right: 10px"> 搜索<input ms-widget="textbox"></div>
+    </div>
+    <div class="m-head-navigation">
+        <ul>
+            <li ms-repeat="titleList" ms-class-1="firstPage:url.substring(url.indexOf('!/')+2)==el.prop" class="titleWid">
+                <a ms-href="#!/{{el.prop}}">{{el.titleName}}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div ms-view class="m-content" ms-css-min-height="propHeight">像南通的单页面的项目获取window.location.href获取的地址都是一样的吗</div>
+<div class="m-bottom">
+    <p>
+        Copyright2015 南通市公安局 版权所有 主办单位：南通市公安局
+    </p>
+    <p>
+        地址：江苏省南通市青年东路 199号 邮政编码226006
+    </p>
+    <p>
+        技术支持：江苏飞搏软件股份有限公司
+    </p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <script src="../require.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <title></title>
+</head>
+<script>//@ sourceUrl=./avalon.simplegrid.ex19.html
+require.config({
+    baseUrl:'../',
+    paths:{
+        avalon: 'avalon.shim',
+        echarts: 'echarts',
+        domReady:'domReady',
+        fb:"avalon.fb"
+    },
+    map:{
+        '*':{
+            'css':'require.css',
+            'text':'require.text'
+        }
+    },
+    shim:{
+        avalon: { exports: "avalon" },
+        echarts:{exports:"echarts"}
+    }
+});
+
+    require(["./avalon.fb","./simplegrid/avalon.simplegrid"], function() {
+       var vm = avalon.define({
+            $id:"test",
+           $Opt:{
+               useInnerRequest:true,
+               interface:{
+                   remoteUrl:"gridData.json",
+                   localUrl:"gridData.json",
+                   type:"POST",
+                   status:"200",
+                   //data:{'pageSize':10,'pageNum':1},
+                   success:function(data){
+                       //none
+                   }
+               },
+               pageable: true,
+               rowSingleLine:false,
+               pager: {
+                   perPages: 10,
+                   showPages: 5,
+                   options: [10, 20, 30, 40]
+               },
+               argFormat:function(args,pageNum,pageSize){
+                   return avalon.mix(args,{"pageSize":pageSize,"pageNum":pageNum})
+               },
+               columns: ["aaa", "bbb", "ccc","xxx","yyy","zzz"],
+               data:[]
+           }
+        })
+        avalon.scan();
+    });
+//@ sourceUrl=./avalon.simplegrid.ex18.html
+</script>
+<body ms-controller="test">
+    <h4>演示simplegrid内置接口</h4>
+
+    <div class="mt" ms-widget="simplegrid,ex18,$Opt"></div>
+    
+    <div>
+        
+                <pre class="brush:javascript;gutter:false;toolbdar:false;">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang="en"&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"&gt;
+    &lt;script src="../require.js"&gt;&lt;/script&gt;
+    &lt;script src="../highlight/shCore.js"&gt;&lt;/script&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;script&gt;//@ sourceUrl=./avalon.simplegrid.ex19.html
+require.config({
+    baseUrl:'../',
+    paths:{
+        avalon: 'avalon.shim',
+        echarts: 'echarts',
+        domReady:'domReady',
+        fb:"avalon.fb"
+    },
+    map:{
+        '*':{
+            'css':'require.css',
+            'text':'require.text'
+        }
+    },
+    shim:{
+        avalon: { exports: "avalon" },
+        echarts:{exports:"echarts"}
+    }
+});
+
+    require(["./avalon.fb","./simplegrid/avalon.simplegrid"], function() {
+       var vm = avalon.define({
+            $id:"test",
+           $Opt:{
+               useInnerRequest:true,
+               interface:{
+                   remoteUrl:"gridData.json",
+                   localUrl:"gridData.json",
+                   type:"POST",
+                   status:"200",
+                   //data:{'pageSize':10,'pageNum':1},
+                   success:function(data){
+                       //none
+                   }
+               },
+               pageable: true,
+               rowSingleLine:false,
+               pager: {
+                   perPages: 10,
+                   showPages: 5,
+                   options: [10, 20, 30, 40]
+               },
+               argFormat:function(args,pageNum,pageSize){
+                   return avalon.mix(args,{"pageSize":pageSize,"pageNum":pageNum})
+               },
+               columns: ["aaa", "bbb", "ccc","xxx","yyy","zzz"],
+               data:[]
+           }
+        })
+        avalon.scan();
+    });
+//@ sourceUrl=./avalon.simplegrid.ex18.html
+&lt;/script&gt;
+&lt;body ms-controller="test"&gt;
+     &lt;h4&gt;演示simplegrid内置接口&lt;/h4&gt;
+
+    &lt;div class="mt" ms-widget="simplegrid,ex18,$Opt"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;      
+                    </pre>
+        <br/>
+    </div>
+</body>
+</html>

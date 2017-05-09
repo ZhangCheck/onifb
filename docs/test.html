@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var a = {};
+    a.fun = function(){console.log("oldfun")}
+    var oldfun = a.fun;
+    a.fun = function(){oldfun();console.log("newfun")}
+    oldfun();
+    a.fun();
+</script>
+</body>
+</html>

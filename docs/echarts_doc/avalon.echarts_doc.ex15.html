@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>series（通用、直角坐标系）</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4>series（通用、直角坐标系）</h4>
+    <b style="color:red;">注明：本series表中包含了所有统计图通用的参数和直角坐标系中可使用的参数，其他如饼图，地图、仪表盘等特定图表可使用的参数在列在每个案例的组件说明中。</b>
+    <p>
+        驱动图表生成的数据内容数组，数组中每一项为一个系列的选项及数据，其中个别选项仅在部分图表类型中有效，请注意适用类型：
+    </p>
+    <h4>series（通用）</h4>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col  width="100">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 适用类型 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> zlevel </td>
+            <td> 0 </td>
+            <td> 通用 </td>
+            <td> 一级层叠控制。每一个不同的zlevel将产生一个独立的canvas，相同zlevel的组件或图标将在同一个canvas上渲染。zlevel越高越靠顶层，canvas对象增多会消耗更多的内存和性能，并不建议设置过多的zlevel，大部分情况可以通过二级层叠控制z实现层叠控制。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> z </td>
+            <td> 2 </td>
+            <td> 通用 </td>
+            <td> 二级层叠控制，同一个canvas（相同zlevel）上z越高约靠顶层。 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> type </td>
+            <td> null </td>
+            <td> 通用 </td>
+            <td> 图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。可选为：
+                <br>'line'（折线图） | 'bar'（柱状图） | 'scatter'（散点图） | 'k'（K线图）
+                <br> 'pie'（饼图） | 'radar'（雷达图） | 'chord'（和弦图） | 'force'（力导向布局图） | 'map'（地图）
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> name </td>
+            <td> null </td>
+            <td> 通用 </td>
+            <td> 系列名称，如启用legend，该值将被legend.data索引相关 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> tooltip </td>
+            <td> null </td>
+            <td> 通用 </td>
+            <td> 提示框样式，仅对本系列有效，如不设则用option.tooltip（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex5" title="">tooltip</a>）,鼠标悬浮交互时的信息提示 </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> clickable </td>
+            <td> true </td>
+            <td> 通用 </td>
+            <td> 数据图形是否可点击，默认开启，如果没有click事件响应可以关闭 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> itemStyle </td>
+            <td> null </td>
+            <td> 通用 </td>
+            <td> 图形样式（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex18" title="">itemStyle</a>） </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> data </td>
+            <td> [] </td>
+            <td> 通用 </td>
+            <td> 数据（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex16" title="">series.data</a>） </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> markPoint </td>
+            <td> {} </td>
+            <td> 通用 </td>
+            <td> 标注（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex17" title="">series.markPoint</a>） </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> markLine </td>
+            <td> {} </td>
+            <td> 通用 </td>
+            <td> 标线（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex17" title="">series.markLine</a>） </td>
+        </tr>
+        </tbody>
+    </table>
+    <h4>series（直角坐标系）</h4>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col  width="100">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 适用类型 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> stack </td>
+            <td> null </td>
+            <td> 折线图，柱状图 </td>
+            <td> 组合名称，双数值轴时无效，多组数据的堆积图时使用，eg：stack:'group1'，则series数组中stack值等于'group1'的数据做堆积计算 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> xAxisIndex </td>
+            <td> 0 </td>
+            <td> 折线图，柱状图，散点图 ，K线图</td>
+            <td><a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex11" title="">xAxis</a>坐标轴数组的索引，指定该系列数据所用的横坐标轴 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> yAxisIndex </td>
+            <td> 0 </td>
+            <td> 折线图，柱状图，散点图，K线图 </td>
+            <td><a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex11" title="">yAxis</a>坐标轴数组的索引，指定该系列数据所用的纵坐标轴 </td>
+        </tr>
+        <tr>
+            <td> <b>{number | string} </b>barGap </td>
+            <td> '30%' </td>
+            <td> 柱状图 </td>
+            <td> 柱间距离，默认为柱形宽度的30%，可设固定值 </td>
+        </tr>
+        <tr>
+            <td> <b>{number | string} </b>barCategoryGap </td>
+            <td> '20%' </td>
+            <td> 柱状图 </td>
+            <td> 类目间柱形距离，默认为类目间距的20%，可设固定值 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> barMinHeight </td>
+            <td> 0 </td>
+            <td> 柱状图 </td>
+            <td> 柱条最小高度，可用于防止某item的值过小而影响交互 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> barWidth </td>
+            <td> 自适应 </td>
+            <td> 柱状图 ，K线图</td>
+            <td> 柱条（K线蜡烛）宽度，不设时自适应 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> barMaxWidth </td>
+            <td> 自适应 </td>
+            <td> 柱状图 ，K线图</td>
+            <td> 柱条（K线蜡烛）最大宽度，不设时自适应 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> symbol </td>
+            <td> null </td>
+            <td> 折线图，散点图 </td>
+            <td> 标志图形类型，默认自动选择（8种类型循环使用，不显示标志图形可设为'none'），默认循环选择类型有：<br>
+                'circle' | 'rectangle' | 'triangle' | 'diamond' |<br>
+                'emptyCircle' | 'emptyRectangle' | 'emptyTriangle' | 'emptyDiamond'
+                <br>另外，还支持五种更特别的标志图形'heart'（心形）、'droplet'（水滴）、'pin'（标注）、'arrow'（箭头）和'star'（五角星），这并不出现在常规的8类图形中，但无论是在系列级还是数据级上你都可以指定使用，同时，'star' + n（n&gt;=3)可变化出N角星，如指定为'star6'则可以显示6角星
+                <br>自1.3.5起支持symbol为自定义图片，格式为'image://' + '图片路径'， 如'image://../asset/ico/favicon.png'
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{number | Function | Array} </b>symbolSize </td>
+            <td> 2 | 4</td>
+            <td> 折线图 (2)，散点图(4) </td>
+            <td> 标志图形大小，可计算特性启用情况建议增大以提高交互体验。可以是单个值，如果在 symbol 为图片的时候想要分别设置宽高防止图片被拉伸，可以使用数组，其中数组第一个值是高，第二个值是宽。 实现气泡图时symbolSize需为Function，气泡大小取决于该方法返回值，传入参数为当前数据项（value数组）。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> symbolRotate </td>
+            <td> null </td>
+            <td> 折线图 ，散点图 </td>
+            <td> 标志图形旋转角度[-180,180]</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> showAllSymbol </td>
+            <td> false </td>
+            <td> 折线图  </td>
+            <td> 标志图形默认只有主轴显示（随主轴标签间隔隐藏策略），如需全部显示可把showAllSymbol设为true</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> smooth </td>
+            <td> false </td>
+            <td> 折线图  </td>
+            <td> 平滑曲线显示，smooth为true时lineStyle不支持虚线</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> dataFilter </td>
+            <td> 'nearst' </td>
+            <td> 折线图 </td>
+            <td> ECharts 会在折线图的数据数量大于实际显示的像素宽度（高度）的时候会启用优化，对显示在一个像素宽度内的数据做筛选，该选项是指明数据筛选的策略。<br><br>
+                可选 'nearest', 'min', 'max', 'average'。或者是使用自定义的筛选函数</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> large </td>
+            <td> false </td>
+            <td> 散点图  </td>
+            <td> 启动大规模散点图</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> largeThreshold </td>
+            <td> 2000 </td>
+            <td> 散点图  </td>
+            <td> 大规模散点图自动切换阀值，large为true下有效</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> legendHoverLink </td>
+            <td> true </td>
+            <td> 折线图，柱状图，散点图 </td>
+            <td> 是否启用图例（legend）hover时的联动响应（高亮显示） </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<style>
+    .m-head{
+        width: 100%;
+        height: 120px;
+        background: black;
+        color: #ffffff;
+    }
+    .m-head-navigation{
+        width: 100%;
+        height: 50px;
+    }
+    .m-head-navigation ul{
+        width: 100%;
+        height: 50px;
+    }
+    .m-head-navigation ul li{
+        float: left;
+        height: 50px;
+        line-height: 50px;
+        font-size: 14px;
+        text-align: center;
+        background: #54c1c8;
+    }
+    .m-head-navigation ul li:hover{
+        background: #3bb4bc;
+    }
+    .m-head-navigation ul li a{
+        color: #ffffff;
+        display: block;
+    }
+    .m-head-navigation .selected:first-child{
+        background: #3bb4bc;
+    }
+    .oni-textbox{
+        background: white;
+    }
+    .m-head-navigation .selected{
+        background: #3bb4bc;
+    }
+</style>
+<script>
+    require(["./fb_lib/textbox/avalon.textbox"], function () {
+        var vm = avalon.define({
+            $id: "titleCtl",
+            titleList:[
+                {"menuTit":"首页","menuHref":"index.html"},
+                {"menuTit":"menu1","menuHref":"showInfo.html"},
+                {"menuTit":"menu2","menuHref":"showInfo.html"},
+                {"menuTit":"menu3","menuHref":"showInfo.html"},
+                {"menuTit":"menu4","menuHref":"showInfo.html"},
+                {"menuTit":"menu5","menuHref":"showInfo.html"}
+            ]
+        });
+        avalon.scan();
+    });
+</script>
+
+<div ms-controller="titleCtl">
+    <div class="m-head">
+        <img src="images/oniicon.png"
+             style="margin-top: 50px;margin-left: 20px;">
+        <div style="float: right;margin-top: 60px;margin-right: 10px"> 搜索 <input class="mlLg" ms-widget="textbox"></div>
+    </div>{{}}
+    <div class="m-head-navigation">
+        <ul>
+            <li ms-repeat="titleList" ms-class="selected:window.location.href.substring(window.location.href.lastIndexOf('/')+1)==el.menuHref"
+                class="titleWid" ms-css-width='100/titleList.length+"%"' >
+                <a ms-href="{{el.menuHref}}" target="_parent">{{el.menuTit}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

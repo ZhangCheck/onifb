@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>合成box</title>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <script src="../require.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:"../../oniui",
+            paths:{
+                avalon:"avalon.shim",
+                echarts: "echarts",
+                domReady:"domReady"
+            },
+            map:{
+                "*":{
+                    "css":"require.css",
+                    "text":"require.text"
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+
+</head>
+<body ms-controller="demo" style="padding:40px;box-sizing: border-box">
+    <div ms-widget="comboBox,comboBox,$comboBoxOpts">
+
+    </div>
+</body>
+<script>
+    require(["./comboBox/avalon.comboBox","./mmRequest/mmRequest"],function(){
+        var vm= avalon.define({
+            $id:"demo",
+            $comboBoxOpts:{
+                list:[],//选择框中的内容值
+                selectedValue:"",//input中默认值
+            }
+        });
+
+        avalon.ajax({
+            url:"model/list.json",
+            type:"post",
+            dataType:"json",
+            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            success:function(data){
+                avalon.vmodels["comboBox"].selectedValue=data.defaultValue.value;
+                avalon.vmodels["comboBox"].selectedCode=data.defaultValue.code;
+                avalon.vmodels["comboBox"].list=data.data;
+
+            }
+
+        });
+        avalon.scan();
+    });
+</script>
+<div ms-skip>
+        <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+            &lt;!DOCTYPE HTML&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;meta charset='utf-8'/&gt;
+                &lt;title&gt;合成box&lt;/title&gt;
+                &lt;script src='../require.js'&gt;&lt;/script&gt;
+                &lt;script&gt;
+                    require.config({
+                        baseUrl:'../../oniui',
+                        paths:{
+                            avalon:'avalon.shim',
+                            echarts: 'echarts',
+                            domReady:'domReady'
+                        },
+                        map:{
+                            '*':{
+                                'css':'require.css',
+                                'text':'require.text'
+                            }
+                        },
+                        shim:{
+                            avalon: { exports: "avalon" },
+                            echarts:{exports:"echarts"}
+                        }
+                    });
+                &lt;/script&gt;
+            &lt;/head&gt;
+            &lt;body ms-controller="demo"&gt;
+                &lt;div  ms-widget="ms-widget="comboBox,comboBox,$comboBoxOpts"&gt;
+
+                &lt;/div&gt;
+                    &lt;script&gt;
+                           require(["./comboBox/avalon.comboBox","./mmRequest/mmRequest"],function(){
+                            var vm= avalon.define({
+                                $id:"demo",
+                                $comboBoxOpts:{
+                                    list:[],//选择框中的内容值
+                                    selectedValue:""//input中默认值
+                                }
+                            });
+
+                            avalon.ajax({
+                                url:"model/list.json",
+                                type:"post",
+                                dataType:"json",
+                                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                                success:function(data){
+                                     avalon.vmodels["comboBox"].selectedValue=data.defaultValue.value;
+                                     avalon.vmodels["comboBox"].selectedCode=data.defaultValue.code;
+                                     avalon.vmodels["comboBox"].list=data.data;
+                                }
+
+                            });
+                            avalon.scan();
+                        });
+
+                    &lt;/script&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </pre>
+</div>
+</html>

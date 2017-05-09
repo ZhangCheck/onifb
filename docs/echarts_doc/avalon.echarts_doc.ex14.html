@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>polar</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4> polar</h4>
+    <p>极坐标：</p>
+
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody><tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> zlevel </td>
+            <td> 0 </td>
+            <td> 一级层叠控制。每一个不同的zlevel将产生一个独立的canvas，相同zlevel的组件或图标将在同一个canvas上渲染。zlevel越高越靠顶层，canvas对象增多会消耗更多的内存和性能，并不建议设置过多的zlevel，大部分情况可以通过二级层叠控制z实现层叠控制。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> z </td>
+            <td> 0 </td>
+            <td> 二级层叠控制，同一个canvas（相同zlevel）上z越高约靠顶层。 </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> center </td>
+            <td> ['50%', '50%'] </td>
+            <td> 圆心坐标，支持绝对值（px）和百分比，百分比计算min(width, height) * 50% </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> radius </td>
+            <td> '75%' </td>
+            <td> 半径，支持绝对值（px）和百分比，百分比计算min(width, height) / 2 * 75%, </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> startAngle </td>
+            <td> 90 </td>
+            <td> 开始角度, 有效输入范围：[-180,180]</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> splitNumber </td>
+            <td> 5 </td>
+            <td> 分割段数，默认为5 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> name </td>
+            <td><pre>{
+    show: true,
+    formatter: null,
+    textStyle: {
+        color:#333
+    }
+}                           </pre></td>
+            <td> 坐标轴名称</td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> boundaryGap </td>
+            <td> [0, 0] </td>
+            <td> 数值轴两端空白策略，数组内数值代表百分比，[原始数据最小值与最终最小值之间的差额，原始数据最大值与最终最大值之间的差额] </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> scale </td>
+            <td> false </td>
+            <td> 脱离0值比例，放大聚焦到最终_min，_max区间 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> axisLine </td>
+            <td> {show : true} </td>
+            <td> 坐标轴线，默认显示，属性show控制显示与否，属性lineStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a>）控制线条样式 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> axisLabel </td>
+            <td> {show : false} </td>
+            <td> 坐标轴文本标签，详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex12" title="">axis.axisLabel</a></td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> splitLine </td>
+            <td> {show : true} </td>
+            <td> 分隔线，默认显示，属性show控制显示与否，属性lineStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a>）控制线条样式 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> splitArea </td>
+            <td> {show : true} </td>
+            <td> 分隔区域，默认不显示，属性show控制显示与否，属性areaStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex20" title="">areaStyle</a>）控制区域样式 </td>
+        </tr>
+        <tr>
+            <td> <b>{String}</b> type </td>
+            <td> 'polygon' </td>
+            <td> 极坐标的形状，'polygon'|'circle' 多边形|圆形</td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> indicator </td>
+            <td> [] </td>
+            <td> 雷达指标列表，同时也是label内容，例子见下</td>
+        </tr>
+        </tbody>
+
+    </table>
+    <pre>indicator : [
+    {text : '外观'},
+    {text : '拍照', min : 0},
+    {text : '系统', min : 0, max : 100},
+    {text : '性能', axisLabel: {...}},
+    {text : '屏幕'}
+]
+</pre>
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+p input{
+    padding: 0.67861em 1em;
+    line-height: 18px;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    border/*\**/: 1px solid #bdc7d1 \9;
+    border-radius: 4px;
+    outline:none
+}

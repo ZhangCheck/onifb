@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>图片组件</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="descriptions" content="图片布局是前端常用功能，也是难点功能，该组件旨在简化图片布局方式。">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <h2>imgCentral</h2>
+    <fieldset>
+        <legend>图片组件</legend>
+        <p>图片布局是前端常用功能，也是难点功能，该组件旨在简化图片布局方式。</p>
+    </fieldset>
+    <h3 class="table-doc-title">使用说明</h3>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="180">
+            <col width="95">
+            <col width="120">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th>名字</th>
+            <th>类型</th>
+            <th>默认值</th>
+            <th>说明</th>
+        </tr>
+        <tr>
+            <td align="center" colspan="4">配置参数</td>
+        </tr>
+        <tr>
+            <td>tip</td>
+            <td>String</td>
+            <td>"加载中..."</td>
+            <td>加载内容提示信息</td>
+        </tr>
+        <tr>
+            <td>numPerPage</td>
+            <td>Number</td>
+            <td>10</td>
+            <td>页大小，每页内容的条目数</td>
+        </tr>
+        <tr>
+            <td>interface</td>
+            <td>Object</td>
+            <td>null</td>
+            <td>
+                接口配置
+            </td>
+        </tr>
+        <tr>
+            <td>pageField</td>
+            <td>String</td>
+            <td>"page"</td>
+            <td>接口发出请求时，上传的数据的字段名（当前页码数据）</td>
+        </tr>
+        <tr>
+            <td>numPerPageField</td>
+            <td>String</td>
+            <td>"rows"</td>
+            <td>接口发出请求时，上传的数据的字段名（页大小数据）</td>
+        </tr>
+        <tr>
+            <td>tipFixBottom</td>
+            <td>Number</td>
+            <td>0</td>
+            <td>提示信息距离底边的距离</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+</body>
+
+</html>

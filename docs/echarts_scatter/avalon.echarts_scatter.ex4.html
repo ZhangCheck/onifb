@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>值域漫游散点图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/scatter","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    title : {
+                        text: '一周内的气温'
+                    },
+                    tooltip : {
+                        trigger: 'axis',
+                        showDelay : 0,
+                        axisPointer:{
+                            show: true,
+                            type : 'cross',
+                            lineStyle: {
+                                type : 'dashed',
+                                width : 1
+                            }
+                        },
+                        formatter : function (params) {
+                            if (params.value.length > 1) {
+                                return params.seriesName + ' :<br/>'
+                                        +"x："+ params.value[0]
+                                        +"，y："+ params.value[1]
+                                        +"，size："+ params.value[2];
+                            }
+                            else {
+                                return params.seriesName + ' :<br/>'
+                                        + params.name + ' : '
+                                        + params.value;
+                            }
+                        }
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataZoom : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    dataRange: {
+                        min: 0,
+                        max: 100,
+                        y: 'center',
+                        text:['高','低'],           // 文本，默认为数值文本
+                        color:['lightgreen','yellow'],
+                        calculable : true
+                    },
+                    xAxis : [
+                        {
+                            type : 'value',
+                            scale:true,
+                            splitNumber: 4
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            scale:true,
+                            splitNumber: 4
+                        }
+                    ],
+
+                    symbolList: ['circle'],//散点图的形状，默认是 [ 'circle', 'rectangle', 'triangle', 'diamond','emptyCircle', 'emptyRectangle', 'emptyTriangle', 'emptyDiamond]循环使用
+                    series:[{
+                        name:"scatter1",
+                        type:"scatter",
+                        symbolSize:8,
+                        data:[]
+                    }]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/xyz.json",
+                localUrl:"./model/xyz.json",
+                success:function(data){
+                    var options=vm.options;
+                    var legend=[];//图例
+                    var result=data.rows;
+                    var dataArr=[];
+                    for(var i=0;i<result.length;i++){//获取图例数据
+                        var simpleData=[];
+                        simpleData.push(result[i].x);
+                        simpleData.push(result[i].y);
+                        simpleData.push(result[i].size);
+                        dataArr.push(simpleData);
+                        dataArr.push(simpleData);
+                    }
+                    options.series[0].data=dataArr;
+                    var myChart = echarts.init(document.getElementById('scatter'));
+                    myChart.setOption(options);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="scatter" style="width: 800px;height: 300px;"></div>
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;值域漫游散点图&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="scatter" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+            &lt;script&gt;
+                require(["echarts.fb","echarts/chart/scatter","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                    var vm=avalon.define({
+                        $id:"demo",
+                        show:function(dialog){
+                            avalon.vmodels[dialog].toggle = true;
+                        },
+                        optionsStr:function(){
+                            return JSON.stringify(vm.options);
+                        },
+                        dialog:{
+                            title:"options的json格式"
+                        },
+                        options:{
+                            title : {
+                                text: '一周内的气温'
+                            },
+                            tooltip : {
+                                trigger: 'axis',
+                                showDelay : 0,
+                                axisPointer:{
+                                    show: true,
+                                    type : 'cross',
+                                    lineStyle: {
+                                        type : 'dashed',
+                                        width : 1
+                                    }
+                                },
+                                formatter : function (params) {
+                                    if (params.value.length > 1) {
+                                        return params.seriesName + ' :<br/>'
+                                                +"x："+ params.value[0]
+                                                +"，y："+ params.value[1]
+                                                +"，size："+ params.value[2];
+                                    }
+                                    else {
+                                        return params.seriesName + ' :<br/>'
+                                                + params.name + ' : '
+                                                + params.value;
+                                    }
+                                }
+                            },
+                            toolbox: {
+                                show : true,
+                                feature : {
+                                    mark : {show: true},
+                                    dataZoom : {show: true},
+                                    dataView : {show: true, readOnly: false},
+                                    restore : {show: true},
+                                    saveAsImage : {show: true}
+                                }
+                            },
+                            dataRange: {
+                                min: 0,
+                                max: 100,
+                                y: 'center',
+                                text:['高','低'],           // 文本，默认为数值文本
+                                color:['lightgreen','yellow'],
+                                calculable : true
+                            },
+                            xAxis : [
+                                {
+                                    type : 'value',
+                                    scale:true,
+                                    splitNumber: 4
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value',
+                                    scale:true,
+                                    splitNumber: 4
+                                }
+                            ],
+
+                            symbolList: ['circle'],//散点图的形状，默认是 [ 'circle', 'rectangle', 'triangle', 'diamond','emptyCircle', 'emptyRectangle', 'emptyTriangle', 'emptyDiamond]循环使用
+                            series:[{
+                                name:"scatter1",
+                                type:"scatter",
+                                symbolSize:8,
+                                data:[]
+                            }]
+                        }
+                    });
+                    avalon.scan();
+
+                    fb.requestJson({
+                        remoteUrl:"./model/xyz.json",
+                        localUrl:"./model/xyz.json",
+                        success:function(data){
+                            var options=vm.options;
+                            var legend=[];//图例
+                            var result=data.rows;
+                            var dataArr=[];
+                            for(var i=0;i&lt;result.length;i++){//获取图例数据
+                                var simpleData=[];
+                                simpleData.push(result[i].x);
+                                simpleData.push(result[i].y);
+                                simpleData.push(result[i].size);
+                                dataArr.push(simpleData);
+                                dataArr.push(simpleData);
+                            }
+                            options.series[0].data=dataArr;
+                            var myChart = echarts.init(document.getElementById('scatter'));
+                            myChart.setOption(options);
+                        }
+                    });
+                });
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

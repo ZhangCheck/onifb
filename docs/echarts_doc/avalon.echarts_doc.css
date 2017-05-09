@@ -1,0 +1,19 @@
+@charset "utf-8";
+.warp .bgGreen{
+    background:rgb(230,255,230);
+}
+.warp .bgRed{
+    background:rgb(255,230,230);
+}
+.warp .bgBlue{
+    background: rgb(210,230,255);
+}
+a{
+    color:red;
+}
+a:hover{
+    text-decoration:underline !important;
+}
+.oni-dialog-content{
+    word-break: break-all;
+}

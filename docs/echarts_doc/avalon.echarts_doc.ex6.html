@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>legend</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4> legend</h4>
+    <p>图例，每个图表最多仅有一个图例。</p>
+
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody><tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 显示策略，可选为：true（显示） | false（隐藏） </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> zlevel </td>
+            <td> 0 </td>
+            <td> 一级层叠控制。每一个不同的zlevel将产生一个独立的canvas，相同zlevel的组件或图标将在同一个canvas上渲染。zlevel越高越靠顶层，canvas对象增多会消耗更多的内存和性能，并不建议设置过多的zlevel，大部分情况可以通过二级层叠控制z实现层叠控制。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> z </td>
+            <td> 4 </td>
+            <td> 二级层叠控制，同一个canvas（相同zlevel）上z越高约靠顶层。 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> orient </td>
+            <td> 'horizontal' </td>
+            <td> 布局方式，默认为水平布局，可选为：'horizontal' | 'vertical' </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> x </td>
+            <td> 'center' </td>
+            <td> 水平安放位置，默认为全图居中，可选为：'center' | 'left' | 'right' | <b>{number}</b>（x坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> y </td>
+            <td> 'top' </td>
+            <td> 垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | <b>{number}</b>（y坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{color}</b> backgroundColor </td>
+            <td> 'rgba(0,0,0,0)' </td>
+            <td> 图例背景颜色，默认透明 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> borderColor </td>
+            <td> '#ccc' </td>
+            <td> 图例边框颜色 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> borderWidth </td>
+            <td> 0 </td>
+            <td> 图例边框线宽，单位px，默认为0（无边框） </td>
+        </tr>
+        <tr>
+            <td> <b>{number | Array}</b> padding </td>
+            <td> 5 </td>
+            <td> 图例内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，同css，见下图 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> itemGap </td>
+            <td> 10 </td>
+            <td> 各个item之间的间隔，单位px，默认为10，横向布局时为水平间隔，纵向布局时为纵向间隔，见下图 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> itemWidth </td>
+            <td> 20 </td>
+            <td> 图例图形宽度 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> itemHeight </td>
+            <td> 14 </td>
+            <td> 图例图形高度 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> textStyle </td>
+            <td> {color: '#333'} </td>
+            <td> 默认只设定了图例文字颜色（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>） ，更个性化的是，要指定文字颜色跟随图例，可设color为'auto'</td>
+        </tr>
+        <tr>
+            <td> <b>{string | Function}</b> formatter </td>
+            <td> null </td>
+            <td> 文本格式器：<b>{string}</b>（Template） | <b>{Function}</b>，模板变量为'{name}'，函数回调参数为name</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean | string}</b> selectedMode </td>
+            <td> true </td>
+            <td> 选择模式，默认开启图例开关，可选single，multiple </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> selected </td>
+            <td> null </td>
+            <td> 配置默认选中状态，可配合LEGEND.SELECTED事件做动态数据载入 </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> data </td>
+            <td> [ ] </td>
+            <td> 图例内容数组，数组项通常为<b>{string}</b>，每一项代表一个系列的name，默认布局到达边缘会自动分行（列），传入空字符串''可实现手动分行（列）。
+                <br>使用根据该值索引<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex15" title="">series</a>中同名系列所用的图表类型和itemStyle，如果索引不到，该item将默认为没启用状态。
+                <br>如需个性化图例文字样式，可把数组项改为<b>{Object}</b>，指定文本样式和个性化图例icon，格式为
+                <br>{<br>&nbsp;&nbsp;name : <b>{string}</b>, <br>&nbsp;&nbsp;textStyle : <b>{Object}</b>, <br>&nbsp;&nbsp;icon : <b>{string}</b><br>}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <img src="image/legend.png">
+</div>
+</body>
+</html>

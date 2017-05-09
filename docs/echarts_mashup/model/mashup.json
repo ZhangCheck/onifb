@@ -1,0 +1,23 @@
+{
+  "rows":[
+    {
+      "type":"gauge",
+      "data":[
+        {
+          "name":"完成率",
+          "value":60
+        }
+      ]
+    },
+    {
+      "type":"funnel",
+      "data":[
+        {"name":"展现","value":100},
+        {"name":"点击","value":80},
+        {"name":"订单","value":20},
+        {"name":"咨询","value":40},
+        {"name":"访问","value":60}
+      ]
+    }
+  ]
+}

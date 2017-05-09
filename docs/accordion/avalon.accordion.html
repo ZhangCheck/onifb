@@ -1,0 +1,68 @@
+<div class="oni-accordion-inner" ms-each-item="data" ms-class="oni-accordion-horizontal: direction==='horizontal'">
+    <div class="oni-accordion-header oni-widget-header oni-accordion-trigger"
+
+        ms-class="MS_OPTION_ACTIVECLASS:item.toggle"
+        ms-class-1="oni-corner-top:!merge&& item.toggle && direction==='vertical' ||(merge&&($first&&$last||$first)&& direction==='vertical')"
+        ms-class-2="oni-corner-all:!merge&&direction==='vertical'"
+        MS_OPTION_HORIZONTAL_HEADER_WIDTH_HEIGHT
+        ms-hover="{{!merge?'oni-state-hover':'oni-merge-state-hover'}}"
+         ms-class-4="oni-corner-bottom:merge&&($last&&!item.toggle&&$first||$last&&!item.toggle)"
+         ms-class-5="oni-corner-topRadiusImport:merge&&$first&&$last&&direction=='vertical'"
+         ms-class-6="oni-corner-bottomRadiusImport:merge&&$first&&$last&&!item.toggle"
+         ms-class-7="oni-accordion-marginTop0:merge"
+         ms-class-8="oni-state-default:!merge||$first"
+         ms-class-9="oni-border-bottom:merge"
+         ms-class-10="oni-corner-left:merge&&$first&&direction==='horizontal'"
+         ms-class-11="oni-corner-right:merge&&$last&&!item.toggle&&direction==='horizontal'"
+         ms-class-12="oni-border-horizontal-bottom:!merge||direction==='horizontal'">
+        <h2 style="line-height: 30px" ms-if="direction==='horizontal'" MS_OPTION_HORIZONTAL_TITLE>{{item.title}} {{$index}}{{currentIndex}}</h2>
+        <span ms-if="direction==='vertical'">{{item.title}}</span>
+    </div>
+    <div class="oni-accordion-content oni-widget-content"
+         ms-visible="item.toggle"
+         ms-animate
+         ms-data-options="animateOptions"
+         ms-data-proterties="animateProterties"
+         ms-class="oni-corner-bottom:!merge&&direction==='vertical'||$last&&item.toggle"
+         ms-class-2="oni-state-default:!merge"
+         ms-class-3="oni-border-bottom:merge&&direction==='vertical'"
+         ms-class-4="oni-border-horizontal-bottom:!merge||direction==='horizontal'"
+         ms-class-5="oni-corner-right:merge&&$last&&item.toggle&&direction==='horizontal'"
+         MS_OPTION_HORIZONTAL_CONTENT_WIDTH_HEIGHT>
+         <div MS_OPTION_HORIZONTAL_CONTENT_WIDTH_HEIGHT>
+            {{item.content|html}}
+         </div>
+    </div>
+</div>
+MS_OPTION_MODE_CARET
+<div class="oni-accordion-inner" ms-each-item="data">
+    <div class="oni-accordion-header oni-widget-header  "
+        ms-class="MS_OPTION_ACTIVECLASS:item.toggle"
+        ms-hover="{{!merge?'oni-state-hover':'oni-merge-state-hover'}}" style="height: 18px"
+         ms-class-2="oni-corner-all:!merge"
+         ms-class-3="oni-corner-top:(!merge&&item.toggle)||(merge&&($first&&$last||$first))"
+         ms-class-4="oni-corner-bottom:merge&&($last&&!item.toggle&&$first||$last&&!item.toggle)"
+         ms-class-5="oni-corner-topRadiusImport:merge&&$first&&$last"
+         ms-class-6="oni-corner-bottomRadiusImport:merge&&$first&&$last&&!item.toggle"
+         ms-class-7="oni-accordion-marginTop0:merge"
+         ms-class-8="oni-state-default:!merge||$first"
+         ms-class-9="oni-border-bottom:merge">
+        <span class="oni-accordion-icon-wrap oni-accordion-trigger">
+            <i class="oni-icon oni-icon-caret-right" ms-visible="!item.toggle" ></i>
+            <i class="oni-icon oni-icon-caret-down" ms-visible="item.toggle"></i>
+        </span>
+        {{item.title}}
+    </div>
+    <div class="oni-accordion-content oni-widget-content"
+         ms-class-1="oni-corner-bottom:!merge||$last&&item.toggle"
+         ms-class-4="oni-border-horizontal-bottom:!merge"
+         ms-class-2="oni-state-default:!merge"
+         ms-class-3="oni-border-bottom:merge"
+         ms-visible="item.toggle"
+         ms-animate
+         ms-data-options="animateOptions"
+         ms-data-proterties="animateProterties"
+         >
+        {{item.content|html}}
+    </div>
+</div>

@@ -1,0 +1,16 @@
+html body{
+    padding:20px;
+    box-sizing: border-box;
+}
+.mobileCon{
+    overflow: hidden;
+    position:relative;
+}
+.mobileCon ul{
+    position:absolute;
+    left:20px;
+    top:0;
+}
+.mobileCon li.selected a{
+    color: #b44a23;
+}

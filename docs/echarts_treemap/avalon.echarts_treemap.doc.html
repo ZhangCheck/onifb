@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>series（矩形树图）</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h3 class="table-doc-title">series（矩形树图）使用说明</h3>
+    <p>json数据中的series中的参数使用说明如下：</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="140">
+            <col width="160">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tbody><tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> center </td>
+            <td> ['50%', '50%']</td>
+            <td> 中心坐标，支持绝对值（px）和百分比</td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> size </td>
+            <td> ['80%', '80%']</td>
+            <td> 大小，支持绝对值（px）和百分比</td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> root</td>
+            <td> ''</td>
+            <td> 当前显示的根节点的名字 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> itemStyle </td>
+            <td> {} </td>
+            <td>参见<a href="#ItemStyle" title="">itemStyle</a>，以下是treemap独有属性
+                <table cellspacing="0" class="ADoc_table full">
+                    <colgroup>
+                        <col width="150">
+                        <col width="100">
+                        <col width="">
+                    </colgroup>
+                    <tbody><tr>
+                        <th> 名称 </th>
+                        <th> 默认值 </th>
+                        <th> 描述 </th>
+                    </tr>
+                    <tr>
+                        <td> <b>{Object}</b> breadcrumb </td>
+                        <td> <pre>{
+                            show: true,
+                            textStyle: {}
+                        } </pre>
+                        </td>
+                        <td> 面包屑
+                            <table cellspacing="0" class="ADoc_table full">
+                                <tbody>
+                                <tr>
+                                    <th> 名称 </th>
+                                    <th> 默认值 </th>
+                                    <th> 描述 </th>
+                                </tr>
+                                <tr>
+                                    <td> <b>{Boolean}</b> show </td>
+                                    <td> true </td>
+                                    <td> 是否展示面包屑 </td>
+                                </tr>
+                                <tr>
+                                    <td> <b>{Object}</b> textStyle </td>
+                                    <td> null </td>
+                                    <td> 参见<a href="#TextStyle" title="">textStyle</a> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <b>{number}</b> childBorderWidth </td>
+                        <td> 1 </td>
+                        <td> 二级边框宽度</td>
+                    </tr>
+                    <tr>
+                        <td> <b>{string}</b> childBorderColor </td>
+                        <td> '' </td>
+                        <td>
+                            二级边框颜色
+                        </td>
+                    </tr>
+                    </tbody></table>
+
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> data </td>
+            <td> [] </td>
+            <td> 数据列表，每一个数组项为Object {}，内容如下：
+                <table cellspacing="0" class="ADoc_table full">
+                    <colgroup>
+                        <col width="150">
+                        <col width="150">
+                        <col width="">
+                    </colgroup>
+                    <tbody><tr>
+                        <th> 名称 </th>
+                        <th> 默认值 </th>
+                        <th> 描述 </th>
+                    </tr>
+                    <tr>
+                        <td> <b>{string}</b> name </td>
+                        <td> null </td>
+                        <td> 数据名称 </td>
+                    </tr>
+                    <tr>
+                        <td> <b>{number}</b> value </td>
+                        <td> null </td>
+                        <td> 数据值 </td>
+                    </tr>
+                    <tr>
+                        <td> {Array} children </td>
+                        <td> []</td>
+                        <td> 子节点，每项的属性和父节点相同 </td>
+                    </tr>
+                    <tr>
+                        <td> <b>{Object}</b> itemStyle </td>
+                        <td> {} </td>
+                        <td>
+                            参见
+                            <a href="#ItemStyle" title="">
+                                itemStyle
+                            </a>
+                            ，权重最高
+                        </td>
+                    </tr>
+                    </tbody></table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

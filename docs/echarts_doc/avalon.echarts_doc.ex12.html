@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>axis.axisLine,axis.axisTick,axis.axisLabel</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4>axis.axisLine,axis.axisTick,axis.axisLabel</h4>
+    <h4>axis.axisLine</h4>
+    <p>坐标轴线，默认显示且带如下样式：</p>
+
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col  width="100">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 适用类型 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 通用 </td>
+            <td> 是否显示，默认为true，设为false后下面都没意义了 </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> onZero </td>
+            <td> true </td>
+            <td> 通用 </td>
+            <td> 定位到垂直方向的0值坐标上 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> lineStyle </td>
+            <td> <pre>{
+    color: '#48b',
+    width: 2,
+    type: 'solid'
+}                           </pre> </td>
+            <td> 通用 </td>
+            <td> 属性lineStyle控制线条样式，（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a>） </td>
+        </tr>
+        </tbody>
+    </table>
+    <h4>axis.axisTick</h4>
+    <p>坐标轴小标记，数值轴和时间轴默认不显示，类目轴默认显示，默认样式见下：</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col  width="100">
+            <col width="">
+        </colgroup>
+        <tbody><tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 适用类型 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> false（数值轴和时间轴）<br> true（类目轴） </td>
+            <td> 通用 </td>
+            <td> 是否显示，默认为false，设为true后下面为默认样式 </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number | function}</b> interval </td>
+            <td> 'auto' </td>
+            <td> 类目型 </td>
+            <td> 小标记显示挑选间隔，默认为'auto'，可选为：
+                <br>'auto'（随axisLabel，自动隐藏显示不下的） | 0（全部显示） |
+                <br><b>{number}</b>（用户指定选择间隔）
+                <br><b>{function}</b>函数回调，传递参数[index，data[index]]，返回true显示，返回false隐藏
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> onGap </td>
+            <td> null </td>
+            <td> 类目型 </td>
+            <td> 小标记是否显示为间隔，默认等于boundaryGap</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> inside </td>
+            <td> false </td>
+            <td> 通用 </td>
+            <td> 小标记是否显示为在grid内部，默认在外部</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> length </td>
+            <td> 5 </td>
+            <td> 通用 </td>
+            <td> 属性length控制线长 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> lineStyle </td>
+            <td> <pre>{
+    color: '#333',
+    width: 1
+}                           </pre></td>
+            <td> 通用 </td>
+            <td> 属性lineStyle控制线条样式，（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a>） </td>
+        </tr>
+        </tbody>
+    </table>
+    <h4>axis.axisLabel</h4>
+    <p>坐标轴文本标签选项</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col  width="100">
+            <col width="">
+        </colgroup>
+        <tbody><tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 适用类型 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 通用 </td>
+            <td> 是否显示，默认为true，设为false后下面都没意义了 </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number | function}</b> interval </td>
+            <td> 'auto' </td>
+            <td> 类目型 </td>
+            <td> 标签显示挑选间隔，默认为'auto'，可选为：
+                <br>'auto'（自动隐藏显示不下的） | 0（全部显示） |
+                <br><b>{number}</b>（用户指定选择间隔）
+                <br><b>{function}</b>函数回调，传递参数[index，data[index]]，返回true显示，返回false隐藏
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> rotate </td>
+            <td> 0 </td>
+            <td> 通用 </td>
+            <td> 标签旋转角度，默认为0，不旋转，正值为逆时针，负值为顺时针，可选为：-90 ~ 90 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> margin </td>
+            <td> 8 </td>
+            <td> 通用 </td>
+            <td> 坐标轴文本标签与坐标轴的间距，默认为8，单位px </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> clickable </td>
+            <td> false </td>
+            <td> 通用 </td>
+            <td> 坐标轴文本标签是否可点击</td>
+        </tr>
+        <tr>
+            <td> <b>{string | Function}</b> formatter </td>
+            <td> null </td>
+            <td> 通用 </td>
+            <td> 间隔名称格式器：<b>{string}</b>（Template） | <b>{Function}</b> </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> textStyle </td>
+            <td><pre>{
+    color: '#333'
+}                           </pre> </td>
+            <td> 通用 </td>
+            <td> 文本样式（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>），其中当坐标轴为数值型和时间型时，color接受方法回调，实现个性化的颜色定义，support <a href="https://github.com/ecomfe/echarts/issues/226" target="_blank">#226 »</a> </td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        间隔名称格式器formatter：
+    </p>
+    <ul>
+        <li>
+            <b>{string}</b>，模板（Template），其变量为：
+            <ul>
+                <li>
+                    {value}: 内容或值
+                </li>
+            </ul>
+
+        </li>
+
+        <li>
+            <b>{Function}</b>，传递参数同模板变量：
+            <ul>
+                <li>
+                    eg：function (value){return "星期" + "日一二三四五六".charAt(value);'}
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+</div>
+</body>
+</html>

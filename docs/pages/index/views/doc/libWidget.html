@@ -1,0 +1,55 @@
+<style>
+    .api-content-wrap .api-content ol{
+        list-style-type: decimal;
+    }
+    .api-content-wrap .api-content ul > li, .api-content-wrap .api-content ol > li{
+        border:none;
+    }
+</style>
+<h3>使用库组件</h3>
+<ul class="mlLg">
+    <li>初始化项目，参见“新建项目”</li>
+    <li>配置_cloudMap.js,增加要使用的组件</li>
+    <li>如果没有运行z2_coding.bat,运行之,这样un_react会将配置的组件拷贝一份到项目的fb_lib文件夹下,并实时更新</li>
+    <li>按<a href="index.html#!/widgets">组件库</a>中对应的组件说明，向页面中插入组件</li>
+</ul>
+
+<h3>修改库组件</h3>
+<ul class="mlLg">
+    <li>修改FB_FE_LIB/下库组件源码</li>
+    <li>运行z2_coding.bat,这样un_react会将配置的组件拷贝一份到项目的fb_lib文件夹下,并实时更新项目中的文件</li>
+    <li>上传FB_FE_LIB/源码,以共享于团队使用</li>
+</ul>
+
+<h3>定制库组件样式</h3>
+<ul class="mlLg">
+    <li>button为例，修改 _cloudMap.js，为button组件加入属性watchFilter:/(.*\.scss$)|(.*\.css$)/，以忽略该组件与云端的自动同步</li>
+    <li>运行z2_coding.bat,这样un_react会将配置的组件拷贝一份到项目的fb_lib文件夹下,并忽略对button的样式文件的同步</li>
+    <li>
+        <div>修改项目中js/fb_lib/button/avalon.button.scss 第85行:</div>
+        <pre>
+            &.oni-state-default {
+                border-color: #ccc;
+                background-color: rgba(0, 0, 0, 0);
+            }
+        </pre>
+        <div>修改为:</div>
+        <pre>
+            &.oni-state-default {
+                border-color: #ccc;
+                background-color: #ff0000;
+            }
+        </pre>
+    </li>
+    <li>编译js/fb_lib/button/avalon.button.scss,可以看到项目中按钮变成红色底</li>
+    <li>同样的操作，修改FB_FE_LIB/oniui/button/avalon.button.scss文件,可以看到项目中按钮不变化,可见button组件样式已脱离云端，成为定制样式</li>
+</ul>
+
+<h3>新建库组件</h3>
+<ul class="mlLg">
+    <li>新建 FB_FE_LIB/oniui/新组件</li>
+    <li>新建 FB_FE_LIB/oniui/新组件样例文档，并测试组件成功</li>
+    <li>新建 FB_FE_LIB/oniui/新组件使用文档</li>
+    <li>配置 FB_FE_LIB/pages/index/使组件样例和文档都显示在组件库文档中</li>
+    <li>上传 FB_FE_LIB/oniui/新组件，共享到云端</li>
+</ul>

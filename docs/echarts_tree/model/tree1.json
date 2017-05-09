@@ -1,0 +1,47 @@
+{
+  "rows":[{
+    "name":"手机",
+    "value":6,
+    "symbol":"http://www.iconpng.com/png/ecommerce-business/iphone.png",
+    "children":[
+      {
+        "name":"小米",
+        "value":3,
+        "symbol":"http://pic.58pic.com/58pic/12/36/51/66d58PICMUV.jpg",
+        "children":[
+          {
+            "name":"小米1",
+            "value":2,
+            "symbol":""
+          },
+          {
+            "name":"小米2",
+            "symbol":"",
+            "value":1
+          },
+          {
+            "name":"小米3",
+            "symbol":"",
+            "value":1
+          }
+        ]
+      },
+      {
+        "name":"苹果",
+        "value":5,
+        "symbol":"http://www.viastreaming.com/images/apple_logo2.png"
+      },
+      {
+        "name":"华为",
+        "value":4,
+        "symbol":"http://market.huawei.com/hwgg/logo_cn/download/logo.jpg"
+      },
+      {
+        "name":"联想",
+        "value":3,
+        "symbol":"http://www.lenovo.com.cn/HomeUpload/Home001/6d94ee9a20140714.jpg"
+      }
+
+    ]
+  }]
+}

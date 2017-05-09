@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/*
+这是每个都组件都应该引用的部分
+*/
+.oni-fileuploadinput {
+  display: inline-block;
+  position: relative; }
+  .oni-fileuploadinput .oni-fileuploadinput-icon {
+    color: #7ca3bf;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center; }
+  .oni-fileuploadinput .oni-fileuploadinput-button {
+    /* height: 26px !important;
+     line-height: 26px !important;*/
+    position: absolute;
+    padding: 0.57861em 1em;
+    top: 2px;
+    right: 3px;
+    border: 0 none;
+    background-color: #FFFFFF;
+    outline: none; }
+  .oni-fileuploadinput .oni-textbox {
+    float: left;
+    width: 100%;
+    box-sizing: border-box; }
+  .oni-fileuploadinput .oni-textbox {
+    min-width: 100px; }
+  .oni-fileuploadinput .oni-fileuploadinput-input {
+    cursor: pointer;
+    box-sizing: border-box; }
+  .oni-fileuploadinput .oni-fileuploadinput-input-focus {
+    border-color: #85b7d9; }
+
+/*# sourceMappingURL=avalon.fileuploadinput.css.map */

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>scrollbar组件</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        <script src="../require.js"></script>
+        <script src="../highlight/shCore.js"></script>
+        <script>
+            require.config({
+                baseUrl:'../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+           require(["scrollbar/avalon.scrollbar"], function() {
+                avalon.define("test", function(vm) {
+                    vm.scrollbar = {
+                        show: "always",
+                        showBarHeader: true
+                    }
+                    vm.updatekk = function() {
+                        avalon.vmodels.$bar && avalon.vmodels.$bar.update()
+                    }
+                    vm.data = avalon.range(1,400)
+                    vm.$index = 2
+                    vm.$skipArray = ["scrollbar"]
+                })
+                avalon.scan()
+            })
+        </script>
+        <style type="text/css">
+            .nobarbg .oni-scrollbar{
+                background: transparent;
+            }
+        </style>
+    </head>
+    <body ms-controller="test" style="padding-bottom:0;" class="" data-scrollbar-position="right">
+        <h1>scrollbar-document.body带上下小箭头</h1>
+        <div ms-widget="scrollbar,$bar" style="height:500px;width:800px">
+            <div class="oni-scrollbar-scroller oni-helper-reset">
+                <div style="width:800px" ms-repeat="data" data-repeat-rendered="updatekk" >left {{$index}} <span style="float:right;">right {{$index}} </span></div>
+            </div>
+        </div>
+        <pre ms-skip class="brush:html;gutter:false;toolbar:false">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;scrollbar组件&lt;/title&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+        &lt;link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"&gt;
+        &lt;script src="../require.js"&gt;&lt;/script&gt;
+        &lt;script src="../highlight/shCore.js"&gt;&lt;/script&gt;
+        &lt;script&gt;
+            require.config({
+                baseUrl:'../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+           require(["scrollbar/avalon.scrollbar"], function() {
+                avalon.define("test", function(vm) {
+                    vm.scrollbar = {
+                        show: "always",
+                        showBarHeader: true
+                    }
+                    vm.updatekk = function() {
+                        avalon.vmodels.$bar && avalon.vmodels.$bar.update()
+                    }
+                    vm.data = avalon.range(1,400)
+                    vm.$index = 2
+                    vm.$skipArray = ["scrollbar"]
+                })
+                avalon.scan()
+            })
+        &lt;/script&gt;
+        &lt;style type="text/css"&gt;
+            .nobarbg .oni-scrollbar{
+                background: transparent;
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body ms-controller="test" style="padding-bottom:0;" class="" data-scrollbar-position="right"&gt;
+        &lt;h1&gt;scrollbar-document.body带上下小箭头&lt;/h1&gt;
+        &lt;div ms-widget="scrollbar,$bar" style="height:500px;width:800px"&gt;
+            &lt;div class="oni-scrollbar-scroller oni-helper-reset"&gt;
+                &lt;div style="width:800px" ms-repeat="data" data-repeat-rendered="updatekk" &gt;left {{$index}} &lt;span style="float:right;"&gt;right {{$index}} &lt;/span&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;pre ms-skip class="brush:html;gutter:false;toolbar:false"&gt;
+
+        &lt;/pre&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+    </body>
+</html>

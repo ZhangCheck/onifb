@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";AASA;;EAEE;ACHI,yDAAiB;EACf,WAAW,EAAE,GAAG;;AAKxB,eAAgB;EACd,KAAK,ECekB,OAAO;;ADbhC,aAAc;EACZ,KAAK,ECakB,IAAI",
+"sources": ["../chameleon/oniui-theme.scss","avalon.switchdropdown.scss","../chameleon/compass/themes/_FBDefault.scss"],
+"names": [],
+"file": "avalon.switchdropdown.css"
+}

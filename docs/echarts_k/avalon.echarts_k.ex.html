@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>标准k线图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/k","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    title : {
+                        text: '2013年1月份上证指数'
+                    },
+                    tooltip : {
+                        trigger: 'axis',
+                        formatter:function(params){
+                            var seriesName=params[0].seriesName;
+                            var axisName= params[0].name;
+                            var data=params[0].data;
+                            return seriesName+":<br/>"+"时间："+axisName+"<br/>"+
+                                    "开盘："+data[0]+"<br/>收盘："+data[1]+
+                                    "<br/>最低："+data[2]+"<br/>最高："+data[3]
+                        }
+                    },
+                    legend: {
+                        data:[]
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data:[]
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            scale:true
+                        }
+                    ],
+                    dataZoom:{
+                        show:true,
+                        realtime:true,//缩放变化是否实时显示，在不支持Canvas的浏览器中该值自动强制置为false。
+                        start:50,
+                        end:100
+                    },
+                    series:[]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/k.json",
+                localUrl:"./model/k.json",
+                success:function(data){
+                    var options=vm.options;
+                    var result=data.rows;
+                    var simpleData=[];
+                    var xAxisData=[];
+                    var series={name:"上证指数",type:"k",data:[]}
+                    for(var i=0;i<result.length;i++){
+                        simpleData=[];
+                        xAxisData.push(result[i].date);
+                        simpleData.push(result[i].openQuotation);
+                        simpleData.push(result[i].marketClose);
+                        simpleData.push(result[i].min);
+                        simpleData.push(result[i].max);
+                        series.data.push(simpleData);
+                    }
+
+                    options.xAxis[0].data=xAxisData;
+                    options.series.push(series);
+                    var myChart = echarts.init(document.getElementById('k'));
+                    myChart.setOption(options);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="k" style="width: 800px;height: 300px;"></div>
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;标准k线图&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+       &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="k" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+            &lt;script&gt;
+                require(["echarts.fb","echarts/chart/k","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                    var vm=avalon.define({
+                        $id:"demo",
+                        show:function(dialog){
+                            avalon.vmodels[dialog].toggle = true;
+                        },
+                        optionsStr:function(){
+                            return JSON.stringify(vm.options);
+                        },
+                        dialog:{
+                            title:"options的json格式"
+                        },
+                        options:{
+                            title : {
+                                text: '2013年1月份上证指数'
+                            },
+                            tooltip : {
+                                trigger: 'axis',
+                                formatter:function(params){
+                                    var seriesName=params[0].seriesName;
+                                    var axisName= params[0].name;
+                                    var data=params[0].data;
+                                    return seriesName+":<br/>"+"时间："+axisName+"<br/>"+
+                                            "开盘："+data[0]+"<br/>收盘："+data[1]+
+                                            "<br/>最低："+data[2]+"<br/>最高："+data[3]
+                                }
+                            },
+                            legend: {
+                                data:[]
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data:[]
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value',
+                                    scale:true
+                                }
+                            ],
+                            dataZoom:{
+                                show:true,
+                                realtime:true,//缩放变化是否实时显示，在不支持Canvas的浏览器中该值自动强制置为false。
+                                start:50,
+                                end:100
+                            },
+                            series:[]
+                        }
+                    });
+                    avalon.scan();
+
+                    fb.requestJson({
+                        remoteUrl:"./model/k.json",
+                        localUrl:"./model/k.json",
+                        success:function(data){
+                            var options=vm.options;
+                            var result=data.rows;
+                            var simpleData=[];
+                            var xAxisData=[];
+                            var series={name:"上证指数",type:"k",data:[]}
+                            for(var i=0;i&lt;result.length;i++){
+                                simpleData=[];
+                                xAxisData.push(result[i].date);
+                                simpleData.push(result[i].openQuotation);
+                                simpleData.push(result[i].marketClose);
+                                simpleData.push(result[i].min);
+                                simpleData.push(result[i].max);
+                                series.data.push(simpleData);
+                            }
+
+                            options.xAxis[0].data=xAxisData;
+                            options.series.push(series);
+                            var myChart = echarts.init(document.getElementById('k'));
+                            myChart.setOption(options);
+                        }
+                    });
+                });
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

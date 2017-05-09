@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>库项目资源清单</title>
+	<script src="oniui/require.js" data-main="pageList.js"></script>
+</head>
+
+<body ms-controller="mainCtl">
+<h2>库项目资源清单</h2>
+
+<h3>数据源配置</h3>
+<div class="mlLg">数据源：<select ms-widget="dropdown,dataSource,$dataSourceOpt" ms-duplex="fbMode"></select></div>
+
+<h3>页面清单</h3>
+<ul class="mlLg">
+	<li ms-repeat="$pages"><a ms-href="el.url+'?fbMode='+fbMode">{{el.name}}（{{el.author}}）</a> </li>
+</ul>
+
+<h3>库级模块清单</h3>
+<div class="mlLg">
+	<div ms-widget="simplegrid, projectModule, $projectModuleOpt" style="width:99%"></div>
+</div>
+
+<h3>短期维护内容</h3>
+<ul class="mlLg">
+	<div ms-widget="simplegrid, issues, $issueOpt" style="width:99%"></div>
+</ul>
+
+<h3>项目结构清单</h3>
+<ul class="mlLg" style='display:none'>
+	<li ms-repeat="$projectStructure">{{el.path}}：{{el.fun}}</li>
+</ul>
+</body>
+</html>

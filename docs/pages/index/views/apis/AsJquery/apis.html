@@ -1,0 +1,45 @@
+<h1>AsJquery API</h1>
+<table class="table-doc" ms-controller="asJquery">
+    <tr>
+        <th>方法或属性</th>
+        <th>描述</th>
+    </tr>
+    <tr ms-repeat="api">
+        <td>{{$key}}</td>
+        <td>{{$val | html}}</td>
+    </tr>
+</table>
+<script>
+    avalon.define({
+        $id:'asJquery',
+        api:{
+            "$(a)":"同jQuery(),参数a支持selector和dom string:<br/>" +
+            "例子1：编辑元素<pre>$('.className').addClass('newClass');</pre><br/>" +
+            "例子2：创建元素<pre>$('<div>test</div>').appendTo('body')</pre>",
+            "$(a).addClass(classNames)":"加入新样式,同jquery addClass方法",
+            "$(a).attr(nameOrObj,valueOrUndefined)":"设置元素属性，同jquery attr方法",
+            "$(a).append(selector)":"将其它元素插入到当前元素中去，同jquery append方法",
+            "$(a).appendTo(selector)":"将当前元素插入到其它元素中去，同jquery appentTo方法",
+            "$(a).bind(eventType,callback)":"绑定事件，类似jquery bind方法",
+            "$(a).css(nameOrObj,valueOrUndefined)":"设置元素样式，同jquery css方法",
+            "$(a).each(callback)":"遍历元素，同jquery each方法",
+            "$(a).empty()":"清空元素内容，同jquery empty方法",
+            "$(a).eq(index)":"获取第index个元素，返回类型AsJquery,同jquery eq方法",
+            "$(a).find(selector)":"查找子元素，同jquery find方法",
+            "$(a).get(index)":"获取第index个元素，返回类型Element,同jquery get方法",
+            "$(a).hasClass(className)":"判断是否拥有某个样式class,同jquery hasClass方法",
+            "$(a).height()":"获取元素的高度,同jquery height方法",
+            "$(a).hide()":"隐藏元素，同jquery hide方法",
+            "$(a).html()":"設置innerHTML，同jquery html方法",
+            "$(a).length":"获取元素个数，同jquery length属性",
+            "$(a).parent()":"查找父元素,类似jquery parent方法",
+            "$(a).remove()":"删除当前元素，同jquery remove方法",
+            "$(a).removeClass(className)":"删除样式，同jquery removeClass方法",
+            "$(a).show()":"显示元素，同jquery show方法",
+
+            "$(a).toggleClass(className)":"切换样式类，同jquery toggleClass方法",
+            "$(a).unbind(eventType,callbackOrUndefined)":"解除绑定，类似jquery unbind方法",
+            "$(a).width()":"获取元素的宽度,同jquery width方法"
+        }
+    })
+</script>

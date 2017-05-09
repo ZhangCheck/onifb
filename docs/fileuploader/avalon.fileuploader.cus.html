@@ -1,0 +1,144 @@
+<!--class="oni-fileuploader-wrapper"-->
+
+<div class="row page-header" ms-visible="head.visible">
+    <span>{{head.content|html}}</span>
+</div>
+
+<div ms-on-drop="onDrop" ms-on-dragover="onDragOver" class="oni-fileuploader-wrapper">
+    <div class="preview-stage"
+         ms-if="showPreview" ms-css-height="previewStageHeight">
+        <div
+                class="preview-image-wrapper"
+                ms-repeat="previews"
+                ms-css-width="previewWidth"
+                ms-css-height="previewHeight">
+            <div class="preview-menu">
+                <div><a class="oni-icon icon" ms-on-click="onPreviewRemoveClicked(el)">
+                    &#xf003;</a><span>{{el.name}}</span></div>
+            </div>
+            <img ms-attr-src="el.preview" alt=""/>
+
+            <div class="preview-progress-wrapper">
+                <div class="preview-progress-body">
+                    <div class='progress-bar' ms-css-width="{{el.uploadProgress}}%" ms-if="showProgress"></div>
+                    <span class="message">{{el.message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="file-list">
+        <div class="bg-danger" ms-if="uploadErrorMessage != null">{{uploadErrorMessage}}</div>
+        <!--<div class="panel-heading">上传文件</div>-->
+        <table class="table table-striped"  width="100%">
+            <thead>
+            <tr>
+                <td hidden>token</td>
+                <td>文件名称</td>
+                <td>大小</td>
+                <td ms-if="showProgress">进度</td>
+                <td width="50px;"></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ms-repeat="previews">
+                <td hidden>{{el.fileLocalToken}}</td>
+                <td>{{el.name}}</td>
+                <td>{{el.size}} b</td>
+                <td ms-if="showProgress">
+                    <div class="preview-progress-wrapper">
+                        <div class="preview-progress-body">
+                            <div class='progress-bar' ms-css-width="{{el.uploadProgress}}%" ms-if="showProgress"></div>
+                            <span class="message">{{el.message}}</span>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <!--buttton style width: 20px;height: 20px;border:0 none;border-radius: 4px;background: red;position: relative;outline: none-->
+                    <button type="button" class="close" style="width: 20px;height: 20px;border:0 none;border-radius: 4px;background: red;position: relative;outline: none;text-align:center;padding:0px;line-height:20px;" aria-label="Close" ms-on-click="onPreviewRemoveClicked(el)">
+                        <span aria-hidden="true" style="color: white;text-align:center;">&times;</span></button><!--span style color: white;position: absolute;right: 4px;bottom: -2px;bottom:9px\0;-->
+                </td>
+            </tr>
+            <tr ms-if="previews.length==0" style="height: 100px;">
+                <td colspan="4"  ms-if="showPreview">
+                    {{noPreviewText|html}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
+
+<div class="oni-fileuploader-wrapper" style="background-color: #FFFFFF">
+    <div ms-widget="button" class="btn btn-lg btn-primary cusButton" style="|" data-button-color="transparent" ms-click="addFileClicked">
+        {{addButtonText}}
+        <input type="file" ms-if="useHtml5Runtime" ms-attr-accept="getInputAcceptTypes(false)"
+               ms-attr-multiple="multipleFileAllowed" style="display:none"/>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <div ms-widget="button" class="btn btn-lg btn-primary cusButton" data-button-color="transparent" ms-click="uploadClicked">
+        {{uploadButtonText}}
+    </div>
+    <div class="flash-wrapper"
+         ms-if="useFlashRuntime">
+        <object
+                classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+                width="100%"
+                align="middle"
+                height="100%"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0"
+                id="##VM_ID##_flash"
+                >
+            <param name="allowScriptAccess" value="sameDomain"/>
+            <param name="scaleMode" value="exactFit">
+            <param name="bgcolor" value=""/>
+            <param name="wmode" value="transparent">
+            <param name="allowFullScreen" value="false"/>
+            <param name="movie" value="##PAGE_PATH##avalon.fileuploader.swf?vmid=##VM_ID##"/>
+            <param name="quality" value="high"/>
+            <embed src="##PAGE_PATH##avalon.fileuploader.swf?vmid=##VM_ID##"
+                   type="application/x-shockwave-flash"
+                   align="middle"
+                   width="100%"
+                   scaleMode="exactFit"
+                   wmode="transparent"
+                   height="100%"
+                   quality="high"
+                   pluginspage="http://www.adobe.com/go/getflashplayer_cn"
+                   allowScriptAccess="sameDomain"
+                   allowFullScreen="false"
+                   name="##VM_ID##_flash" />
+        </object>
+    </div>
+</div>
+
+
+
+<!--<div class="row page-header"></div>
+
+<div class="row" style="margin-top: 50px;">
+    <div class="col-md-1 col-md-offset-1"></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1 col-md-offset-6"></div>
+    <div class="col-md-1"></div>
+    <div class="row col-md-4 col-md-offset-1" ms-visible="btnGroupVisible">
+        <button ms-widget="button" class="btn btn-lg btn-primary" data-button-color="transparent" ms-click="addFileClicked">
+            {{addButtonText}}
+            <input type="file" ms-if="useHtml5Runtime" ms-attr-accept="getInputAcceptTypes(false)"
+                   ms-attr-multiple="multipleFileAllowed" style="display:none"/>
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button ms-widget="button" class="btn btn-lg btn-primary" data-button-color="transparent" ms-click="uploadClicked">
+            {{uploadButtonText}}
+        </button>
+    </div>
+    &lt;!&ndash; <div class="row col-md-3 col-md-offset-4">
+        <button type="button" class="btn btn-lg btn-primary " ms-click="doConfirm">确&nbsp;&nbsp;认</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-lg btn-primary" ms-click="doCancel">取&nbsp;&nbsp;消</button>
+    </div> &ndash;&gt;
+</div>-->

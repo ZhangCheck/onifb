@@ -1,0 +1,47 @@
+@import "../chameleon/oniui-theme";
+$uiname: "oni-textBoxDialog";
+.#{$uiname}.buttonPosLeft{
+    .#{$uiname}-button{
+        left: 2px;
+    }
+    .oni-textbox{
+        padding-left:46px;
+    }
+}
+.#{$uiname}.buttonPosRight{
+    .#{$uiname}-button{
+        right: 2px;
+    }
+    .oni-textbox{
+        padding-right:1px;
+    }
+}
+.#{$uiname}{
+    display: inline-block;
+    position:relative;
+    .#{$uiname}-icon{
+        color: $oni-icon-color;
+        font-size: 12px;
+        cursor: pointer;
+        text-align: center;
+    }
+    .#{$uiname}-button{
+       /* height: 26px !important;
+        line-height: 26px !important;*/
+        position: absolute;
+        padding: 0.57861em 1em;;
+        top: 1px;
+        border: 0 none;
+        background-color: #FFFFFF;
+        outline: none;
+    }
+    .oni-textbox{
+        float:left;
+        width:100%;
+        box-sizing: border-box;
+    }
+    .oni-textbox{
+        min-width:100px;
+
+    }
+}

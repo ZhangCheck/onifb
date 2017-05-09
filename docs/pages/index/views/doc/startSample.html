@@ -1,0 +1,36 @@
+<iframe style="min-heiht:200px;" src="pages/index/views/doc/startSampleImpl.html"></iframe>
+<pre style="margin-top:100px" ms-skip>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+	&lt;style&gt;
+		*[ms-controller],.ms-controller{
+			display:none;
+		}
+	&lt;/style&gt;
+    &lt;script src=&quot;../../../../../oniui/require.js&quot;&gt;&lt;/script&gt; //这是使用requireJs,起始项目中已经设置好，不用关心
+    &lt;script&gt;
+        require.config(...);                           //这句是amd的配置，所有项目都是一样的，在起始项目中已经设置好，不用关心
+        require([&quot;avalon.fb&quot;],function(){             //这句是加载基础资源，起始项目中已经设置好，不用关心
+                   var DEFAULT_VALUE = &quot;江苏飞博&quot;    //定义初始化常量
+		    var vm = avalon.define({          //定义一个作用域 (vm)
+                                $id:&quot;mainCtl&quot;,       //指定作用域名称（对应dom)
+				$defaultValue:DEFAULT_VALUE,    //定义非监控的变量
+                                name:DEFAULT_VALUE,            //定义被监控的变量
+				reset:function(){              //定义函数或事件处理函数
+					vm.name = vm.$defaultValue
+				}
+                     })
+                     avalon.scan()
+        })
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body ms-controller=&quot;mainCtl&quot;&gt;
+    &lt;div class=&quot;mtLg mlLg&quot;&gt; 欢迎来到：{{name}}&lt;/div&gt;  //使用作用域中的变量
+    &lt;input class=&quot;mtLg mlLg&quot; type=&quot;text&quot; ms-duplex=&quot;name&quot;&gt; //通过双向绑定更新变量
+    &lt;span ms-css-cursor=&quot;{{name==$defaultValue?&#39;&#39;:&#39;pointer&#39;}}&quot; ms-css-color=&quot;{{name==$defaultValue?&#39;#BBBBBB&#39;:&#39;&#39;}}&quot; ms-click=&quot;reset&quot;&gt; 重置 &lt;/span&gt; //通过事件更新变量、动态样式
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>

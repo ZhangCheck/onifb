@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>柱状图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{       
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/bar","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm = avalon.define({
+                $id:"test",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.barOptions);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                barOptions:{
+                    timeline:{
+                        controlStyle:{
+                            normal : {
+                                color : '#48D1CC'
+                            },
+                            emphasis : {
+                                color : '#1e90ff'
+                            }
+                        },
+                        lineStyle:{
+                            color:'#48D1CC'
+                        },
+                        data:[],
+                        label:{
+                            formatter : function(time) {
+                                var month=parseInt(time.substr(5,2));
+                                var day=parseInt(time.substr(8,2));
+                                return month+'月'+day+'日';
+                            }
+                        },
+                        autoPlay : false,
+                        playInterval : 2000
+                    },
+                    options:[
+                        {
+                            title : {
+                                x: 'center',
+                                padding: 1,
+                                'text':'各警种办理事项分析'
+                            },
+                            tooltip : {
+                                'trigger':'axis'
+                            },
+                            toolbox : {
+                                'show':false
+                            },
+                            calculable : false,
+                            grid: {
+                                borderWidth: 0
+                            },
+                            xAxis : [{
+                                type:'category',
+                                name:'警种',
+                                splitLine: {
+                                    show: false
+                                },
+                                axisTick : {
+                                    interval: 0
+                                },
+                                axisLabel:{
+                                    show: true,
+                                    boundaryGap : true,
+                                    interval: 0,
+                                    margin: 2,
+                                    textStyle: {
+                                        color: 'black'
+                                    }
+                                },
+                                data:[]
+                            }],
+                            yAxis : [
+                                {
+                                    type: 'value',
+                                    name: '办理数',
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        show: true,
+                                        interval: 'auto',
+                                        textStyle: {
+                                            color: 'black'
+                                        }
+                                    }
+                                }
+                            ],
+                            series : [
+                                {
+                                    name: '办理数',
+                                    type: 'bar',
+                                    itemStyle:{
+                                        normal:{
+                                            color:function(value){
+                                                var colorList = [
+                                                    '#FF3030','#CDCD00','#EEC900',
+                                                    '#CD8500','#668B8B','#CD7054'
+                                                ];
+                                                return colorList[value.dataIndex%colorList.length];
+                                            }
+                                        }
+                                    },
+                                    barCategoryGap:'40',
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/bar.json",
+                localUrl:"./model/bar.json",
+                data:{},
+                success:function(data){
+                    var result=data.rows;
+                    var xz=new Array();
+                    var yz1=new Array();
+                    var yz2=new Array();
+                    var yz3=new Array();
+                    var yz4=new Array();
+                    var yz5=new Array();
+                    var yz6=new Array();
+                    var yz7=new Array();
+                    var time_arr;
+
+                    for(var i=0;i<result.length;i++){
+                        xz.push(result[i].name);
+                        yz1.push(result[i].value1);
+                        yz2.push(result[i].value2);
+                        yz3.push(result[i].value3);
+                        yz4.push(result[i].value4);
+                        yz5.push(result[i].value5);
+                        yz6.push(result[i].value6);
+                        yz7.push(result[i].value7);
+                    }
+                    time_arr=[result[0].time1,result[0].time2,result[0].time3,result[0].time4,result[0].time5,result[0].time6,result[0].time7];
+                    vm.barOptions.timeline.data=time_arr;
+                    vm.barOptions.options[0].xAxis[0].data=xz;
+                    vm.barOptions.options[0].series[0].data=yz1;
+                    vm.barOptions.options[1].series[0].data=yz2;
+                    vm.barOptions.options[2].series[0].data=yz3;
+                    vm.barOptions.options[3].series[0].data=yz4;
+                    vm.barOptions.options[4].series[0].data=yz5;
+                    vm.barOptions.options[5].series[0].data=yz6;
+                    vm.barOptions.options[6].series[0].data=yz7;
+
+                    var myChart = echarts.init(document.getElementById('bar'));
+                    myChart.setOption(vm.barOptions);
+
+                    window.onresize=function (){
+                        myChart.resize();
+                    };
+                }
+            });
+        });
+
+    </script>
+</head>
+<body ms-controller="test">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="bar" style="width: 800px;height: 300px;"></div>
+
+<div ms-skip>
+        <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;head lang=&quot;en&quot;&gt;
+                &lt;meta charset=&quot;UTF-8&quot;&gt;
+                &lt;title&gt;柱状图&lt;/title&gt;
+                &lt;script src=&quot;../require.js&quot;&gt;&lt;/script&gt;
+                &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot;  href=&quot;../highlight/shCore.css&quot;/&gt;
+                &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;../style/avalon.doc.css&quot;/&gt;
+                &lt;script src=&quot;../highlight/shCore.js&quot;&gt;&lt;/script&gt;
+                &lt;script&gt;
+                    require.config({
+                        baseUrl:&#39;../../oniui&#39;,
+                        paths:{
+                            avalon:&#39;avalon.shim&#39;,
+                            echarts: &#39;echarts&#39;,
+                            domReady:&#39;domReady&#39;
+                        },
+                        map:{
+                            &#39;*&#39;:{
+                                &#39;css&#39;:&#39;require.css&#39;,
+                                &#39;text&#39;:&#39;require.text&#39;
+                            }
+                        },
+                        shim:{
+                            avalon: { exports: &quot;avalon&quot; },
+                            echarts:{exports:&quot;echarts&quot;}
+                        }
+                    });
+                &lt;/script&gt;
+                &lt;script&gt;
+                   require(["echarts.fb","echarts/chart/bar","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                        var vm = avalon.define({
+                            $id:"test",
+                            show:function(dialog){
+                                avalon.vmodels[dialog].toggle = true;
+                            },
+                            optionsStr:function(){
+                                return JSON.stringify(vm.barOptions);
+                            },
+                            dialog:{
+                                title:"options的json格式"
+                            },
+                            barOptions:{
+                                timeline:{
+                                    controlStyle:{
+                                        normal : {
+                                            color : '#48D1CC'
+                                        },
+                                        emphasis : {
+                                            color : '#1e90ff'
+                                        }
+                                    },
+                                    lineStyle:{
+                                        color:'#48D1CC'
+                                    },
+                                    data:[],
+                                    label:{
+                                        formatter : function(time) {
+                                            var month=parseInt(time.substr(5,2));
+                                            var day=parseInt(time.substr(8,2));
+                                            return month+'月'+day+'日';
+                                        }
+                                    },
+                                    autoPlay : false,
+                                    playInterval : 2000
+                                },
+                                options:[
+                                    {
+                                        title : {
+                                            x: 'center',
+                                            padding: 1,
+                                            'text':'各警种办理事项分析'
+                                        },
+                                        tooltip : {
+                                            'trigger':'axis'
+                                        },
+                                        toolbox : {
+                                            'show':false
+                                        },
+                                        calculable : false,
+                                        grid: {
+                                            borderWidth: 0
+                                        },
+                                        xAxis : [{
+                                            type:'category',
+                                            name:'警种',
+                                            splitLine: {
+                                                show: false
+                                            },
+                                            axisTick : {
+                                                interval: 0
+                                            },
+                                            axisLabel:{
+                                                show: true,
+                                                boundaryGap : true,
+                                                interval: 0,
+                                                margin: 2,
+                                                textStyle: {
+                                                    color: 'black'
+                                                }
+                                            },
+                                            data:[]
+                                        }],
+                                        yAxis : [
+                                            {
+                                                type: 'value',
+                                                name: '办理数',
+                                                splitLine: {
+                                                    show: false
+                                                },
+                                                axisLabel: {
+                                                    show: true,
+                                                    interval: 'auto',
+                                                    textStyle: {
+                                                        color: 'black'
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        series : [
+                                            {
+                                                name: '办理数',
+                                                type: 'bar',
+                                                itemStyle:{
+                                                    normal:{
+                                                        color:function(value){
+                                                            var colorList = [
+                                                                '#FF3030','#CDCD00','#EEC900',
+                                                                '#CD8500','#668B8B','#CD7054'
+                                                            ];
+                                                            return colorList[value.dataIndex%colorList.length];
+                                                        }
+                                                    }
+                                                },
+                                                barCategoryGap:'40',
+                                                data: []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        series : [
+                                            {
+                                                data: []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        series : [
+                                            {
+                                                data: []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        series : [
+                                            {
+                                                data: []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        series : [
+                                            {
+                                                data: []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        series : [
+                                            {
+                                                data: []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        series : [
+                                            {
+                                                data: []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        });
+                        avalon.scan();
+
+                        fb.requestJson({
+                            remoteUrl:"./model/bar.json",
+                            localUrl:"./model/bar.json",
+                            data:{},
+                            success:function(data){
+                                var result=data.rows;
+                                var xz=new Array();
+                                var yz1=new Array();
+                                var yz2=new Array();
+                                var yz3=new Array();
+                                var yz4=new Array();
+                                var yz5=new Array();
+                                var yz6=new Array();
+                                var yz7=new Array();
+                                var time_arr;
+
+                                for(var i=0;i&lt;result.length;i++){
+                                    xz.push(result[i].name);
+                                    yz1.push(result[i].value1);
+                                    yz2.push(result[i].value2);
+                                    yz3.push(result[i].value3);
+                                    yz4.push(result[i].value4);
+                                    yz5.push(result[i].value5);
+                                    yz6.push(result[i].value6);
+                                    yz7.push(result[i].value7);
+                                }
+                                time_arr=[result[0].time1,result[0].time2,result[0].time3,result[0].time4,result[0].time5,result[0].time6,result[0].time7];
+                                vm.barOptions.timeline.data=time_arr;
+                                vm.barOptions.options[0].xAxis[0].data=xz;
+                                vm.barOptions.options[0].series[0].data=yz1;
+                                vm.barOptions.options[1].series[0].data=yz2;
+                                vm.barOptions.options[2].series[0].data=yz3;
+                                vm.barOptions.options[3].series[0].data=yz4;
+                                vm.barOptions.options[4].series[0].data=yz5;
+                                vm.barOptions.options[5].series[0].data=yz6;
+                                vm.barOptions.options[6].series[0].data=yz7;
+
+                                var myChart = echarts.init(document.getElementById('bar'));
+                                myChart.setOption(vm.barOptions);
+
+                                window.onresize=function (){
+                                    myChart.resize();
+                                };
+                            }
+                        });
+                    });
+
+                &lt;/script&gt;
+            &lt;/head&gt;
+            &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="bar" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+
+
+
+
+            &lt;/body&gt;
+
+            &lt;/html&gt;
+        </pre>
+    </div>
+    
+
+</body>
+
+</html>
+

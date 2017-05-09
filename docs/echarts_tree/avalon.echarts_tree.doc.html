@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>series（树图）</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h3 class="table-doc-title">series（树图）使用说明</h3>
+    <p>json数据中的series中的参数使用说明如下：</p>
+    <table class="table-doc" border="1">
+        <tbody><tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> rootLocation </td>
+            <td>
+                各异
+            </td>
+            <td> 根节点坐标，支持绝对值（px）、字符和百分比
+                <pre>{
+                    x: 'center' | 'left' | 'right' | 'x%' | {number},
+                    y: 'center' | 'top' | 'bottom' | 'y%' | {number}
+                }</pre>
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> layerPadding </td>
+            <td> 100</td>
+            <td> 层间距</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> nodePadding </td>
+            <td> 30</td>
+            <td> 节点间距</td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> orient </td>
+            <td> 'vertical'</td>
+            <td> 树的方向可选：'vertical' | 'horizontal' | 'radial'</td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> direction </td>
+            <td> ''</td>
+            <td> 方向反转，可选：'inverse'</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean | string}</b> roam </td>
+            <td> false </td>
+            <td> 是否开启滚轮缩放和拖拽漫游，默认为false（关闭），其他有效输入为true（开启），'scale'（仅开启滚轮缩放），'move'（仅开启拖拽漫游）</td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> symbol </td>
+            <td> 'circle' </td>
+            <td> 同<a href="#SeriesCartesian" title="">series（直角系）</a></td>
+        </tr>
+        <tr>
+            <td> {number|Array} symbolSize </td>
+            <td> 20</td>
+            <td> 所有该类目的节点的大小 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> itemStyle </td>
+            <td> {} </td>
+            <td>参见<a href="#ItemStyle" title="">itemStyle</a></td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> data </td>
+            <td> [] </td>
+            <td> 只有一项的数组，为Object {}，内容如下：
+                <table cellspacing="0" class="ADoc_table full">
+                    <tbody><tr>
+                        <th> 名称 </th>
+                        <th> 默认值 </th>
+                        <th> 描述 </th>
+                    </tr>
+                    <tr>
+                        <td> <b>{string}</b> name </td>
+                        <td> null </td>
+                        <td> 数据名称 </td>
+                    </tr>
+                    <tr>
+                        <td> <b>{number}</b> value </td>
+                        <td> null </td>
+                        <td> 数据值 </td>
+                    </tr>
+                    <tr>
+                        <td> <b>{string}</b> symbol </td>
+                        <td> 'circle' </td>
+                        <td> 同<a href="#SeriesCartesian" title="">series（直角系）</a></td>
+                    </tr>
+                    <tr>
+                        <td> {number|Array} symbolSize </td>
+                        <td> 20</td>
+                        <td> 所有该类目的节点的大小 </td>
+                    </tr>
+                    <tr>
+                        <td> {Array} children </td>
+                        <td> []</td>
+                        <td> 子节点，每项的属性和父节点相同 </td>
+                    </tr>
+                    <tr>
+                        <td> <b>{Object}</b> itemStyle </td>
+                        <td> {} </td>
+                        <td>
+                            参见
+                            <a href="#ItemStyle" title="">
+                                itemStyle
+                            </a>
+                            ，权重最高
+                        </td>
+                    </tr>
+                    </tbody></table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>textBox弹窗-多选tree</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:"../../oniui",
+            paths:{
+                avalon:"avalon.shim",
+                echarts: "echarts",
+                domReady:"domReady"
+            },
+            map:{
+                "*":{
+                    "css":"require.css",
+                    "text":"require.text"
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["./textbox/avalon.textbox","./button/avalon.button","./dialog/avalon.dialog","./tree/avalon.tree.check","./mmRequest/mmRequest"],function(fb){
+
+            var vm=avalon.define({
+                $id:"demo",
+                selectedValue:"",//选中的值
+                selectedLevelCode:"",//code
+                showMuiplexTree:function(dialog){//对话框显示
+                    avalon.vmodels[dialog].toggle=true;
+                },
+                $muiplexTreeOpt:{//多选树参数
+                    children:[],
+                    check: {
+                        enable: true//可选
+                    },
+                    data:{
+                        simpleData: {
+                            enable: true,
+                            pIdKey: "pid"
+                        }
+                    }
+                },
+                $muiplexTreeDialogOpts:{
+                    onConfirm:function(){
+                        var resultDisplay = "";//显示选中节点中文值
+                        var result = "";//实际选中节点值
+                        var array = avalon.vmodels["muiplexTree"].getCheckedNodes(true);//获得所有选中状态的节点
+                        avalon.each(array,function(i,el){
+                            if(result == ""){
+                                resultDisplay = resultDisplay + el.name ;
+                                result = result + el.code;
+                            }else{
+                                resultDisplay = resultDisplay + "," + el.name;
+                                result = result + "," + el.code;
+                            }
+                        });
+                        vm.selectedValue =  resultDisplay;//绑定选中中文值
+                        vm.selectedLevelCode = result;//绑定选中值
+                    },
+                    onOpen:function(){//打开时弹出框时重置树
+                        var muiplexTreeVmodels=avalon.vmodels["muiplexTree"];
+                        var nodes=muiplexTreeVmodels.getNodes();
+                        var nodesObj=muiplexTreeVmodels.transformToArray(nodes);
+                        var selectedName=vm.selectedValue.split(",");
+                        avalon.each(nodesObj , function(i,el){//遍历所有数据
+                            if(selectedName.indexOf(el.name) > -1){//如果属于array中，则选中
+                                el.checked = true;
+                            }
+                        });
+                        muiplexTreeVmodels.reset(muiplexTreeVmodels.transformTozTreeNodes(nodesObj));
+                        muiplexTreeVmodels.expandAll(true);
+                    }
+                }
+            });
+
+            avalon.ajax({
+                url:"model/tree.json",
+                type:"post",
+                dataType:"json",
+                contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                success:function(data){
+                    avalon.vmodels["muiplexTree"].children=data.zNodes;
+                    vm.selectedValue=data.defalultValue;
+                }
+
+            });
+
+//        vm.$watch("selectedLevelCode",function(code){
+//            var codeArray=[];
+//        });
+            avalon.scan();
+        });
+
+    </script>
+</head>
+<body >
+    <div ms-controller="demo">
+        <label>多选树</label>
+        <input ms-widget="textbox" data-textbox-width="100%" ms-duplex="selectedValue"/>
+        <input type="hidden"  ms-duplex="selectedLevelCode"/>
+        <button type="button" ms-widget="button"  ms-click="showMuiplexTree('muiplexTreeDialog')"><span class="icon-list"></span></button>
+        <div ms-widget="dialog,muiplexTreeDialog,$muiplexTreeDialogOpts">
+            <div ms-widget="tree,muiplexTree,$muiplexTreeOpt">
+
+            </div>
+        </div>
+    </div>
+
+<div ms-skip>
+        <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+            &lt;!DOCTYPE HTML&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;meta charset='utf-8'/&gt;
+                &lt;title&gt;textBox弹窗-多选tree&lt;/title&gt;
+                &lt;script src='../require.js'&gt;&lt;/script&gt;
+                &lt;script&gt;
+                    require.config({
+                        baseUrl:'../../oniui',
+                        paths:{
+                            avalon:'avalon.shim',
+                            echarts: 'echarts',
+                            domReady:'domReady'
+                        },
+                        map:{
+                            '*':{
+                                'css':'require.css',
+                                'text':'require.text'
+                            }
+                        },
+                        shim:{
+                            avalon: { exports: "avalon" },
+                            echarts:{exports:"echarts"}
+                        }
+                    });
+                &lt;/script&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;div class="demo-show" ms-controller="demo"&gt;
+                &lt;body ms-controller="demo"&gt;
+                &lt;div &gt;
+                &lt;label&gt;多选树&lt;/label&gt;
+                    &lt;input ms-widget="textbox" data-textbox-width="100%" ms-duplex="selectedValue"/&gt;
+                    &lt;input type="hidden"  ms-duplex="selectedLevelCode"/&gt;
+                    &lt;button type="button" ms-widget="button"  ms-click="showMuiplexTree('muiplexTreeDialog')"&gt;&lt;span class="icon-list"&gt;&lt;/span&gt;&lt;/button&gt;
+                        &lt;div ms-widget="dialog,muiplexTreeDialog,$muiplexTreeDialogOpts"&gt;
+                        &lt;div ms-widget="tree,muiplexTree,$muiplexTreeOpt"&gt;
+
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                    &lt;script&gt;
+                            require(["./textbox/avalon.textbox","./button/avalon.button","./dialog/avalon.dialog","./tree/avalon.tree.check","./mmRequest/mmRequest"],function(fb){
+                                var vm=avalon.define({
+                                    $id:"demo",
+                                    selectedValue:"",//选中的值
+                                    selectedLevelCode:"",//code
+                                    showMuiplexTree:function(dialog){//对话框显示
+                                        avalon.vmodels[dialog].toggle=true;
+                                    },
+                                    $muiplexTreeOpt:{//多选树参数
+                                        children:[],
+                                        check: {
+                                            enable: true//可选
+                                        },
+                                        data:{
+                                            simpleData: {
+                                                enable: true,
+                                                pIdKey: "pid"
+                                            }
+                                        }
+                                    },
+                                    $muiplexTreeDialogOpts:{
+                                        onConfirm:function(){
+                                            var resultDisplay = "";//显示选中节点中文值
+                                            var result = "";//实际选中节点值
+                                            var array = avalon.vmodels["muiplexTree"].getCheckedNodes(true);//获得所有选中状态的节点
+                                            avalon.each(array,function(i,el){
+                                                if(result == ""){
+                                                    resultDisplay = resultDisplay + el.name ;
+                                                    result = result + el.code;
+                                                }else{
+                                                    resultDisplay = resultDisplay + "," + el.name;
+                                                    result = result + "," + el.code;
+                                                }
+                                            });
+                                            vm.selectedValue =  resultDisplay;//绑定选中中文值
+                                            vm.selectedLevelCode = result;//绑定选中值
+                                        },
+                                        onOpen:function(){//打开时弹出框时重置树
+                                            var muiplexTreeVmodels=avalon.vmodels["muiplexTree"];
+                                            var nodes=muiplexTreeVmodels.getNodes();
+                                            var nodesObj=muiplexTreeVmodels.transformToArray(nodes);
+                                            var selectedName=vm.selectedValue.split(",");
+                                            avalon.each(nodesObj , function(i,el){//遍历所有数据
+                                                if(selectedName.indexOf(el.name) > -1){//如果属于array中，则选中
+                                                    el.checked = true;
+                                                }
+                                            });
+                                            muiplexTreeVmodels.reset(muiplexTreeVmodels.transformTozTreeNodes(nodesObj));
+                                            muiplexTreeVmodels.expandAll(true);
+                                        }
+                                    }
+                                });
+
+                                avalon.ajax({
+                                    url:"model/tree.json",
+                                    type:"post",
+                                    dataType:"json",
+                                    contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                                    success:function(data){
+                                        avalon.vmodels["muiplexTree"].children=data.zNodes;
+                                        vm.selectedValue=data.defalultValue;
+                                    }
+
+                                });
+
+                                avalon.scan();
+                            });
+
+                    &lt;/script&gt;
+                &lt;/div&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </pre>
+</div>
+</body>
+
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>首页</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/fb_lib/require.js" data-main="js/index.js"></script>
+    <style type="text/css">
+        body[ms-controller="mainCtl"]{
+            display: none;
+        }
+        .main{
+            width: auto;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+        .m-photo{
+            margin-top: -5px;
+        }
+    </style>
+</head>
+<body ms-controller="mainCtl">
+    <div class="main">
+       <div ms-include-src="'header.html'" id="theight"></div>
+       <div class="m-photo" >
+           <img src="http://img.bzdao.com/2019/1312743.jpg" ms-on-onload="onLoad()" width="100%" height="300px"/>
+       </div>
+
+       <div style="width: 100%;font-size: 14px" ms-css-min-height="contentHeight" >
+           <div ms-widget="button">widget</div>
+       </div>
+
+       <div ms-include-src="'footer.html'" id="fheight" ></div>
+    </div>
+</body>
+</html>

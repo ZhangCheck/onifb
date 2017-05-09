@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>formLayout生成</title>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <script src="../require.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:"../../oniui",
+            paths:{
+                avalon:"avalon.shim",
+                echarts: "echarts",
+                domReady:"domReady"
+            },
+            map:{
+                "*":{
+                    "css":"require.css",
+                    "text":"require.text"
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["avalon.fb","checkboxlist/avalon.checkboxlist","./formLayout/avalon.formLayout","css!./formLayout/avalon.formLayout.css"],function(){
+            var vm=avalon.define({
+                $id:"demo",
+                $formOpts:{
+                    column:4,//一行显示的列数
+                    titleWidth:120,
+                    NameTextOpts:{//参数名名称必须以Opts结束
+                        type:"textBox",//显示的类型
+                        name:"姓名"
+                    },
+                    dropDownOpts:{//参数名名称必须以Opts结束
+                        type:"dropDown",//显示的类型
+                        name:"下拉选择",
+                        opts:{
+                            container:"selectedDrop",
+                            listWidth:"100%",
+                            titleWidth:"90%",
+                            data: [
+                                {
+                                    value: "选择1",
+                                    label: "选择1"
+                                }, {
+                                    value: "选择2",
+                                    label: "选择2"
+                                }
+                            ]
+
+                        }
+
+                    },
+                    startDateOpts:{//参数名名称必须以Opts结束
+                        type:"date",//显示的类型
+                        name:"起始时间"
+                    },
+                    textBoxDialogOpts:{//参数名名称必须以Opts结束
+                        type:"textBoxDialog",//显示的类型
+                        name:"职业",
+                        opts:{
+                            fileTemplate:'<ul id="checkList" ms-widget="checkboxlist,list,$checkListOpt" data-checkboxlist-duplex="selectedList"></ul>',
+                            iconPosition:"right",
+                            selectedValue:"",//选中的值
+                            selectedCode:"",
+                            $checkListOpt:{
+                                selectedList:[],
+                                data:[]
+                            },
+                            title:"标题名称",//弹框标题
+                            width:"100%",//textBoxDialog的宽度
+                            onOpen:function(){
+                                 avalon.scan(document.getElementById("checkList"), vm);//手动扫描checklist组件
+
+                                fb.requestJson({
+                                    remoteUrl:"../textBoxDialog/model/checkList.json",
+                                    localUrl:"../textBoxDialog/model/checkList.json",
+                                    type:"post",
+                                    success:function(data){
+                                        avalon.vmodels["list"].data=data.checkList;
+                                        avalon.vmodels["list"].selectedList=avalon.vmodels["textBoxDialog"].selectedCode.split(",");
+                                    }
+
+                                });
+                            },
+                            onConfirm:function(){
+                                var hash = {};//构造hash， value[code] => value
+                                var checkList=avalon.vmodels["list"].data;
+                                for (var m=0; m < checkList.length; m++) {
+                                    hash[checkList[m]["value"]] = checkList[m];
+                                }
+                                var resultDisplay = "";
+                                var resultCode="";
+                                var array = avalon.vmodels["list"].selectedList;//获取选中值数组
+                                avalon.each(array,function(i,el){//遍历选中值数组，其中el就是code
+                                    if(resultDisplay == ""){
+                                        resultDisplay = resultDisplay + hash[el]["text"] ;
+                                        resultCode=resultCode+hash[el]["value"];
+                                    }else{
+                                        resultDisplay = resultDisplay + "," + hash[el]["text"];
+                                        resultCode=resultCode+","+hash[el]["value"];
+                                    }
+                                });
+                                avalon.vmodels["textBoxDialog"].selectedValue = resultDisplay.split(",");//绑定选中中文值
+                                avalon.vmodels["textBoxDialog"].selectedCode = resultCode.split(",");
+                            },
+                            onClose:function(){
+                                console.log("close");
+                            },
+                            onCancel:function(){
+                                console.log("cancel");
+                            }
+
+                        }
+                    },
+                    comboBoxOpts:{//参数名名称必须以Opts结束
+                        type:"comboBox",
+                        name:"可输入的选择框",
+                        opts:{
+                            list:[{"code":"01","value":"选择1"},{"code":"02","value":"选择2"},{"code":"03","value":"选择3"},{"code":"04","value":"选择4"},{"code":"05","value":"选择5"},{"code":"06","value":"选择6"},{"code":"07","value":"选择7"}],
+                            selectedValue:"选择2",
+                            selectedCode:"02"
+                        }
+
+                    }
+                }
+            });
+
+            fb.requestJson({
+                remoteUrl:"../textBoxDialog/model/checkList.json",
+                localUrl:"../textBoxDialog/model/checkList.json",
+                type:"post",
+                success:function(data){
+                    var selectedText=[],selectedCode=[];
+                    var defalutSelected=data.selectedList;
+                    for(var i=0;i<defalutSelected.length;i++){
+                        selectedText.push(defalutSelected[i].text);
+                        selectedCode.push(defalutSelected[i].value);
+                    }
+                    avalon.vmodels["formLayout"].textBoxDialogOpts.opts.selectedValue=selectedText.join(",");
+                    avalon.vmodels["formLayout"].textBoxDialogOpts.opts.selectedCode=selectedCode.join(",");
+                }
+
+            });
+
+            avalon.scan();
+        });
+
+    </script>
+</head>
+<body ms-controller="demo">
+<p>动态生成的表单的样式跟静态的一样</p>
+    <div ms-widget="formLayout,formLayout,$formOpts"></div>
+</body>
+
+<div ms-skip>
+     <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+            &lt;!DOCTYPE HTML&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;meta charset='utf-8'/&gt;
+                &lt;title&gt;formLayout生成&lt;/title&gt;
+                &lt;script src='../require.js'&gt;&lt;/script&gt;
+                &lt;script&gt;
+                    require.config({
+                        baseUrl:'../../oniui',
+                        paths:{
+                            avalon:'avalon.shim',
+                            echarts: 'echarts',
+                            domReady:'domReady'
+                        },
+                        map:{
+                            '*':{
+                                'css':'require.css',
+                                'text':'require.text'
+                            }
+                        },
+                        shim:{
+                            avalon: { exports: "avalon" },
+                            echarts:{exports:"echarts"}
+                        }
+                    });
+                &lt;/script&gt;
+            &lt;/head&gt;
+            &lt;body ms-controller="demo"&gt;
+                &lt;div  ms-widget="formLayout,formLayout,$formOpts"&gt;
+
+                &lt;/div&gt;
+                    &lt;script&gt;
+                           require(["avalon.fb","checkboxlist/avalon.checkboxlist","./formLayout/avalon.formLayout","css!./formLayout/avalon.formLayout.css"],function(){
+                                var vm=avalon.define({
+                                    $id:"demo",
+                                    $formOpts:{
+                                        column:4,//一行显示的列数
+                                        titleWidth:120,
+                                        NameTextOpts:{//参数名名称必须以Opts结束
+                                            type:"textBox",//显示的类型
+                                            name:"姓名"
+                                        },
+                                        dropDownOpts:{//参数名名称必须以Opts结束
+                                            type:"dropDown",//显示的类型
+                                            name:"下拉选择",
+                                            opts:{
+                                                container:"selectedDrop",
+                                                listWidth:"100%",
+                                                titleWidth:"90%",
+                                                data: [
+                                                    {
+                                                        value: "选择1",
+                                                        label: "选择1"
+                                                    }, {
+                                                        value: "选择2",
+                                                        label: "选择2"
+                                                    }
+                                                ]
+
+                                            }
+
+                                        },
+                                        startDateOpts:{//参数名名称必须以Opts结束
+                                            type:"date",//显示的类型
+                                            name:"起始时间"
+                                        },
+                                        textBoxDialogOpts:{//参数名名称必须以Opts结束
+                                            type:"textBoxDialog",//显示的类型
+                                            name:"职业",
+                                            opts:{
+                                                fileTemplate:'<ul id="checkList" ms-widget="checkboxlist,list,$checkListOpt" data-checkboxlist-duplex="selectedList"></ul>',
+                                                iconPosition:"right",
+                                                selectedValue:"",//选中的值
+                                                selectedCode:"",
+                                                $checkListOpt:{
+                                                    selectedList:[],
+                                                    data:[]
+                                                },
+                                                title:"标题名称",//弹框标题
+                                                width:"100%",//textBoxDialog的宽度
+                                                onOpen:function(){
+                                                     avalon.scan(document.getElementById("checkList"), vm);//手动扫描checklist组件
+
+                                                    fb.requestJson({
+                                                        remoteUrl:"../textBoxDialog/model/checkList.json",
+                                                        localUrl:"../textBoxDialog/model/checkList.json",
+                                                        type:"post",
+                                                        success:function(data){
+                                                            avalon.vmodels["list"].data=data.checkList;
+                                                            avalon.vmodels["list"].selectedList=avalon.vmodels["textBoxDialog"].selectedCode.split(",");
+                                                        }
+
+                                                    });
+                                                },
+                                                onConfirm:function(){
+                                                    var hash = {};//构造hash， value[code] => value
+                                                    var checkList=avalon.vmodels["list"].data;
+                                                    for (var m=0; m &lt; checkList.length; m++) {
+                                                        hash[checkList[m]["value"]] = checkList[m];
+                                                    }
+                                                    var resultDisplay = "";
+                                                    var resultCode="";
+                                                    var array = avalon.vmodels["list"].selectedList;//获取选中值数组
+                                                    avalon.each(array,function(i,el){//遍历选中值数组，其中el就是code
+                                                        if(resultDisplay == ""){
+                                                            resultDisplay = resultDisplay + hash[el]["text"] ;
+                                                            resultCode=resultCode+hash[el]["value"];
+                                                        }else{
+                                                            resultDisplay = resultDisplay + "," + hash[el]["text"];
+                                                            resultCode=resultCode+","+hash[el]["value"];
+                                                        }
+                                                    });
+                                                    avalon.vmodels["textBoxDialog"].selectedValue = resultDisplay.split(",");//绑定选中中文值
+                                                    avalon.vmodels["textBoxDialog"].selectedCode = resultCode.split(",");
+                                                },
+                                                onClose:function(){
+                                                    console.log("close");
+                                                },
+                                                onCancel:function(){
+                                                    console.log("cancel");
+                                                }
+
+                                            }
+                                        },
+                                        comboBoxOpts:{//参数名名称必须以Opts结束
+                                            type:"comboBox",
+                                            name:"可输入的选择框",
+                                            opts:{
+                                                list:[{"code":"01","value":"选择1"},{"code":"02","value":"选择2"},{"code":"03","value":"选择3"},{"code":"04","value":"选择4"},{"code":"05","value":"选择5"},{"code":"06","value":"选择6"},{"code":"07","value":"选择7"}],
+                                                selectedValue:"选择2",
+                                                selectedCode:"02"
+                                            }
+
+                                        }
+                                    }
+                                });
+
+                                fb.requestJson({
+                                    remoteUrl:"../textBoxDialog/model/checkList.json",
+                                    localUrl:"../textBoxDialog/model/checkList.json",
+                                    type:"post",
+                                    success:function(data){
+                                        var selectedText=[],selectedCode=[];
+                                        var defalutSelected=data.selectedList;
+                                        for(var i=0;i&lt;defalutSelected.length;i++){
+                                            selectedText.push(defalutSelected[i].text);
+                                            selectedCode.push(defalutSelected[i].value);
+                                        }
+                                        avalon.vmodels["formLayout"].textBoxDialogOpts.opts.selectedValue=selectedText.join(",");
+                                        avalon.vmodels["formLayout"].textBoxDialogOpts.opts.selectedCode=selectedCode.join(",");
+                                    }
+
+                                });
+
+                                avalon.scan();
+                            });
+
+                    &lt;/script&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </pre>
+</div>
+</html>

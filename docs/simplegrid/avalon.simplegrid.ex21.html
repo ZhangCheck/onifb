@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>simplegrid</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        
+        <script src="../require.js"></script>
+        <script src="../highlight/shCore.js"></script>
+       
+        <script>
+            require.config({
+                baseUrl:'../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+           require(["avalon.fb","./simplegrid/avalon.simplegrid"], function() {
+                function getData(n) {
+                    var ret = []
+                    for (var i = 0; i < n; i++) {
+                        ret.push({
+                            symbol: Math.random().toString(32).slice(4, 10),
+                            price: range(100, 200),
+                            change: Math.random().toFixed(2) * (Math.random() > 0.5 ? 1 : -1)
+                        })
+                    }
+                    return ret
+                }
+                function range(s, b) {
+                    return s + Math.floor((b - s) * Math.random())
+                }
+                var testVM = avalon.define("test", function(vm) {
+                    vm.$simplegridCOpts = {
+                        columns: ["symbol", "price", "change"],
+                        data: getData(20),
+                        pageable: true,
+                        scrollInPage:true,
+                        height:"100%",
+                        pager: {
+                            perPages : 20,
+                            totalItems: 50,
+                            options:[10,20,30],
+                            onOptionsChanged:function(perPages){
+                                avalon.vmodels['simplegridC'].showRows = perPages;
+                                avalon.vmodels['simplegridC'].reRender(getData(perPages),avalon.vmodels['simplegridB']);
+                            },
+                            onJump: function(e,page){
+                                var vm = avalon.vmodels['simplegridC'];
+                                var dataLength = vm.pager.perPages;
+                                if(vm.pager.currentPage==vm.pager.totalPages && vm.pager.totalItems%vm.pager.perPages!=0){
+                                    dataLength = vm.pager.totalItems%vm.pager.perPages;
+                                }
+                                vm.reRender(getData(dataLength),vm);
+                            }
+                        }
+                    }
+                    vm.resetData = function(id) {
+                        var data = getData(20);
+                        var vmodel = avalon.vmodels[id];
+                        vmodel.pager.totalItems = Math.round(20+Math.random()*115);
+                        console.log(vmodel.pager.totalItems)
+                        vmodel.reRender(data, vmodel)
+                    }
+                    vm.$skipArray = ["simplegrid"]
+                })
+                avalon.scan()
+            })
+        </script>
+    </head>
+    
+    <body ms-controller="test">
+            <h4>自适应高度（百分比-100%）（缩放窗口查看自适应效果）</h4>
+            <div style="position:fixed;top:80px;bottom:10px;right:10px;left:10px;">
+                    <div ms-widget="simplegrid, simplegridC, $simplegridCOpts"></div>
+            </div>
+    </body>
+</html>

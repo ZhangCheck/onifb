@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>scrollbar组件</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        <script src="../require.js"></script>
+        <script src="../highlight/shCore.js"></script>
+        <script>
+            require.config({
+                baseUrl:'../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+           require(["scrollbar/avalon.scrollbar"], function() {
+                avalon.define("test", function(vm) {
+                    vm.scrollbar = {
+                        size: "large"
+                    }
+                    vm.data = avalon.range(1,100)
+                    vm.$index = 2
+                    vm.$skipArray = ["scrollbar"]
+                    vm.up = function() {
+                        setTimeout(function() {
+                            avalon.vmodels.$hehe.update()
+                        }, 20)
+                    }
+                })
+                avalon.scan()
+            })
+        </script>
+        <style type="text/css">
+            .nobarbg .oni-scrollbar{
+                background: transparent;
+            }
+        </style>
+    </head>
+    <body ms-controller="test">
+        <h1>scrollbar-元素带上下小箭头双滚动条</h1>
+        <div ms-widget="scrollbar,$hehe" class="oni-helper-reset" style="height:300px;border:1px solid #ccc;width:700px;" data-scrollbar-position="right,bottom">
+            <div class="oni-scrollbar-scroller oni-helper-reset">
+                <p style="width:65000px;max-width:65000px;" ms-repeat="data" class="oni-helper-reset" data-repeat-rendered="up">left {{$index}} <span style="float:right;">right {{$index}} </span></p>
+            </div>
+        </div>
+        <pre ms-skip class="brush:html;gutter:false;toolbar:false">&lt;!DOCTYPE html&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;scrollbar组件&lt;/title&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+        &lt;link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"&gt;
+        &lt;script src="../require.js"&gt;&lt;/script&gt;
+        &lt;script src="../highlight/shCore.js"&gt;&lt;/script&gt;
+        &lt;script&gt;
+            require.config({
+                baseUrl:'../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+           require(["scrollbar/avalon.scrollbar"], function() {
+                avalon.define("test", function(vm) {
+                    vm.scrollbar = {
+                        size: "large"
+                    }
+                    vm.data = avalon.range(1,100)
+                    vm.$index = 2
+                    vm.$skipArray = ["scrollbar"]
+                    vm.up = function() {
+                        setTimeout(function() {
+                            avalon.vmodels.$hehe.update()
+                        }, 20)
+                    }
+                })
+                avalon.scan()
+            })
+        &lt;/script&gt;
+        &lt;style type="text/css"&gt;
+            .nobarbg .oni-scrollbar{
+                background: transparent;
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body ms-controller="test"&gt;
+        &lt;h1&gt;scrollbar-元素带上下小箭头双滚动条&lt;/h1&gt;
+        &lt;div ms-widget="scrollbar,$hehe" class="oni-helper-reset" style="height:300px;border:1px solid #ccc;width:700px;" data-scrollbar-position="right,bottom"&gt;
+            &lt;div class="oni-scrollbar-scroller oni-helper-reset"&gt;
+                &lt;p style="width:65000px;max-width:65000px;" ms-repeat="data" class="oni-helper-reset" data-repeat-rendered="up"&gt;left {{$index}} &lt;span style="float:right;"&gt;right {{$index}} &lt;/span&gt;&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;pre ms-skip class="brush:html;gutter:false;toolbar:false"&gt;&lt;!DOCTYPE html&gt;
+
+        &lt;/pre&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+    </div>
+</body>
+</html>

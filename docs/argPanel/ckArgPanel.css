@@ -1,0 +1,50 @@
+*[argumentCk],
+*[argument-ck] {
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+}
+*[argumentCk] .argBtn,
+*[argument-ck] .argBtn {
+  border: solid 1px #888888;
+  padding: 10px;
+  cursor: pointer;
+  background: #fff;
+  display: inline-block;
+  border-radius: 3px;
+}
+*[argumentCk] h3,
+*[argument-ck] h3,
+*[argumentCk] h4,
+*[argument-ck] h4 {
+  line-height: 30px;
+  margin-left: 0;
+}
+*[argumentCk] .argGlobalBts,
+*[argument-ck] .argGlobalBts {
+  float: right;
+}
+xmp[codeCk],
+*[templateCk],
+textarea[codeCk],
+#codeCk {
+  display: none;
+  width: 100%;
+}
+textarea[codeCk],
+#codeCk {
+  min-height: 300px;
+}
+*[codeCk],
+#codeCk {
+  background: #fff;
+  width: 100%;
+  min-height: 100px;
+}
+iframe[codeCk],
+iframe[viewCk],
+#codeCk,
+#viewCk {
+  height: 360px;
+  width: 100%;
+}

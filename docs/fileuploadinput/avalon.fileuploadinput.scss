@@ -1,0 +1,39 @@
+@import "../chameleon/oniui-theme";
+$uiname: "oni-fileuploadinput";
+
+.#{$uiname}{
+  display: inline-block;
+  position:relative;
+  .#{$uiname}-icon{
+    color: $oni-icon-color;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+  }
+  .#{$uiname}-button{
+    /* height: 26px !important;
+     line-height: 26px !important;*/
+    position: absolute;
+    padding: 0.57861em 1em;
+    top: 2px;
+    right: 3px;
+    border: 0 none;
+    background-color: #FFFFFF;
+    outline: none;
+  }
+  .oni-textbox{
+    float:left;
+    width:100%;
+    box-sizing: border-box;
+  }
+  .oni-textbox{
+    min-width:100px;
+  }
+  .#{$uiname}-input{
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  .#{$uiname}-input-focus{
+    border-color: #85b7d9;
+  }
+}

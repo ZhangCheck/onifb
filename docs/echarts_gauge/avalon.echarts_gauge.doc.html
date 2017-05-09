@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>series（仪表盘）</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h3 class="table-doc-title">series（仪表盘）使用说明</h3>
+    <p>json数据中的series中的参数使用说明如下：</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> center </td>
+            <td> ['50%', '50%'] </td>
+            <td> 圆心坐标，支持绝对值（px）和百分比，百分比计算min(width, height) * 50% </td>
+        </tr>
+        <tr>
+            <td> <b>{number | Array}</b> radius </td>
+            <td> [0, '75%'] </td>
+            <td> 半径，支持绝对值（px）和百分比，百分比计算比，min(width, height) / 2 * 75%，
+                <br>传数组实现环形图，[内半径，外半径] </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> startAngle </td>
+            <td> 225</td>
+            <td> 开始角度, 饼图（90）、仪表盘（225），有效输入范围：[-360,360]</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> endAngle </td>
+            <td> -45 </td>
+            <td> 结束角度,有效输入范围：[-360,360]，保证startAngle - endAngle为正值</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> min </td>
+            <td> 0 </td>
+            <td> 指定的最小值</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> max </td>
+            <td> 100 </td>
+            <td> 指定的最大值</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> splitNumber </td>
+            <td> 10 </td>
+            <td> 分割段数，默认为10</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> axisLine </td>
+            <td><pre>{
+    show: true,
+    lineStyle: {
+        color: [
+            [0.2, '#228b22'],
+            [0.8, '#48b'],
+            [1, '#ff4500']
+        ],
+        width: 30
+    }
+}                           </pre> </td>
+            <td> 坐标轴线，默认显示
+                <br><br>属性show控制显示与否，
+                <br><br>属性lineStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a>）控制线条样式，
+                <br><br>比较特殊的是这里的lineStyle.color是一个二维数组，用于把仪表盘轴线分成若干份，
+                <br><br>并且可以给每一份指定具体的颜色，格式为:[[百分比, 颜色值], [...]]
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> axisTick </td>
+            <td><pre>{
+    show: true,
+    splitNumber: 5,
+    length :8,
+    lineStyle: {
+        color: '#eee',
+        width: 1,
+        type: 'solid'
+    }
+}                           </pre> </td>
+            <td> 坐标轴小标记，默认显示
+                <br><br>属性show控制显示与否，
+                <br><br>属性lineStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a>）控制线条样式，
+                <br><br>属性splitNumber控制每份split细分多少段
+                <br><br>属性length控制线长
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> axisLabel </td>
+            <td><pre>{
+    show: true,
+    formatter: null,
+    textStyle: {
+        color: 'auto'
+    }
+}                           </pre> </td>
+            <td> 坐标轴文本标签（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex12" title="">axis.axislabel</a>）
+                <br><br>属性formatter可以格式化文本标签，
+                <br><br>属性textStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>）控制文本样式
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> splitLine </td>
+            <td><pre>{
+    show: true,
+    length :30,
+    lineStyle: {
+        color: '#eee',
+        width: 2,
+        type: 'solid'
+    }
+}                           </pre> </td>
+            <td> 主分隔线，默认显示
+                <br><br>属性show控制显示与否，
+                <br><br>属性length控制线长
+                <br><br>属性lineStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a>）控制线条样式，
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> pointer </td>
+            <td><pre>{
+    length : '80%',
+    width : 8,
+    color : 'auto'
+}                           </pre> </td>
+            <td> 指针样式
+                <br>属性length控制线长，百分比相对的是仪表盘的外半径
+                <br>属性width控制指针最宽处，
+                <br>属性color控制指针颜色
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> title </td>
+            <td><pre>{
+    show : true,
+    offsetCenter: [0, '-40%'],
+    textStyle: {
+        color: '#333',
+        fontSize : 15
+    }
+}                           </pre> </td>
+            <td> 仪表盘标题
+                <br><br>属性show控制显示与否，
+                <br><br>属性offsetCenter用于标题定位，数组为横纵相对仪表盘圆心坐标偏移，支持百分比（相对外半径），
+                <br><br>属性textStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>）控制文本样式
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> detail </td>
+            <td><pre>{
+    show : true,
+    backgroundColor: 'rgba(0,0,0,0)',
+    borderWidth: 0,
+    borderColor: '#ccc',
+    width: 100,
+    height: 40,
+    offsetCenter: [0, '40%'],
+    formatter: null,
+    textStyle: {
+        color: 'auto',
+        fontSize : 30
+    }
+}                           </pre> </td>
+            <td> 仪表盘详情
+                <br><br>属性show控制显示与否，
+                <br>属性backgroundColor控制边框颜色，
+                <br>属性borderWidth控制边框线宽，
+                <br>属性borderColor控制边框颜色，
+                <br>属性width控制详情宽度，
+                <br>属性height控制详情高度，
+                <br>属性offsetCenter用于详情定位，数组为横纵相对仪表盘圆心坐标偏移，支持百分比（相对外半径），
+                <br>属性formatter可以格式化文本，
+                <br>属性textStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>）控制文本样式
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> legendHoverLink </td>
+            <td> true </td>
+            <td> 是否启用图例（legend）hover时的联动响应（高亮显示） </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

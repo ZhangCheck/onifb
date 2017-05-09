@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>仪表盘</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/gauge","dialog/avalon.dialog","button/avalon.button"],function(){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    tooltip : {
+                        formatter: "{a} <br/>{b} : {c}%"
+                    },
+                    series : [
+                        {
+                            name:'业务指标',
+                            type:'gauge',
+                            axisLine: {
+                                lineStyle: {
+                                    color:[[0.2,'lime'],[0.9,'#1e90ff'],[1,'#ff4500']],
+                                    width: 10,
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            axisTick: {
+                                length :15,
+                                lineStyle: {
+                                    color: 'auto',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            detail : {formatter:'{value}%'},
+                            data:[]
+                        }
+                    ]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson(/**@type fb.InterfaceStruct**/{
+                //remoteUrl:"http://192.168.0.236:8080/ntjmyj/item/zhfxModuleList",
+                remoteUrl:"./model/gauge.json",
+                localUrl:"./model/gauge.json",
+                success:function(data){
+                    var options=vm.options;
+                    var result=data.rows;
+                    options.series[0].data.push(result);
+                    myChart = echarts.init(document.getElementById('gauge'));
+                    myChart.setOption(options);
+
+                    window.onresize=function (){
+                        myChart.resize();
+                    };
+                }
+            })
+        });
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="gauge" style="width: 800px;height: 300px;"></div>
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;仪表盘&lt;/title&gt;
+            &lt;script src='../fb_lib/require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="gauge" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+                &lt;script&gt;
+                    require(["echarts.fb","echarts/chart/gauge","dialog/avalon.dialog","button/avalon.button"],function(){
+                        var vm=avalon.define({
+                            $id:"demo",
+                            show:function(dialog){
+                                avalon.vmodels[dialog].toggle = true;
+                            },
+                            optionsStr:function(){
+                                return JSON.stringify(vm.options);
+                            },
+                            dialog:{
+                                title:"options的json格式"
+                            },
+                            options:{
+                                tooltip : {
+                                    formatter: "{a} <br/>{b} : {c}%"
+                                },
+                                series : [
+                                    {
+                                        name:'业务指标',
+                                        type:'gauge',
+                                        axisLine: {
+                                            lineStyle: {
+                                                color:[[0.2,'lime'],[0.9,'#1e90ff'],[1,'#ff4500']],
+                                                width: 10,
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        axisTick: {
+                                            length :15,
+                                            lineStyle: {
+                                                color: 'auto',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        detail : {formatter:'{value}%'},
+                                        data:[]
+                                    }
+                                ]
+                            }
+                        });
+                        avalon.scan();
+
+                        fb.requestJson(/**@type fb.InterfaceStruct**/{
+                            //remoteUrl:"http://192.168.0.236:8080/ntjmyj/item/zhfxModuleList",
+                            remoteUrl:"./model/gauge.json",
+                            localUrl:"./model/gauge.json",
+                            success:function(data){
+                                var options=vm.options;
+                                var result=data.rows;
+                                options.series[0].data.push(result);
+                                myChart = echarts.init(document.getElementById('gauge'));
+                                myChart.setOption(options);
+
+                                window.onresize=function (){
+                                    myChart.resize();
+                                };
+                            }
+                        })
+                    });
+                &lt;/script&gt;
+            &lt;/div&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

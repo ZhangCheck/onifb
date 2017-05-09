@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>option</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4> option</h4>
+    <p>图表选项，包含图表实例任何可配置选项：<b class="bgGreen">公共选项</b>，<b class="bgRed">组件选项</b>，<b class="bgBlue">数据选项</b></p>
+
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr class="bgGreen">
+            <td> <b>{color}</b> backgroundColor </td>
+            <td>null</td>
+            <td> 全图默认背景，支持rgba，默认为无，透明</td>
+        </tr>
+        <tr class="bgGreen">
+            <td> <b>{Array}</b> color </td>
+            <td>['#ff7f50', '#87cefa', '#da70d6', '#32cd32', '#6495ed',
+                '#ff69b4', '#ba55d3', '#cd5c5c', '#ffa500', '#40e0d0',
+                '#1e90ff', '#ff6347', '#7b68ee', '#00fa9a', '#ffd700',
+                '#6b8e23', '#ff00ff', '#3cb371', '#b8860b', '#30e0e0' ]，循环使用</td>
+            <td> 数值系列的颜色列表，可配数组，eg：['#87cefa', 'rgba(123,123,123,0.5)','...']，当系列数量个数比颜色列表长度大时将循环选取 </td>
+        </tr>
+        <tr class="bgGreen">
+            <td> <b>{boolean}</b> renderAsImage </td>
+            <td>false</td>
+            <td> 非IE8-支持渲染为图片，可设为true或指定图片格式（png | jpeg），渲染为图片后实例依然可用（如setOption，resize等），但各种交互失效</td>
+        </tr>
+        <tr class="bgGreen">
+            <td> <b>{boolean}</b> calculable </td>
+            <td>false</td>
+            <td> 是否启用拖拽重计算特性，默认关闭相关的还有<br/>
+                calculableColor:{color} 'rgba(255,165,0,0.6)'，拖拽重计算提示边框颜色；<br/>
+                calculableHolderColor:{color} '#ccc'，可计算占位提示颜色；<br/>
+                nameConnector:{string} ' & '，数据合并名字间连接符；<br/>
+                valueConnector:{string} ' : '，数据合并名字与数值间连接符<br/>
+            </td>
+        </tr>
+        <tr class="bgGreen">
+            <td> <b>{boolean}</b> animation </td>
+            <td>true</td>
+            <td> 是否开启动画，默认开启，建议IE8-关闭。
+                相关的还有<br/>
+                addDataAnimation：{boolean} true，是否启用动态数据接口动画效果，默认开启，建议IE8-关闭；<br/>
+                animationThreshold：{number} 2500，动画元素阀值，产生的图形原素超过2500不出动画，建议IE8-关闭；<br/>
+                animationDuration：{number} 2000，进入动画时长，单位ms；<br/>
+                animationDurationUpdate：{number} 500，更新动画时长，单位ms；<br/>
+                animationEasing：{string} 'BounceOut'，主元素的缓动效果，详见<a target="_blank" href="http://ecomfe.github.io/zrender/doc/doc.html#animation.easing">zrender.animation.easing</a>，可选有：<br/>
+                'Linear',
+                'QuadraticIn', 'QuadraticOut', 'QuadraticInOut',
+                'CubicIn', 'CubicOut', 'CubicInOut',
+                'QuarticIn', 'QuarticOut', 'QuarticInOut',
+                'QuinticIn', 'QuinticOut', 'QuinticInOut',
+                'SinusoidalIn', 'SinusoidalOut', 'SinusoidalInOut',
+                'ExponentialIn', 'ExponentialOut', 'ExponentialInOut',
+                'CircularIn', 'CircularOut', 'CircularInOut',
+                'ElasticIn', 'ElasticOut', 'ElasticInOut',
+                'BackIn', 'BackOut', 'BackInOut',
+                'BounceIn', 'BounceOut', 'BounceInOut'
+            </td>
+        </tr>
+
+        <tr class="bgRed">
+            <td> <b>{Object}</b> timeline </td>
+            <td></td>
+            <td> 时间轴（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex2" title="">timeline</a>），每个图表最多仅有一个时间轴控件 </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Object}</b> title </td>
+            <td></td>
+            <td> 标题（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex3" title="">title</a>），每个图表最多仅有一个标题控件 </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Object}</b> toolbox </td>
+            <td></td>
+            <td> 工具箱（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex4" title="">toolbox</a>），每个图表最多仅有一个工具箱 </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Object}</b> tooltip </td>
+            <td></td>
+            <td> 提示框（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex5" title="">tooltip</a>），鼠标悬浮交互时的信息提示 </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Object}</b> legend </td>
+            <td></td>
+            <td> 图例（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex6" title="">legend</a>），每个图表最多仅有一个图例，混搭图表共享 </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Object}</b> dataRange </td>
+            <td></td>
+            <td> 值域选择（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex7" title="">dataRange</a>）,值域范围 </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Object}</b> dataZoom </td>
+            <td></td>
+            <td> 数据区域缩放（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex8" title="">dataZoom</a>）,数据展现范围选择 </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Object}</b> roamController </td>
+            <td></td>
+            <td> 漫游缩放组件（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex9" title="">roamController</a>）,搭配地图使用 </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Object}</b> grid </td>
+            <td></td>
+            <td> 直角坐标系内绘图网格（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex10" title="">grid</a>） </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Array | Object}</b> xAxis </td>
+            <td></td>
+            <td> 直角坐标系中横轴数组（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex11" title="">xAxis</a>），数组中每一项代表一条横轴坐标轴，标准（1.0）中规定最多同时存在2条横轴 </td>
+        </tr>
+        <tr class="bgRed">
+            <td> <b>{Array | Object}</b> yAxis </td>
+            <td></td>
+            <td> 直角坐标系中纵轴数组（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex12" title="">yAxis</a>），数组中每一项代表一条纵轴坐标轴，标准（1.0）中规定最多同时存在2条纵轴 </td>
+        </tr>
+        <tr class="bgBlue">
+            <td> <b>{Array}</b> series </td>
+            <td></td>
+            <td> 驱动图表生成的数据内容（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex15" title="">series</a>），数组中每一项代表一个系列的特殊选项及数据 </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

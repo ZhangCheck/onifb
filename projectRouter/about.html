@@ -1,0 +1,43 @@
+<style type="text/css">
+    div[ms-controller="news"]{
+        display: none;
+    }
+</style>
+<script>
+    require([],function(){
+        var vm=avalon.define({
+            $id:"news",
+            firstWord:"",
+            showtitle:fb.getStateParam('title')
+        });
+        avalon.scan();
+
+        fb.requestJson({
+            remoteUrl:"model/demo.json",
+            localUrl:"model/demo.json",
+            success:function(data){
+                vm.firstWord = data.firstWord;
+            }
+        })
+    })
+</script>
+<div ms-controller="news">
+    <div style="width: 100%;height: 50px;font-size: 14px">
+        <span ms-if="showtitle==0">content  menu0</span>
+        <span ms-if="showtitle==1">content  menu1</span>
+        <span ms-if="showtitle==2">content  menu2</span>
+        <span ms-if="showtitle==3">content  menu3</span>
+        <span ms-if="showtitle==4">content  menu4</span>
+        <span ms-if="showtitle==5">content  menu5</span>
+        {{firstWord}}
+    </div>
+</div>
+<table>
+    <tbody>
+    <tr>
+        <td>
+
+        </td>
+    </tr>
+    </tbody>
+</table>

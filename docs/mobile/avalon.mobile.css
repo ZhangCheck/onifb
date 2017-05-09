@@ -1,0 +1,97 @@
+#jim-body {
+    position: absolute;
+    overflow: auto;
+}
+#jim-mobile {
+    position: relative;
+    width: 450px;
+    margin: 0 auto;
+}
+#jim-mobile.landscape {
+    width: 730px;
+    height: 450px;
+}
+#jim-case {
+    width: 450px;
+    height: 730px;
+}
+#jim-container.portrait {
+    position: absolute;
+    top: 45px;
+    left: 45px;
+    width: 360px;
+    height: 640px;
+}
+#jim-container.landscape {
+    position: absolute;
+    top: 45px;
+    left: 45px;
+    width: 640px;
+    height: 360px;
+}
+#simulation {
+    position: relative;
+    height: 100%;
+}
+#jim-case #jim-case-top-left {
+    background-image: url('mobileImg/lt.png');
+    background-repeat: no-repeat;
+    float: left;
+    width: 45px;
+    height: 45px;
+}
+#jim-case #jim-case-top-center {
+    background: url('mobileImg/tc.png') repeat-x scroll 0 0 transparent;
+    float: left;
+    width: 360px;
+    height: 45px;
+}
+#jim-case #jim-case-top-right {
+    background-image: url('mobileImg/rt.png');
+    background-repeat: no-repeat;
+    float: left;
+    width: 45px;
+    height: 45px;
+}
+#jim-case #jim-case-center-left {
+    background: url('mobileImg/cl.png') repeat-y scroll 0 0 transparent;
+    float: left;
+    width: 45px;
+    height: 640px;
+}
+#jim-case #jim-case-center-center {
+    float: left;
+    width: 360px;
+    height: 640px;
+}
+#jim-case #jim-case-center-right {
+    background: url('mobileImg/cr.png') repeat-y scroll 0 0 transparent;
+    float: left;
+    width: 45px;
+    height: 640px;
+}
+#jim-case #jim-case-bottom-left {
+    background-image: url('mobileImg/bl.png');
+    background-repeat: no-repeat;
+    float: left;
+    width: 45px;
+    height: 45px;
+}
+#jim-case #jim-case-bottom-center {
+    background: url('mobileImg/bc.png') repeat-x scroll 0 0 transparent;
+    float: left;
+    width: 360px;
+    height: 45px;
+}
+#jim-case #jim-case-bottom-right {
+    background-image: url('mobileImg/br.png');
+    background-repeat: no-repeat;
+    float: left;
+    width: 45px;
+    height: 45px;
+}
+#jim-container iframe{
+    width:100%;
+    height: 100%;
+    border:none;
+}

@@ -1,0 +1,307 @@
+{
+  "success": true,
+  "options": {
+    "action": "interface",
+    "method": "post",
+    "submit": "ajax"
+  },
+  "data": [
+    {
+      "type": "text",
+      "field": "name",
+      "value": "name",
+      "label": "name",
+      "validationType": "",
+      "validateText": "不能为数字",
+      "validates":[
+        {
+          "type":"required",
+          "message":"不能为空",
+          "pass":true
+        }
+      ]
+    },
+    {
+      "type": "date",
+      "label": "time",
+      "value": "2015-6-13",
+      "field": "time"
+    },
+    {
+      "type": "daterange",
+      "place": 2,
+      "field": "check",
+      "label": "daterange",
+      "starttime": "2015-6-23",
+      "endtime": "2016-7-1",
+      "options": {
+        "rules": "null, 0D"
+      }
+    },
+    {
+      "type": "check",
+      "label": "check",
+      "field": "check",
+      "value": [
+        "1",
+        "2"
+      ],
+      "data": [
+        {
+          "value": "1",
+          "text": "选项一"
+        },
+        {
+          "value": "2",
+          "text": "选项二"
+        },
+        {
+          "value": "3",
+          "text": "选项三"
+        }
+      ]
+    },
+    {
+      "type": "radio",
+      "label": "radio",
+      "field": "radio",
+      "value": "1",
+      "data": [
+        {
+          "value": "1",
+          "text": "选项一"
+        },
+        {
+          "value": "2",
+          "text": "选项二"
+        },
+        {
+          "value": "3",
+          "text": "选项三"
+        }
+      ]
+    },
+    {
+      "type": "dropdownlist",
+      "field": "option",
+      "label": "dropdownlist",
+      "value": "three",
+      "options": [
+        {
+          "text": "<i>选项一</i>",
+          "value": "one"
+        },
+        {
+          "text": "选项二",
+          "value": "two",
+          "selected": true
+        },
+        {
+          "text": "选项三",
+          "value": "three"
+        }
+      ]
+    },
+    {
+      "type": "fileupload",
+      "label": "fileupload",
+      "field":"files",
+      "files": [
+        {
+          "done": true,
+          "fileKey": "000000",
+          "fileLocalToken": "__avalonfile0",
+          "message": "上传完成",
+          "name": "000.js",
+          "size": 100,
+          "uploadProgress": 100,
+          "uploadStatus": 4
+        }
+      ]
+    },
+    {
+      "type": "dropdowntree",
+      "title": "树形选择框",
+      "label": "dropdowntree",
+      "field": "dropdowntree",
+      "value": 10,
+      "treeData": [
+        {
+          "id": 1,
+          "pid": 0,
+          "value": 1,
+          "label": "父节点1 - 展开",
+          "open": true
+        },
+        {
+          "id": 11,
+          "pid": 1,
+          "value": 2,
+          "label": "父节点11 - 折叠"
+        },
+        {
+          "id": 111,
+          "pid": 11,
+          "value": 3,
+          "label": "叶子节点111"
+        },
+        {
+          "id": 112,
+          "pid": 11,
+          "value": 4,
+          "label": "叶子节点112"
+        },
+        {
+          "id": 113,
+          "pid": 11,
+          "value": 5,
+          "label": "叶子节点113"
+        },
+        {
+          "id": 114,
+          "pid": 11,
+          "value": 6,
+          "label": "叶子节点114"
+        },
+        {
+          "id": 12,
+          "pid": 1,
+          "value": 7,
+          "label": "父节点12 - 折叠"
+        },
+        {
+          "id": 121,
+          "pid": 12,
+          "value": 8,
+          "label": "叶子节点121"
+        },
+        {
+          "id": 122,
+          "pid": 12,
+          "value": 9,
+          "label": "叶子节点122"
+        },
+        {
+          "id": 123,
+          "pid": 12,
+          "value": 10,
+          "label": "叶子节点123"
+        },
+        {
+          "id": 124,
+          "pid": 12,
+          "value": 11,
+          "label": "叶子节点124"
+        },
+        {
+          "id": 13,
+          "pid": 1,
+          "value": 12,
+          "label": "父节点13 - 空节点",
+          "isParent": true
+        }
+      ]
+    },
+    {
+      "type": "multilevel",
+      "label": "multilevel",
+      "place":3,
+      "fields": ["a", "b", "c"],
+      "ids": [1, 4, 8],
+      "values":["aaa","4","8"],
+      "data": [],
+      "$dropdownOpts": null,
+      "dataSource": [{
+        "id": 1,
+        "parentid": -1,
+        "value": "aaa",
+        "text": "选项一"
+      },
+        {
+          "id": 2,
+          "parentid": -1,
+          "value": "2",
+          "text": "选项二"
+        },
+        {
+          "id": 3,
+          "parentid": -1,
+          "value": "3",
+          "text": "选项三"
+        },
+        {
+          "id": 4,
+          "parentid": 1,
+          "value": "4",
+          "text": "选项四"
+        },
+        {
+          "id": 5,
+          "parentid": 1,
+          "value": "5",
+          "text": "选项五"
+        },
+        {
+          "id": 6,
+          "parentid": 2,
+          "value": "6",
+          "text": "选项六"
+        },
+        {
+          "id": 7,
+          "parentid": 2,
+          "value": "7",
+          "text": "选项七"
+        },
+        {
+          "id": 8,
+          "parentid": 3,
+          "value": "8",
+          "text": "选项八"
+        },
+        {
+          "id": 9,
+          "parentid": 4,
+          "value": "9",
+          "text": "选项九"
+        },
+        {
+          "id": 10,
+          "parentid": 4,
+          "value": "10",
+          "text": "选项十"
+        },
+        {
+          "id": 11,
+          "parentid": 5,
+          "value": "11",
+          "text": "选项十一"
+        }]
+    },
+    {
+      "type":"textarea",
+      "field":"textarea",
+      "label":"textarea",
+      "place":4,
+      "cols":50,
+      "minHeight":200,
+      "maxHeight":200
+    },{
+      "type":"kindeditor",
+      "place":4,
+      "label":"kindeditor",
+      "field":"kindeditor",
+      "value":"富文本编辑器"
+    },{
+      "type":"display",
+      "label":"display",
+      "value":"仅作展示用"
+    },{
+      "type":"rating",
+      "place":2,
+      "label":"rating",
+      "field":"rating",
+      "value":3
+    }
+  ]
+}

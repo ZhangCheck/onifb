@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>textBox弹窗</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:"../../oniui",
+            paths:{
+                avalon:"avalon.shim",
+                echarts: "echarts",
+                domReady:"domReady"
+            },
+            map:{
+                "*":{
+                    "css":"require.css",
+                    "text":"require.text"
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["avalon.fb","./textBoxDialog/avalon.textBoxDialog","./tree/avalon.tree.check","./checkboxlist/avalon.checkboxlist","./mmRequest/mmRequest"],function(){
+
+            var  vm=avalon.define({
+                $id:"demo",
+                $textOpt:{
+                    fileTemplate:'<ul id="checkList" ms-widget="checkboxlist,list,$checkListOpt" data-checkboxlist-duplex="selectedList"></ul>',
+                    iconPosition:"right",
+                    selectedValue:"",//选中的值
+                    selectedCode:"",
+                    title:"标题名称",//弹框标题
+                    $checkListOpt:{
+                        selectedList:[],
+                        data:[]
+                    },
+                    onOpen:function(){
+                        avalon.scan(document.getElementById("checkList"), vm);
+                        fb.requestJson({
+                            remoteUrl:"./model/checkList.json",
+                            localUrl:"./model/checkList.json",
+                            type:"post",
+                            success:function(data){
+                                avalon.vmodels["list"].data=data.checkList;
+                                avalon.vmodels["list"].selectedList=avalon.vmodels["textBox"].selectedCode.split(",");
+                            }
+
+                        });
+                    },
+                    onConfirm:function(){
+                        var hash = {};//构造hash， value[code] => value
+                        var checkList=avalon.vmodels["list"].data;
+                        for (var m=0; m < checkList.length; m++) {
+                            hash[checkList[m]["value"]] = checkList[m];
+                        }
+                        var resultDisplay = "";
+                        var resultCode="";
+                        var array = avalon.vmodels["list"].selectedList;//获取选中值数组
+                        avalon.each(array,function(i,el){//遍历选中值数组，其中el就是code
+                            if(resultDisplay == ""){
+                                resultDisplay = resultDisplay + hash[el]["text"] ;
+                                resultCode=resultCode+hash[el]["value"];
+                            }else{
+                                resultDisplay = resultDisplay + "," + hash[el]["text"];
+                                resultCode=resultCode+","+hash[el]["value"];
+                            }
+                        });
+                        avalon.vmodels["textBox"].selectedValue = resultDisplay.split(",");//绑定选中中文值
+                        avalon.vmodels["textBox"].selectedCode = resultCode.split(",");
+                    },
+                    onClose:function(){
+                        console.log("close");
+                    },
+                    onCancel:function(){
+                        console.log("cancel");
+                    }
+                },
+                $treeTextOpt:{
+                    fileTemplateUrl:'avalon.textBoxDialog.content1.html',
+                    iconPosition:"left",
+                    selectedValue:"",//选中的值
+                    title:"标题名称",//弹框标题
+                    $muiplexTreeOpt:{//多选树参数
+                        children:[
+                        ],
+                        check: {
+                            enable: true//可选
+                        },
+                        data:{
+                            simpleData: {
+                                enable: true,
+                                pIdKey: "pid"
+                            }
+                        }
+                    },
+                    onOpen:function(){//打开时弹出框时重置树
+                        avalon.scan(document.getElementById("treeText"), vm);
+                        fb.requestJson({
+                            remoteUrl:"./model/tree.json",
+                            localUrl:"./model/tree.json",
+                            type:"post",
+                            success:function(data){
+                                avalon.vmodels["muiplexTree"].children=[];
+                                avalon.vmodels["muiplexTree"].children=data.zNodes;
+                                var muiplexTreeVmodels=avalon.vmodels["muiplexTree"];
+                                var nodes=muiplexTreeVmodels.getNodes();
+                                var nodesObj=muiplexTreeVmodels.transformToArray(nodes);
+                                var selectedName=avalon.vmodels["treeTextBox"].selectedValue.split(",");
+                                avalon.each(nodesObj , function(i,el){//遍历所有数据
+                                    el.checked = false;
+                                    if(selectedName.indexOf(el.name) > -1){//如果属于array中，则选中
+                                        el.checked = true;
+                                    }
+                                });
+                                muiplexTreeVmodels.reset(muiplexTreeVmodels.transformTozTreeNodes(nodesObj));
+                                muiplexTreeVmodels.expandAll(true);
+                            }
+
+                        });
+                    },
+                    onConfirm:function(){
+                        var resultDisplay = "";//显示选中节点中文值
+                        var resultCode="";
+                        var array = avalon.vmodels["muiplexTree"].getCheckedNodes(true);//获得所有选中状态的节点
+                        avalon.each(array,function(i,el){
+                            if(resultDisplay == ""){
+                                resultDisplay = resultDisplay + el.name ;
+                                resultCode = resultCode + el.code ;
+                            }else{
+                                resultDisplay = resultDisplay + "," + el.name;
+                                resultCode=resultCode+","+el.code;
+                            }
+                        });
+                        avalon.vmodels["treeTextBox"].selectedValue =  resultDisplay;//绑定选中中文值
+                        avalon.vmodels["treeTextBox"].selectedCode =  resultCode;
+                    },
+                    onClose:function(){
+                        console.log("close");
+                    },
+                    onCancel:function(){
+                        console.log("cancel");
+                    }
+                }
+
+            });
+            fb.requestJson({
+                remoteUrl:"./model/checkList.json",
+                localUrl:"./model/checkList.json",
+                type:"post",
+                success:function(data){
+                    var selectedText=[],selectedCode=[];
+                    var defalutSelected=data.selectedList;
+                    for(var i=0;i<defalutSelected.length;i++){
+                        selectedText.push(defalutSelected[i].text);
+                        selectedCode.push(defalutSelected[i].value);
+                    }
+                    avalon.vmodels["textBox"].selectedValue=selectedText;
+                    avalon.vmodels["textBox"].selectedCode=selectedCode;
+                }
+
+            });
+
+            fb.requestJson({
+                remoteUrl:"./model/tree.json",
+                localUrl:"./model/tree.json",
+                type:"post",
+                success:function(data){
+                    var selectedText=[],selectedCode=[];
+                    var defalutSelected=data.defalultValue;
+                    for(var i=0;i<defalutSelected.length;i++){
+                        selectedText.push(defalutSelected[i].value);
+                        selectedCode.push(defalutSelected[i].code);
+                    }
+                    avalon.vmodels["treeTextBox"].selectedValue=selectedText;
+                    avalon.vmodels["treeTextBox"].selectedCode=selectedCode;
+                }
+
+            });
+
+
+            avalon.scan();
+        });
+
+    </script>
+</head>
+<body>
+<div ms-controller="demo">
+    <div style="color:red;font-size:14px;margin-left:20px;margin-bottom:20px;">
+        textbox弹出窗口说明(textBoxDialog)：<br/>
+        本插件是对textbox,button,dialog插件整合在一起的textbox弹出窗口，一般情况下，弹出窗口的内容是变化的，本插件的主要思路是将弹出窗口中的内容通过ms-include-src（弹出窗口内容的单独放在一个文件内）的形式引进来的。<br/>
+        插件对应的方法和参数参考组件使用说明。
+
+    </div>
+    <div style="margin-bottom:10px;"  ms-widget="textBoxDialog,textBox,$textOpt">
+
+    </div>
+    <div ms-widget="textBoxDialog,treeTextBox,$treeTextOpt">
+
+    </div>
+</div>
+
+<div ms-skip>
+        <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+            &lt;!DOCTYPE HTML&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;meta charset='utf-8'/&gt;
+                &lt;title&gt;textBox弹窗&lt;/title&gt;
+                &lt;script src='../require.js'&gt;&lt;/script&gt;
+                &lt;script&gt;
+                    require.config({
+                        baseUrl:'../../oniui',
+                        paths:{
+                            avalon:'avalon.shim',
+                            echarts: 'echarts',
+                            domReady:'domReady'
+                        },
+                        map:{
+                            '*':{
+                                'css':'require.css',
+                                'text':'require.text'
+                            }
+                        },
+                        shim:{
+                            avalon: { exports: "avalon" },
+                            echarts:{exports:"echarts"}
+                        }
+                    });
+                &lt;/script&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+              &lt;div ms-controller="demo"&gt;
+                &lt;div style="margin-bottom:10px;" ms-widget="textBoxDialog,textBox,$textOpt"&gt;
+
+                &lt;/div&gt;
+                &lt;div ms-widget="textBoxDialog,treeTextBox,$treeTextOpt"&gt;
+
+                &lt;/div&gt;
+                    &lt;script&gt;
+                           require(["avalon.fb","./textBoxDialog/avalon.textBoxDialog","./tree/avalon.tree.check","./checkboxlist/avalon.checkboxlist","./mmRequest/mmRequest"],function(){
+                                var  vm=avalon.define({
+                                    $id:"demo",
+                                    $textOpt:{
+                                        fileTemplate:'<ul id="checkList" ms-widget="checkboxlist,list,$checkListOpt" data-checkboxlist-duplex="selectedList"></ul>',
+                                        iconPosition:"right",
+                                        selectedValue:"",//选中的值
+                                        selectedCode:"",
+                                        title:"标题名称",//弹框标题
+                                        $checkListOpt:{
+                                            selectedList:[],
+                                            data:[]
+                                        },
+                                        onOpen:function(){
+                                            avalon.scan(document.getElementById("checkList"), vm);
+                                            fb.requestJson({
+                                                remoteUrl:"./model/checkList.json",
+                                                localUrl:"./model/checkList.json",
+                                                type:"post",
+                                                success:function(data){
+                                                    avalon.vmodels["list"].data=data.checkList;
+                                                    avalon.vmodels["list"].selectedList=avalon.vmodels["textBox"].selectedCode.split(",");
+                                                }
+
+                                            });
+                                        },
+                                        onConfirm:function(){
+                                            var hash = {};//构造hash， value[code] => value
+                                            var checkList=avalon.vmodels["list"].data;
+                                            for (var m=0; m < checkList.length; m++) {
+                                                hash[checkList[m]["value"]] = checkList[m];
+                                            }
+                                            var resultDisplay = "";
+                                            var resultCode="";
+                                            var array = avalon.vmodels["list"].selectedList;//获取选中值数组
+                                            avalon.each(array,function(i,el){//遍历选中值数组，其中el就是code
+                                                if(resultDisplay == ""){
+                                                    resultDisplay = resultDisplay + hash[el]["text"] ;
+                                                    resultCode=resultCode+hash[el]["value"];
+                                                }else{
+                                                    resultDisplay = resultDisplay + "," + hash[el]["text"];
+                                                    resultCode=resultCode+","+hash[el]["value"];
+                                                }
+                                            });
+                                            avalon.vmodels["textBox"].selectedValue = resultDisplay.split(",");//绑定选中中文值
+                                            avalon.vmodels["textBox"].selectedCode = resultCode.split(",");
+                                        },
+                                        onClose:function(){
+                                            console.log("close");
+                                        },
+                                        onCancel:function(){
+                                            console.log("cancel");
+                                        }
+                                    },
+                                    $treeTextOpt:{
+                                        fileTemplateUrl:'avalon.textBoxDialog.content1.html',
+                                        iconPosition:"left",
+                                        selectedValue:"",//选中的值
+                                        title:"标题名称",//弹框标题
+                                        $muiplexTreeOpt:{//多选树参数
+                                            children:[
+                                            ],
+                                            check: {
+                                                enable: true//可选
+                                            },
+                                            data:{
+                                                simpleData: {
+                                                    enable: true,
+                                                    pIdKey: "pid"
+                                                }
+                                            }
+                                        },
+                                        onOpen:function(){//打开时弹出框时重置树
+                                            avalon.scan(document.getElementById("treeText"), vm);
+                                            fb.requestJson({
+                                                remoteUrl:"./model/tree.json",
+                                                localUrl:"./model/tree.json",
+                                                type:"post",
+                                                success:function(data){
+                                                    avalon.vmodels["muiplexTree"].children=[];
+                                                    avalon.vmodels["muiplexTree"].children=data.zNodes;
+                                                    var muiplexTreeVmodels=avalon.vmodels["muiplexTree"];
+                                                    var nodes=muiplexTreeVmodels.getNodes();
+                                                    var nodesObj=muiplexTreeVmodels.transformToArray(nodes);
+                                                    var selectedName=avalon.vmodels["treeTextBox"].selectedValue.split(",");
+                                                    avalon.each(nodesObj , function(i,el){//遍历所有数据
+                                                        el.checked = false;
+                                                        if(selectedName.indexOf(el.name) > -1){//如果属于array中，则选中
+                                                            el.checked = true;
+                                                        }
+                                                    });
+                                                    muiplexTreeVmodels.reset(muiplexTreeVmodels.transformTozTreeNodes(nodesObj));
+                                                    muiplexTreeVmodels.expandAll(true);
+                                                }
+
+                                            });
+                                        },
+                                        onConfirm:function(){
+                                            var resultDisplay = "";//显示选中节点中文值
+                                            var resultCode="";
+                                            var array = avalon.vmodels["muiplexTree"].getCheckedNodes(true);//获得所有选中状态的节点
+                                            avalon.each(array,function(i,el){
+                                                if(resultDisplay == ""){
+                                                    resultDisplay = resultDisplay + el.name ;
+                                                    resultCode = resultCode + el.code ;
+                                                }else{
+                                                    resultDisplay = resultDisplay + "," + el.name;
+                                                    resultCode=resultCode+","+el.code;
+                                                }
+                                            });
+                                            avalon.vmodels["treeTextBox"].selectedValue =  resultDisplay;//绑定选中中文值
+                                            avalon.vmodels["treeTextBox"].selectedCode =  resultCode;
+                                        },
+                                        onClose:function(){
+                                            console.log("close");
+                                        },
+                                        onCancel:function(){
+                                            console.log("cancel");
+                                        }
+                                    }
+
+                                });
+                                fb.requestJson({
+                                    remoteUrl:"./model/checkList.json",
+                                    localUrl:"./model/checkList.json",
+                                    type:"post",
+                                    success:function(data){
+                                        var selectedText=[],selectedCode=[];
+                                        var defalutSelected=data.selectedList;
+                                        for(var i=0;i&lt;defalutSelected.length;i++){
+                                            selectedText.push(defalutSelected[i].text);
+                                            selectedCode.push(defalutSelected[i].value);
+                                        }
+                                        avalon.vmodels["textBox"].selectedValue=selectedText;
+                                        avalon.vmodels["textBox"].selectedCode=selectedCode;
+                                    }
+
+                                });
+
+                                fb.requestJson({
+                                    remoteUrl:"./model/tree.json",
+                                    localUrl:"./model/tree.json",
+                                    type:"post",
+                                    success:function(data){
+                                        var selectedText=[],selectedCode=[];
+                                        var defalutSelected=data.defalultValue;
+                                        for(var i=0;i&lt;defalutSelected.length;i++){
+                                            selectedText.push(defalutSelected[i].value);
+                                            selectedCode.push(defalutSelected[i].code);
+                                        }
+                                        avalon.vmodels["treeTextBox"].selectedValue=selectedText;
+                                        avalon.vmodels["treeTextBox"].selectedCode=selectedCode;
+                                    }
+
+                                });
+
+
+                                avalon.scan();
+                            });
+
+                    &lt;/script&gt;
+                &lt;/div&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </pre>
+</div>
+</body>
+</html>

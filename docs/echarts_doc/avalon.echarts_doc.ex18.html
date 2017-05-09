@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>itemStyle</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4>itemStyle</h4>
+    <p>图形样式，可设置图表内图形的默认样式和强调样式（悬浮时样式）：</p>
+<pre>itemStyle: {
+    normal: {
+        ...
+    },
+    emphasis: {
+        ...
+    }
+}
+</pre>
+    <p>
+        其中normal和emphasis属性为对象，其包含：
+    </p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col width="100">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 适用类型 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{color | Function}</b> color </td>
+            <td> 图表各异 </td>
+            <td> 通用 </td>
+            <td> 颜色，主色 ，函数回调参数为<br>{seriesIndex:x, series:xxx, dataIndex:y, data:yyy}</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> lineStyle </td>
+            <td> 图表各异 </td>
+            <td> 折线图，K线图，markLine</td>
+            <td> 线条样式，详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a></td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> areaStyle </td>
+            <td> 图表各异 </td>
+            <td> 堆积折线图，地图</td>
+            <td> 区域样式，详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex20" title="">areaStyle</a></td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> chordStyle </td>
+            <td> 图表各异 </td>
+            <td> 和弦图</td>
+            <td> 弦样式，详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex24" title="">chordStyle</a></td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> nodeStyle </td>
+            <td> 图表各异 </td>
+            <td> 力导向图</td>
+            <td> 节点样式，详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex25" title="">nodeStyle</a></td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> linkStyle </td>
+            <td> 图表各异 </td>
+            <td> 力导向图</td>
+            <td> 边样式，详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex26" title="">linkStyle</a></td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> borderColor </td>
+            <td> 各异 </td>
+            <td> 折线图（symbol），散点图（symbole），饼图，地图，markPoint</td>
+            <td> 边框颜色 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> borderWidth </td>
+            <td> 各异 </td>
+            <td> 折线图（symbol），散点图（symbole），饼图，地图，markPoint</td>
+            <td> 边框线宽，单位px </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> barBorderColor </td>
+            <td> '#fff' </td>
+            <td> 柱形图</td>
+            <td> 边框颜色 </td>
+        </tr>
+        <tr>
+            <td> <b>{number | Array}</b> barBorderRadius </td>
+            <td> 0 </td>
+            <td> 柱形图</td>
+            <td> 柱形边框圆角，单位px，默认为0，支持传入数组分别指定柱形4个圆角半径，如:[5, 5, 0, 0]（顺时针左上，右上，右下，左下） </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> barBorderWidth </td>
+            <td> 0 </td>
+            <td> 柱形图</td>
+            <td> 柱形边框线宽，单位px，默认为0 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> label </td>
+            <td><pre>{
+    show: true,
+    position:'outer'
+}                           </pre></td>
+            <td> 折线图，柱形图，K线图，散点图，饼图 ，地图，力导向，漏斗图，markPoint，markLine</td>
+            <td> 标签，饼图默认显示在外部，离饼图距离由labelLine.length决定，
+                <br>漏斗图默认显示在右侧，离图形距离由labelLine.length决定
+                <br>地图标签不可指定位置，
+                <br> 折线图，柱形图，K线图，散点图可指定position见下
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> labelLine </td>
+            <td> {show: true} </td>
+            <td> 饼图，漏斗图</td>
+            <td> 标签视觉引导线，默认显示 </td>
+        </tr>
+        </tbody>
+
+    </table>
+    <p>
+        其中标签label属性为对象，其包含：
+    </p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 标签显示策略，可选为：true（显示） | false（隐藏） </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> position </td>
+            <td> 'outer' | null</td>
+            <td> 标签显示位置，地图标签不可指定位置
+                <br>饼图可选为：'outer'（外部） | 'inner'（内部），
+                <br>漏斗图可选为：'inner'（内部）| 'left' | 'right'（默认），
+                <br>折线图，柱形图，K线图，散点图默认根据布局自适应为'top'或者'right'，可选的还有：'inside' | 'left' | 'bottom'
+                <br>柱形图可选的还有，'insideLeft' | 'insideRight' | 'insideTop' | 'insideBottom'
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> rotate </td>
+            <td> false </td>
+            <td> 和弦图有效，文本标签自动旋转</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> distance </td>
+            <td> 10 </td>
+            <td> 和弦图: 文本标签旋转后于弦的间隔
+                <br>饼图: 当label position为inner时有效，为label位置到圆心的距离与圆半径(环状图为内外半径和)的比例系数，默认为0.5。
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{string | Function}</b> formatter </td>
+            <td> null </td>
+            <td> 标签文本格式器，通用，同<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex5" title="">Tooltip.formatter</a>，支持模板、方法回调，不支持异步回调</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> textStyle </td>
+            <td> null </td>
+            <td> 标签的文本样式（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>） </td>
+        </tr>
+        <tr>
+            <td> <b>{Number}</b> x </td>
+            <td> 各异 </td>
+            <td> 仅矩形树图使用，标签横坐标 </td>
+        </tr>
+        <tr>
+            <td> <b>{Number}</b> y </td>
+            <td> 各异 </td>
+            <td> 仅矩形树图使用，标签纵坐标 </td>
+        </tr>
+        </tbody>
+
+    </table>
+    <p>
+        其中标签视觉引导线labelLine属性为对象，其包含：
+    </p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 饼图标签视觉引导线显示策略，可选为：true（显示） | false（隐藏） </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> length </td>
+            <td> 40 </td>
+            <td> 线长 ，从图形外边缘起计算，可为负值。漏斗图支持'auto'</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> lineStyle </td>
+            <td> 各异 </td>
+            <td> 线条样式，详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a></td>
+        </tr>
+        </tbody>
+
+    </table>
+    <p>
+        通过有效设置itemStyle的normal和emphasis选项可实现个性化的显示策略，比如希望饼图文字标签默认隐藏，并在鼠标悬浮时通过一条红色的视觉引导线显示在饼图外部区域，可以如下设置：
+    </p>
+    <pre>itemStyle: {
+    normal: {
+        label: {
+            show: false
+        }
+        labelLine: {
+            show: false
+        }
+    } ,
+    emphasis: {
+        label: {
+            show: true,
+            position: 'outer'
+        }
+        labelLine: {
+            show: true,
+            lineStyle: {
+                color: 'red'
+            }
+        }
+    }
+}
+</pre>
+</div>
+</body>
+</html>

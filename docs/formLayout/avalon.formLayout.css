@@ -1,0 +1,33 @@
+@charset "UTF-8";
+/*
+这是每个都组件都应该引用的部分
+*/
+.formLayout {
+  border-collapse: collapse;
+  border-spacing: 0; }
+  .formLayout .oni-textbox, .formLayout .oni-datepicker-input-wrapper {
+    width: 100%;
+    box-sizing: border-box; }
+  .formLayout .oni-textbox {
+    min-width: 100px; }
+  .formLayout .oni-datepicker-input-wrapper {
+    min-width: 150px; }
+    .formLayout .oni-datepicker-input-wrapper input {
+      padding: 3px 0px 3px 0; }
+  .formLayout .oni-textbox input {
+    width: 100%; }
+  .formLayout .oni-datepicker-input-wrapper {
+    z-index: auto !important; }
+  .formLayout .fl-label {
+    min-width: 90px;
+    text-align: right;
+    vertical-align: middle; }
+  .formLayout .oni-dropdown-source {
+    overflow: hidden; }
+  .formLayout .oni-textbox-input-wrap {
+    width: 100%; }
+  .formLayout .formLayout-dropDownWarp .formLayout-dropDownWarp-content {
+    width: 100%;
+    position: relative; }
+
+/*# sourceMappingURL=avalon.formLayout.css.map */

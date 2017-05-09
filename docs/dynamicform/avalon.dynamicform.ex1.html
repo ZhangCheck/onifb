@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>例子一</title>
+    <style>
+        table input{
+            padding: 0.67861em 1em;
+            line-height: 18px;
+            border: 1px solid rgba(34, 36, 38, 0.15);
+            border/*\**/: 1px solid #bdc7d1 \9;
+            border-radius: 4px;
+            outline:none
+        }
+    </style>
+    <script src="../require.js" ></script>
+</head>
+<body ms-controller="main">
+<div ms-widget="dynamicform,id1,$opts">
+
+</div>
+<script>
+    require.config({
+        baseUrl:'../',
+        paths:{
+            avalon: 'avalon.shim',
+            echarts: 'echarts',
+            domReady:'domReady',
+            fb:"avalon.fb"
+        },
+        map:{
+            '*':{
+                'css':'require.css',
+                'text':'require.text'
+            }
+        },
+        shim:{
+            avalon: { exports: "avalon" },
+            echarts:{exports:"echarts"}
+        }
+    });
+    require(["./dynamicform/avalon.dynamicform"],function(){
+        var vm=avalon.define({
+            $id:'main',
+            $opts:{
+                columnNum:4,
+                dataSource:"./ex1.json"
+            }
+        })
+        avalon.scan()
+    })
+</script>
+</body>
+</html>

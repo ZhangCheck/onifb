@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>xAxis、yAxis、axis（x轴，y轴，坐标轴）</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4>xAxis、yAxis、axis（x轴，y轴，坐标轴）</h4>
+    <h5>xAxis</h5>
+    <p>直角坐标系中横轴数组，数组中每一项代表一条横轴坐标轴，仅有一条时可省略数组。最多同时存在2条横轴，单条横轴时可指定安放于grid的底部（默认）或顶部，2条同时存在时位置互斥，默认第一条安放于底部，第二条安放于顶部。
+        坐标轴有三种类型，类目型、数值型和时间型（区别详见axis），横轴通常为类目型，但条形图时则横轴为数值型，散点图时则横纵均为数值型，具体参数详见axis。
+    </p>
+    <h5>yAxis</h5>
+    <p>
+        直角坐标系中纵轴数组，数组中每一项代表一条纵轴坐标轴，仅有一条时可省略数组。最多同时存在2条纵轴，单条纵轴时可指定安放于grid的左侧（默认）或右侧，2条同时存在时位置互斥，默认第一条安放于左侧，第二条安放于右侧。
+        坐标轴有三种类型，类目型、数值型和时间型（区别详见axis），纵轴通常为数值型，但条形图时则纵轴为类目型，具体参数详见axis。
+    </p>
+    <h5>axis</h5>
+    <p>
+        坐标轴有三种类型，类目型、数值型和时间型，他们的区别在于：<br/>
+        类目型：需要指定类目列表，坐标轴内有且仅有这些指定类目坐标<br/>
+        数值型：需要指定数值区间，不指定时则自定计算数值范围，坐标轴内包含数值区间内容全部坐标<br/>
+        时间型：时间型坐标轴用法同数值型，只是目标处理和格式化显示时会自动转变为时间，并且随着时间跨度的不同自动切换需要显示的时间粒度<br/>
+    </p>
+    <p>下面是坐标轴的全部选项，其中个别选项仅在个别类型时有效，请注意适用类型。</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th style="width:70px"> 适用类型 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> type </td>
+            <td> 'category' | 'value' | 'time' | 'log' </td>
+            <td> 通用 </td>
+            <td> 坐标轴类型，横轴默认为类目型'category'，纵轴默认为数值型'value' </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 通用 </td>
+            <td> 显示策略，可选为：true（显示） | false（隐藏） </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> zlevel </td>
+            <td> 0 </td>
+            <td> 通用 </td>
+            <td> 一级层叠控制。每一个不同的zlevel将产生一个独立的canvas，相同zlevel的组件或图标将在同一个canvas上渲染。zlevel越高越靠顶层，canvas对象增多会消耗更多的内存和性能，并不建议设置过多的zlevel，大部分情况可以通过二级层叠控制z实现层叠控制。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> z </td>
+            <td> 0 </td>
+            <td> 通用 </td>
+            <td> 二级层叠控制，同一个canvas（相同zlevel）上z越高约靠顶层。 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> position </td>
+            <td> 'bottom' | 'left' </td>
+            <td> 通用 </td>
+            <td> 坐标轴类型，横轴默认为类目型'bottom'，纵轴默认为数值型'left'，可选为：'bottom' | 'top' | 'left' | 'right' </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> name </td>
+            <td> '' </td>
+            <td> 数值型，时间型</td>
+            <td> 坐标轴名称，默认为空</td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> nameLocation </td>
+            <td> 'end' </td>
+            <td> 数值型，时间型 </td>
+            <td> 坐标轴名称位置，默认为'end'，可选为：'start' | 'end'</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> nameTextStyle </td>
+            <td> {} </td>
+            <td> 数值型，时间型 </td>
+            <td> 坐标轴名称文字样式，默认取全局配置，颜色跟随axisLine主色，可设</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> boundaryGap </td>
+            <td> true </td>
+            <td> 类目型 </td>
+            <td> 类目起始和结束两端空白策略，见下图，默认为true留空，false则顶头 </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> boundaryGap </td>
+            <td> [0, 0] </td>
+            <td> 数值型，时间型 </td>
+            <td> 坐标轴两端空白策略，数组内数值代表百分比，[原始数据最小值与最终最小值之间的差额，原始数据最大值与最终最大值之间的差额] </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> min </td>
+            <td> null </td>
+            <td> 数值型，时间型 </td>
+            <td> 指定的最小值，eg: 0，默认无，会自动根据具体数值调整，指定后将忽略boundaryGap[0] </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> max </td>
+            <td> null </td>
+            <td> 数值型，时间型 </td>
+            <td> 指定的最大值，eg: 100，默认无，会自动根据具体数值调整，指定后将忽略boundaryGap[1] </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> scale </td>
+            <td> false </td>
+            <td> 数值型，时间型 </td>
+            <td> 脱离0值比例，放大聚焦到最终_min，_max区间 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> splitNumber </td>
+            <td> null </td>
+            <td> 数值型，时间型 </td>
+            <td> 分割段数，不指定时根据min、max算法调整</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> logLabelBase </td>
+            <td> null </td>
+            <td> value </td>
+            <td> axis.type === 'log'时生效。指定时，axisLabel显示为指数形式，如指定为4时，axisLabel可显示为4²、4³。不指定时，显示为普通形式，如 1,000,000 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> logPositive </td>
+            <td> null </td>
+            <td> value </td>
+            <td> axis.type === 'log'时生效。指明是否使用反向log数轴（从而支持value为负值）。默认自适应，即如果value全为负值，则logPositive自动设为false，否则为true。 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> axisLine </td>
+            <td> 各异</td>
+            <td> 通用 </td>
+            <td> 坐标轴线，默认显示，详见下方 </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> axisTick </td>
+            <td> 各异 </td>
+            <td> 通用 </td>
+            <td> 坐标轴小标记，默认不显示，详见下方</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> axisLabel </td>
+            <td> 各异 </td>
+            <td> 通用 </td>
+            <td> 坐标轴文本标签，详见下方</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> splitLine </td>
+            <td> 各异 </td>
+            <td> 通用 </td>
+            <td> 分隔线，默认显示，，详见下方</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> splitArea </td>
+            <td> 各异 </td>
+            <td> 通用 </td>
+            <td> 分隔区域，默认不显示，详见下方 </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> data </td>
+            <td> [] </td>
+            <td> 类目型 </td>
+            <td> 类目列表，同时也是label内容，详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex11" title="">axis.data</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <p>boundaryGap端空白策略</p>
+    <table  class="table-doc" border="1">
+        <tbody>
+        <tr>
+            <th>boundaryGap: true</th>
+            <th>boundaryGap: false</th>
+        </tr>
+        <tr>
+            <td><img src="image/axisBoundaryGap1.jpg"/></td>
+            <td><img src="image/axisBoundaryGap.png"/></td>
+        </tr>
+        </tbody>
+    </table>
+    <p>scale策略</p>
+    <table  class="table-doc" border="1">
+        <tbody>
+        <tr>
+            <th>scale: false</th>
+            <th>scale: true</th>
+        </tr>
+        <tr>
+            <td><img style="width: 400px;" src="image/axisScale1.png"/></td>
+            <td><img style="width: 400px;" src="image/axisScale2.png"/></td>
+        </tr>
+        </tbody>
+    </table>
+    <p>
+        axis属性说明
+    </p>
+    <img src="image/axisDetail.png">
+</div>
+</body>
+</html>

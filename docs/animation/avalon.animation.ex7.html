@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title></title>
+    <script src="../require.js"></script>
+    <script src="../require.config.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="avalon.animate.style.css"/>
+</head>
+<body ms-controller="test">
+<script>
+    require(["animation/avalon.animate","button/avalon.button"], function() {
+        var vmodel=avalon.define({
+            $id:'test',
+            showDiv:true,
+            //动画元素的配置属性，名称与ms-animate中的第三个值对应,缺省时使用animate
+            animate:{
+                //动画元素目标状态的样式
+                properties:{
+                    top:400
+                },
+                //动画的基本配置
+                options:{
+                    duration:5000,      //持续时间，默认2000
+                    easing:avalon.easing[3],  //缓动公示，默认线性
+                    fps:30,              //控制动画平滑程度
+                    before:function(){
+                        //alert("动画要开始了")
+                    },
+                    step:function(){
+                        avalon.log("一步")
+                    },
+                    after:function(){
+                        var animateObj=vmodel.animateObj||avalon.vmodels['animateObj'].animateObj
+                        animateObj.setProperties({top:360})
+                        animateObj.setOptions({
+                            duration:500,
+                            easing:avalon.easing[4],
+                            step:function(){
+                                avalon.log("一步")
+                            },
+                            after:function(){
+                                var animateObj=vmodel.animateObj||avalon.vmodels['animateObj'].animateObj
+                                animateObj.setProperties({top:400})
+                                animateObj.setOptions({
+                                    duration:500,
+                                    easing:avalon.easing[3],
+                                    after:avalon.noop,
+                                    step:function(){
+                                        avalon.log("一步")
+                                    },
+                                })
+                                animateObj.excuteAnimate();
+                            }
+                        })
+                        animateObj.excuteAnimate();
+                    }
+                }
+            }/*,
+             animateObj:{
+
+             }*/
+        })
+        avalon.scan()
+    });
+</script>
+<div style="height: 500px;">
+<div class="normal" style="position: relative" ms-animate="test,animateObj"  data-animate-options-duration="2000" data-animate-options-fps="20"  >
+</div>
+</div>
+<div ms-controller="animateObj">
+    <button ms-widget="button" ms-click="animateObj.excuteAnimate">执行动画</button>
+</div>
+</body>
+<pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang="en"&gt;
+    &lt;meta charset="UTF-8"&gt;
+
+    &lt;title&gt;&lt;/title&gt;
+    &lt;script src="../require.js"&gt;&lt;/script&gt;
+    &lt;script src="../require.config.js"&gt;&lt;/script&gt;
+    &lt;script src="../highlight/shCore.js"&gt;&lt;/script&gt;
+    &lt;link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/&gt;
+    &lt;link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/&gt;
+    &lt;link type="text/css" rel="stylesheet" href="avalon.animate.style.css"/&gt;
+&lt;/head&gt;
+&lt;body ms-controller="test"&gt;
+&lt;script&gt;
+    require(["animation/avalon.animate","button/avalon.button"], function() {
+        var vmodel=avalon.define({
+            $id:'test',
+            showDiv:true,
+            animate:{
+                //动画元素目标状态的样式
+                properties:{
+                    top:400
+                },
+                //动画的基本配置
+                options:{
+                    duration:5000,      //持续时间，默认2000
+                    easing:avalon.easing[3],  //缓动公示，默认线性
+                    fps:30,              //控制动画平滑程度
+                    before:function(){
+                        //alert("动画要开始了")
+                    },
+                    step:function(){
+                        //avalon.log("一步")
+                    },
+                    after:function(){
+                        var animateObj=vmodel.animateObj||avalon.vmodels['animateObj'].animateObj
+                        animateObj.setProperties({top:360})
+                        animateObj.setOptions({
+                            duration:500,
+                            easing:avalon.easing[4],
+                            after:function(){
+                                var animateObj=vmodel.animateObj||avalon.vmodels['animateObj'].animateObj
+                                animateObj.setProperties({top:400})
+                                animateObj.setOptions({
+                                    duration:500,
+                                    easing:avalon.easing[3],
+                                    after:avalon.noop()
+                                })
+                                animateObj.excuteAnimate();
+                            }
+                        })
+                        animateObj.excuteAnimate();
+                    }
+                }
+            }/*,
+             animateObj:{
+
+             }*/
+        })
+        avalon.scan()
+    });
+&lt;/script&gt;
+&lt;div style="height: 500px;"&gt;
+&lt;div class="normal" style="position: relative" ms-animate="test,animateObj"  data-animate-options-duration="2000" data-animate-options-fps="20"  &gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div ms-controller="animateObj"&gt;&lt;
+    &lt;button ms-widget="button" ms-click="animateObj.excuteAnimate"&gt;执行动画&lt;/button&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+</pre>
+</html>

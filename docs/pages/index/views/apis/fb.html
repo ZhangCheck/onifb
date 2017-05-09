@@ -1,0 +1,140 @@
+<h3>fb架构图</h3>
+
+<div class="mtLg mlLg">
+    <img src="pages/index/imgs/fb.api.png">
+</div>
+<style>
+    table{
+        border:solid 1px #BBBBBB;
+    }
+    td,th{
+        text-align: left;
+        border-bottom:solid 1px #BBBBBB;
+    }
+</style>
+<div style="margin-top:80px;">
+    <h3>A:"$(AsJquery)":</h3>
+    <div class="mt mlLg">"$(AsJquery)"实现了轻量级的JQuery,但在项目中应少使用AsJquery处理节点，而是多使用MVVM机制动态处理dom；</div>
+</div>
+
+<div class="mtLg">
+    <h3>B:接口系统</h3>
+    <div class="mt mlLg">统一了JSON数据格式的全局接口请求方式，并向页面中插入接口请求状态，如:加载中,404错误，数据格式错误等，并在远程接口访问失败时请求本地接口；</div>
+    <div class="mtLg mlLg">
+        <h3>一，全局接口配置</h3>
+        <div class="mtLg">接口数据环境配置：</div>
+		<div>
+			数据环境配置，是指请求的接口来源配置，本地环境是指静态json;<br/>
+			数据环境配置方法：<br/>
+				1，在页面地址后追加xxx.html?fbMode=fbMode值,fbMode值将被写入cookie,所以同一个站点中多个页面间只需要配置一次；
+				2，在pageList.html页面中通过下拉框选择数据源；
+		</div>
+		<div>数据源列表：</div>
+		<table style="min-width:400px">
+		    <tr><th>fbMode值</th><th>功能</th></tr>
+			<tr><td>48</td><td>开发版-本地环境</td></tr>
+			<tr><td>42</td><td>开发版-联调环境（先远程联调机，失败后请求本地数据）</td></tr>
+			<tr><td>38</td><td>开发版-联调环境（只远程联调机）</td></tr>
+			<tr><td>41</td><td>开发版-发布环境（先远程发布机，失败后请求本地数据）</td></tr>
+			<tr><td>37</td><td>开发版-发布环境（只远程发布机）</td></tr>
+            
+			<tr><td>16</td><td>发布版-本地环境</td></tr>
+			<tr><td>10</td><td>发布版-联调环境（先远程联调机，失败后请求本地数据）</td></tr>
+            <tr><td>9</td><td>发布版-发布环境（先远程发布机，失败后请求本地数据）</td></tr>
+			<tr><td>6</td><td>发布版-联调环境（只远程联调机）</td></tr>
+			<tr><td>5</td><td>发布版-发布环境（只远程发布机）</td></tr>
+		</table>
+        <!-- <div>1:发布机 2:联调机 4:只远 8：先远后近 16：只近   32：源码环境 64：前端联调机 </div> -->
+        
+        <div>(数据环境值保存在cookie中，因此只需要配置一次)</div>
+
+        <div class="mtLg">接口处理方式配置：<pre class="mlLg">code: avalon.mix(fb.config.interface,{...}</pre></div>
+        <table class="mt mlLg" width="100%">
+            <tbody>
+            <tr><th>参数</th><th>功能</th></tr>
+            <tr><td>alert</td><td>{Function}接口请求过程中各种状态提示</td></tr>
+            <tr><td>extendDataCheck</td><td>{Function}项目里扩展的数据格式检查器</td></tr>
+            </tbody>
+        </table>
+        <h3 class="mtLg">二，发起接口请求</h3>
+        <pre class="mlLg">code:vm.$someRequest = fb.requestJson({...});</pre>
+        <table class="mt mlLg" width="100%">
+            <tbody>
+            <tr><th>参数</th><th>功能</th><th>默认值</th></tr>
+            <tr><td>name</td><td>{String}保留字段</td><td>undefined</td></tr>
+            <tr><td>data</td><td>{anything}上传的数据</td><td>undefined</td></tr>
+            <tr><td>remoteUrl</td><td>{string}远程接口地址<td>undefined</td></tr>
+            <tr><td>localUrl</td><td>{string}本地接口地址</td><td>undefined</td></tr>
+            <tr><td>type</td><td>{string}"POST"or"GET"</td><td>"POST"</td></tr>
+            <tr><td>view</td><td>{string}要显示接口状态的dom节点，如"#someDom"</td><td>undefined</td></tr>
+            <tr><td>success</td><td>{Function}接口请求成功回调<td>undefined</td></tr>
+            <tr><td>error</td><td>{Function}接口请求失败回调</td><td>undefined</td></tr>
+            <tr><td>complete</td><td>{Function}接口请求完成回调</td><td>undefined</td></tr>
+            </tbody>
+        </table>
+
+        <h3 class="mtLg">三，终止接口请求</h3>
+        <pre class="mlLg">code:vm.$someRequest.abort();</pre>
+        <h3 class="mtLg">四，数据格式（JSON)</h3>
+        <pre class="mtLg">
+         1，常规数据：
+            request:{anything}
+            response:
+                成功返回：Json数据
+                失败返回：{
+                    message:"错误消息",
+                    errorCode:"错误码"
+                }
+
+         2，分页数据：
+            request:{
+                "pageNum":1,
+                "pageSize":10
+             }
+            //其中page是页序号，从1开始；pageSize是每页条目数；
+
+            response:{
+                "total":20,
+                "pageNum":1,
+                "pageSize":10,
+                "cols":["列名"],
+                "data":["数据内容"]
+             }
+            //total是总条目数,data是数据体,cols是列名
+        </pre>
+
+        <h3 class="mtLg">五，例子</h3>
+        <pre style="width:80%; " class="mt mlLg">
+            页面JS文件:
+            require(["avalon.fb"],function(){
+                var vm = avalon.define({
+                    $id:"someCtl",
+                    remoteData:{}
+                 });
+                fb.requestJson({
+                    remoteUrl:"",
+                `   localUrl:"model/test.json",
+                    success:function(data){
+                        vm.remoteData = data;
+                    }
+                });
+            })
+
+
+            接口文件"test.json":
+            {
+                "test":"good"
+            }
+        </pre>
+
+        <h3 class="mtLg">六，接口版本历史</h3>
+        <ul>
+            <ul>
+                <li>
+                    V1.0.0之前的项目，需要修改pronject.core.js文件，以支持旧数据格式，详细可查看"project.core.forV0.0.0.js
+                </li>
+            </ul>
+
+        </ul>
+    </div>
+</div>

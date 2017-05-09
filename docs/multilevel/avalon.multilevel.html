@@ -1,0 +1,7 @@
+
+<span ms-repeat="data" class="oni-multilevel-level" >
+    <select ms-widget="dropdown,$,$dropdownOpts"  ms-data-index="$index" data-dropdown-$source="el" >
+        <option ms-attr-value="item.id" ms-repeat-item="el" ms-attr-selected="ids[$outer.$index]==item.id?'selected':''">{{item.text}}</option>
+    </select>
+    <input type="hidden" ms-attr-name="fields[$index]" ms-value="values[$index]">
+</span>

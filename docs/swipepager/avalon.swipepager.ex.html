@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script src="../avalon.mobile.js"></script>
+</head>
+<body ms-controller="demo">
+    <div>这个例子需要将浏览器切换至手机模式下查看</div>
+    <style>
+        .example{
+            height:500px;
+        }
+        .example .e-tempContent{
+            height:800px;background: #e3c080;
+            line-height:800px;
+        }
+    </style>
+    <div ms-widget="swipepager,ss,$options" class="example">
+        <div class="e-tempContent">
+            这是原有内容
+        </div>
+        <div ms-repeat="ajaxContent">{{el}}</div>
+    </div>
+    <script>
+        require(["swipepager/avalon.swipepager"],function(){
+            var vm = avalon.define({
+                $id:"demo",
+                ajaxContent:[],
+                $options:{
+                    interface:{
+                        localUrl:"../../model/pageData.json",
+                        remoteUrl:"",
+                        success:function(data){
+                            avalon.each(data.data,function(i,e){
+                                vm.ajaxContent.push(e);
+                            })
+                            console.log("loaded:",vm.ajaxContent.length);
+                        }
+                    }
+                }
+            })
+            avalon.scan();
+        })
+    </script>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot;  href=&quot;../highlight/shCore.css&quot;/&gt;
+    &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;../style/avalon.doc.css&quot;/&gt;
+    &lt;script src=&quot;../highlight/shCore.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../avalon.mobile.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ms-controller=&quot;demo&quot;&gt;
+    &lt;div&gt;这个例子需要将浏览器切换至手机模式下查看&lt;/div&gt;
+    &lt;style&gt;
+        .example{
+            height:500px;
+        }
+        .example .e-tempContent{
+            height:800px;background: #e3c080;
+            line-height:800px;
+        }
+    &lt;/style&gt;
+    &lt;div ms-widget=&quot;swipepager,ss,$options&quot; class=&quot;example&quot;&gt;
+        &lt;div class=&quot;e-tempContent&quot;&gt;
+            这是原有内容
+        &lt;/div&gt;
+        &lt;div ms-repeat=&quot;ajaxContent&quot;&gt;{{el}}&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        require([&quot;swipepager/avalon.swipepager&quot;],function(){
+            var vm = avalon.define({
+                $id:&quot;demo&quot;,
+                ajaxContent:[],
+                $options:{
+                    interface:{
+                        localUrl:&quot;../../model/pageData.json&quot;,
+                        remoteUrl:&quot;&quot;,
+                        success:function(data){
+                            avalon.each(data.data,function(i,e){
+                                vm.ajaxContent.push(e);
+                            })
+                            console.log(&quot;loaded:&quot;,vm.ajaxContent.length);
+                        }
+                    }
+                }
+            })
+            avalon.scan();
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</body>
+</html>

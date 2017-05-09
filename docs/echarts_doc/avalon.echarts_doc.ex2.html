@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>timeline</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4> timeline</h4>
+    <p>时间轴，每个图表最多仅有一个时间轴控件</p>
+
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 显示策略，可选为：true（显示） | false（隐藏） </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> zlevel </td>
+            <td> 0 </td>
+            <td> 一级层叠控制。每一个不同的zlevel将产生一个独立的canvas，相同zlevel的组件或图标将在同一个canvas上渲染。zlevel越高越靠顶层，canvas对象增多会消耗更多的内存和性能，并不建议设置过多的zlevel，大部分情况可以通过二级层叠控制z实现层叠控制。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> z </td>
+            <td> 4 </td>
+            <td> 二级层叠控制，同一个canvas（相同zlevel）上z越高约靠顶层。 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> type </td>
+            <td> 'time' </td>
+            <td> 模式是时间类型，时间轴间隔根据时间跨度自动计算，可选为：'number' </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> notMerge </td>
+            <td> false </td>
+            <td> 时间轴上多个option切换时是否进行merge操作，同setOption第二个参数（详见实例方法） </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> realtime </td>
+            <td> true </td>
+            <td> 拖拽或点击改变时间轴是否实时显示，在不支持Canvas的浏览器中该值自动强制置为false </td>
+        </tr>
+        <tr>
+            <td> <b>{number | string}</b> x </td>
+            <td> 80 </td>
+            <td> 时间轴左上角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心) </td>
+        </tr>
+        <tr>
+            <td> <b>{number | string}</b> y </td>
+            <td> null </td>
+            <td> 时间轴左上角纵坐标，数值单位px，支持百分比（字符串），默认无，随y2定位，如'50%'(显示区域纵向中心) </td>
+        </tr>
+        <tr>
+            <td> <b>{number | string}</b> x2 </td>
+            <td> 80 </td>
+            <td> 时间轴右下角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心) </td>
+        </tr>
+        <tr>
+            <td> <b>{number | string}</b> y2 </td>
+            <td> 0 </td>
+            <td> 时间轴右下角纵坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域纵向中心) </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> width </td>
+            <td> 自适应 </td>
+            <td> 时间轴宽度，默认为总宽度 - x - x2，数值单位px，指定width后将忽略x2。见下图。
+                <br>支持百分比（字符串），如'50%'(显示区域一半的宽度) </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> height </td>
+            <td> 50 </td>
+            <td> 时间轴高度，数值单位px，支持百分比（字符串），如'50%'(显示区域一半的高度) </td>
+        </tr>
+        <tr>
+            <td> <b>{color}</b> backgroundColor </td>
+            <td> 'rgba(0,0,0,0)' </td>
+            <td> 背景颜色，默认透明。 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> borderWidth </td>
+            <td> 0 </td>
+            <td> 边框线宽 </td>
+        </tr>
+        <tr>
+            <td> <b>{color}</b> borderColor </td>
+            <td> '#ccc' </td>
+            <td> 边框颜色。 </td>
+        </tr>
+        <tr>
+            <td> <b>{number | Array}</b> padding </td>
+            <td> 5 </td>
+            <td> 内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，同css，见下图 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> controlPosition </td>
+            <td> 'left' </td>
+            <td> 播放控制器位置，可选为：'left' | 'right' | 'none' </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> autoPlay </td>
+            <td> false </td>
+            <td> 是否自动播放</td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> loop </td>
+            <td> true </td>
+            <td> 是否循环播放</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> playInterval </td>
+            <td> 2000 </td>
+            <td> 播放时间间隔，单位ms </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> lineStyle </td>
+            <td><pre>{
+    color: '#666',
+    width: 1,
+    type: 'dashed'
+}                           </pre></td>
+            <td> 时间轴轴线样式，lineStyle控制线条样式，（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a>） </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> label </td>
+            <td><pre>{
+    show: true,
+    interval: 'auto',
+    rotate: 0,
+    formatter: null,
+    textStyle: {
+        color: '#333'
+    }
+}                           </pre></td>
+            <td> 时间轴标签文本<br>
+                <br>show : 是否显示
+                <br>interval : 挑选间隔，默认为'auto'，可选为：'auto'（自动隐藏显示不下的） | 0（全部显示） | {number}
+                <br>rotate : 旋转角度，默认为0，不旋转，正值为逆时针，负值为顺时针，可选为：-90 ~ 90
+                <br>formatter ： 间隔名称格式器：{string}（Template） | {Function}
+                <br>textStyle : 文字样式（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>）
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> checkpointStyle </td>
+            <td><pre>{
+    symbol : 'auto',
+    symbolSize : 'auto',
+    color : 'auto',
+    borderColor : 'auto',
+    borderWidth : 'auto',
+    label: {
+        show: false,
+        textStyle: {
+            color: 'auto'
+        }
+    }
+}                           </pre></td>
+            <td> 时间轴当前点<br>
+                <br>symbol : 当前点symbol，默认随轴上的symbol
+                <br>symbolSize : 当前点symbol大小，默认随轴上symbol大小
+                <br>color : 当前点symbol颜色，默认为随当前点颜色，可指定具体颜色，如无则为'#1e90ff'
+                <br>borderColor ： 当前点symbol边线颜色
+                <br>borderWidth ： 当前点symbol边线宽度
+                <br>label同上
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> controlStyle </td>
+            <td><pre>{
+    itemSize: 15,
+    itemGap: 5,
+    normal : {
+        color : '#333'
+    },
+    emphasis : {
+        color : '#1e90ff'
+    }
+}                               </pre></td>
+            <td> 时间轴控制器样式，可指定itemSize按钮大小，itemGap按钮间隔，normal.color正常和emphasis.color高亮颜色
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> symbol </td>
+            <td> 'emptyDiamond'</td>
+            <td> 轴点symbol，同serie.symbol </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> symbolSize </td>
+            <td> 4 </td>
+            <td> 轴点symbol，同serie.symbolSize </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> currentIndex </td>
+            <td> 0 </td>
+            <td> 当前索引位置，对应options数组，用于指定显示特定系列 </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> data </td>
+            <td> [] </td>
+            <td> 时间轴列表，同时也是轴label内容 </td>
+        </tr>
+        </tbody>
+    </table>
+    <img src="image/timeline.png">
+</div>
+</body>
+</html>

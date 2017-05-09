@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单+列表</title>
+    <style>
+        table input{
+            padding: 0.67861em 1em;
+            line-height: 18px;
+            border: 1px solid rgba(34, 36, 38, 0.15);
+            border/*\**/: 1px solid #bdc7d1 \9;
+            border-radius: 4px;
+            outline:none
+        }
+    </style>
+</head>
+<body>
+<div  ms-controller="main">
+    <div ms-widget="dynamicform,id1,$OptForm"></div>
+    <div ms-widget="simplegrid,ex18,$OptGrid"></div>
+</div>
+
+<script>
+    require(["./dynamicform/avalon.dynamicform","./simplegrid/avalon.simplegrid"],function(){
+        var vm=avalon.define({
+            $id:'main',
+            $OptForm:{
+                columnNum:3,
+                dataSource:"./ex3/ex3.json"
+            },
+            $OptGrid:{
+                useInnerRequest:true,
+                interface:{
+                    remoteUrl:"ex3/gridData.json",
+                    localUrl:"ex3/gridData.json",
+                    type:"POST",
+                    status:"200",
+                    //data:{'pageSize':10,'pageNum':1},
+                    success:function(data){
+                        //none
+                    }
+                },
+
+                pageable: true,
+                rowSingleLine:false,
+                pager: {
+                    perPages: 10,
+                    showPages: 5,
+                    options: [10, 20, 30, 40]
+                },
+                argFormat:function(args,pageNum,pageSize){
+                    return avalon.mix(args,{"pageSize":pageSize,"pageNum":pageNum})
+                },
+                dataFormat:function(vmodel,interfaceData,options) {
+                    vmodel.pager.totalItems=interfaceData.total
+                    var columns=new Array();
+                    for(var i= 0,len=interfaceData.cols.length;i<len;i++)
+                    {
+                        columns.push({field: interfaceData.cols[i].field, text:interfaceData.cols[i].text , resizable: true, align: "center"})
+                    }
+                    vmodel.columns=vmodel.getColumns(columns,options)
+                    return interfaceData.data
+                }
+            }
+        })
+        avalon.scan()
+    })
+</script>
+</body>
+</html>

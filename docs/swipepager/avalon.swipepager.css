@@ -1,0 +1,12 @@
+.swipepager{
+    height:100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    position:relative;
+}
+.swipepager .s-tip{
+    color: #6b6b6b;
+    padding:15px 0;
+    text-align:center;
+    width:100%;
+}

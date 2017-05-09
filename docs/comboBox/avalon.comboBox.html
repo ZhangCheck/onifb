@@ -1,0 +1,21 @@
+<!--考虑到合成框一个页面多用-->
+<div class="oni-comboBox" ms-css-width="{{width}}" >
+    <input ms-widget="textbox,comboBox-textbox-###,comboBoxTextBoxOpts-###" data-textbox-width="100%"
+           ms-duplex="selectedValue" />
+    <input type="hidden" ms-duplex="selectedCode"/>
+    <div class="oni-comboBox-icon-wrap">
+        <i class="oni-comboBox-icon oni-icon oni-icon-angle-up" ms-visible="iconStatus" ms-click="showSelectContent($event,this)"></i>
+        <i class="oni-comboBox-icon oni-icon oni-icon-angle-down" ms-visible="!iconStatus" ms-click="showSelectContent($event,this)"></i>
+    </div>
+    <div class="oni-comboBox-item-body" ms-css-width="{{selWidth}}"  ms-visible="toggle">
+        <ul ms-visible="!dataStatus" class="oni-comboBox-items"  ms-css-height="{{selHeight}}" style="overflow-y: auto">
+            <li  class="oni-comboBox-item oni-comboBox-searchWarp" ms-if="search">
+                <input ms-widget="textbox,comboBox-searchtextbox-###" data-textbox-width="100%"
+                       ms-duplex="searchValue" ms-on-keyup="enterSelected($event)"/>
+            </li>
+            <li  class="oni-comboBox-item" ms-repeat-item="list" ms-hover="cur" ms-click="selectValue(this)" ms-attr-code="{{item.code}}">
+                {{item.value}}
+        </ul>
+        <span ms-visible="dataStatus">{{nodataText}}</span>
+    </div>
+</div>

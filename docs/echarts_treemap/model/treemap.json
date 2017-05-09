@@ -1,0 +1,11 @@
+{
+  "rows":[
+    {"name": "三星","value": 6},
+    {"name": "小米","value": 4},
+    {"name": "苹果","value": 4},
+    {"name": "华为","value": 2},
+    {"name": "联想","value": 2},
+    {"name": "魅族","value": 1},
+    {"name": "中兴","value": 1}
+  ]
+}

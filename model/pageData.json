@@ -1,0 +1,7 @@
+{
+  "total":20,
+  "pageNum":1,
+  "pageSize":10,
+  "cols":["列名"],
+  "data":["数据内容"]
+}

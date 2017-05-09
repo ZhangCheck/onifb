@@ -1,0 +1,133 @@
+<h3>Avalon 架构图</h3>
+<img src="pages/index/imgs/avalon.api.png">
+<h3>所有原型成员，用法可以参看jQuery</h3>
+<style>
+    .prototype-method-table{
+        width:850px;
+    }
+    .prototype-method-table .events {
+        background: #FF7B3A;
+    }
+    .prototype-method-table .styles {
+        background: #E449A1;
+    }
+    .prototype-method-table .attributes {
+        background: #AF4FDD;
+    }
+    .prototype-method-table td {
+        vertical-align: top;
+        padding: 5px 10px;
+    }
+    .api-content-wrap .api-content .prototype-method-table ul > li, .api-content-wrap .api-content ol > li{
+        background: none;
+        border:none;
+    }
+
+</style>
+<table class="prototype-method-table" id="prototype-method">
+    <tbody><tr>
+        <td class="events"><h3>事件</h3>
+            <ul>
+                <li>bind()</li>
+                <li>unbind()</li>
+
+            </ul>
+        </td>
+
+        <td class="styles"><h3>样式</h3>
+            <ul>
+                <li>css()</li>
+                <li>width()</li>
+                <li>height()</li>
+                <li>innerWidth()</li>
+                <li>innerHeight()</li>
+                <li>outerWidth()</li>
+                <li>outerHeight()</li>
+                <li>position()</li>
+                <li>offset()</li>
+                <li>offsetParent()</li>
+                <li>scrollLeft()</li>
+                <li>scrollTop()</li>
+                <li>addClass()</li>
+                <li>removeClass()</li>
+                <li>hasClass()</li>
+                <li>toggleClass()</li>
+            </ul>
+        </td>
+        <td class="attributes"><h3>属性</h3>
+            <ul>
+                <li>attr()</li>
+                <li>val()</li>
+                <li>data()</li>
+                <li>removeData()</li>
+            </ul>
+        </td>
+    </tr>
+    </tbody></table>
+<h3>所有静态成员</h3>
+<table class="table table-bordered" avalonctrl="test">
+    <tbody><tr>
+        <th>方法或属性</th>  <th>描述</th>
+    </tr>
+    <!--repeat858730260283:start--><tr>
+        <td>mix(a,b)</td>  <td><!--html207382131368-->★★★相当于jQuery.extend，参数个数不定，用于深浅拷贝属性，比如avalon.mix(a), avalon.mix(true, target, c, d)<!--html207382131368:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>log(s)</td>  <td><!--html17988243699-->打印日志, 参数个数不定， 比如<br>avalon.log(a);<br> avalon.log(a, b)<!--html17988243699:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>isFunction(s)</td>  <td><!--html74109051004-->判定是否为函数,1.3.6新增 <br> avalon.isFunction(alert) ==&gt; true<!--html74109051004:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>error(s)</td>  <td><!--html706066157669-->抛出异常，比如avalon.error('类型不正确')<!--html706066157669:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>ui</td>  <td><!--html408325999975-->一个对象，用于放置各种widget的构造器。大家在控制台下查看console.log(avalon.ui)就明白什么回事了。<!--html408325999975:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>vmodels</td>  <td><!--html116228349507-->★★★用于放置avalon.define(id, fn)产生的ViewModel。大家在控制台下查看console.log(avalon.vmodels)就明白什么回事了。<!--html116228349507:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>noop</td>  <td><!--html521453369409-->一个空函数<!--html521453369409:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>ready(fn)</td>  <td><!--html553373508155-->★★★domReady，将回调延迟到DOM树后才执行<br>avalon.ready(function(){alert('页面上的标签已经全部变成DOM对象')})<!--html553373508155:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>oneObject(str | array, val?)</td>  <td><!--html290875159204-->★★★如果传入一个字符串则将它以逗号转换为一个字符串数组，否则一定要传字符串数组，第二个参数可选，为生成的对象的值。此方法是用于生成一个键名不一样，但键值都一样的对象。比如<br>avalon.oneObject('a,b,c,d') ==&gt; {a:1, b:1, c:1, d:1}<!--html290875159204:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>type(obj)</td>  <td><!--html23676621914-->★★★返回传参的数据类型，值可能为array, date, object, json, number, string, null, undefined，比如<br>avalon.type('aaa') ==&gt; 'string' <br>avalon.type(12345) ==&gt; 'number' <br>avalon.type(null) ==&gt; 'null' <br>avalon.type(void 0) ==&gt; 'undefined' <br>avalon.type(window) ==&gt; 'object' <br>avalon.type([1,2,3]) ==&gt; 'array'<!--html23676621914:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>isWindow(obj)</td>  <td><!--html913027923554-->判定是否为window对象<!--html913027923554:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>isPlainObject(obj)</td>  <td><!--html081745747477-->判定是否是一个朴素的javascript对象（Object），不是DOM对象，不是BOM对象，不是自定义类的实例<!--html081745747477:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>slice(obj, start?, end?)</td>  <td><!--html503249611706-->用于转换一个类数组对象为一个纯数组，后面两个为索引值，可以只取原对象的一部分元素，比如<br>avalon.slice(document.getElementsByTagName('p'), 10)<br>avalon.slice(arguments)<!--html503249611706:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>range(start, end, step)</td>  <td><!--html344046980143-->生成一个整数数组，功能与underscorejs或python的同名函数一致，比如<br>avalon.range(10) ==&gt;  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] <br>avalon.range(1, 11) ==&gt; [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] <br>avalon.range(0, 30, 5) ==&gt;  [0, 5, 10, 15, 20, 25]<br>avalon.range(0, -10, -1) ==&gt; [0, -1, -2, -3, -4, -5, -6, -7, -8, -9]avalon.range(0) ==&gt; []<!--html344046980143:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>bind(el, type, fn, phase?)</td>  <td><!--html796285111457-->绑定事件，返回一个回调给你自行卸载，比如<br>avalon.bind(document.body, 'keydown', callback)<!--html796285111457:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>unbind(el, type, fn, phase)</td>  <td><!--html236645430326-->卸载事件，比如<br>avalon.unbind(document.body, 'keydown', callback)<!--html236645430326:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>each(obj,fn)</td>  <td><!--html483567599207-->★★★功能同jQuery.each， 都是索引值或键名在前，值或元素在后<!--html483567599207:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>avalon.define(id, factory)</td>  <td><!--html4259403795-->★★★定义一个ViewModel, <br>旧风格： avalon.define('test', function(vm){ vm.aaa = 1})<br>新风格： avalon.define({$id: 'test', aaa: 1})<br>id： 用来定义VM的$id属性<br>factory: 用来收集vm属性并初始化值,并且规定哪些可监控的，哪是需要计算的，哪些是不可监控的<!--html4259403795:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>scan(el?, vmodels?)</td>  <td><!--html248348087072-->★★★扫描DOM树，抽取绑定(el默认为DOM,vmodels默认为空数组<br>avalon默认在domReady时，从body开始扫描一次，以后自己动态添加了新内容，需要自己手动scan。<br>如果你的VM是定义在某个回调里面，如require回调，也需要自己手动扫描<!--html248348087072:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>define(id?, deps?, factory)</td>  <td><!--html968652278185-->●一个全局方法，用于定义AMD规范的JS模块<!--html968652278185:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>require(deps, callback)</td>  <td><!--html632693301886-->●一个全局方法，用于加载JS模块<!--html632693301886:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>css(node, name, value?)</td>  <td><!--html231007341295-->如果只有两个参数，读取元素的某个样式，三个参数时，设置元素某个样式;<br>在设置样式时,如果是长宽等计量属性,你可以直接传一个数值,框架会自动帮你添加px单位;<br>如果是取值时,你的第三个参数是true,它会帮你去掉单位,转换为纯数值<!--html231007341295:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>nextTick(fn)</td>  <td><!--html042424794286-->延迟执行某个函数，类似于setTimeout(fn, 0)<!--html042424794286:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>contains(a, b)</td>  <td><!--html81621453166-->判定A元素包含B元素，比如<br>avalon.contains(document.documentElement, document.body) ==&gt; true<!--html81621453166:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>parseHTML(str)</td>  <td><!--html095074482262-->将一段字符串转换为文档碎片<!--html095074482262:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>innerHTML(node, str)</td>  <td><!--html290595326573-->对节点node进行innerHTML操作，在旧式IE下，head, table, td, tr, th等元素的innerHTML是只读，这个方法进行了兼容处理<!--html290595326573:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>clearHTML(node)</td>  <td><!--html90012941882-->清空元素的所有子节点<!--html90012941882:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>Array.remove(array, el)</td>  <td><!--html706986404955-->移除某个元素，成功返回true，失败返回false<!--html706986404955:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>Array.removeAt(array, index)</td>  <td><!--html4966149106622-->移除某个位置上的元素，成功返回true，失败返回false<!--html4966149106622:end--></td>
+    </tr><!--repeat858730260283--><tr>
+        <td>Array.ensure(array, el)</td>  <td><!--html861054725945-->只有数组不存在此元素时才添加它<!--html861054725945:end--></td>
+    </tr><!--repeat858730260283--><!--repeat858730260283:end-->
+    </tbody></table>

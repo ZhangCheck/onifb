@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>series（饼图）</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h3 class="table-doc-title">series（饼图）使用说明</h3>
+    <p>json数据中的series中的参数使用说明如下：</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> center </td>
+            <td> ['50%', '50%'] </td>
+            <td> 圆心坐标，支持绝对值（px）和百分比，百分比计算min(width, height) * 50% </td>
+        </tr>
+        <tr>
+            <td> <b>{number | Array}</b> radius </td>
+            <td> [0, '75%'] </td>
+            <td> 半径，支持绝对值（px）和百分比，百分比计算比，min(width, height) / 2 * 75%， 传数组实现环形图，[内半径，外半径] </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> startAngle </td>
+            <td> 90 </td>
+            <td> 开始角度, 饼图（90）、仪表盘（225），有效输入范围：[-360,360]</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> minAngle </td>
+            <td> 0 </td>
+            <td> 最小角度，可用于防止某item的值过小而影响交互 </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> clockWise </td>
+            <td> true </td>
+            <td> 显示是否顺时针 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> roseType </td>
+            <td> null </td>
+            <td> 南丁格尔玫瑰图模式，'radius'（半径） | 'area'（面积）</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> selectedOffset </td>
+            <td> 10 </td>
+            <td> 选中是扇区偏移量 </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean | string}</b> selectedMode </td>
+            <td> null </td>
+            <td> 选中模式，默认关闭，可选single，multiple </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> legendHoverLink </td>
+            <td> true </td>
+            <td> 是否启用图例（legend）hover时的联动响应（高亮显示） </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

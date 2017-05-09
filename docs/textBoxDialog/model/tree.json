@@ -1,0 +1,10 @@
+{
+  "defalultValue":[{"code":"112","value":"刑事案件"},{"code":"113","value":"抢劫"}],
+  "zNodes":[
+    { "id":1, "pid":0,"code":"112","name":"刑事案件", "open":true},
+    { "id":11, "pid":1,"code":"113", "name":"抢劫"},
+    { "id":111, "pid":11,"code":"115","name":"拦路抢劫"},
+    { "id":111, "pid":1,"code":"114", "name":"杀人"},
+    { "id":1111, "pid":111,"code":"116", "name":"分尸"}
+  ]
+}

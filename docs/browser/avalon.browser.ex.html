@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>cookie组件</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        <script src="../avalon.js">
+
+        </script>
+        <script src="../highlight/shCore.js">
+
+        </script>
+        <style >
+            .cookieerror input{
+                border:1px  solid red;
+                background: orangered;
+            }
+            ul{
+                margin: 10px 0 30px;
+            }
+        </style>
+        <script>
+            require(["browser/avalon.browser"], function(avalon) {
+                var a = avalon.define("test", function(vm) {
+                    vm.browser = avalon.browser
+                    vm.engine = avalon.engine
+                    vm.platform = avalon.platform
+                })
+
+                avalon.scan()
+            })
+        </script>
+    </head>
+    <body>
+        <div ms-controller="test">
+            <div>操作系统</div>
+            <ul style="list-style-type:circle">
+                <li ms-repeat="platform" >{{$key}}:{{$val}}</li>
+            </ul>
+            <div>浏览器</div>
+            <ul  >
+                <li ms-repeat="browser" >{{$key}}:{{$val}}</li>
+            </ul>
+            <div>渲染引擎</div>
+            <ul style="list-style-type:square">
+                <li ms-repeat="engine"  >{{$key}}:{{$val}}</li>
+            </ul>
+        </div>
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;cookie组件&lt;/title&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+        &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;../style/avalon.doc.css&quot;&gt;
+        &lt;script src=&quot;../avalon.js&quot;&gt;
+
+        &lt;/script&gt;
+        &lt;script src=&quot;../highlight/shCore.js&quot;&gt;
+
+        &lt;/script&gt;
+        &lt;style &gt;
+            .cookieerror input{
+                border:1px  solid red;
+                background: orangered;
+            }
+            ul{
+                margin: 10px 0 30px;
+            }
+        &lt;/style&gt;
+        &lt;script&gt;
+            require([&quot;browser/avalon.browser&quot;], function(avalon) {
+                var a = avalon.define(&quot;test&quot;, function(vm) {
+                    vm.browser = avalon.browser
+                    vm.engine = avalon.engine
+                    vm.platform = avalon.platform
+                })
+
+                avalon.scan()
+            })
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div ms-controller=&quot;test&quot;&gt;
+            &lt;div&gt;操作系统&lt;/div&gt;
+            &lt;ul style=&quot;list-style-type:circle&quot;&gt;
+                &lt;li ms-repeat=&quot;platform&quot; &gt;{{$key}}:{{$val}}&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;div&gt;浏览器&lt;/div&gt;
+            &lt;ul  &gt;
+                &lt;li ms-repeat=&quot;browser&quot; &gt;{{$key}}:{{$val}}&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;div&gt;渲染引擎&lt;/div&gt;
+            &lt;ul style=&quot;list-style-type:square&quot;&gt;
+                &lt;li ms-repeat=&quot;engine&quot;  &gt;{{$key}}:{{$val}}&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+    </body>
+</html>

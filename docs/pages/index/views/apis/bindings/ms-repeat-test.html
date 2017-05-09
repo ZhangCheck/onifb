@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>li{margin-left:10px;}</style>
+</head>
+<body style="overflow: hidden;">
+<div class="mtLg mlLg" ms-controller="repeatTest" id="testUnit">
+    <div>对象测试:</div>
+    <ul>
+        <li ms-repeat="testObj">{{$val}}</li>
+    </ul>
+     <div>数组测试:</div>
+    <ul>
+        <li ms-repeat-arr="testArr">{{arr}}</li>
+    </ul>
+    <div>含有对象的数组测试:</div>
+    <ul ms-repeat-ul="testArrObj">
+        <li ms-repeat="ul">{{$val}}</li>
+    </ul>
+    <button ms-widget="button" ms-click="onClick()">change</button> 
+</div>
+<script src="../../../../../require.js"></script>
+<script>//@ sourceURL=ms-repeat.html
+require.config({
+    baseUrl:'../../../../../',
+    paths:{
+        avalon: 'avalon.shim',
+        echarts: 'echarts',
+        domReady:'domReady',
+        fb:"avalon.fb"
+    },
+    map:{
+        '*':{
+            'css':'require.css',
+            'text':'require.text'
+        }
+    },
+    shim:{
+        avalon: { exports: "avalon" },
+        echarts:{exports:"echarts"}
+    }
+});
+require(["avalon.fb","button/avalon.button"],function(){
+    var vm = avalon.define({
+        $id:"repeatTest",
+        testObj:{a:'a',b:'b',c:'c'},
+        testArr:['a','b','c'],
+        testArrObj:[{a:'a',b:'b',c:'c'}],
+        onClick:function(){
+            vm.testObj = {b:'bb',a:'aa',c:'cc'}
+            vm.testArr = ["bb","aa","cc"]
+            vm.testArrObj = [{b:'bb',a:'aa',c:'cc'}]
+        }
+    })
+    avalon.scan($("#testUnit").get(0))
+})
+//@ sourceURL=ms-repeat.html
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+/*
+这是每个都组件都应该引用的部分
+*/
+.oni-multilevel-level:not(:first-child):before {
+  content: '-'; }
+
+/*# sourceMappingURL=avalon.multilevel.css.map */

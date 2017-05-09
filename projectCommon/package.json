@@ -1,0 +1,12 @@
+{
+  "name": "fbProject",
+  "version": "0.1.0",
+  "author": "@CHECK",
+  "homepage": "",
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.3.17",
+  }
+}

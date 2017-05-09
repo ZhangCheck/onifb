@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../require.js"></script>
+    <script>
+        require.config({
+            baseUrl:'js',
+            paths:{
+                avalon:'fb_lib/avalon.shim',
+                echarts: 'fb_lib/echarts',
+                domReady:'fb_lib/domReady'
+            },
+            map:{
+                '*':{
+                    'css':'fb_lib/require.css',
+                    'text':'fb_lib/require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+
+        require(["fb_lib/echarts.fb","echarts/chart/bar","echarts/chart/line","css!../css/echarts.css",'mf_webNavigator/mf_module'],function(fb){
+            var vm = avalon.define({
+                $id:"infoShowxxth",
+                test:"哈哈",
+                $mfOpt:{},
+                $barOptions:{
+                    timeline:{
+                        controlStyle:{
+                            normal : {
+                                color : '#48D1CC'
+                            },
+                            emphasis : {
+                                color : '#1e90ff'
+                            }
+                        },
+                        lineStyle:{
+                            color:'#48D1CC'
+                        },
+                        data:[],
+                        label:{
+                            formatter : function(time) {
+                                var month=parseInt(time.substr(5,2));
+                                var day=parseInt(time.substr(8,2));
+                                return month+'月'+day+'日';
+                            }
+                        },
+                        autoPlay : false,
+                        playInterval : 2000
+                    },
+                    options:[
+                        {
+//                    title : {
+//                        padding: 1,
+//                        'text':'各警种办理事项分析'
+//                    },
+                            tooltip : {
+                                'trigger':'axis'
+                            },
+                            toolbox : {
+                                'show':false
+                            },
+                            calculable : false,
+                            grid: {
+                                borderWidth: 0
+                            },
+                            xAxis : [{
+                                type:'category',
+                                //name:'警种',
+                                splitLine: {
+                                    show: false
+                                },
+                                axisTick : {
+                                    interval: 0
+                                },
+                                axisLabel:{
+                                    show: true,
+                                    boundaryGap : true,
+                                    interval: 0,
+                                    margin: 2,
+                                    textStyle: {
+                                        color: 'black'
+                                    }
+                                },
+                                data:[]
+                            }],
+                            yAxis : [
+                                {
+                                    type: 'value',
+                                    //name: '预警数',
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    axisLabel: {
+                                        show: true,
+                                        interval: 'auto',
+                                        textStyle: {
+                                            color: 'black'
+                                        }
+                                    }
+                                }
+                            ],
+                            series : [
+                                {
+                                    name: '预警数',
+                                    type: 'bar',
+                                    itemStyle:{
+                                        normal:{
+                                            color:function(value){
+                                                var colorList = [
+                                                    '#FF3030','#CDCD00','#EEC900',
+                                                    '#CD8500','#668B8B','#CD7054'
+                                                ];
+                                                return colorList[value.dataIndex%colorList.length];
+                                            }
+                                        }
+                                    },
+                                    barCategoryGap:'40',
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        },
+                        {
+                            series : [
+                                {
+                                    data: []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            });
+
+            fb.requestJson(/**@type fb.InterfaceStruct**/{
+                remoteUrl:"echarts_bar_model.json",
+                localUrl:"echarts_bar_model.json",
+                success:function(data){
+                    var result=data.rows;
+                    var xz=new Array();
+                    var yz1=new Array();
+                    var yz2=new Array();
+                    var yz3=new Array();
+                    var yz4=new Array();
+                    var yz5=new Array();
+                    var yz6=new Array();
+                    var yz7=new Array();
+                    var time_arr;
+
+                    for(var i=0;i<result.length;i++){
+                        xz.push(result[i].name);
+                        yz1.push(result[i].value1);
+                        yz2.push(result[i].value2);
+                        yz3.push(result[i].value3);
+                        yz4.push(result[i].value4);
+                        yz5.push(result[i].value5);
+                        yz6.push(result[i].value6);
+                        yz7.push(result[i].value7);
+                    }
+                    time_arr=[result[0].time1,result[0].time2,result[0].time3,result[0].time4,result[0].time5,result[0].time6,result[0].time7];
+
+                    myChart = echarts.init(document.getElementById('bar'));
+
+                    vm.$barOptions.timeline.data=time_arr;
+                    vm.$barOptions.options[0].xAxis[0].data=xz;
+                    vm.$barOptions.options[0].series[0].data=yz1;
+                    vm.$barOptions.options[1].series[0].data=yz2;
+                    vm.$barOptions.options[2].series[0].data=yz3;
+                    vm.$barOptions.options[3].series[0].data=yz4;
+                    vm.$barOptions.options[4].series[0].data=yz5;
+                    vm.$barOptions.options[5].series[0].data=yz6;
+                    vm.$barOptions.options[6].series[0].data=yz7;
+
+                    myChart.setOption(vm.$barOptions);
+
+                    window.onresize=function (){
+                        myChart.resize();
+                    };
+                }
+            });
+
+            avalon.scan();
+        })
+    </script>
+
+
+</head>
+
+<body>
+    <div ms-controller="infoShowxxth">
+    <div  class="div-ulzss">
+        <table class="mb-tablezss">
+            <tbody>
+            <tr class="first-trzss">
+                <td style="width:10px;"></td>
+                <td style="border-top:1px solid #dddddd;border-bottom:1px solid #dddddd;">
+                    <div ms-widget="mf_webNavigator,mf,$mfOpt" class="address"></div>
+                </td>
+            </tr>
+            <tr class="second-trzss">
+                <td style="width:10px;"></td>
+                <td style="vertical-align: top;border-bottom:1px solid #dddddd;">
+                    <div id="bar" class="chart_bar"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

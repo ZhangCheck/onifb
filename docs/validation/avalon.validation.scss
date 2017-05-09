@@ -1,0 +1,33 @@
+@import "../chameleon/oniui-theme";
+
+.error{
+  border:1px  solid red;
+}
+.success{
+  border:1px  solid greenyellow;
+}
+.error-tip{
+  color: red;
+  background:pink;
+  margin-left: 10px;
+  padding: 8px;
+  display: inline-block;
+  border-radius: $ui-input-radius;
+}
+p input,label input,form input[type='password'],form input[type='text']{
+  padding: $ui-input-paddingTB $ui-input-paddingLR;
+  line-height: 18px;
+  border: $ui-input-borderC;
+  border/*\**/: $ui-input-borderC-ie \9;
+  border-radius: $ui-input-radius;
+  outline:none
+}
+input[type='password']:focus, input[type='text']:focus, input:focus {
+  border: 1px solid $ui-state-focus-border-color;
+}
+
+.oni-dropdown .error-tip {
+  margin-right: -110px;
+  float: right;
+  margin-top: -38px;
+}

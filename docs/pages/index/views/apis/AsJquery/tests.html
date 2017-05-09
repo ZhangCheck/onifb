@@ -1,0 +1,201 @@
+<h1>AsJquery（属于avalon.fb） 测试和样例</h1>
+(本页面已在模拟IE8下测试通过）
+<style>
+    .testClass{
+        color:red;
+    }
+    pre{
+        display:inline-block;
+    }
+
+    h3{
+        margin-top:20px;
+        padding-bottom:6px;
+        border-bottom:1px solid #dbdbdb;
+        margin-bottom: 6px;
+    }
+</style>
+
+<div ms-controller="aqTest" id="aqTest">
+    <h3>一，dom元素创建</h3>
+    <div><span id="test1">test1</span></div>
+    <div>
+        <button ms-click="create">新建dom</button> <pre>$('&lt;span&gt;new dom&lt;/span&gt;').appendTo('#test1');</pre>
+    </div>
+
+    <h3>二，$ 选择器</h3>
+    <div id="test1_1"><span class="t-test">selector</span></div>
+    <div>
+        <button ms-click="selector">$('#test1_1>.t-test')</button> <pre>alert("该选择器共找到："+$('#test1_1&gt;.t-test').length+"个元素");</pre>
+    </div>
+
+    <h3>三，css class操作</h3>
+    <div><span id="test2">test2</span></div>
+    <div>
+        <button ms-click="addClass">addClass(className)</button> <pre>$('#test2').addClass("testClass");</pre>
+    </div>
+    <div>
+        <button ms-click="removeClass">removeClass(className)</button> <pre>$('#test2').removeClass("testClass");</pre>
+    </div>
+    <div>
+        <button ms-click="toggleClass">toggleClass(className)</button> <pre>$('#test2').toggleClass("testClass");</pre>
+    </div>
+    <div>
+        <button ms-click="hasClass">hasClass(className)</button> <pre>alert($('#test2').hasClass('testClass'));</pre>
+    </div>
+
+    <h3>四，css 样式操作</h3>
+    <div><span id="test3">test3</span></div>
+    <div>
+        <button ms-click="css1">css(name,value)</button> <pre>$('#test3').css('color','green');</pre>
+    </div>
+    <div>
+        <button ms-click="css2">css(obj)</button> <pre>$('#test3').css({color:'red','font-size':'20px'})</pre>
+    </div>
+
+
+    <h3>五，Dom 节点操作</h3>
+    <div class="t-parent"><span id="test4"><span class="t-child">test4</span></span></div>
+    <div>
+        <button ms-click="length">length</button> <pre>alert("取得了元素个数:"+$('test4').length);</pre>
+    </div>
+    <div>
+        <button ms-click="hide">hide()</button> <pre>$('#test4').hide();</pre>
+    </div>
+    <div>
+        <button ms-click="show">show()</button> <pre>$('#test4').show();</pre>
+    </div>
+
+    <div>
+        <button ms-click="get">get(0)</button> <pre>var dom = $('#test4').get(0);</pre>
+    </div>
+    <div>
+        <button ms-click="eq">eq(0)</button> <pre>var $dom = $('#test4').eq(0);</pre>
+    </div>
+    <div>
+        <button ms-click="attr">attr()</button> <pre>$('#test4').attr({"ttt":"kkk"});alert("已经给test4添加了属性ttt,值为kkk");</pre>
+    </div>
+    <div>
+        <button ms-click="html">html()</button> <pre>$('#test4').html("<span>html</span>")'</pre>
+    </div>
+    <div>
+        <button ms-click="parent">parent()</button> <pre>$('#test4').parent()</pre>
+    </div>
+    <div>
+        <button ms-click="find">find(selector)</button> <pre>var tChildren = $('#test4').find('.t-child');</pre>
+    </div>
+    <div>
+        <button ms-click="empty">empty()</button> <pre>$('#test4').empty();</pre>
+    </div>
+
+    <div>
+        <button ms-click="width">width()</button> <pre>alert("获取宽度:"+$('#test4').width());</pre>
+    </div>
+    <div>
+        <button ms-click="height">height()</button> <pre>alert("获取高度:"+$('#test4').height());</pre>
+    </div>
+    <div>
+        <button ms-click="bind">bind(event,callback)</button>
+        <pre>$('#test4').bind('click',vm.onClick).get(0).innerHTML="click me";</pre>
+    </div>
+    <div>
+        <button ms-click="unbind">unbind(event,callback)</button> <pre>$('#test4').unbind('click',vm.onClick).get(0).innerHTML="have unbind, click me.";</pre>
+    </div>
+    <div>
+        <button ms-click="remove">remove()</button> <pre>$('#test4').remove();</pre>
+    </div>
+    <div>
+        <button ms-click="append">append()</button> <pre>$('#test4').append($('<div>newDom</div>'));</pre>
+    </div>
+    <div>
+        <button ms-click="appendTo">appendTo()</button> <pre>$('<div>newDom</div>').appendTo($('#test4'));</pre>
+    </div>
+</div>
+<script>//@ URL=pages/index/views/apis/AsJquery/tests.html
+require(["avalon.fb"],function(){
+    var vm = avalon.define({
+        $id:'aqTest',
+        create:function(){
+            $('<span>new dom</span>').appendTo('#test1');
+        },
+        selector:function(){
+            alert("该选择器共找到："+$('#test1_1>.t-test').length+"个元素");
+        },
+        addClass:function(){
+            $('#test2').addClass("testClass");
+        },
+        removeClass:function(){
+            $('#test2').removeClass('testClass');
+        },
+        toggleClass:function(){
+            $('#test2').toggleClass('testClass');
+        },
+        hasClass:function(){
+            alert($('#test2').hasClass('testClass'));
+        },
+        css1:function(){
+            $('#test3').css('color','green');
+        },
+        css2:function(){
+            $('#test3').css({color:'red','font-size':'20px'})
+        },
+        length:function(){
+            alert("元素个数是: "+$('#test4').length);
+        },
+        show:function(){
+            $('#test4').show();
+        },
+        hide:function(){
+            $('#test4').hide();
+        },
+        get:function(){
+            alert("取得了第0个dom元素:"+$('#test4').get(0).outerHTML);
+        },
+        eq:function(){
+            var $dom = $('#test4').eq(0);
+            alert("取得了第0个dom元素，类型为AsJquery");
+        },
+        attr:function(){
+            $('#test4').attr({"ttt":"kkk"});alert("已经给test4添加了属性ttt,值为kkk");
+        },
+        html:function(){
+            $('#test4').html("<span>html</span>");
+        },
+        outerHTML:function(){
+            alert("outerHTML是："+$('#test4').get(0).outerHTML);
+        },
+        parent:function(){
+            var $p = $('#test4').parent();
+            alert("取得了父元素："+$p.get(0).outerHTML)
+        },
+        find:function(){
+            var $c = $('#test4').find('.t-child');
+            alert("取得了子元素："+$c.length+"个");
+        },
+        empty:function(){
+            $('#test4').empty();
+        },
+        bind:function(){
+            $('#test4').bind('click',vm.onClick).get(0).innerHTML="click me";
+        },
+        unbind:function(){
+            $('#test4').unbind('click',vm.onClick).get(0).innerHTML="have unbind, click me.";
+        },
+        onClick:function(){
+            $(this).get(0).innerHTML="good,clicked";
+        },
+        remove:function(){
+            $('#test4').remove();
+        },
+        append:function(){
+             $('#test4').append($('<div>newDom</div>'));
+         },
+        appendTo:function(){
+            $('<div>newDom</div>').appendTo($('#test4'));
+        }
+
+    });
+    avalon.scan($('aqTest').get(0));
+})
+//@ URL=pages/index/views/apis/AsJquery/tests.html
+</script>

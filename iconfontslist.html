@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @font-face {
+            font-family: 'icomoon';
+            src: url("fonts/icomoon.eot?4y8jt2");
+            src: url("fonts/icomoon.eot?4y8jt2#iefix") format("embedded-opentype"), url("fonts/icomoon.ttf?4y8jt2") format("truetype"), url("fonts/icomoon.woff?4y8jt2") format("woff"), url("fonts/icomoon.svg?4y8jt2#icomoon") format("svg");
+            font-weight: normal;
+            font-style: normal; }
+        [class^="oni-icon-"], [class*=" oni-icon-"] {
+            /* use !important to prevent issues with browser extensions that change fonts */
+            font-family: 'icomoon' !important;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            /* Better Font Rendering =========== */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale; }
+
+        .oni-icon-left:before {
+            content: "\1f491"; }
+
+        .oni-icon-angle-down:before {
+            content: "\e901"; }
+
+        .oni-icon-right:before {
+            content: "\e902"; }
+
+        .oni-icon-angle-up:before {
+            content: "\e903"; }
+
+        .oni-icon-caret-right:before {
+            content: "\e904"; }
+
+        .oni-icon-calendar-o:before {
+            content: "\e905"; }
+
+        .oni-icon-file-empty:before {
+            content: "\e906";
+            color: #3775c0; }
+
+        .oni-icon-folder-open:before {
+            content: "\e907";
+            color: #7ca3bf; }
+
+        .oni-icon-folder-close:before {
+            content: "\e908";
+            color: #7ca3bf; }
+
+        .oni-icon-list:before {
+            content: "\e909";
+            color: #7ca3bf; }
+
+        .oni-icon-minus:before {
+            content: "\e90a"; }
+
+        .oni-icon-plus:before {
+            content: "\e90b"; }
+
+        .oni-icon-caret-down:before {
+            content: "\e90c"; }
+
+        .oni-icon-center:before {
+            content: "\e90d"; }
+
+        .oni-icon-pause2:before {
+            content: "\e90e"; }
+
+        .oni-icon-stop2:before {
+            content: "\e90f"; }
+
+        .oni-icon-cancel-circle:before {
+            content: "\e900"; }
+       /* .oni-icon-caret-right:before{
+            content:"\f040";
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            cursor: default;
+            font-family: fontawesome !important;
+            font-size: 20px;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 18px;
+            vertical-align: middle;
+        }*/
+       .main{
+           font-size: 16px;
+           width: 1100px;
+           height: 500px;
+           background:#00d6b2;
+           margin-left: 15%;
+       }
+        li{
+            float: left;
+            list-style: none;
+            width: 260px;
+            height: 30px;
+        }
+
+    </style>
+</head>
+<body>
+<!--右<i class="oni-icon-caret-right"></i>
+下<i class="oni-icon oni-icon-caret-down">&#xf033;</i>
+按钮<i class="oni-icon oni-icon-center">&#xf038;</i>
+按钮左<i class="oni-icon oni-icon-left">&#xf047;</i>&#xe903
+按钮右<i class="oni-icon oni-icon-right">&#xf03e;</i>
+日期：<i class='oni-icon oni-icon-calendar-o'>&#xf088;</i>
+日期上<i class="oni-datepicker-icon oni-icon oni-icon-angle-up">&#xf028;</i>
+日期下<i class="oni-datepicker-icon oni-icon oni-icon-angle-down">&#xf032;</i>
+&lt;!&ndash;按钮<i class="oni-icon g-icon-start">&#xf04c;</i>&ndash;&gt;
+加号<i class="oni-icon oni-icon-plus">&#xf016;</i>
+减号<i class="oni-icon oni-icon-minus">&#xf085;</i>
+<i class="oni-icon oni-icon-plug">&#xf1e6;</i>
+<i class="oni-icon-angle-down"></i>-->
+<div class="main">
+
+    <h1 class="mvm mtn fgc1">FontIcon List</h1>
+    <div class="bgc1 clearfix">
+        <h3 class="mhmm mvm"><span class="fgc1">Font Name:</span> icomoon <small class="fgc1">(Glyphs:&nbsp;11)</small></h3>
+    </div>
+    <ul>
+        <li>右<i class="oni-icon-caret-right"></i>oni-icon-caret-right</li>
+        <li>下<i class="oni-icon oni-icon-caret-down"></i>oni-icon-caret-down</li>
+        <li>按钮星<i class="oni-icon oni-icon-center"></i>oni-icon-center</li>
+        <li>按钮左<i class="oni-icon oni-icon-left"></i>oni-icon-left</li>
+        <li>按钮右<i class="oni-icon oni-icon-right"></i>oni-icon-right</li>
+        <li>日期<i class='oni-icon oni-icon-calendar-o'></i>oni-icon-calendar-o</li>
+        <li>日期上<i class="oni-datepicker-icon oni-icon oni-icon-angle-up"></i>oni-icon-angle-up</li>
+        <li>日期下<i class="oni-datepicker-icon oni-icon oni-icon-angle-down"></i>oni-icon-angle-down</li>
+        <li>加号<i class="oni-icon oni-icon-plus"></i>oni-icon-plus</li>
+        <li>减号<i class="oni-icon oni-icon-minus"></i>oni-icon-minus</li>
+        <li>播放<i class="oni-icon oni-icon-pause2"></i>oni-icon-pause2</li>
+        <li>暂停<i class="oni-icon oni-icon-stop2"></i>oni-icon-stop2</li>
+        <li>闭合包<i class="oni-icon oni-icon-folder-close"></i>oni-icon-folder-close</li>
+        <li>打开包<i class="oni-icon oni-icon-folder-open"></i>oni-icon-folder-open</li>
+        <li>文件<i class="oni-icon oni-icon-file-empty"></i>oni-icon-file-empty</li>
+        <li>点击弹出框<i class="oni-icon oni-icon-list"></i>oni-icon-list</li>
+        <li>文件<i class="oni-icon oni-icon-cancel-circle"></i>oni-icon-cancel-circle</li>
+    </ul>
+</div>
+
+</body>
+</html>

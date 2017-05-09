@@ -1,0 +1,14 @@
+{
+  "rows":[
+    { "name":"女性","height":162.1,"weight":51.6},
+    { "name":"女性","height":167.5,"weight":59.0},
+    { "name":"女性","height":172.5,"weight":55.2},
+    { "name":"女性","height":175.0,"weight":73.2},
+    { "name":"女性","height":179.9,"weight":67.3},
+    { "name":"男性","height":174.0,"weight":65.6},
+    { "name":"男性","height":175.3,"weight":71.8},
+    { "name":"男性","height":193.5,"weight":80.7},
+    { "name":"男性","height":184.5,"weight":78.4},
+    { "name":"男性","height":192.0,"weight":90.0}
+  ]
+}

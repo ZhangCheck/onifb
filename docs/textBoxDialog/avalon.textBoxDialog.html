@@ -1,0 +1,15 @@
+<!--考虑到文本弹窗一个页面多用-->
+<div class="oni-textBoxDialog" ms-class-1="{{buttonPos}}" ms-css-width="{{width}}">
+    <input ms-widget="textbox,textbox-###,textBoxOpts-###" data-textbox-width="100%" ms-duplex="selectedValue"/>
+    <input type="hidden" ms-duplex="selectedCode"/>
+    <!--<button type="button" ms-class="{{iconPosition}} oni-textBoxDialog-button" ms-widget="button,button-###"  ms-click="showTextBoxDialog('textBoxDialog-###')">-->
+        <!--<span class="oni-textBoxDialog-icon oni-icon oni-icon-list"></span>-->
+    <!--</button>-->
+    <button type="button"  class="oni-textBoxDialog-button" ms-click="showTextBoxDialog('textBoxDialog-###')">
+        <i class="oni-textBoxDialog-icon oni-icon oni-icon-list"></i>
+    </button>
+    <div ms-widget="dialog,textBoxDialog-###,textBoxDialogOpts-###">
+       <div ms-include-src="{{fileTemplateFun()}}"></div>
+        XXXXXXXXXXXXXXXXXXXX
+    </div>
+</div>

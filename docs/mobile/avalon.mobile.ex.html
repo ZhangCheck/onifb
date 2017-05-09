@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mobile组件</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="../require.js"></script>
+</head>
+
+<body ms-controller="exampleCtl" style="padding:40px;box-sizing: border-box;">
+<h1>mobile组件示例</h1>
+<div ms-widget="mobile" data-mobile-src="http://m.baidu.com"></div>
+<script>
+    require.config({
+        baseUrl:'../',
+        paths:{
+            avalon: 'avalon.shim',
+            echarts: 'echarts',
+            domReady:'domReady',
+            fb:"avalon.fb"
+        },
+        map:{
+            '*':{
+                'css':'require.css',
+                'text':'require.text'
+            }
+        },
+        shim:{
+            avalon: { exports: "avalon" },
+            echarts:{exports:"echarts"}
+        }
+    });
+
+    require(["./mobile/avalon.mobile","css!style/avalon.doc.css"], function () {
+        var vm = avalon.define({
+            $id:"exampleCtl"
+        })
+        avalon.scan();
+    });
+</script>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;mobile组件&lt;/title&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+    &lt;script src=&quot;../require.js&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        body #jim-case #jim-case-top-left {
+            background-image: url(&#39;../../projectCommon/mobileImg/lt.png&#39;);
+        }
+        body #jim-case #jim-case-top-center {
+            background: url(&#39;../../projectCommon/mobileImg/tc.png&#39;) repeat-x scroll 0 0 transparent;
+        }
+        body #jim-case #jim-case-top-right {
+            background-image: url(&#39;../../projectCommon/mobileImg/rt.png&#39;);
+        }
+        body #jim-case #jim-case-center-left {
+            background: url(&#39;../../projectCommon/mobileImg/cl.png&#39;) repeat-y scroll 0 0 transparent;
+        }
+        body #jim-case #jim-case-center-right {
+            background: url(&#39;../../projectCommon/mobileImg/cr.png&#39;) repeat-y scroll 0 0 transparent;
+        }
+        body #jim-case #jim-case-bottom-left {
+            background-image: url(&#39;../../projectCommon/mobileImg/bl.png&#39;);
+        }
+        body #jim-case #jim-case-bottom-center {
+            background: url(&#39;../../projectCommon/mobileImg/bc.png&#39;) repeat-x scroll 0 0 transparent;
+        }
+        body #jim-case #jim-case-bottom-right {
+            background-image: url(&#39;../../projectCommon/mobileImg/br.png&#39;);
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body ms-controller=&quot;exampleCtl&quot; style=&quot;padding:40px;box-sizing: border-box;&quot;&gt;
+&lt;h1&gt;avalon.mobile示例&lt;/h1&gt;
+&lt;div ms-widget=&quot;mobile&quot; data-mobile-src=&quot;http://m.baidu.com&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+    require.config({
+        baseUrl:&#39;../&#39;,
+        paths:{
+            avalon: &#39;avalon.shim&#39;,
+            echarts: &#39;echarts&#39;,
+            domReady:&#39;domReady&#39;,
+            fb:&quot;avalon.fb&quot;
+        },
+        map:{
+            &#39;*&#39;:{
+                &#39;css&#39;:&#39;require.css&#39;,
+                &#39;text&#39;:&#39;require.text&#39;
+            }
+        },
+        shim:{
+            avalon: { exports: &quot;avalon&quot; },
+            echarts:{exports:&quot;echarts&quot;}
+        }
+    });
+
+    require([&quot;./mobile/avalon.mobile&quot;,&quot;css!style/avalon.doc.css&quot;], function () {
+        var vm = avalon.define({
+            $id:&quot;exampleCtl&quot;
+        })
+        avalon.scan();
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</body>
+</html>

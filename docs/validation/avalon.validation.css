@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/*
+这是每个都组件都应该引用的部分
+*/
+.error {
+  border: 1px  solid red; }
+
+.success {
+  border: 1px  solid greenyellow; }
+
+.error-tip {
+  color: red;
+  background: pink;
+  margin-left: 10px;
+  padding: 8px;
+  display: inline-block;
+  border-radius: 4px; }
+
+p input, label input, form input[type='password'], form input[type='text'] {
+  padding: 0.67861em 1em;
+  line-height: 18px;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border/*\**/: 1px solid #bdc7d1 \9;
+  border-radius: 4px;
+  outline: none; }
+
+input[type='password']:focus, input[type='text']:focus, input:focus {
+  border: 1px solid #85b7d9; }
+
+.oni-dropdown .error-tip {
+  margin-right: -110px;
+  float: right;
+  margin-top: -38px; }
+
+/*# sourceMappingURL=avalon.validation.css.map */

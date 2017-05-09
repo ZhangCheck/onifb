@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>simplegrid</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        <script src="../require.js"></script>
+        <script src="../highlight/shCore.js"></script>
+        <script>
+            require.config({
+                baseUrl:'../../../../../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+           require(["avalon.fb"], function() {
+                var testVM = avalon.define("outerInclude", function(vm) {
+                    
+                })
+                avalon.scan()
+            })
+        </script>
+    </head>
+    <body ms-controller="outerInclude">
+            <div ms-include-src="'childPage.html'"></div>
+    </body>
+</html>

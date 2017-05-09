@@ -1,0 +1,116 @@
+/**reset**/
+html{
+  font-size: 62.5%;
+  font-family: '微软雅黑';
+}
+body{
+  margin:0;
+}
+a:visited,a:link{
+  text-decoration: none;
+}
+ul{padding:0;margin:0;}
+ul li{list-style-type:none;}
+/*
+html,body{
+  font-size:24px;
+}
+@media all (min-width:375){
+  font-size:(375/720)*24px;
+}*/
+
+
+
+/** justifies **/
+.justifies{width:100%;display: table;}
+.justifies>div{display: table-cell;position:relative;height: 100%;vertical-align: middle;}
+.justifies>div>span,.justifies>div>div{position:relative;}
+.justifies .justifies{padding:0;}
+.justifies>.jf-fixed{width:150px;min-width: 150px;}
+.justifies .jf-bg{position: absolute;bottom: 0;top:0;right: 0;left: 0;}
+.justifies>div.top,.justifies.tops>div{vertical-align: top;}
+.justifies>div.middle,.justifies.middles>div{vertical-align: middle;}
+.justifies>div.bottom,.justifies.bottoms>div{vertical-align: bottom;}
+
+/** inline-block **/
+.ibs>*,.ib{display: inline-block;vertical-align: middle;position: relative;}
+.ibs>.ib-height{height:40px;width:1px;margin-left:-1px;}
+.ibs>*>.ibs-imgMiddle{width:100%;height:100%;display: table-cell;/* position: absolute; */top: 0;vertical-align: middle;text-align: center;left: 0;right: 0;bottom: 0;}
+
+/** justify values **/
+.j1{width:1%}.j2{width:2%}.j3{width:3%}.j4{width:4%}.j5{width:5%}.j6{width:6%}.j7{width:7%}.j8{width:8%}.j9{width:9%}.j10{width:10%}.j11{width:11%}.j12{width:12%}.j13{width:13%}.j14{width:14%}.j15{width:15%}.j16{width:16%}.j17{width:17%}.j18{width:18%}.j9{width:19%}.j20{width:20%}  .j21{width:21%}.j22{width:22%}.j23{width:23%}.j24{width:24%}.j25{width:25%}.j26{width:26%}.j27{width:27%}.j28{width:28%}.j29{width:29%}.j30{width:30%}.j31{width:31%}.j32{width:32%}.j33{width:33%}.j34{width:34%}.j35{width:35%}.j36{width:36%}.j37{width:37%}.j38{width:38%}.j39{width:39%}.j40{width:40%}.j41{width:41%}.j42{width:42%}.j43{width:43%}.j44{width:44%}.j45{width:45%}.j46{width:46%}.j47{width:47%}.j48{width:48%}.j49{width:49%}.j50{width:50%}.j51{width:51%}.j52{width:52%}.j53{width:53%}.j54{width:54%}.j55{width:55%}.j56{width:56%}.j57{width:57%}.j58{width:58%}.j59{width:59%}.j60{width:60%}.j61{width:61%}.j62{width:62%}.j63{width:63%}.j64{width:64%}.j65{width:65%}.j66{width:66%}.j67{width:67%}.j68{width:68%}.j69{width:69%}.j70{width:70%}.j71{width:71%}.j72{width:72%}.j73{width:73%}.j74{width:74%}.j75{width:75%}.j76{width:76%}.j77{width:77%}.j78{width:78%}.j79{width:79%}.j80{width:80%}.j81{width:81%}.j82{width:82%}.j83{width:83%}.j84{width:84%}.j85{width:85%}.j86{width:86%}.j87{width:87%}.j88{width:88%}.j89{width:89%}.j90{width:90%}.j91{width:91%}.j92{width:92%}.j93{width:93%}.j94{width:94%}.j95{width:95%}.j96{width:96%}.j97{width:97%}.j98{width:98%}.j99{width:99%}.j100{width:100%}.v100{height:100%}
+
+/** margin **/
+.mls{margin-left: -4px;margin-right: -4px;}
+.mls>div{margin-left: 4px;margin-right: 4px;}
+.justifies.mls{margin-left: 0;margin-right: 0;}.justifies.mls>div:first-child{padding-left: 0;}.justifies.mls>div{margin-left: 0;padding-left: 3px;padding-right: 2px;}
+.justifies.mls>div>.jf-bg{left: 3px;right:2px;}.justifies.mls>div:first-child>.jf-bg{left:0;}.justifies.mls>div:last-child>.jf-bg{right:0;}
+.justifies.mls>div:last-child{padding-right: 0;}
+.mts{margin-top:-10px;}.mts:first-child{margin-top:0;}.mts>*{margin-top:10px;}.mt{margin-top: 10px}.mtLg{margin-top:20px}.mtSm{margin-top: 5px}.mtSuLg{margin-top:30px}.ml{margin-left:10px}.mlLg{margin-left: 20px;}.mlSm{margin-left: 5px}.mlSuLg{margin-left:30px;}.pd{padding:10px}.pdLg{padding: 20px}.pdSuLg{padding:30px}.pdSm{padding:5px}
+
+/** alignment **/
+.centers>*,.center{text-align: center;}
+.centers>*>*{text-align:left;}
+.centersDiv>*,.centerDiv{display:block;margin-left:auto;margin-right:auto;}
+.middles>*,.middle{vertical-align: middle;}
+.tbMiddles,.ibs>.tbMiddles,.tbMiddle,.tbMiddles>.tbMiddle{display: table-cell;vertical-align: middle}
+.tbMiddles>*{display:inline-block}
+.bottoms>*,.bottom{vertical-align: bottom;}
+
+div[codeCk]{/*background:#f8ddd5;*/box-sizing: border-box; }
+.documentCk a{display:inline-block;margin-left:10px;}
+
+/** fix bootstrap **/
+input[type=checkbox].form-control{padding:0;width: 34px;height: 34px;display: inline-block;vertical-align: middle;margin-right: 10px;margin-top: 0;}
+
+/** bootstrap utils **/
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pull-right {
+  float: right !important;
+}
+.pull-left {
+  float: left !important;
+}
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+.invisible {
+  visibility: hidden;
+}
+.text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.hidden {
+  display: none !important;
+}
+.affix {
+  position: fixed;
+}
+
+.pointers>*,.pointer{
+    cursor:pointer;
+}
+
+/*
+*[ms-controller]{
+  visibility: hidden
+}*/

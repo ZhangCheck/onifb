@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <script src="../avalon.js"></script>
+    <script type="text/javascript">
+        require(["multilevel/avalon.multilevel", "ready!"], function() {
+            avalon.define('main', function(vm) {
+                vm.$opts={
+
+                }
+            });
+            avalon.scan();
+        });
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div ms-controller="main" class="frame">
+        <div class="top">
+            <div ms-widget="multilevel,id1">
+        </div>
+    </div>
+</div>
+</body>
+</html>

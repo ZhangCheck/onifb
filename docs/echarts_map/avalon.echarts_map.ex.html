@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>地图-某省</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/map","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    title: {
+                        text : '江苏省使用iphone6的显示图'
+                    },
+                    tooltip:{
+                        formatter:"{b}:{c}万部"
+                    },
+                    dataRange: {
+                        min: 0,
+                        max: 25,
+                        text:['高','低'],           // 文本，默认为数值文本
+                        calculable : true
+                    },
+                    series:[
+                        {
+                            name:"随机数",
+                            type:"map",
+                            mapType:"江苏",//指定地图显示类型，该值支持的类型在组件库地图的组件说明里有
+                            itemStyle:{
+                                normal:{
+                                    label:{
+                                        show:true
+                                    }
+                                },
+                                emphasis:{
+                                    label:{
+                                        show:true
+                                    }
+                                }
+                            },
+                            data:[]
+                        }
+                    ]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/jiangsu.json",
+                localUrl:"./model/jiangsu.json",
+                success:function(data){
+                    var options=vm.options;
+                    var result=data.rows;
+                    options.series[0].data=result;
+                    var myChart = echarts.init(document.getElementById('map'));
+                    myChart.setOption(options);
+                }
+            });
+
+        });
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="map" style="width: 800px;height: 300px;"></div>
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;地图-某省&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="map" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+            &lt;script&gt;
+               require(["echarts.fb","echarts/chart/map","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                    var vm=avalon.define({
+                        $id:"demo",
+                        show:function(dialog){
+                            avalon.vmodels[dialog].toggle = true;
+                        },
+                        optionsStr:function(){
+                            return JSON.stringify(vm.options);
+                        },
+                        dialog:{
+                            title:"options的json格式"
+                        },
+                        options:{
+                            title: {
+                                text : '江苏省使用iphone6的显示图'
+                            },
+                            tooltip:{
+                                formatter:"{b}:{c}万部"
+                            },
+                            dataRange: {
+                                min: 0,
+                                max: 25,
+                                text:['高','低'],           // 文本，默认为数值文本
+                                calculable : true
+                            },
+                            series:[
+                                {
+                                    name:"随机数",
+                                    type:"map",
+                                    mapType:"江苏",//指定地图显示类型，该值支持的类型在组件库地图的组件说明里有
+                                    itemStyle:{
+                                        normal:{
+                                            label:{
+                                                show:true
+                                            }
+                                        },
+                                        emphasis:{
+                                            label:{
+                                                show:true
+                                            }
+                                        }
+                                    },
+                                    data:[]
+                                }
+                            ]
+                        }
+                    });
+                    avalon.scan();
+
+                    fb.requestJson({
+                        remoteUrl:"./model/jiangsu.json",
+                        localUrl:"./model/jiangsu.json",
+                        success:function(data){
+                            var options=vm.options;
+                            var result=data.rows;
+                            options.series[0].data=result;
+                            var myChart = echarts.init(document.getElementById('map'));
+                            myChart.setOption(options);
+                        }
+                    });
+
+                });
+
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

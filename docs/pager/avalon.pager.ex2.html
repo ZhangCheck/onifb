@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>分页栏组件</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        <script src="../require.js">
+
+        </script>
+        <script src="../highlight/shCore.js">
+
+        </script>
+        <script>
+            require.config({
+                baseUrl:'../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+            require(["pager/avalon.pager"], function() {
+                avalon.define("test", function(vm) {
+                    vm.pager = {
+                        totalItems: 150,
+                        onJump: function(e, data) {
+                            location.href = "#page=" + data.currentPage
+                        }
+                    }
+                    vm.$skipArray = ["pager"]
+                })
+                avalon.scan()
+            })
+        </script>
+    </head>
+    <body ms-controller="test">
+        <h1>指定回调onJump(与例6对照看)</h1>
+        <div ms-widget="pager"></div>
+        <pre class="brush:html;gutter:false;toolbar:false">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;分页栏组件&lt;/title&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width"&gt;
+        &lt;script src="../require.js"&gt;
+
+        &lt;/script&gt;
+        &lt;script&gt;
+            require.config({
+                baseUrl:&#39;../&#39;,
+                paths:{
+                    avalon: &#39;avalon.shim&#39;,
+                    echarts: &#39;echarts&#39;,
+                    domReady:&#39;domReady&#39;,
+                    fb:&quot;avalon.fb&quot;
+                },
+                map:{
+                    &#39;*&#39;:{
+                        &#39;css&#39;:&#39;require.css&#39;,
+                        &#39;text&#39;:&#39;require.text&#39;
+                    }
+                },
+                shim:{
+                    avalon: { exports: &quot;avalon&quot; },
+                    echarts:{exports:&quot;echarts&quot;}
+                }
+            });
+
+            require(["pager/avalon.pager"], function() {
+                avalon.define("test", function(vm) {
+                    vm.pager = {
+                        totalItems: 150,
+                        onJump: function(e, data) {
+                            location.href = "#page=" + data.currentPage
+                        }
+                    }
+                    vm.$skipArray = ["pager"]
+                })
+                avalon.scan()
+            })
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body ms-controller="test"&gt;
+        &lt;h1&gt;指定回调onJump&lt;/h1&gt;
+        &lt;div ms-widget="pager"&gt;&lt;/div&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+    </body>
+</html>

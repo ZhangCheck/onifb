@@ -1,0 +1,94 @@
+@charset "utf-8";
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot?b8jjyz');
+    src:url('../fonts/icomoon.eot?b8jjyz#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?b8jjyz') format('truetype'),
+    url('../fonts/icomoon.woff?b8jjyz') format('woff'),
+    url('../fonts/icomoon.svg?b8jjyz#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    color: #187ec6;
+    font-weight: bold;
+    /*font-size: 28px;*/
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-news:before {
+    content: "\e90b";
+    color: red;
+}
+.icon-tjfx:before {
+    content: "\e900";
+}
+.icon-bmdt:before {
+    content: "\e901";
+}
+.icon-gsgg:before {
+    content: "\e902";
+}
+.icon-kstd:before {
+    content: "\e903";
+}
+.icon-rdzt:before {
+    content: "\e904";
+}
+.icon-tzgg:before {
+    content: "\e905";
+}
+.icon-xxth:before {
+    content: "\e906";
+}
+.icon-zhfx:before {
+    content: "\e907";
+}
+.icon-zhyw:before {
+    content: "\e908";
+}
+.icon-ztlm:before {
+    content: "\e909";
+}
+.icon-zxgz:before {
+    content: "\e90a";
+}
+
+/*------ 接口状态样式 ----------*/
+.interfaceState{
+    color: #b9bfc4;
+    font-size: 3.6rem;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.interfaceState .i-icon{
+    text-align: center;
+    margin-top: 10%;
+}
+
+.interfaceState .i-icon img{
+    max-width:226px;
+    width:31.4%;
+    height:auto;
+}
+
+.interfaceState.i_loading .i-icon img{
+    max-width:50px;
+    width:14%;
+}
+.interfaceState .i-state{
+    margin-top:20px;
+    font-size:14px;
+}
+/*------ 接口状态样式 结束 ----------*/

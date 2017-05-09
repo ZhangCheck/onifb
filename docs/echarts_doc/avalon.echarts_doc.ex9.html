@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>roamController</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4>roamController</h4>
+    <p>缩放漫游组件，仅对地图有效。</p>
+
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody><tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 显示策略，可选为：true（显示） | false（隐藏）。 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> zlevel </td>
+            <td> 0 </td>
+            <td> 一级层叠控制。每一个不同的zlevel将产生一个独立的canvas，相同zlevel的组件或图标将在同一个canvas上渲染。zlevel越高越靠顶层，canvas对象增多会消耗更多的内存和性能，并不建议设置过多的zlevel，大部分情况可以通过二级层叠控制z实现层叠控制。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> z </td>
+            <td> 4 </td>
+            <td> 二级层叠控制，同一个canvas（相同zlevel）上z越高约靠顶层。 </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> x </td>
+            <td> 'left' </td>
+            <td> 水平安放位置，默认为左侧，可选为：'center' | 'left' | 'right' | <b>{number}</b>（x坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> y </td>
+            <td> 'top' </td>
+            <td> 垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | <b>{number}</b>（y坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> width </td>
+            <td> 80</td>
+            <td> 指定宽度，决定4向漫游圆盘大小，可指定 <b>{number}</b>（宽度，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> height </td>
+            <td> 120</td>
+            <td> 指定高度，缩放控制键默认会在指定高度的最下方最大化显示，可指定 <b>{number}</b>（高度，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{color}</b> backgroundColor </td>
+            <td> 'rgba(0,0,0,0)' </td>
+            <td> 缩放漫游组件背景颜色，默认透明 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> borderColor </td>
+            <td> '#ccc' </td>
+            <td> 缩放漫游组件边框颜色 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> borderWidth </td>
+            <td> 0 </td>
+            <td> 缩放漫游组件边框线宽，单位px，默认为0（无边框） </td>
+        </tr>
+        <tr>
+            <td> <b>{number | Array}</b> padding </td>
+            <td> 5 </td>
+            <td> 缩放漫游组件内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，同css，见下图 </td>
+        </tr>
+        <tr>
+            <td> <b>{color}</b> fillerColor </td>
+            <td> '#fff' </td>
+            <td> 漫游组件文字填充颜色 </td>
+        </tr>
+        <tr>
+            <td> <b>{color}</b> handleColor </td>
+            <td> '#6495ed' </td>
+            <td> 控制手柄主体颜色  </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> step </td>
+            <td> 15 </td>
+            <td> 4向漫游移动步伐，单位px</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> mapTypeControl </td>
+            <td> null </td>
+            <td> 必须，指定漫游组件可控地图类型，如：{ china: true }<br>当同一图表内同时呈现多个地图时，可以单独指定所需控制地图类型，如：{ china: false, '北京': true} </td>
+        </tr>
+        </tbody>
+    </table>
+    <img src="image/roamController.png">
+</div>
+</body>
+</html>

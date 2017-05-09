@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/*
+这是每个都组件都应该引用的部分
+*/
+.oni-textBoxDialog.buttonPosLeft .oni-textBoxDialog-button {
+  left: 2px; }
+.oni-textBoxDialog.buttonPosLeft .oni-textbox {
+  padding-left: 46px; }
+
+.oni-textBoxDialog.buttonPosRight .oni-textBoxDialog-button {
+  right: 2px; }
+.oni-textBoxDialog.buttonPosRight .oni-textbox {
+  padding-right: 1px; }
+
+.oni-textBoxDialog {
+  display: inline-block;
+  position: relative; }
+  .oni-textBoxDialog .oni-textBoxDialog-icon {
+    color: #7ca3bf;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center; }
+  .oni-textBoxDialog .oni-textBoxDialog-button {
+    /* height: 26px !important;
+     line-height: 26px !important;*/
+    position: absolute;
+    padding: 0.57861em 1em;
+    top: 1px;
+    border: 0 none;
+    background-color: #FFFFFF;
+    outline: none; }
+  .oni-textBoxDialog .oni-textbox {
+    float: left;
+    width: 100%;
+    box-sizing: border-box; }
+  .oni-textBoxDialog .oni-textbox {
+    min-width: 100px; }
+
+/*# sourceMappingURL=avalon.textBoxDialog.css.map */

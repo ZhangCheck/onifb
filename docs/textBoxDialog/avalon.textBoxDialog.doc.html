@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>textbox弹出窗口</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <h2>textBoxDialog</h2>
+    <h3 class="table-doc-title">使用说明</h3>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="180">
+            <col width="95">
+            <col width="120">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th>名字</th>
+            <th>类型</th>
+            <th>默认值</th>
+            <th>说明</th>
+        </tr>
+        <tr>
+            <td align="center" colspan="4">配置参数</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>String</td>
+            <td>不写则随机产生</td>
+            <td>因为一个页面中可能会出现多个textBoxDialog为确保中的textbox,dialog,以及button按钮的vmodelId是唯一的。
+                此值得产生是根据comboBox的vmodelId值，若comboBox的vmodelId为空，者自动产生一个值</td>
+        </tr>
+        <tr>
+            <td>iconPosition</td>
+            <td>String</td>
+            <td>right</td>
+            <td>用于设定弹出按钮的位置，值有"left","right"</td>
+        </tr>
+        <tr>
+            <td>width</td>
+            <td>String</td>
+            <td>200</td>
+            <td>textBoxDialog的宽度值</td>
+        </tr>
+        <tr>
+            <td>onOpen</td>
+            <td>function</td>
+            <td></td>
+            <td>弹出窗口打开窗口时执行的方法</td>
+        </tr>
+        <tr>
+            <td>onConfirm</td>
+            <td>function</td>
+            <td></td>
+            <td>弹出窗口点击确定执行的方法</td>
+        </tr>
+        <tr>
+            <td>onClose</td>
+            <td>function</td>
+            <td></td>
+            <td>关闭弹出窗口执行的方法</td>
+        </tr>
+        <tr>
+            <td>onCancel</td>
+            <td>function</td>
+            <td></td>
+            <td>取消弹出窗口执行的方法</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>String</td>
+            <td></td>
+            <td>弹出窗口的标题</td>
+        </tr>
+        <tr>
+            <td>fileTemplateUrl</td>
+            <td>String</td>
+            <td></td>
+            <td>窗口内容的html路径值，窗口中的内容是在另一个文件中渲染完成数据，路径中只能是html代码，且不含有js部分（e8环境,ms-include-src引入外模板的时候,外模板页面上的js不运行,ie9及高级点的浏览器就能运行），该文件中的js渲染在textBoxDialog中执行</td>
+        </tr>
+        <tr>
+            <td>fileTemplate</td>
+            <td>String</td>
+            <td></td>
+            <td>窗口内容的html字符串，窗口中的内容是在另一个文件中渲染完成数据</td>
+        </tr>
+        <tr>
+            <td>selectedValue</td>
+            <td>String</td>
+            <td></td>
+            <td>textbox的对应默认值</td>
+        </tr>
+        <tr>
+            <td>selectedCode</td>
+            <td>String</td>
+            <td></td>
+            <td>textbox值对应的code值</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+</body>
+
+</html>

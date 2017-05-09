@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+/*------ 接口状态样式 ----------*/
+.interfaceState{
+    color: #b9bfc4;
+    font-size: 3.6rem;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.interfaceState .i-icon{
+    text-align: center;
+    margin-top: 10%;
+}
+
+.interfaceState .i-icon img{
+    max-width:226px;
+    width:31.4%;
+    height:auto;
+}
+
+.interfaceState.i_loading .i-icon img{
+    max-width:50px;
+    width:14%;
+}
+.interfaceState .i-state{
+    margin-top:20px;
+    font-size:14px;
+}
+/*------ 接口状态样式 结束 ----------*/

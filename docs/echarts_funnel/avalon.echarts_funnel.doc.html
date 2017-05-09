@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>series（漏斗图）</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h3 class="table-doc-title">series（漏斗图）使用说明</h3>
+    <p>json数据中的series中的参数使用说明如下：</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col width="95">
+            <col width="">
+        </colgroup>
+        <tbody>
+            <tr>
+                <th> 名称</th>
+                <th> 默认值</th>
+                <th> 描述</th>
+            </tr>
+            <tr>
+                <td><b>{number | string}</b> x</td>
+                <td> 80</td>
+                <td> 左上角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)</td>
+            </tr>
+            <tr>
+                <td><b>{number | string}</b> y</td>
+                <td> 60</td>
+                <td> 左上角纵坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域纵向中心)</td>
+            </tr>
+            <tr>
+                <td><b>{number | string}</b> x2</td>
+                <td> 80</td>
+                <td> 右下角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)</td>
+            </tr>
+            <tr>
+                <td><b>{number | string}</b> y2</td>
+                <td> 60</td>
+                <td> 右下角纵坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域纵向中心)</td>
+            </tr>
+            <tr>
+                <td><b>{number | string}</b> width</td>
+                <td> null</td>
+                <td> 总宽度，默认为绘图区总宽度 - x - x2，数值单位px，指定width后将忽略x2，支持百分比（字符串），如'50%'(显示区域一半的宽度)</td>
+            </tr>
+            <tr>
+                <td><b>{number | string}</b> height</td>
+                <td> null</td>
+                <td> 总高度，默认为绘图区总高度 - y - y2，数值单位px，指定height后将忽略y2，支持百分比（字符串），如'50%'(显示区域一半的高度)</td>
+            </tr>
+            <tr>
+                <td><b>{string}</b> funnelAlign</td>
+                <td> 'center'</td>
+                <td> 水平方向对齐布局类型，默认居中对齐，可用选项还有：'left' | 'right' | 'center'</td>
+            </tr>
+            <tr>
+                <td><b>{number}</b> min</td>
+                <td> 0</td>
+                <td> 指定的最小值</td>
+            </tr>
+            <tr>
+                <td><b>{number}</b> max</td>
+                <td> 100</td>
+                <td> 指定的最大值</td>
+            </tr>
+            <tr>
+                <td><b>{string}</b> minSize</td>
+                <td> '0%'</td>
+                <td> 最小值min映射到总宽度的比例，如果需要最小值的图形并不是尖端三角，可设置minSize实现</td>
+            </tr>
+            <tr>
+                <td><b>{string}</b> maxSize</td>
+                <td> '100%'</td>
+                <td> 最大值max映射到总宽度的比例</td>
+            </tr>
+            <tr>
+                <td><b>{string}</b> sort</td>
+                <td> 'descending'</td>
+                <td> 数据排序， 可以取ascending, descending</td>
+            </tr>
+            <tr>
+                <td><b>{number}</b> gap</td>
+                <td> 0</td>
+                <td> 数据图形间距</td>
+            </tr>
+            <tr>
+                <td><b>{boolean}</b> legendHoverLink</td>
+                <td> true</td>
+                <td> 是否启用图例（legend）hover时的联动响应（高亮显示）</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

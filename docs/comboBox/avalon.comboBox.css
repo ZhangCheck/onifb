@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/*
+这是每个都组件都应该引用的部分
+*/
+.oni-comboBox {
+  display: inline-block;
+  position: relative; }
+  .oni-comboBox .oni-comboBox-item-body {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    z-index: 1001; }
+  .oni-comboBox .hide {
+    display: none; }
+  .oni-comboBox .show {
+    display: list-item; }
+  .oni-comboBox .oni-comboBox-items {
+    list-style-type: none;
+    padding: 0; }
+    .oni-comboBox .oni-comboBox-items .oni-comboBox-item {
+      padding: 4px 8px;
+      cursor: pointer; }
+    .oni-comboBox .oni-comboBox-items .oni-comboBox-item.cur {
+      background: #fefafa; }
+    .oni-comboBox .oni-comboBox-items .oni-comboBox-item.selected {
+      background: #f3f3f3; }
+  .oni-comboBox .oni-comboBox-icon-wrap {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    float: right;
+    height: 36px;
+    right: 1px;
+    line-height: 36px;
+    margin-top: -38px;
+    width: 36px;
+    text-align: center;
+    background: #FFFFFF; }
+  .oni-comboBox .oni-comboBox-icon-wrap .oni-comboBox-icon {
+    color: #7ca3bf;
+    font-size: 12px;
+    cursor: pointer; }
+  .oni-comboBox .oni-textbox {
+    width: 100%;
+    box-sizing: border-box; }
+  .oni-comboBox .oni-textbox {
+    min-width: 100px; }
+
+/*# sourceMappingURL=avalon.comboBox.css.map */

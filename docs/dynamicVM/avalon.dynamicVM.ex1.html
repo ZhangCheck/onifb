@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>button demo 1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="text/javascript" src="../require.js"></script>
+    <link href="avalon.dynamicVM.css" rel="stylesheet" />
+</head>
+<body ms-controller="demo1">
+   <select ms-widget="dropdown" ms-duplex="url">
+       <option value="./dynamicVM/ex1/content.html">列表</option>
+       <option value="./dynamicVM/ex2/content.html">表单</option>
+       <option value="./dynamicVM/ex3/content.html">列表+表单</option>
+   </select>
+    <button ms-widget="button"  ms-click="openWin" >点击弹出窗口</button>
+    <div id="mask" style="display:none">
+        <div  class="window">
+            <div class="window-head">
+                <span>&nbsp;&nbsp;{{title}}</span>
+                <span style="float:right;cursor:pointer" ms-click="closeWin"><i class="oni-icon-folder-close"></i>&nbsp;&nbsp;</span>
+            </div>
+            <div class="scrollbody" >
+                <div id="win" class="contentbody"></div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    require.config({
+        baseUrl:'../',
+        paths:{
+            avalon: 'avalon.shim',
+            echarts: 'echarts',
+            domReady:'domReady',
+            fb:"avalon.fb"
+        },
+        map:{
+            '*':{
+                'css':'require.css',
+                'text':'require.text'
+            }
+        },
+        shim:{
+            avalon: { exports: "avalon" },
+            echarts:{exports:"echarts"}
+        }
+    });
+    require(["avalon.fb","button/avalon.button","dropdown/avalon.dropdown"], function(fb) {
+        var vm=avalon.define({
+           $id:"demo1",
+            url:"",
+            title:"",
+            openWin:function(){
+                fb.load(vm.url,"#win",function(title){
+                    document.getElementById("mask").style.display="block"
+                    vm.title=title
+                })
+            },
+            closeWin:function(){
+                document.getElementById("mask").style.display="none"
+            }
+        })
+        avalon.scan()
+    })
+</script>
+
+</div>
+</body>
+</html>

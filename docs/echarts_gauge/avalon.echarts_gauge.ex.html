@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>多仪表盘</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/gauge","dialog/avalon.dialog","button/avalon.button"],function(){
+            var vm = avalon.define({
+                $id:"test",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.gaugeOptions);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                gaugeOptions:{
+                    tooltip : {
+                        formatter: "{a} <br/>{c}"+"%"
+                    },
+                    series : [
+                        //中间的码表
+                        {
+                            name:'今年',
+                            type:'gauge',
+                            radius : '87%',
+                            center : ['50%', '50%'],
+                            z: 3,
+                            min:0,
+                            max:100,
+                            splitNumber:10,
+                            axisLine: {
+                                lineStyle: {
+                                    color:[[0.2,'lime'],[0.9,'#1e90ff'],[1,'#ff4500']],
+                                    width: 10,
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            axisTick: {
+                                length :15,
+                                lineStyle: {
+                                    color: 'auto',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            splitLine: {
+                                length :20,
+                                lineStyle: {
+                                    color: '#187ec6',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            pointer:{
+                                shadowColor : '#187ec6',
+                                shadowBlur: 5
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color: '#187ec6',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            title : {
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color:'#187ec6',
+                                    fontSize: 30,
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            detail : {
+                                //backgroundColor: 'rgba(30,144,255,0.8)',
+                                borderWidth: 1,
+                                borderColor: '#187ec6',
+                                shadowColor : '#187ec6',
+                                shadowBlur: 5,
+                                formatter:function(param){
+                                    return param+'%';
+                                },
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color: '#187ec6'
+                                }
+                            },
+                            data:[{value:1, name: '1'}]
+                        },
+                        //左侧的码表
+                        {
+                            name:'本月',
+                            type:'gauge',
+                            radius : '75%',
+                            center : ['19%', '55%'],
+                            z: 3,
+                            min:0,
+                            max:100,
+                            splitNumber:10,
+                            endAngle:45,
+                            axisLine: {
+                                lineStyle: {
+                                    color:[[0.2,'lime'],[0.9,'#1e90ff'],[1,'#ff4500']],
+                                    width: 10,
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            axisTick: {
+                                length :15,
+                                lineStyle: {
+                                    color: 'auto',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            splitLine: {
+                                length :20,
+                                lineStyle: {
+                                    color: '#187ec6',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            pointer:{
+                                shadowColor : '#187ec6',
+                                shadowBlur: 5
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    //fontSize:3,
+                                    fontWeight: 'bolder',
+                                    color: '#187ec6',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            title : {
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color:'#187ec6',
+                                    fontSize: 18,
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            detail : {
+                                shadowColor : '#187ec6',
+                                shadowBlur: 5,
+                                formatter:function(param){
+                                    return param+'%';
+                                },
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color: '#187ec6'
+                                }
+                            },
+                            data:[{value:1, name: '1'}]
+                        },
+                        //右侧的码表
+                        {
+                            name:'当天',
+                            type:'gauge',
+                            radius : '75%',
+                            center : ['81%', '55%'],
+                            z: 3,
+                            min:0,
+                            max:100,
+                            splitNumber:10,
+                            startAngle:135,
+                            axisLine: {
+                                lineStyle: {
+                                    color:[[0.2,'lime'],[0.9,'#1e90ff'],[1,'#ff4500']],
+                                    width: 10,
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            axisTick: {
+                                length :15,
+                                lineStyle: {
+                                    color: 'auto',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            splitLine: {
+                                length :20,
+                                lineStyle: {
+                                    color: '#187ec6',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            pointer:{
+                                shadowColor : '#187ec6',
+                                shadowBlur: 5
+                            },
+                            axisLabel: {
+                                textStyle: {
+                                    //fontSize:3,
+                                    fontWeight: 'bolder',
+                                    color: '#187ec6',
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            title : {
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color:'#187ec6',
+                                    fontSize: 18,
+                                    shadowColor : '#187ec6',
+                                    shadowBlur: 10
+                                }
+                            },
+                            detail : {
+                                shadowColor : '#187ec6',
+                                shadowBlur: 5,
+                                formatter:function(param){
+                                    return param+'%';
+                                },
+                                textStyle: {
+                                    fontWeight: 'bolder',
+                                    color: '#187ec6'
+                                }
+                            },
+                            data:[{value:1, name: '1'}]
+                        }
+                    ]
+                }
+            });
+
+            fb.requestJson(/**@type fb.InterfaceStruct**/{
+                //remoteUrl:"http://192.168.0.236:8080/ntjmyj/item/zhfxModuleList",
+                remoteUrl:"./model/gauge_more.json",
+                localUrl:"./model/gauge_more.json",
+                view:"#gaugeCk",
+                success:function(data){
+                    var result=data.rows;
+                    var xz=new Array();
+                    var yz=new Array();
+                    for(var i=0;i<result.length;i++){
+                        xz.push(result[i].type);
+                        yz.push(result[i].val);
+                    }
+                    var myChart = echarts.init(document.getElementById('gaugeCk'));
+                    for(var j=0;j<vm.gaugeOptions.series.length;j++){
+                        if("1"==result[j].type){
+                            vm.gaugeOptions.series[j].data[0].name="今年";
+                        }else if("2"==result[j].type){
+                            vm.gaugeOptions.series[j].data[0].name="本月";
+                        }else{
+                            vm.gaugeOptions.series[j].data[0].name="当天";
+                        }
+                        vm.gaugeOptions.series[j].data[0].value=result[j].val;
+                    }
+                    myChart.setOption(vm.gaugeOptions);
+
+                    window.onresize=function (){
+                        myChart.resize();
+                    };
+                }
+            })
+        });
+    </script>
+</head>
+<body ms-controller="test">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog" ms->{{optionsStr()}}</div>
+<div id="gaugeCk" style="width: 800px;height: 300px;"></div>
+
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;多仪表盘&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="gaugeCk" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+                &lt;script&gt;
+                    require(["echarts.fb","echarts/chart/gauge","dialog/avalon.dialog","button/avalon.button"],function(){
+                        var vm = avalon.define({
+                            $id:"test",
+                            show:function(dialog){
+                                avalon.vmodels[dialog].toggle = true;
+                            },
+                            optionsStr:function(){
+                                return JSON.stringify(vm.gaugeOptions);
+                            },
+                            dialog:{
+                                title:"options的json格式"
+                            },
+                            gaugeOptions:{
+                                tooltip : {
+                                    formatter: "{a} <br/>{c}"+"%"
+                                },
+                                series : [
+                                    //中间的码表
+                                    {
+                                        name:'今年',
+                                        type:'gauge',
+                                        radius : '87%',
+                                        center : ['50%', '50%'],
+                                        z: 3,
+                                        min:0,
+                                        max:100,
+                                        splitNumber:10,
+                                        axisLine: {
+                                            lineStyle: {
+                                                color:[[0.2,'lime'],[0.9,'#1e90ff'],[1,'#ff4500']],
+                                                width: 10,
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        axisTick: {
+                                            length :15,
+                                            lineStyle: {
+                                                color: 'auto',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        splitLine: {
+                                            length :20,
+                                            lineStyle: {
+                                                color: '#187ec6',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        pointer:{
+                                            shadowColor : '#187ec6',
+                                            shadowBlur: 5
+                                        },
+                                        axisLabel: {
+                                            textStyle: {
+                                                fontWeight: 'bolder',
+                                                color: '#187ec6',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        title : {
+                                            textStyle: {
+                                                fontWeight: 'bolder',
+                                                color:'#187ec6',
+                                                fontSize: 30,
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        detail : {
+                                            //backgroundColor: 'rgba(30,144,255,0.8)',
+                                            borderWidth: 1,
+                                            borderColor: '#187ec6',
+                                            shadowColor : '#187ec6',
+                                            shadowBlur: 5,
+                                            formatter:function(param){
+                                                return param+'%';
+                                            },
+                                            textStyle: {
+                                                fontWeight: 'bolder',
+                                                color: '#187ec6'
+                                            }
+                                        },
+                                        data:[{value:1, name: '1'}]
+                                    },
+                                    //左侧的码表
+                                    {
+                                        name:'本月',
+                                        type:'gauge',
+                                        radius : '75%',
+                                        center : ['19%', '55%'],
+                                        z: 3,
+                                        min:0,
+                                        max:100,
+                                        splitNumber:10,
+                                        endAngle:45,
+                                        axisLine: {
+                                            lineStyle: {
+                                                color:[[0.2,'lime'],[0.9,'#1e90ff'],[1,'#ff4500']],
+                                                width: 10,
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        axisTick: {
+                                            length :15,
+                                            lineStyle: {
+                                                color: 'auto',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        splitLine: {
+                                            length :20,
+                                            lineStyle: {
+                                                color: '#187ec6',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        pointer:{
+                                            shadowColor : '#187ec6',
+                                            shadowBlur: 5
+                                        },
+                                        axisLabel: {
+                                            textStyle: {
+                                                //fontSize:3,
+                                                fontWeight: 'bolder',
+                                                color: '#187ec6',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        title : {
+                                            textStyle: {
+                                                fontWeight: 'bolder',
+                                                color:'#187ec6',
+                                                fontSize: 18,
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        detail : {
+                                            shadowColor : '#187ec6',
+                                            shadowBlur: 5,
+                                            formatter:function(param){
+                                                return param+'%';
+                                            },
+                                            textStyle: {
+                                                fontWeight: 'bolder',
+                                                color: '#187ec6'
+                                            }
+                                        },
+                                        data:[{value:1, name: '1'}]
+                                    },
+                                    //右侧的码表
+                                    {
+                                        name:'当天',
+                                        type:'gauge',
+                                        radius : '75%',
+                                        center : ['81%', '55%'],
+                                        z: 3,
+                                        min:0,
+                                        max:100,
+                                        splitNumber:10,
+                                        startAngle:135,
+                                        axisLine: {
+                                            lineStyle: {
+                                                color:[[0.2,'lime'],[0.9,'#1e90ff'],[1,'#ff4500']],
+                                                width: 10,
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        axisTick: {
+                                            length :15,
+                                            lineStyle: {
+                                                color: 'auto',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        splitLine: {
+                                            length :20,
+                                            lineStyle: {
+                                                color: '#187ec6',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        pointer:{
+                                            shadowColor : '#187ec6',
+                                            shadowBlur: 5
+                                        },
+                                        axisLabel: {
+                                            textStyle: {
+                                                //fontSize:3,
+                                                fontWeight: 'bolder',
+                                                color: '#187ec6',
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        title : {
+                                            textStyle: {
+                                                fontWeight: 'bolder',
+                                                color:'#187ec6',
+                                                fontSize: 18,
+                                                shadowColor : '#187ec6',
+                                                shadowBlur: 10
+                                            }
+                                        },
+                                        detail : {
+                                            shadowColor : '#187ec6',
+                                            shadowBlur: 5,
+                                            formatter:function(param){
+                                                return param+'%';
+                                            },
+                                            textStyle: {
+                                                fontWeight: 'bolder',
+                                                color: '#187ec6'
+                                            }
+                                        },
+                                        data:[{value:1, name: '1'}]
+                                    }
+                                ]
+                            }
+                        });
+
+                        fb.requestJson(/**@type fb.InterfaceStruct**/{
+                            //remoteUrl:"http://192.168.0.236:8080/ntjmyj/item/zhfxModuleList",
+                            remoteUrl:"./model/gauge_more.json",
+                            localUrl:"./model/gauge_more.json",
+                            view:"#gaugeCk",
+                            success:function(data){
+                                var result=data.rows;
+                                var xz=new Array();
+                                var yz=new Array();
+                                for(var i=0;i&lt;result.length;i++){
+                                    xz.push(result[i].type);
+                                    yz.push(result[i].val);
+                                }
+                                var myChart = echarts.init(document.getElementById('gaugeCk'));
+                                for(var j=0;j&lt;vm.gaugeOptions.series.length;j++){
+                                    if("1"==result[j].type){
+                                        vm.gaugeOptions.series[j].data[0].name="今年";
+                                    }else if("2"==result[j].type){
+                                        vm.gaugeOptions.series[j].data[0].name="本月";
+                                    }else{
+                                        vm.gaugeOptions.series[j].data[0].name="当天";
+                                    }
+                                    vm.gaugeOptions.series[j].data[0].value=result[j].val;
+                                }
+                                myChart.setOption(vm.gaugeOptions);
+
+                                window.onresize=function (){
+                                    myChart.resize();
+                                };
+                            }
+                        })
+                    });
+                &lt;/script&gt;
+            &lt;/div&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

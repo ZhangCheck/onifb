@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>标准漏斗图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/funnel","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    title : {
+                        text: '漏斗图'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c}%"
+                    },
+                    legend: {
+                        data:[]
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataZoom : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    series:[]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/funnel.json",
+                localUrl:"./model/funnel.json",
+                success:function(data){
+                    var options=vm.options;
+                    var legend=[];//图例
+                    var result=data.rows;
+                    var serie={//正三角
+                        name:"漏斗图",
+                        type:"funnel",
+                        data:[],
+                        itemStyle:{
+                            normal:{
+                                label:{
+                                    position:"inside",
+                                    formatter: '{c}%',
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    position:'inside',
+                                    formatter: '{b}预期 : {c}%'
+                                }
+                            }
+                        },
+                        //sort : 'ascending',//上升
+                        width:"40%"//控制漏斗图的宽度
+                    }
+                    var serie1=avalon.mix({"sort":"ascending","x":"60%"},serie);//x属性：左上角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)
+                    for(var i=0;i<result.length;i++){//获取图例数据
+                        if(legend.indexOf(result[i].name)<0){
+                            legend.push(result[i].name);
+                        }
+                    }
+                    options.legend.data=legend;
+                    serie1.data=serie.data=result;
+                    options.series.push(serie);//倒三角 添加sort属性 变成正三角
+                    options.series.push(serie1);
+                    var myChart = echarts.init(document.getElementById('funnel'));
+                    myChart.setOption(options);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="funnel" style="width: 800px;height: 300px;"></div>
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;标准漏斗图&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="funnel" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+            &lt;script&gt;
+               require(["echarts.fb","echarts/chart/funnel","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                    var vm=avalon.define({
+                        $id:"demo",
+                        show:function(dialog){
+                            avalon.vmodels[dialog].toggle = true;
+                        },
+                        optionsStr:function(){
+                            return JSON.stringify(vm.options);
+                        },
+                        dialog:{
+                            title:"options的json格式"
+                        },
+                        options:{
+                            title : {
+                                text: '漏斗图'
+                            },
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c}%"
+                            },
+                            legend: {
+                                data:[]
+                            },
+                            toolbox: {
+                                show : true,
+                                feature : {
+                                    mark : {show: true},
+                                    dataZoom : {show: true},
+                                    dataView : {show: true, readOnly: false},
+                                    restore : {show: true},
+                                    saveAsImage : {show: true}
+                                }
+                            },
+                            series:[]
+                        }
+                    });
+                    avalon.scan();
+
+                    fb.requestJson({
+                        remoteUrl:"./model/funnel.json",
+                        localUrl:"./model/funnel.json",
+                        success:function(data){
+                            var options=vm.options;
+                            var legend=[];//图例
+                            var result=data.rows;
+                            var serie={//正三角
+                                name:"漏斗图",
+                                type:"funnel",
+                                data:[],
+                                itemStyle:{
+                                    normal:{
+                                        label:{
+                                            position:"inside",
+                                            formatter: '{c}%',
+                                        }
+                                    },
+                                    emphasis: {
+                                        label: {
+                                            position:'inside',
+                                            formatter: '{b}预期 : {c}%'
+                                        }
+                                    }
+                                },
+                                //sort : 'ascending',//上升
+                                width:"40%"//控制漏斗图的宽度
+                            }
+                            var serie1=avalon.mix({"sort":"ascending","x":"60%"},serie);//x属性：左上角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)
+                            for(var i=0;i&lt;result.length;i++){//获取图例数据
+                                if(legend.indexOf(result[i].name)&lt;0){
+                                    legend.push(result[i].name);
+                                }
+                            }
+                            options.legend.data=legend;
+                            serie1.data=serie.data=result;
+                            options.series.push(serie);//倒三角 添加sort属性 变成正三角
+                            options.series.push(serie1);
+                            var myChart = echarts.init(document.getElementById('funnel'));
+                            myChart.setOption(options);
+                        }
+                    });
+                });
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<style>
+		*[ms-controller],.ms-controller{
+			display:none;
+		}
+	</style>
+    <script src="../../../../../oniui/require.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../../../../oniui/',
+            paths:{
+                avalon: 'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady',
+                fb:"avalon.fb"
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+        require(["avalon.fb"],function(){
+			var DEFAULT_VALUE = "江苏飞博"
+		    var vm = avalon.define({
+                $id:"mainCtl",
+				$defaultValue:DEFAULT_VALUE,
+                name:DEFAULT_VALUE,
+				reset:function(){
+					vm.name = vm.$defaultValue
+				}
+            })
+            avalon.scan()
+        })
+    </script>
+</head>
+<body ms-controller="mainCtl">
+    <div class="mtLg mlLg"> 欢迎来到：{{name}}</div>
+    <input class="mtLg mlLg" type="text" ms-duplex="name">
+	<span ms-css-cursor="{{name==$defaultValue?'':'pointer'}}" ms-css-color="{{name==$defaultValue?'#BBBBBB':''}}" ms-click="reset"> 重置 </span>
+</body>
+</html>

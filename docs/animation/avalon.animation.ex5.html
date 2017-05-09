@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title></title>
+    <script src="../require.js"></script>
+    <script src="../require.config.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="avalon.animate.style.css"/>
+</head>
+<body ms-controller="test">
+<script>
+    require(["animation/avalon.animate","button/avalon.button"], function() {
+        var vmodel=avalon.define({
+            $id:'test',
+            showDiv:true,
+            //动画元素的配置属性，名称与ms-animate中的第三个值对应,缺省时使用animate
+            animate:{
+                //动画元素目标状态的样式
+                properties:{
+                    width:200,
+                    height:200,
+                    marginTop:200,
+                    marginLeft:600,
+                    opacity:0.8,
+                    transform:"rotate(30deg)"
+                },
+                //动画的基本配置
+                options:{
+                    duration:5000,      //持续时间，默认2000
+                    easing:avalon.easing[0],  //缓动公示，默认线性
+                    fps:30,              //控制动画平滑程度
+                    before:function(){
+                        //alert("动画要开始了")
+                    },
+                    step:function(){
+                        //avalon.log("一步")
+                    },
+                    after:function(){
+                        //alert("结束了")
+                    }
+                }
+            }/*,
+            animateObj:{
+
+            }*/
+        })
+        avalon.scan()
+    });
+</script>
+<!--动画的配置除了可以在父级VM中定义以外，还可以通过行内的属性定义，并且行内的优先级要高于VM中的-->
+<div id="cube" class="normal" style="backface-visibility: hidden;position: relative;background-image: url('../../images/demo.jpg');background-size: 100% 100%" ms-animate="test,animateObj"  data-animate-options-duration="1000" data-animate-options-fps="20" data-animate-properties-height="50" >
+</div>
+<div ms-controller="animateObj"><!--在IE8下必须在所有用到animateObj属性或方法的元素外层定义 ms-controller 值为动画元素的id 即animateObj 在谷歌、火狐或IE8以上的浏览器中可以省略-->
+<button ms-widget="button" ms-click="animateObj.excuteAnimate">执行动画</button>
+    <!--调用animateObj的执行动画方法-->
+<br />
+    <!--绑定动画目标状态的样式属性-->
+宽度:<input ms-duplex="animateObj.properties.properties.width" />
+高度:<input ms-duplex="animateObj.properties.properties.height" />
+top:<input ms-duplex="animateObj.properties.properties.marginTop" />
+left:<input ms-duplex="animateObj.properties.properties.marginLeft" />
+颜色:<input ms-duplex="animateObj.properties.properties.backgroundColor" />
+alpha:<input ms-duplex="animateObj.properties.properties.opacity"/>
+angle:<input ms-duplex="animateObj.properties.properties.transform"/>
+</div>
+</body>
+<pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang="en"&gt;
+    &lt;meta charset="UTF-8"&gt;
+
+    &lt;title&gt;&lt;/title&gt;
+    &lt;script src="../require.js"&gt;&lt;/script&gt;
+    &lt;script src="../require.config.js"&gt;&lt;/script&gt;
+    &lt;script src="../highlight/shCore.js"&gt;&lt;/script&gt;
+    &lt;link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/&gt;
+    &lt;link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/&gt;
+    &lt;link type="text/css" rel="stylesheet" href="avalon.animate.style.css"/&gt;
+&lt;/head&gt;
+&lt;body ms-controller="test"&gt;
+&lt;script&gt;
+    require(["animation/avalon.animate","button/avalon.button"], function() {
+        //alert(Math.round(180*Math.asin(0.5)/Math.PI,1))
+        var effects=new Array()
+        for(var effect in avalon.easing) {
+            effects.push(effect)
+        }
+        var vmodel=avalon.define({
+            $id:'test',
+            showDiv:true,
+            //动画元素的配置属性，名称与ms-animate中的第三个值对应,缺省时使用animate
+            animate:{
+                //动画元素目标状态的样式
+                properties:{
+                    backgroundColor:"blue",
+                    width:200,
+                    height:200,
+                    marginTop:200,
+                    marginLeft:600,
+                    opacity:0.5,
+                    transform:"rotate(18deg)"
+                },
+                //动画的基本配置
+                options:{
+                    duration:5000,      //持续时间，默认2000
+                    easing:avalon.easing[0],  //缓动公示，默认线性
+                    fps:30,              //控制动画平滑程度
+                    before:function(){
+                        //alert("动画要开始了")
+                    },
+                    step:function(){
+                        //avalon.log("一步")
+                    },
+                    after:function(){
+                        //alert("结束了")
+                    }
+                }
+            }/*,
+             animateObj:{
+
+             }*/
+        })
+        avalon.scan()
+    });
+&lt;/script&gt;
+&lt;!--动画的配置除了可以在父级VM中定义以外，还可以通过行内的属性定义，并且行内的优先级要高于VM中的--&gt;
+&lt;div id="cube" class="normal" ms-animate="test,animateObj"  data-animate-options-duration="2000"
+data-animate-options-fps="20" &gt;
+&lt;/div&gt;
+&lt;div ms-controller="animateObj"&gt;
+    &lt;!--在IE8下必须在所有用到animateObj属性或方法的元素外层定义 ms-controller 值为动画元素的id 即animateObj 在谷歌、火狐或IE8以上的浏览器中可以省略--&gt;
+    &lt;button ms-widget="button" ms-click="animateObj.excuteAnimate"&gt;执行动画&lt;/button&gt;
+    &lt;!--调用animateObj的执行动画方法--&gt;
+    &lt;br /&gt;
+    &lt;!--绑定动画目标状态的样式属性--&gt;
+    宽度:&lt;input ms-duplex="animateObj.properties.properties.width" /&gt;
+    高度:&lt;input ms-duplex="animateObj.properties.properties.height" /&gt;
+    top:&lt;input ms-duplex="animateObj.properties.properties.marginTop" /&gt;
+    left:&lt;input ms-duplex="animateObj.properties.properties.marginLeft" /&gt;
+    颜色:&lt;input ms-duplex="animateObj.properties.properties.backgroundColor" /&gt;
+    alpha:&lt;input ms-duplex="animateObj.properties.properties.opacity"/&gt;
+    angle:&lt;input ms-duplex="animateObj.properties.properties.transform"/&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+</pre>
+</html>

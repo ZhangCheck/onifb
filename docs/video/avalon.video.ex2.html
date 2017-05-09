@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>video</title>
+  <meta charset="UTF-8">
+  
+  <link href="video-js.css" rel="stylesheet" type="text/css">
+  <script src="video.dev.js"></script>
+
+</head>
+<body>
+  <h4>原生JS事例</h4>
+  <video id="myVideo" poster="poster.jpg" class="video-js vjs-default-skin" controls preload="none" width="640" height="360"></video>
+  <br/>
+   <a href="javascript:void(0);" onclick='onClickVideoBt(1)'>视频1</a>
+   <a href="javascript:void(0);" onclick='onClickVideoBt(2)'>视频2</a>
+   
+    <script>
+        //根据具体项目配置正确的swf地址【重要】
+        videojs.options.flash.swf = "video-js.swf";
+        vjs.players['myVideo']=null;//清空缓存，已确保新建视频
+        
+        function playVideo(src,poster){
+            videojs('myVideo').poster(poster);
+            videojs('myVideo').src(src);
+        }
+        
+        function onClickVideoBt(index){
+            if(index==1){
+                playVideo("CAT_HD.mp4","poster.jpg");
+            }else{
+                playVideo("aaa.mp4","poster1.jpg");
+            }
+        }
+        onClickVideoBt(1);
+    </script>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;video&lt;/title&gt;
+  &lt;meta charset="UTF-8"&gt;
+  
+  &lt;link href="video-js.css" rel="stylesheet" type="text/css"&gt;
+  &lt;script src="video.dev.js"&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h4&gt;原生JS事例&lt;/h4&gt;
+  &lt;video id="myVideo" poster="poster.jpg" class="video-js vjs-default-skin" controls preload="none" width="640" height="360"&gt;&lt;/video&gt;
+  &lt;br/&gt;
+   &lt;a href="javascript:void(0);" onclick='onClickVideoBt(1)'&gt;视频1&lt;/a&gt;
+   &lt;a href="javascript:void(0);" onclick='onClickVideoBt(2)'&gt;视频2&lt;/a&gt;
+   
+    &lt;script&gt;
+        //根据具体项目配置正确的swf地址【重要】
+        videojs.options.flash.swf = "video-js.swf";
+        
+        function playVideo(src,poster){
+            videojs('myVideo').poster(poster);
+            videojs('myVideo').src(src);
+        }
+        
+        function onClickVideoBt(index){
+            if(index==1){
+                playVideo("CAT_HD.mp4","poster.jpg");
+            }else{
+                playVideo("aaa.mp4","poster1.jpg");
+            }
+        }
+        onClickVideoBt(1);
+    &lt;/script&gt;
+    &lt;pre&gt;
+
+    &lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+    </pre>
+    
+    <div>IE6下可能会因为嵌套复杂dom导致全屏异常，可以通过fullScreenChange回调，调整video父级节点高宽修复该问题,例如：</div>
+    <pre>
+  &lt;script&gt;
+       var isIE=!!window.ActiveXObject; 
+       var isIE6=isIE&&!window.XMLHttpRequest;
+       //页面有滚动条时，需要向body绑定  onBodyScroll 事件，以便在滚动页面时退出全屏的视频 
+       function onBodyScroll(){ 
+          if(isIE6 && videojs('myVideo').isFullscreen()){ 
+             videojs('myVideo').exitFullscreen(); 
+          } 
+       }
+       //修正ie6下多层嵌套引起的全屏尺寸或位置错误
+       videojs('myVideo').on('fullscreenchange',function(a,b,c){ 
+            if(isIE6){ 
+               var parentDom = $('.player'); 
+               if(this.isFullscreen()){ 
+                    var winW = document.body.clientWidth; 
+                     var winH = document.body.clientHeight; 
+                      
+                     parentDom.data('preWidth',parentDom.width()) 
+                            .data('preHeight',parentDom.height()) 
+                            .width(winW) 
+                            .height(winH);    
+                     $('.video-js.vjs-fullscreen').css('position','fixed'); 
+               }else{ 
+                  parentDom.width(parentDom.data('preWidth')) 
+                         .height(parentDom.data('preHeight')); 
+                  $('.video-js').css('position','absolute'); 
+               } 
+                                                   
+            } 
+       })
+    &lt;/script&gt;
+    </pre>
+</body>
+</html>

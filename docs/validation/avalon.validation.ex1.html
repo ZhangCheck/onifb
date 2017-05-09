@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>验证框架</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        <script src="../avalon.js"></script>
+        <script src="../highlight/shCore.js"></script>
+        <script>
+            require(["validation/avalon.validation","button/avalon.button", "ready!"], function() {
+                var validationVM
+
+                function showError(el, data) {
+                    var next = el.nextSibling
+
+                    if (!(next && next.className === "error-tip")) {
+                        next = document.createElement("div")
+                        next.className = "error-tip"
+                        next.innerHTML =data.getMessage()
+
+                        el.parentNode.appendChild(next)
+                    }
+
+                    //next.innerHTML ="<div>"+ data.getMessage()+"</div>"
+                }
+                function removeError(el) {
+                    var next = el.nextSibling
+                    if (next && next.className === "error-tip") {
+                        el.parentNode.removeChild(next)
+                    }
+                }
+                var funPlaceholder = function(element) {
+                    var placeholder = '';
+
+
+                    if (element && !("placeholder" in document.createElement("input")) && (placeholder = element.getAttribute("placeholder"))) {
+                        if(element.value==='')
+                        {
+                            element.value=placeholder
+                           element.style.color = 'graytext'
+                        }
+                        element.onfocus = function() {
+                            if (this.value === placeholder) {
+                                this.value = "";
+                            }
+                            this.style.color = '';
+                        };
+                        element.onblur = function() {
+                            if (this.value === "") {
+                                this.value = placeholder;
+                                this.style.color = 'graytext';
+                            }
+                        };
+                        //样式初始化
+                        if (element.value === "") {
+                            element.value = placeholder;
+                            element.style.color = 'graytext';
+                        }
+                    }
+                }
+                avalon.define({
+                    $id: "test",
+                    $skipArray: ["validation"],
+                    a: "xxxx",
+                    b: "a",
+                    c: "d",
+                    d: "",
+                    e: "",
+                    f: "",
+                    g: "",
+                    reset: function() {
+                        validationVM && validationVM.resetAll()
+                    },
+                    validation: {
+                        onInit: function(v,element,elem) {
+                            validationVM = v
+                            var inputleng=this.getElementsByTagName('input')
+                            for(var i=1;i<=inputleng.length;i++){
+                                funPlaceholder(document.getElementById("email"+i));
+                            }
+                        },
+                        onReset: function(e, data) {
+                            data.valueResetor && data.valueResetor()
+                            avalon(this).removeClass("error success")
+                            removeError(this)
+                        },
+                        onError: function(reasons) {
+                            reasons.forEach(function(reason) {
+                                avalon(this).removeClass("success").addClass("error")
+                                showError(this, reason)
+                            }, this)
+                        },
+                        onSuccess: function() {
+                            avalon(this).removeClass("error").addClass("success")
+                            removeError(this)
+                        },
+                        onValidateAll: function(reasons) {
+                            reasons.forEach(function(reason) {
+                                avalon(reason.element).removeClass("success").addClass("error")
+                                showError(reason.element, reason)
+                            })
+                            if (reasons.length === 0) {
+                                avalon.log("全部验证成功！")
+                            }
+                        }
+                    }
+                })
+                avalon.scan()
+            })
+        </script>
+    </head>
+    <body>
+        <form ms-controller="test" ms-widget="validation">
+            <h3>验证组件</h3>
+            <p><input id="email1" ms-duplex-required="a" placeholder="不能为空"></p>
+            <p><input id="email2" ms-duplex-int="b" placeholder="必须输入整数"></p>
+            <p><input id="email3" ms-duplex-decimal="c" placeholder="必须输入小数"></p>
+            <p><input id="email4" ms-duplex-alpha="d" placeholder="必须输入字母"></p>
+            <p><input id="email5" ms-duplex-chs="e" placeholder="必须输入中文"></p>
+            <p><input id="email6" ms-duplex-ipv4="f" placeholder="请输入互联网协议（Internet Protocol，IP）的第四版"></p>
+            <p><input id="email7" ms-duplex-phone="g" placeholder="必须输入手机号码"></p>
+
+            <script type="text/javascript">
+
+            </script>
+
+            <button ms-widget="button" data-button-color="select" type="submit">submit
+            </button>
+            <button ms-widget="button" data-button-color="transparent" type="button" ms-click="reset">reset
+            </button>
+        </form>
+    </body>
+</html>

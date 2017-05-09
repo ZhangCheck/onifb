@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/fb_lib/require.js" data-main="js/index.js"></script>
+    <style type="text/css">
+        .main{
+            width: auto;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+    </style>
+    <script>
+        require.config({
+            baseUrl:'js',
+            paths:{
+                avalon:'fb_lib/avalon.shim',
+                echarts: 'fb_lib/echarts',
+                domReady:'fb_lib/domReady'
+            },
+            map:{
+                '*':{
+                    'css':'fb_lib/require.css',
+                    'text':'fb_lib/require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"},
+                jquery: {
+                    exports: "jQuery"
+                }
+            }
+        });
+    </script>
+    <script>
+       /* require(["project.core"],function(fb){
+            var vm=avalon.define({
+                $id:"showMenu"
+            });
+            avalon.scan();
+
+        })*/
+    </script>
+</head>
+<body ms-controller="mainCtl">
+<div class="main">
+    <div ms-include-src="'header.html'" id="theight"></div>
+    <div style="width: 100%;font-size: 14px" ms-css-min-height="contentHeight">
+        content  menu1
+    </div>
+    <div ms-include-src="'footer.html'" id="fheight"></div>
+
+</div>
+</body>
+</html>

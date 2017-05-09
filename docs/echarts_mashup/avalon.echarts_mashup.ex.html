@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>仪表盘+漏斗图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/gauge","echarts/chart/funnel","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    title : {
+                        text: '仪表盘+漏斗图'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c}%"
+                    },
+                    series:[]
+                }
+            });
+            avalon.scan();
+
+
+            fb.requestJson({
+                remoteUrl:"./model/mashup.json",
+                localUrl:"./model/mashup.json",
+                success:function(data){
+                    var options=vm.options;
+                    var result=data.rows;
+                    var json={};
+                    for(var i=0;i<result.length;i++){
+                        json={};
+                        json.type=result[i].type;
+                        if(json.type=="funnel"){
+                            json.x="40%";
+                            json.width=300;
+                            json.name="漏斗图";
+                            json.itemStyle={
+                                normal:{
+                                    label:{
+                                        position:"inside",
+                                        formatter: '{c}%',
+                                    }
+                                },
+                                emphasis: {
+                                    label: {
+                                        position:'inside',
+                                        formatter: '{b}预期 : {c}%'
+                                    }
+                                }
+                            }
+                        }
+                        if(json.type=="gauge"){
+                            json.center=["20%","50%"];
+                            json.name="仪表盘";
+                        }
+                        json.data=result[i].data;
+                        options.series.push(json);
+                    }
+                    var myChart = echarts.init(document.getElementById('mashup'));
+                    myChart.setOption(options);
+                }
+            });
+        });
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="mashup" style="width: 800px;height: 300px;"></div>
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;仪表盘+漏斗图&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="mashup" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+            &lt;script&gt;
+               require(["echarts.fb","echarts/chart/gauge","echarts/chart/funnel","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                    var vm=avalon.define({
+                        $id:"demo",
+                        show:function(dialog){
+                            avalon.vmodels[dialog].toggle = true;
+                        },
+                        optionsStr:function(){
+                            return JSON.stringify(vm.options);
+                        },
+                        dialog:{
+                            title:"options的json格式"
+                        },
+                        options:{
+                            title : {
+                                text: '仪表盘+漏斗图'
+                            },
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c}%"
+                            },
+                            series:[]
+                        }
+                    });
+                    avalon.scan();
+
+
+                    fb.requestJson({
+                        remoteUrl:"./model/mashup.json",
+                        localUrl:"./model/mashup.json",
+                        success:function(data){
+                            var options=vm.options;
+                            var result=data.rows;
+                            var json={};
+                            for(var i=0;i&lt;result.length;i++){
+                                json={};
+                                json.type=result[i].type;
+                                if(json.type=="funnel"){
+                                    json.x="40%";
+                                    json.width=300;
+                                    json.name="漏斗图";
+                                    json.itemStyle={
+                                        normal:{
+                                            label:{
+                                                position:"inside",
+                                                formatter: '{c}%',
+                                            }
+                                        },
+                                        emphasis: {
+                                            label: {
+                                                position:'inside',
+                                                formatter: '{b}预期 : {c}%'
+                                            }
+                                        }
+                                    }
+                                }
+                                if(json.type=="gauge"){
+                                    json.center=["20%","50%"];
+                                    json.name="仪表盘";
+                                }
+                                json.data=result[i].data;
+                                options.series.push(json);
+                            }
+                            var myChart = echarts.init(document.getElementById('mashup'));
+                            myChart.setOption(options);
+                        }
+                    });
+                });
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

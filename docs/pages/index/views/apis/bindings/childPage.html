@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>simplegrid</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        <script src="../require.js"></script>
+        <script src="../highlight/shCore.js"></script>
+        <script>
+            require.config({
+                baseUrl:'../../../../../',
+                paths:{
+                    avalon: 'avalon.shim',
+                    echarts: 'echarts',
+                    domReady:'domReady',
+                    fb:"avalon.fb"
+                },
+                map:{
+                    '*':{
+                        'css':'require.css',
+                        'text':'require.text'
+                    }
+                },
+                shim:{
+                    avalon: { exports: "avalon" },
+                    echarts:{exports:"echarts"}
+                }
+            });
+
+           require(["./simplegrid/avalon.simplegrid"], function() {
+                function getData(n) {
+                    var ret = []
+                    for (var i = 0; i < n; i++) {
+                        ret.push({
+                            symbol: Math.random().toString(32).slice(4, 10),
+                            price: range(100, 200),
+                            change: Math.random().toFixed(2) * (Math.random() > 0.5 ? 1 : -1)
+                        })
+                    }
+                    return ret
+                }
+                function range(s, b) {
+                    return s + Math.floor((b - s) * Math.random())
+                }
+                var testVM = avalon.define("test", function(vm) {
+                    vm.$skipArray = ["pagerVM"]
+
+                    vm.$simplegridAOpts = {
+                        columns: ["symbol", "price", "change"],
+                        data: getData(10)
+                    }
+
+
+                    vm.pagerVM = null
+                    vm.$simplegridBOpts = {
+                        columns: ["symbol", "price", "change"],
+                        data: [],
+                        pageable: true,
+                        pager: {
+                            perPages : 10,
+                            totalItems: 0,
+                            onInit: function(vmodel) {
+                                testVM.pagerVM = vmodel
+                            }
+                        }
+                    }
+                    vm.resetData = function(id) {
+                        var data = getData(3);
+                        var vmodel = avalon.vmodels[id];
+                        testVM.pagerVM.totalItems = data.length
+                        vmodel.reRender(data, vmodel)
+                    }
+                    vm.$skipArray = ["simplegrid"]
+                })
+                avalon.scan()
+            })
+        </script>
+    </head>
+    <body ms-controller="test">
+            <legend>最简单的例子</legend>
+
+            <div ms-widget="simplegrid, simplegridA, $simplegridAOpts" style="width:99%">
+            </div>
+
+            <br />
+            <div ms-widget="simplegrid, simplegridB, $simplegridBOpts" style="width:99%">
+            </div>
+
+            <button ms-click="resetData('simplegridA')">reset data A</button>
+            <button ms-click="resetData('simplegridB')">reset data B</button>
+            <pre class="brush:html;gutter:false;toolbar:false;">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;simplegrid&lt;/title&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+        &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;../style/avalon.doc.css&quot;&gt;
+        &lt;script src=&quot;../require.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;../highlight/shCore.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            require.config({
+                baseUrl:&#39;../&#39;,
+                paths:{
+                    avalon: &#39;avalon.shim&#39;,
+                    echarts: &#39;echarts&#39;,
+                    domReady:&#39;domReady&#39;,
+                    fb:&quot;avalon.fb&quot;
+                },
+                map:{
+                    &#39;*&#39;:{
+                        &#39;css&#39;:&#39;require.css&#39;,
+                        &#39;text&#39;:&#39;require.text&#39;
+                    }
+                },
+                shim:{
+                    avalon: { exports: &quot;avalon&quot; },
+                    echarts:{exports:&quot;echarts&quot;}
+                }
+            });
+
+           require([&quot;./simplegrid/avalon.simplegrid&quot;], function() {
+                function getData(n) {
+                    var ret = []
+                    for (var i = 0; i &lt; n; i++) {
+                        ret.push({
+                            symbol: Math.random().toString(32).slice(4, 10),
+                            price: range(100, 200),
+                            change: Math.random().toFixed(2) * (Math.random() &gt; 0.5 ? 1 : -1)
+                        })
+                    }
+                    return ret
+                }
+                function range(s, b) {
+                    return s + Math.floor((b - s) * Math.random())
+                }
+                var testVM = avalon.define(&quot;test&quot;, function(vm) {
+                    vm.$skipArray = [&quot;pagerVM&quot;]
+                    vm.$simplegridAOpts = {
+                        columns: [&quot;symbol&quot;, &quot;price&quot;, &quot;change&quot;],
+                        data: getData(10)
+                    }
+
+
+                    vm.pagerVM = null
+                    vm.$simplegridBOpts = {
+                        columns: [&quot;symbol&quot;, &quot;price&quot;, &quot;change&quot;],
+                        data: [],
+                        pageable: true,
+                        pager: {
+                            perPages : 10,
+                            totalItems: 0,
+                            onInit: function(vmodel) {
+                                testVM.pagerVM = vmodel
+                            }
+                        }
+                    }
+                    vm.resetData = function(id) {
+                        var data = getData(3);
+                        var vmodel = avalon.vmodels[id];
+                        testVM.pagerVM.totalItems = data.length
+                        vmodel.reRender(data, vmodel)
+                    }
+                    vm.$skipArray = [&quot;simplegrid&quot;]
+                })
+                avalon.scan()
+            })
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body &gt;
+        &lt;fieldset ms-controller=&quot;test&quot;&gt;
+            &lt;legend&gt;最简单的例子&lt;/legend&gt;
+            &lt;div ms-widget=&quot;simplegrid, simplegridA, $simplegridAOpts&quot; style=&quot;width:99%&quot;&gt;
+
+            &lt;/div&gt;
+            &lt;br /&gt;
+
+            &lt;!--&lt;div ms-widget=&quot;simplegrid, simplegridB, $simplegridBOpts&quot; style=&quot;width:99%&quot;&gt;
+
+            &lt;/div&gt;--&gt;
+            &lt;button ms-click=&quot;resetData(&#39;simplegridA&#39;)&quot;&gt;reset data A&lt;/button&gt;
+            &lt;button ms-click=&quot;resetData(&#39;simplegridB&#39;)&quot;&gt;reset data B&lt;/button&gt;
+
+        &lt;/fieldset&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+            </pre>
+    </body>
+</html>

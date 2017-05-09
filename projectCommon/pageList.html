@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>项目清单</title>
+    <script src="js/fb_lib/require.js" data-main="js/pageList.js"></script>
+</head>
+
+<body ms-controller="mainCtl" style="display: none;">
+<h2>项目清单</h2>
+
+<h3>数据源配置</h3>
+<div class="mlLg">数据源：<select ms-widget="dropdown,dataSource,$dataSourceOpt" ms-duplex="fbMode"></select></div>
+
+<h3>项目级模块清单</h3>
+<div class="mlLg" ms-widget="simplegrid, projectModule, $projectModuleOpt" style="width:99%"></div>
+
+<h3>开发页面清单</h3>
+<div class="mlLg" ms-widget="simplegrid, pages, $pagesOpt" style="width:99%"></div>
+
+<h3>项目结构清单</h3>
+<div class="mlLg" ms-widget="simplegrid, projectStruct, $projectStructureOpt" style="width:99%"></div>
+
+
+</body>
+</html>

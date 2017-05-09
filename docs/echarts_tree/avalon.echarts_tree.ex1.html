@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>树图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/tree","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            function traverse(node,itemStyle, i) {//遍历树
+                itemStyle=itemStyle||{};
+                i=i||0;
+                var children = node.children;
+                if (children != null) {
+                    console.log("parent:" + node.name + ",child:" + children[i].name);
+                    if(children[i].symbol){
+                        children[i].symbol="image://"+children[i].symbol;
+                        children[i].itemStyle=itemStyle;
+                    }
+                    if (i == children.length - 1) {
+                        traverse(children[0],itemStyle,0);
+                    } else {
+                        traverse(node,itemStyle, i + 1);
+                    }
+                }
+            }
+
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    title : {
+                        text: '手机品牌'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c}"
+                    },
+                    series:[{
+                        name:'手机占有矩形图',
+                        type:'tree',
+                        orient: 'horizontal',  // vertical horizontal
+                        rootLocation: {x: 100, y: '60%'}, // 根节点位置  {x: 'center',y: 10}
+                        nodePadding: 20,
+                        symbol: 'circle',
+                        symbolSize: 40,
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    position: 'inside',
+                                    textStyle: {
+                                        color: '#cc9999',
+                                        fontSize: 15,
+                                        fontWeight:  'bolder'
+                                    }
+                                },
+                                lineStyle: {
+                                    color: '#000',
+                                    width: 1,
+                                    type: 'broken' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
+                                }
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                }
+                            }
+                        },
+                        data:[]
+                    }]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/tree1.json",
+                localUrl:"./model/tree1.json",
+                success:function(data){
+                    var options=vm.options;
+                    var result=data.rows;
+                    var itemStyle={//label不展现
+                        normal:{
+                            label:{
+                                show:false
+                            }
+                        }
+                    }
+                    for(var i=0;i<result.length;i++){
+                        result[i].itemStyle=itemStyle;
+                        traverse(result[i],itemStyle);
+                    }
+
+                    options.series[0].data=result;
+                    var myChart = echarts.init(document.getElementById('tree'));
+                    myChart.setOption(options);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="tree" style="width: 800px;height: 300px;"></div>
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;树图&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+       &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="tree" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+            &lt;script&gt;
+               require(["echarts.fb","echarts/chart/tree","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                    function traverse(node,itemStyle, i) {//遍历树
+                        itemStyle=itemStyle||{};
+                        i=i||0;
+                        var children = node.children;
+                        if (children != null) {
+                            console.log("parent:" + node.name + ",child:" + children[i].name);
+                            if(children[i].symbol){
+                                children[i].symbol="image://"+children[i].symbol;
+                                children[i].itemStyle=itemStyle;
+                            }
+                            if (i == children.length - 1) {
+                                traverse(children[0],itemStyle,0);
+                            } else {
+                                traverse(node,itemStyle, i + 1);
+                            }
+                        }
+                    }
+
+                    var vm=avalon.define({
+                        $id:"demo",
+                        show:function(dialog){
+                            avalon.vmodels[dialog].toggle = true;
+                        },
+                        optionsStr:function(){
+                            return JSON.stringify(vm.options);
+                        },
+                        dialog:{
+                            title:"options的json格式"
+                        },
+                        options:{
+                            title : {
+                                text: '手机品牌'
+                            },
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c}"
+                            },
+                            series:[{
+                                name:'手机占有矩形图',
+                                type:'tree',
+                                orient: 'horizontal',  // vertical horizontal
+                                rootLocation: {x: 100, y: '60%'}, // 根节点位置  {x: 'center',y: 10}
+                                nodePadding: 20,
+                                symbol: 'circle',
+                                symbolSize: 40,
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: true,
+                                            position: 'inside',
+                                            textStyle: {
+                                                color: '#cc9999',
+                                                fontSize: 15,
+                                                fontWeight:  'bolder'
+                                            }
+                                        },
+                                        lineStyle: {
+                                            color: '#000',
+                                            width: 1,
+                                            type: 'broken' // 'curve'|'broken'|'solid'|'dotted'|'dashed'
+                                        }
+                                    },
+                                    emphasis: {
+                                        label: {
+                                            show: true
+                                        }
+                                    }
+                                },
+                                data:[]
+                            }]
+                        }
+                    });
+                    avalon.scan();
+
+                    fb.requestJson({
+                        remoteUrl:"./model/tree1.json",
+                        localUrl:"./model/tree1.json",
+                        success:function(data){
+                            var options=vm.options;
+                            var result=data.rows;
+                            var itemStyle={//label不展现
+                                normal:{
+                                    label:{
+                                        show:false
+                                    }
+                                }
+                            }
+                            for(var i=0;i&lt;result.length;i++){
+                                result[i].itemStyle=itemStyle;
+                                traverse(result[i],itemStyle);
+                            }
+
+                            options.series[0].data=result;
+                            var myChart = echarts.init(document.getElementById('tree'));
+                            myChart.setOption(options);
+                        }
+                    });
+                });
+
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

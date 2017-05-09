@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>series（韦恩图）</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h3 class="table-doc-title">series（韦恩图）使用说明</h3>
+    <p>json数据中的series中的参数使用说明如下：</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col width="95">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称</th>
+            <th> 默认值</th>
+            <th> 描述</th>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> itemStyle </td>
+            <td> {} </td>
+            <td>参见<a href="#ItemStyle" title="">itemStyle</a></td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> data </td>
+            <td> [] </td>
+            <td> 数据列表，长度为3，前两项分别表示两个集合，第三项表示交集。每一个数组项为Object {}，内容如下：
+                <table cellspacing="0" class="ADoc_table full">
+                    <tbody><tr>
+                        <th> 名称 </th>
+                        <th> 默认值 </th>
+                        <th> 描述 </th>
+                    </tr>
+                    <tr>
+                        <td> <b>{string}</b> name </td>
+                        <td> null </td>
+                        <td> 数据名称 </td>
+                    </tr>
+                    <tr>
+                        <td> <b>{Number}</b> value </td>
+                        <td> null </td>
+                        <td> 数据值 </td>
+                    </tr>
+                    <tr>
+                        <td> <b>{Object}</b> itemStyle </td>
+                        <td> {} </td>
+                        <td>
+                            参见
+                                itemStyle
+                        </td>
+                    </tr>
+                    </tbody></table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

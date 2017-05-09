@@ -1,0 +1,9 @@
+{
+  "rows":[
+    {"name":"展现","expectValue":100,"factValue":80},
+    {"name":"点击","expectValue":80,"factValue":50},
+    {"name":"订单","expectValue":20,"factValue":5},
+    {"name":"咨询","expectValue":40,"factValue":10},
+    {"name":"访问","expectValue":60,"factValue":30}
+  ]
+}

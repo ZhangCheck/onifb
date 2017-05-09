@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <script src="../require.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <title></title>
+</head>
+<script>//@ sourceUrl=./avalon.simplegrid.ex18.html
+require.config({
+    baseUrl:'../',
+    paths:{
+        avalon: 'avalon.shim',
+        echarts: 'echarts',
+        domReady:'domReady',
+        fb:"avalon.fb"
+    },
+    map:{
+        '*':{
+            'css':'require.css',
+            'text':'require.text'
+        }
+    },
+    shim:{
+        avalon: { exports: "avalon" },
+        echarts:{exports:"echarts"}
+    }
+});
+    require(["./simplegrid/avalon.simplegrid"], function() {
+       var vm = avalon.define({
+            $id:"test",
+           $Opt:{
+               useInnerRequest:true,
+               interface:{
+                   remoteUrl:"",
+                   localUrl:"gridData.json",
+                   type:"POST",
+                   status:"200",
+                   data:{'rows':10,'page':1},
+                   success:function(data){
+                       //none
+                   }
+               },
+               columns: [
+                   {field: "aaa", text: "紫薯", resizable: true, align: "center"},
+                   {field: "zzz", text: "石榴", resizable: true, align: "center"},
+                   {field: "yyy", text: "雪梨", resizable: true, align: "center"},
+                   {field: "xxx", text: "苹果", resizable: true, align: "center"},
+                   {field: "bbb", text: "南瓜", resizable: true, align: "center"},
+                   {field: "ccc", text: "西红柿", resizable: true, align: "center"}
+               ],
+               showRows: 10,
+               pageable: true,
+               showLineNum:true,
+               pager: {
+                   perPages: 10,
+                   showPages: 5,
+                   options: [10, 20, 30, 40]
+               },
+               argFormat:function(args,pageNum,pageSize){
+                   return avalon.mix(args,{"rows":pageSize,"page":pageNum})
+               },
+               dataFormat:function(vmodel,interfaceData) {
+                   vmodel.pager.totalItems=interfaceData.data.total
+                  // vm.pager.totalItems=interfaceData.total
+                   return interfaceData.data.rows
+               }
+           }
+        })
+        avalon.scan();
+    });
+//@ sourceUrl=./avalon.simplegrid.ex18.html
+</script>
+<body ms-controller="test">
+<div ms-widget="simplegrid,ex18,$Opt">
+
+</div>
+</body>
+</html>

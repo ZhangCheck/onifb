@@ -1,0 +1,137 @@
+
+@import "../chameleon/oniui-theme";
+$uiname: "oni-pager";
+$pager-background-color: #F8F8F8;
+$pager-active-color: $ui-state-active-color;
+@if($oinui-theme == smoothness){
+    $pager-background-color: #F8F8F8;
+    $pager-active-color: #3775c0;
+}
+.#{$uiname} {
+    @include inline-block();
+    @extend %oniui-font-setting;
+    vertical-align: middle;
+    white-space: nowrap;
+    .#{$uiname}-items {
+        @include inline-block();
+        vertical-align: middle;
+    }
+    .#{$uiname}-prev, .#{$uiname}-next, .#{$uiname}-item {
+        @include inline-block();
+        background-color: $pager-background-color;
+        color: #3775c0;
+        height: 24px;
+        line-height: 24px;
+        margin-right: 5px;
+        border: 1px solid $ui-state-default-border-color;
+        padding: 0 10px;
+        @include border-radius(2px);
+        cursor: pointer;
+        font-size: 12px;
+        vertical-align: middle;
+        @include user-select(none);
+
+        &.oni-state-active {
+            color: #FFFFFF;
+            /*border: 0 none;*/
+            padding: 1px 11px;
+            cursor: default;
+            background: $pager-active-color;
+        }
+
+        &.oni-state-hover{
+            border-color:$pager-active-color;
+        }
+
+        &.oni-state-disabled {
+            border-color:$ui-state-disabled-border-color;
+            background-color:$ui-state-disabled-background-color;
+            color: $ui-state-disabled-color;
+            cursor: default;
+        }
+    }
+
+    .#{$uiname}-omit {
+        @include inline-block();
+        height: 24px;
+        line-height: 24px;
+        margin-right: 5px;
+        padding: 1px 0;
+        vertical-align: middle;
+        font-size: 12px;
+        @include user-select(none);
+        cursor: default;
+    }
+
+    .#{$uiname}-jump {
+        @include inline-block();
+        vertical-align: middle;
+        padding-left:5px;
+        padding-right: 5px;
+        vertical-align: middle;
+    }
+
+    .#{$uiname}-textbox-wrapper {
+
+        @include inline-block();
+        width:26px;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 3px 5px;
+        vertical-align: middle;
+        font-size: 0;
+        outline: none;
+        background-color:$pager-background-color; 
+        border: 1px solid $ui-state-default-border-color;
+
+    }
+
+    .#{$uiname}-textbox {
+        display: inline;
+        float: left;
+        position: relative;
+        width: 26px;
+        height: 18px;
+        line-height: 18px;
+        padding: 0;
+        border: 0 none;
+        font-size: 12px;
+        outline: medium none;
+        vertical-align: middle;
+        text-align: center;
+        @if($oinui-theme == smoothness){
+            color: #333333;
+            background: #fff;
+        }
+    }
+
+    .#{$uiname}-button {
+        @include inline-block();
+        overflow: visible;
+        _overflow-y: hidden;
+        height: 26px;
+        margin-left: 5px;
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+        font-size: 12px;
+        vertical-align: middle;
+        padding: 0 10px;
+        text-decoration: none;
+        border: 1px solid #ccc;
+        background-color: #f8f8f8;
+        color: #333;
+        &:hover{
+            border-color: #bbb;
+        }
+    }
+
+    .#{$uiname}-text {
+        @include inline-block();
+        font-size: 12px;
+        vertical-align: middle;
+    }
+}
+
+
+

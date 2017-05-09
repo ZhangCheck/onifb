@@ -1,0 +1,29 @@
+{
+  "checkList":[
+    {
+      "text": "男",
+      "value": "0"
+    },
+    {
+      "text": "女",
+      "value": "1"
+    },
+    {
+      "text": "Java工程师",
+      "value": "java"
+    },
+    {
+      "text": "C++工程师",
+      "value": "C++"
+    },
+    {
+      "text": "大数据处理",
+      "value": "BigData"
+    },
+    {
+      "text": "移动端开发",
+      "value": "Mobile"
+    }
+  ],
+  "selectedList":[{"text":"C++工程师","value":"C++"},{"text":"大数据处理","value":"BigData"},{"text":"移动端开发","value":"Mobile"}]
+}

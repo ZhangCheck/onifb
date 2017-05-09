@@ -1,0 +1,107 @@
+<style>
+    .api-content-wrap .api-content ol{
+        list-style-type: decimal;
+    }
+    .api-content-wrap .api-content ul > li, .api-content-wrap .api-content ol > li{
+        border:none;
+    }
+</style>
+<h1>新建项目</h1>
+<div class="mlLg">
+    <h3 class="mtLg">项目环境</h3>
+    <ul class="mlLg">
+        <li>安装 Nodejs: https://nodejs.org/en/</li>
+		<li>安装 babel:  npm install babel-cli -g</li>
+        <li>安装 SVN客户端TortoiseSvn</li>
+    </ul>
+	
+	<h3>项目初始化V1.0</h3>
+    <ul class="mlLg">
+		<li>安装svn客户端CLI：https://sliksvn.com/download/ (和本机的TortoiseSvn不会冲突)</li>
+        <li>建立项目文件夹"src"</li>
+		<li>下载<a href="initProject.bat">initProject.bat（稳定版）到项目文件夹,并运行initProject.bat</a> </li>
+        <li>配置项目资源Gruntfile.js (可选）</li>
+        <li>运行 grunt_coding.bat 初始化项目</li>
+        <li>运行 grunt_index_server.bat 查看项目开发版运行效果</li>
+		<li>运行 src/grunt_publish.bat,发布项目到release文件夹</li>
+		<li>运行 release/grunt_index_server.bat 查看项目发布版运行效果</li>
+    </ul>
+	<h3>项目结构V1.0</h3>
+    <ul class="mlLg">
+		<li>src: 项目源文件</li>
+        <li>release: 项目发布版(发布时自动创建)</li>
+        <li>src/GruntFile.js: 通用库资源配置，其中"watch"参数配置为"true"的资源，由Grunt自动维护</li>
+        <li>src/pageList.html: 项目中所有页面清单</li>
+        <li>src/js/fb_lib/: 通用库资源在项目中的应用</li>
+        <li>src/js/*.js: 项目级js文件</li>
+        <li>src/css/*.css: 项目级css文件</li>
+        <li>src/images/: 项目级图片资源</li>
+        <li>src/fonts/: 项目级图标字体</li>
+    </ul>
+
+    <h3>项目初始化V1.1</h3>
+    <ul class="mlLg">
+        <li>建立项目文件夹"src"</li>
+		<li>下载<a href="z1_initProject_Online.bat">z1_initProject_Online.bat（测试版）</a>(飞博前端组请下载: <a href="z1_initProject.bat">z1_initProject.bat</a>（内网环境）（测试版）)</li>
+        <li></li>
+        <li>运行 initProject.bat或z1_initProject.bat 获取资源文件</li>
+        <li>配置项目资源_cloudMap.js (可选）</li>
+        <li>运行 z2_coding.bat 初始化项目</li>
+        <li>运行 z3_index_server.bat 查看项目开发版运行效果</li>
+    </ul>
+	<h3>项目结构V1.1</h3>
+    <ul class="mlLg">
+		<li>src: 项目源文件</li>
+        <li>release: 项目发布版(发布时自动创建)</li>
+        <li>src/un_config.js: 云端地址配置(svn)</li>
+        <li>src/pageList.html: 项目中所有页面清单</li>
+        <li>src/_cloudMap.js: 项目资源列表配置文件，其中"watch"参数配置为"true"的资源，由Grunt自动维护</li>
+        <li>src/js/fb_lib/: 存放云端资源的副本</li>
+        <li>src/js/*.js: 项目级js文件</li>
+        <li>src/css/*.css: 项目级css文件</li>
+        <li>src/images/: 项目级图片资源</li>
+        <li>src/fonts/: 项目级图标字体</li>
+    </ul>
+	
+	<h3>飞博平台2.0项目初始化</h3>
+	<ul class='mlLg'>
+		<li>建立项目文件夹"src"</li>
+		<li>下载<a href="initProject_plateformV2.bat">initProject_plateformV2.bat</a>到项目文件夹，并运行</li>
+		<li>配置项目资源Gruntfile.js (可选）</li>
+		<li>运行 src/grunt_coding.bat 初始化项目</li>
+        <li>运行 src/grunt_index_server.bat 查看项目开发版运行效果</li>
+		<li>运行 src/grunt_publish.bat,发布项目到release文件夹</li>
+		<li>运行 release/grunt_index_server.bat 查看项目发布版运行效果</li>
+	</ul>
+	<h3>飞博平台2.0项目结构</h3>
+    <ul class="mlLg">
+        <li>src: 项目源文件</li>
+        <li>release: 项目发布版(发布时自动创建)</li>
+        <li>src/GruntFile.js: 通用库资源配置，其中"watch"参数配置为"true"的资源，由Grunt自动维护</li>
+        <li>src/js/fb_lib/: 通用库的映射版本</li>
+        <li>src/js/*.js: 项目级js文件</li>
+        <li>src/css/*.css: 项目级css文件</li>
+        <li>src/images/: 项目级图片资源</li>
+        <li>src/fonts/: 项目级图标字体</li>
+		<li>src/pageList.html: 项目中所有页面清单</li>
+    </ul>
+    
+	
+	<h3>通用库在项目中的版本控件</h3>
+	<ul class="mlLg">
+		<li>开发时，通用库始终使用最新通用库，并实时更新到最新</li>
+		<li>开发后，前端以测试组测试时的svn版本号（通用库FB_FE_LIB）作为前端版本号</li>
+		<li>维护时，通用库组件需要改进或升级的，可只针对单个组件升级</li>
+        <li>资源库的备份与恢复：备份"GruntFile.js"或"_cloudMap.js"，恢复时先恢复备份文件中或从svn上恢复"GruntFile.js"或"_couldMap.js",再运行*_coding.bat即可</li>
+	</ul>
+	
+    <h3>项目历史</h3>
+    <ul>
+        <li>
+            V0.0.0：（2015年8月-2015年12月）如果要更新到V1.0.0以上，原项目需要修改project.core文件（查看project.core.forV0.0.0.js），以支持旧的接口访问方式
+            <div>V0.0.0：项目清单：大河南-分析研判，大河南APP(3个项目), 辽宁APP（2个项目）, 南通门户</div>
+        </li>
+        <li>V1.0.0: (2016年1月8日-2016年7月7号) 和平台组对接，更新默认接口数据格式</li>
+		<li>飞博平台2.0: 正式在项目中应用平台2.0的前端</li>
+    </ul>
+</div>

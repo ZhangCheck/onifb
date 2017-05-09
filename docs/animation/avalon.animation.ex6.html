@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../require.js"></script>
+    <script src="../require.config.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="avalon.animate.style.css"/>
+</head>
+<body ms-controller="test">
+<script>
+    require(["animation/avalon.animate","button/avalon.button"], function() {
+        var effects=new Array()
+        for(var effect in avalon.easing) {
+            effects.push(effect)
+        }
+        var vmodel=avalon.define({
+            $id:'test',
+            showDivA:true,
+            animate:{
+                properties:{
+                    backgroundColor:"yellow",
+                    height:0
+                },
+                options:{
+                    easing:effects[0],
+                    before:function(){
+                        //alert("动画要开始了")
+                    },
+                    step:function(){
+                        avalon.log("一帧")
+                    },
+                    after:function(){
+                        //alert("结束了")
+                    }
+                }
+            },
+            changeA:function(){
+                vmodel.showDivA=!vmodel.showDivA
+            }
+        })
+        var vmodel2=avalon.define("test2",function(vm){
+            /*showDivB=true,
+            showDivC:true,
+            showDivD:true,*/
+            vm.showDivE=false,
+            vm.showDivF=true,
+            vm.showDivG=true,
+            vm.showDivH=false,
+            vm.showDivI=true,
+            vm. showDivJ=true,
+            /*animate:{
+                properties:{
+                    backgroundColor:"blue"
+                },
+                easing:effects[0],
+                before:function(){
+                    //alert("动画要开始了")
+                },
+                step:function(){
+                    avalon.log("一帧")
+                },
+                after:function(){
+                    //alert("结束了")
+                }
+            },
+            animate2:{
+                properties:{
+                    backgroundColor:"green"
+                },
+                easing:effects[0]
+            },*/
+            /*changeB:function(){
+                vmodel2.showDivB=!vmodel2.showDivB
+            },
+            changeC:function(){
+                vmodel2.showDivC=!vmodel2.showDivC
+            },
+            changeD:function(){
+                vmodel2.showDivD=!vmodel2.showDivD
+            },*/
+            vm.changeE=function(){
+                vm.showDivE=!vm.showDivE
+            },
+            vm.changeF=function(){
+                vm.showDivF=!vm.showDivF
+            },
+            vm.changeG=function(){
+                vm.showDivG=!vm.showDivG
+            },
+            vm.changeH=function(){
+                vm.showDivH=!vm.showDivH
+            },
+            vm.changeI=function(){
+                vm.showDivI=!vm.showDivI
+            },
+            vm.changeJ=function(){
+                vm.showDivJ=!vm.showDivJ
+            }
+            return vm
+        })
+        avalon.scan();
+    });
+</script>
+<div class="wrapper" ms-controller="test2">
+
+<div class="normal" ms-if="showDivA"  ms-animate="test,id1,animate"  data-animate-duration="2000" data-animate-fps="20"></div>
+<button ms-widget="button" ms-click="changeA">{{showDivA?'隐藏':'显示'}}A</button>
+    <p class="example">
+            ms-animate="VM的名称，绑定动画的ID(AnimateId),配置属性的对象名(animate)"(括号中为缺省值) ms-animate绑定属性通过VM的名称来寻找为其提供参数的VM,如果不配置则寻找最近的一个VM,
+        该绑定属性被扫描时会在该VM中添加一个对象名称为"animate_VM的名称_绑定动画的ID",由该对象来实现动画效果
+    </p>
+<!--<div class="normal" ms-if="showDivB"  ms-animate="test2,id2,animate"  data-animate-duration="2000" data-animate-fps="20"></div>
+<div ms-widget="button" ms-click="changeB">{{showDivB?'隐藏':'显示'}}B</div>
+    <p class="example"></p>
+<div class="normal" ms-if="showDivC"  ms-animate="test2,id3,animate2" data-animate2-duration="5000" data-animate2-fps="20"></div>
+<div ms-widget="button" ms-click="changeC">{{showDivC?'隐藏':'显示'}}C</div>
+    <p class="example"></p>
+<div class="normal" ms-if="showDivD"  ms-animate></div>
+<div ms-widget="button" ms-click="changeD">{{showDivD?'隐藏':'显示'}}D</div>
+    <p class="example"></p>-->
+    <table width="500px">
+    <tr>
+        <td  width="33%"><div class="normal" ms-if="showDivE"  ms-animate="test2,id4,animate" data-animate-options-model="slide"></div></td>
+        <td  width="33%"><div class="normal" ms-if="showDivF"  ms-animate="test2,id5,animate" data-animate-options-model="fade"></div></td>
+        <td  width="33%"><div class="normal" ms-if="showDivG"  ms-animate="test2,id6,animate" data-animate-options-model="expand"></div></td>
+    </tr>
+    <tr>
+        <td><button ms-widget="button" ms-click="changeE">{{showDivE?'隐藏':'显示'}}E</button></td>
+        <td><button ms-widget="button" ms-click="changeF">{{showDivF?'隐藏':'显示'}}F</button></td>
+        <td><button ms-widget="button" ms-click="changeG">{{showDivG?'隐藏':'显示'}}G</button></td>
+    </tr>
+</table>
+    <p class="example">
+        slide,fade,expand三种常用的显示隐藏动画效果,可以通过配置model属性来快速实现 把ms-if换成ms-visible也可以实现同样的效果
+    </p>
+    <table width="500px">
+        <tr>
+            <td  width="33%"><div class="normal" ms-visible="showDivH"  ms-animate="test2,id7,animate" data-animate-options-model="slide"></div></td>
+            <td  width="33%"><div class="normal" ms-visible="showDivI"  ms-animate="test2,id8,animate" data-animate-options-model="fade"></div></td>
+            <td  width="33%"><div class="normal" ms-visible="showDivJ"  ms-animate="test2,id9,animate" data-animate-options-model="expand"></div></td>
+        </tr>
+        <tr>
+            <td><button ms-widget="button" ms-click="changeH">{{showDivH?'隐藏':'显示'}}H</button></td>
+            <td><button ms-widget="button" ms-click="changeI">{{showDivI?'隐藏':'显示'}}I</button></td>
+            <td><button ms-widget="button" ms-click="changeJ">{{showDivJ?'隐藏':'显示'}}J</button></td>
+        </tr>
+    </table>
+    <p class="example">
+        把ms-if换成ms-visible也可以实现同样的效果
+    </p>
+</div>
+<pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+    &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang="en"&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;script src="../require.js"&gt;&lt;/script&gt;
+    &lt;script src="../require.config.js"&gt;&lt;/script&gt;
+    &lt;script src="../highlight/shCore.js"&gt;&lt;/script&gt;
+    &lt;link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/&gt;
+    &lt;link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/&gt;
+    &lt;link type="text/css" rel="stylesheet" href="avalon.animate.style.css"/&gt;
+&lt;/head&gt;
+&lt;body ms-controller="test"&gt;
+&lt;script&gt;
+    require(["animation/avalon.animate","button/avalon.button"], function() {
+        var effects=new Array()
+        for(var effect in avalon.easing) {
+            effects.push(effect)
+        }
+        var vmodel=avalon.define({
+            $id:'test',
+            showDivA:true,
+            animate:{
+                properties:{
+                    backgroundColor:"yellow",
+                    height:0
+                },
+                options:{
+                    easing:effects[0],
+                    before:function(){
+                        //alert("动画要开始了")
+                    },
+                    step:function(){
+                        avalon.log("一帧")
+                    },
+                    after:function(){
+                        //alert("结束了")
+                    }
+                }
+            },
+            changeA:function(){
+                vmodel.showDivA=!vmodel.showDivA
+            }
+        })
+        var vmodel2=avalon.define("test2",function(vm){
+            vm.showDivE=true,
+            vm.showDivF=true,
+            vm.showDivG=true,
+            vm.showDivH=true,
+            vm.showDivI=true,
+            vm. showDivJ=true,
+            vm.changeE=function(){
+                vm.showDivE=!vm.showDivE
+            },
+            vm.changeF=function(){
+                vm.showDivF=!vm.showDivF
+            },
+            vm.changeG=function(){
+                vm.showDivG=!vm.showDivG
+            },
+            vm.changeH=function(){
+                vm.showDivH=!vm.showDivH
+            },
+            vm.changeI=function(){
+                vm.showDivI=!vm.showDivI
+            },
+            vm.changeJ=function(){
+                vm.showDivJ=!vm.showDivJ
+            }
+        })
+        avalon.scan();
+    });
+&lt;/script&gt;
+&lt;div class="wrapper" ms-controller="test2"&gt;
+
+&lt;div class="normal" ms-if="showDivA"  ms-animate="test,id1,animate"  data-animate-duration="2000" data-animate-fps="20"&gt;&lt;/div&gt;
+&lt;button ms-widget="button" ms-click="changeA"&gt;{{showDivA?'隐藏':'显示'}}A&lt;/button&gt;
+    &lt;p class="example"&gt;
+            ms-animate="VM的名称，绑定动画的ID,配置属性的对象名" ms-animate绑定属性通过VM的名称来寻找为其提供参数的VM,如果不配置则寻找最近的一个VM,
+        该绑定属性被扫描时会在该VM中添加一个对象名称为"animate_VM的名称_绑定动画的ID",由该对象来实现动画效果
+    &lt;/p&gt;
+    &lt;table width="500px"&gt;
+    &lt;tr&gt;
+        &lt;td  width="33%"&gt;&lt;div class="normal" ms-if="showDivE"  ms-animate="test2,id4,animate" data-animate-options-model="slide"&gt;&lt;/div&gt;&lt;/td&gt;
+        &lt;td  width="33%"&gt;&lt;div class="normal" ms-if="showDivF"  ms-animate="test2,id5,animate" data-animate-options-model="fade"&gt;&lt;/div&gt;&lt;/td&gt;
+        &lt;td  width="33%"&gt;&lt;div class="normal" ms-if="showDivG"  ms-animate="test2,id6,animate" data-animate-options-model="expand"&gt;&lt;/div&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;button ms-widget="button" ms-click="changeE"&gt;{{showDivE?'隐藏':'显示'}}E&lt;/button&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;button ms-widget="button" ms-click="changeF"&gt;{{showDivF?'隐藏':'显示'}}F&lt;/button&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;button ms-widget="button" ms-click="changeG"&gt;{{showDivG?'隐藏':'显示'}}G&lt;/button&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+    &lt;p class="example"&gt;
+        slide,fade,expand三种常用的显示隐藏动画效果,可以通过配置model属性来快速实现 把ms-if换成ms-visible也可以实现同样的效果
+    &lt;/p&gt;
+    &lt;table width="500px"&gt;
+        &lt;tr&gt;
+            &lt;td  width="33%"&gt;&lt;div class="normal" ms-visible="showDivH"  ms-animate="test2,id7,animate" data-animate-options-model="slide"&gt;&lt;/div&gt;&lt;/td&gt;
+            &lt;td  width="33%"&gt;&lt;div class="normal" ms-visible="showDivI"  ms-animate="test2,id8,animate" data-animate-options-model="fade"&gt;&lt;/div&gt;&lt;/td&gt;
+            &lt;td  width="33%"&gt;&lt;div class="normal" ms-visible="showDivJ"  ms-animate="test2,id9,animate" data-animate-options-model="expand"&gt;&lt;/div&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;button ms-widget="button" ms-click="changeH"&gt;{{showDivH?'隐藏':'显示'}}H&lt;/button&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;button ms-widget="button" ms-click="changeI"&gt;{{showDivI?'隐藏':'显示'}}I&lt;/button&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;button ms-widget="button" ms-click="changeJ"&gt;{{showDivJ?'隐藏':'显示'}}J&lt;/button&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;p class="example"&gt;
+        把ms-if换成ms-visible也可以实现同样的效果
+    &lt;/p&gt;
+&lt;/div&gt;
+</pre>
+
+</body>
+</html>

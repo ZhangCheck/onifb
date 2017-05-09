@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>类目散点图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/scatter","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    title : {
+                        text : '一周内的气温',
+                        subtext : 'dataZoom支持'
+                    },
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer:{
+                            show: true,
+                            type : 'cross',
+                            lineStyle: {
+                                type : 'dashed',
+                                width : 1
+                            }
+                        }
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    dataZoom: {//数据区域缩放
+                        show: true,
+                        //start : 30,//数据缩放，选择起始比例，默认为0（%），从首个数据起选择。
+                        //end : 70//数据缩放，选择结束比例，默认为100（%），到最后一个数据选择结束。
+                    },
+                    legend : {
+                        data : []
+                    },
+                    symbolList: ['circle'],//散点图的形状，默认是 [ 'circle', 'rectangle', 'triangle', 'diamond','emptyCircle', 'emptyRectangle', 'emptyTriangle', 'emptyDiamond]循环使用
+                    dataRange: {//值域选择
+                        min: 0,
+                        max: 100,
+                        orient: 'horizontal',
+                        y: 30,
+                        x: 'center',
+                        text:['高','低'],           // 文本，默认为数值文本
+                        color:['lightgreen','orange'],
+                        splitNumber: 5
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            axisLabel: {
+                                formatter : function(v) {
+                                    return '类目' + v
+                                }
+                            },
+                            data : function (){
+                                var list = [];
+                                var len = 0;
+                                while (len++ < 500) {
+                                    list.push(len);
+                                }
+                                return list;
+                            }()
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    animation: false,
+                    series : []
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/month_weather.json",
+                localUrl:"./model/month_weather.json",
+                success:function(data){
+                    var options=vm.options;
+                    var legend=[];//图例
+                    var result=data.rows;
+                    for(var i=0;i<result.length;i++){//获取图例数据
+                        if(legend.indexOf(result[i].name)<0){
+                            legend.push(result[i].name);
+                        }
+                    }
+                    options.legend.data=legend;
+                    for(var j=0;j<legend.length;j++){//根据图例信息合并相应的数据
+                        var dataArr=[];
+                        var series={
+                                name:legend[j],
+                                type:"scatter",
+                                symbolSize:4,
+                                tooltip : {
+                                    trigger: 'item',
+                                    formatter : function (params) {
+                                        if (params.value.length > 1) {
+                                            return params.seriesName + ' :<br/>'
+                                                    +"最高温度："+ params.value[0] + '℃ '
+                                                    +"，最低温度："+ params.value[1] + '℃ '
+                                                    +"，平均温度："+ params.value[2] + '℃ ';
+                                        }
+                                        else {
+                                            return params.seriesName + ' :<br/>'
+                                                    + params.name + ' : '
+                                                    + params.value + '℃ ';
+                                        }
+                                    },
+                                    axisPointer:{
+                                        show: true
+                                    }
+                                },
+                                data:[]
+                            }
+                        for(var i=0;i<result.length;i++){//获取图例数据
+                            var simpleData=[];
+                            simpleData.push(result[i].max);
+                            simpleData.push(result[i].min);
+                            simpleData.push(result[i].avg);
+                            if(result[i].name==legend[j]){
+                                dataArr.push(simpleData);
+                                series.data.push(simpleData);
+                            }
+                        }
+                        options.series.push(series);
+                    }
+                    var myChart = echarts.init(document.getElementById('scatter'));
+                    myChart.setOption(options);
+                }
+            });
+        });
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="scatter" style="width: 800px;height: 300px;"></div>
+
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;值域漫游散点图&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="scatter" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+            &lt;script&gt;
+                require(["echarts.fb","echarts/chart/scatter","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                    var vm=avalon.define({
+                        $id:"demo",
+                        show:function(dialog){
+                            avalon.vmodels[dialog].toggle = true;
+                        },
+                        optionsStr:function(){
+                            return JSON.stringify(vm.options);
+                        },
+                        dialog:{
+                            title:"options的json格式"
+                        },
+                        options:{
+                            title : {
+                                text : '一周内的气温',
+                                subtext : 'dataZoom支持'
+                            },
+                            tooltip : {
+                                trigger: 'axis',
+                                axisPointer:{
+                                    show: true,
+                                    type : 'cross',
+                                    lineStyle: {
+                                        type : 'dashed',
+                                        width : 1
+                                    }
+                                }
+                            },
+                            toolbox: {
+                                show : true,
+                                feature : {
+                                    mark : {show: true},
+                                    dataView : {show: true, readOnly: false},
+                                    restore : {show: true},
+                                    saveAsImage : {show: true}
+                                }
+                            },
+                            dataZoom: {//数据区域缩放
+                                show: true,
+                                //start : 30,//数据缩放，选择起始比例，默认为0（%），从首个数据起选择。
+                                //end : 70//数据缩放，选择结束比例，默认为100（%），到最后一个数据选择结束。
+                            },
+                            legend : {
+                                data : []
+                            },
+                            symbolList: ['circle'],//散点图的形状，默认是 [ 'circle', 'rectangle', 'triangle', 'diamond','emptyCircle', 'emptyRectangle', 'emptyTriangle', 'emptyDiamond]循环使用
+                            dataRange: {//值域选择
+                                min: 0,
+                                max: 100,
+                                orient: 'horizontal',
+                                y: 30,
+                                x: 'center',
+                                text:['高','低'],           // 文本，默认为数值文本
+                                color:['lightgreen','orange'],
+                                splitNumber: 5
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    axisLabel: {
+                                        formatter : function(v) {
+                                            return '类目' + v
+                                        }
+                                    },
+                                    data : function (){
+                                        var list = [];
+                                        var len = 0;
+                                        while (len++ < 500) {
+                                            list.push(len);
+                                        }
+                                        return list;
+                                    }()
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value'
+                                }
+                            ],
+                            animation: false,
+                            series : []
+                        }
+                    });
+                    avalon.scan();
+
+                    fb.requestJson({
+                        remoteUrl:"./model/month_weather.json",
+                        localUrl:"./model/month_weather.json",
+                        success:function(data){
+                            var options=vm.options;
+                            var legend=[];//图例
+                            var result=data.rows;
+                            for(var i=0;i<result.length;i++){//获取图例数据
+                                if(legend.indexOf(result[i].name)<0){
+                                    legend.push(result[i].name);
+                                }
+                            }
+                            options.legend.data=legend;
+                            for(var j=0;j<legend.length;j++){//根据图例信息合并相应的数据
+                                var dataArr=[];
+                                var series={
+                                        name:legend[j],
+                                        type:"scatter",
+                                        symbolSize:4,
+                                        tooltip : {
+                                            trigger: 'item',
+                                            formatter : function (params) {
+                                                if (params.value.length > 1) {
+                                                    return params.seriesName + ' :<br/>'
+                                                            +"最高温度："+ params.value[0] + '℃ '
+                                                            +"，最低温度："+ params.value[1] + '℃ '
+                                                            +"，平均温度："+ params.value[2] + '℃ ';
+                                                }
+                                                else {
+                                                    return params.seriesName + ' :<br/>'
+                                                            + params.name + ' : '
+                                                            + params.value + '℃ ';
+                                                }
+                                            },
+                                            axisPointer:{
+                                                show: true
+                                            }
+                                        },
+                                        data:[]
+                                    }
+                                for(var i=0;i<result.length;i++){//获取图例数据
+                                    var simpleData=[];
+                                    simpleData.push(result[i].max);
+                                    simpleData.push(result[i].min);
+                                    simpleData.push(result[i].avg);
+                                    if(result[i].name==legend[j]){
+                                        dataArr.push(simpleData);
+                                        series.data.push(simpleData);
+                                    }
+                                }
+                                options.series.push(series);
+                            }
+                            var myChart = echarts.init(document.getElementById('scatter'));
+                            myChart.setOption(options);
+                        }
+                    });
+                });
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "success": true,
+  "options": {
+    "action": "interface",
+    "method": "post",
+    "submit": "ajax"
+  },
+  "data": [
+    {
+      "type": "text",
+      "field": "name",
+      "value": "name",
+      "label": "name",
+      "validationType": ""
+    },{
+      "type": "text",
+      "field": "name",
+      "value": "name",
+      "label": "age",
+      "validationType": ""
+    },
+    {
+      "type": "date",
+      "label": "time",
+      "value": "2015-6-13",
+      "field": "time"
+    },
+    {
+      "type": "daterange",
+      "place": 2,
+      "field": "check",
+      "label": "daterange",
+      "starttime": "2015-6-23",
+      "endtime": "2016-7-1",
+      "options": {
+        "rules": "null, 0D"
+      }
+    },
+    {
+      "type": "dropdownlist",
+      "field": "option",
+      "label": "dropdownlist",
+      "value": "three",
+      "options": [
+        {
+          "text": "<i>选项一</i>",
+          "value": "one"
+        },
+        {
+          "text": "选项二",
+          "value": "two",
+          "selected": true
+        },
+        {
+          "text": "选项三",
+          "value": "three"
+        }
+      ]
+    }
+  ]
+}

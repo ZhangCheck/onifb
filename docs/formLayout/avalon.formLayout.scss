@@ -1,0 +1,49 @@
+@charset "utf-8";
+@import "../chameleon/oniui-theme";
+$uiname: "formLayout";
+$uiShort:"fl";
+.#{$uiname}{
+  border-collapse: collapse;
+  border-spacing: 0;
+  .oni-textbox,.oni-datepicker-input-wrapper{
+    width:100%;
+    box-sizing: border-box;
+  }
+  .oni-textbox{
+    min-width:100px;
+
+  }
+  .oni-datepicker-input-wrapper{
+    min-width:150px;
+    input{
+      padding: 3px 0px 3px 0;
+    }
+  }
+  .oni-textbox input{
+    width:100%;
+  }
+  .oni-datepicker-input-wrapper{
+    z-index:auto !important;
+  }
+
+  .#{$uiShort}-label{
+    min-width:90px;
+    text-align:right;
+    vertical-align:middle;
+  }
+
+  .oni-dropdown-source{
+    overflow: hidden;
+  }
+  .oni-textbox-input-wrap{
+    width:100%;
+  }
+
+
+  .formLayout-dropDownWarp{
+    .formLayout-dropDownWarp-content{
+      width:100%;
+      position:relative;
+    }
+  }
+}

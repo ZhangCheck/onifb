@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>axis.splitLine,axis.splitArea,data</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4>axis.splitLine,axis.splitArea,data</h4>
+    <h4>axis.splitLine</h4>
+    <p>分隔线，默认显示且带如下样式：</p>
+
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col  width="100">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 适用类型 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 通用 </td>
+            <td> 是否显示，默认为true，设为false后下面都没意义了 </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> onGap </td>
+            <td> null </td>
+            <td> 类目型 </td>
+            <td> 分隔线是否显示为间隔，默认等于boundaryGap</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> lineStyle </td>
+            <td><pre>{
+    color: ['#ccc'],
+    width: 1,
+    type: 'solid'
+}                           </pre></td>
+            <td> 通用 </td>
+            <td> 属性lineStyle控制线条样式，（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex19" title="">lineStyle</a>） </td>
+        </tr>
+        </tbody>
+    </table>
+    <h4>axis.splitArea</h4>
+    <p>分隔区域，默认不显示：</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col  width="100">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 适用类型 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> false </td>
+            <td> 通用 </td>
+            <td> 是否显示，默认为false，设为true后带如下默认样式 </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> onGap </td>
+            <td> null </td>
+            <td> 类目型 </td>
+            <td> 分隔区域是否显示为间隔，默认等于boundaryGap</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> areaStyle </td>
+            <td><pre>{
+    color: [
+        'rgba(250,250,250,0.3)',
+        'rgba(200,200,200,0.3)'
+    ]
+}                           </pre> </td>
+            <td> 通用 </td>
+            <td> 属性areaStyle（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex20" title="">areaStyle</a>）控制区域样式，颜色数组实现间隔变换。 </td>
+        </tr>
+        </tbody>
+    </table>
+    <h4>axis.data</h4>
+    <p>
+        类目型坐标轴文本标签数组，指定label内容。 数组项通常为文本，'\n'指定换行，如:<br/>
+        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', ..., 'Dec']<br/>
+        当需要对个别标签进行个性化定义时，数组项可用对象，接受textStyle设置个性化标签，如：<br/>
+        <pre>[
+    'Jav', 'Feb', 'Mar',
+     {
+        value:'Apr',            //文本内容，如指定间隔名称格式器formatter，则这个值将被作为模板变量值或参数传入
+        textStyle:{             //详见textStyle
+            color : 'red'
+            ...
+        }
+     },
+    'May', '...'
+]
+</pre>
+    </p>
+</div>
+</body>
+</html>

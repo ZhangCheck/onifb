@@ -1,0 +1,6 @@
+@import "../chameleon/oniui-theme";
+$uiname: "oni-multilevel";
+
+.#{$uiname}-level:not(:first-child):before{
+   content:'-';
+}

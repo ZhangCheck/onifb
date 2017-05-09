@@ -1,0 +1,17 @@
+{
+  "rows":[
+    {"name": "盐城市","value": 10},
+    {"name": "徐州市","value":8},
+    {"name": "南通市","value": 7},
+    {"name": "淮安市","value": 6},
+    {"name": "苏州市","value": 5},
+    {"name": "宿迁市","value": 7},
+    {"name": "连云港市","value": 62.1},
+    {"name": "扬州市","value": 21.0},
+    {"name": "南京市","value": 11.0},
+    {"name": "泰州市","value": 14.0},
+    {"name": "无锡市","value": 13.0},
+    {"name": "常州市","value": 12.0},
+    {"name": "镇江市","value":11.0}
+  ]
+}

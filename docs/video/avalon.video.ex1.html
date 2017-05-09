@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>treegrid</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <script src="../require.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    
+    <script>
+        require.config({
+            baseUrl:'../',
+            paths:{
+                avalon: 'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady',
+                fb:"avalon.fb"
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{ exports:"echarts"}
+            }
+        });
+        
+        require(["./video/avalon.video",'./button/avalon.button'], function() {
+            //根据具体项目配置正确的swf地址【重要】
+            videojs.options.flash.swf = "video-js.swf";
+            
+            var testVM = avalon.define("test", function(vm) {
+                vjs.players['myVideo']=null;//清空缓存，已确保新建视频
+                vm.$videos = ['CAT_HD.mp4','aaa.mp4']
+                vm.$posters = ['poster.jpg','poster1.jpg']
+                vm.currentVideoIndex = -1
+                vm.playOther = function(){
+                    var player = videojs('myVideo')
+                    vm.currentVideoIndex = vm.currentVideoIndex==0?1:0
+                    player.poster(vm.$posters[vm.currentVideoIndex])
+                    player.src(vm.$videos[vm.currentVideoIndex]);
+                }
+            })
+            avalon.scan()
+            testVM.playOther()
+        })
+    </script>
+</head>
+<body ms-controller="test">
+   <h3>视频播放器</h3>
+   <br/>
+   
+   <video id="myVideo" ms-widget="video,myVideo" poster="poster.jpg" class="video-js vjs-default-skin" controls preload="none" width="640" height="360">
+      
+   </video>
+   <div class='mtLg'>
+      <span ms-widget='button' ms-click="playOther()">切换视频</span>
+      <span>{{$videos[currentVideoIndex]}}</span>
+    </div>
+    <div>iframe中不允许全屏，查看全屏效果，请查看<a href='avalon.video.ex1.html' target='blank' class='pointer'> [这里] </a></div>
+    <br />
+    <pre class="brush:html;gutter:false;toolbar:false;">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;treegrid&lt;/title&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width"&gt;
+    &lt;link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"&gt;
+    &lt;script src="../require.js"&gt;&lt;/script&gt;
+    &lt;script src="../highlight/shCore.js"&gt;&lt;/script&gt;
+    
+    &lt;script&gt;
+        require.config({
+            baseUrl:'../',
+            paths:{
+                avalon: 'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady',
+                fb:"avalon.fb"
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{ exports:"echarts"}
+            }
+        });
+        
+        require(["./video/avalon.video",'./button/avalon.button'], function() {
+            //根据具体项目配置正确的swf地址【重要】
+            videojs.options.flash.swf = "video-js.swf";
+            
+            var testVM = avalon.define("test", function(vm) {
+                vm.$videos = ['CAT_HD.mp4','aaa.mp4']
+                vm.$posters = ['poster.jpg','poster1.jpg']
+                vm.currentVideoIndex = -1
+                vm.playOther = function(){
+                    var player = videojs('myVideo')
+                    vm.currentVideoIndex = vm.currentVideoIndex==0?1:0
+                    player.poster(vm.$posters[vm.currentVideoIndex])
+                    player.src(vm.$videos[vm.currentVideoIndex]);
+                }
+            })
+            avalon.scan()
+            testVM.playOther()
+        })
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body ms-controller="test"&gt;
+   &lt;h3&gt;视频播放器&lt;/h3&gt;
+   &lt;br/&gt;
+   
+   &lt;video id="myVideo" ms-widget="video,myVideo" poster="poster.jpg" class="video-js vjs-default-skin" controls preload="none" width="640" height="360"&gt;
+      
+   &lt;/video&gt;
+   &lt;div class='mtLg'&gt;
+      &lt;span ms-widget='button' ms-click="playOther()"&gt;切换视频&lt;/span&gt;
+      &lt;span&gt;{{$videos[currentVideoIndex]}}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;iframe中不允许全屏，查看全屏效果，请查看&lt;a href='avalon.video.ex1.html' target='blank' class='pointer'&gt; [这里] &lt;/a&gt;&lt;/div&gt;
+    &lt;br /&gt;
+    &lt;pre class="brush:html;gutter:false;toolbar:false;"&gt;
+
+    &lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+    </pre>
+</body>
+</html>

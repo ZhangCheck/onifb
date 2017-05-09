@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>comboBox组合框</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <h2>comboBox</h2>
+    <h3 class="table-doc-title">使用说明</h3>
+    <p>输入框中的值可以通过手输入，或下拉选择，改变值</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="180">
+            <col width="95">
+            <col width="120">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th>名字</th>
+            <th>类型</th>
+            <th>默认值</th>
+            <th>说明</th>
+        </tr>
+        <tr>
+            <td align="center" colspan="4">配置参数</td>
+        </tr>
+        <tr>
+            <td>width</td>
+            <td>int</td>
+            <td>200</td>
+            <td>textBoxDialog的宽度值</td>
+        </tr>
+        <tr>
+            <td>selWidth</td>
+            <td>String</td>
+            <td>100%</td>
+            <td>选择框的默认宽度</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>String</td>
+            <td>不写则随机产生</td>
+            <td>因为一个页面中可能会出现多个comoboBox为确保中的textbox以及button按钮的vmodelId是唯一的。
+            此值得产生是根据comboBox的vmodelId值，若comboBox的vmodelId为空，者自动产生一个值</td>
+        </tr>
+        <tr>
+            <td>list</td>
+            <td>Array</td>
+            <td></td>
+            <td>选择框中的内容 eg:[{"code":"01","value":"选择1"},
+			{"code":"02","value":"选择2"},
+			{"code":"03","value":"选择3"},
+			{"code":"04","value":"选择4"},
+			{"code":"05","value":"选择5"},
+			{"code":"06","value":"选择6"},
+			{"code":"07","value":"选择7"}]</td>
+        </tr>
+        <tr>
+            <td>selectedValue</td>
+            <td>String</td>
+            <td></td>
+            <td>textbox的对应默认值</td>
+        </tr>
+        <tr>
+            <td>selectedCode</td>
+            <td>String</td>
+            <td></td>
+            <td>textbox值对应的code值</td>
+        </tr>
+        <tr>
+            <td>listNumber</td>
+            <td>Int</td>
+            <td>6</td>
+            <td>选项框中的超过listNumber的个数时，出现滚动条</td>
+        </tr>
+        <tr>
+            <td>search</td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>是否开启搜索选择类目</td>
+        </tr>
+        <tr>
+            <td>nodataText</td>
+            <td>String</td>
+            <td>无</td>
+            <td>无数据时显示文本</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+</body>
+
+</html>

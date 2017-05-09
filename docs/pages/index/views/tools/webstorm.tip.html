@@ -1,0 +1,248 @@
+<h1>WebStorm下自动提示</h1>
+<h3 class="mtLg">HTML自动提示</h3>
+<div>(复制以下代码到webstorm的liveTemplate中)</div>
+<textarea class="mt" style="width:100%;height:500px;">
+    <template name="$first" value="$first" description="是否为监控数组的第一个元素（循环绑定）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="$index" value="$index" description="当前元素的索引值（循环绑定）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="$key" value="$key" description="当前属性名（循环绑定）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="$last" value="$last" description="是否为监控数组的最后一个元素（循环绑定）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="$outer" value="$outer" description="外围循环的那个元素（循环绑定）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="$remove" value="$remove" description="移除此元素（循环绑定）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="$val" value="$val" description="当前属性值（循环绑定）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-active" value="ms-active=&quot;&quot;" description="鼠标按下（类名切换）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-attr-*" value="ms-attr-attrName=&quot;{{}}&quot;" description="属性绑定" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-class" value="ms-class=&quot;&quot;" description="动态类名（类名切换）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-class-\d" value="ms-class-1=&quot;&quot;" description="多个动态类" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-controller" value="ms-controller=&quot;controlNameCtl&quot;" description="控制器" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-css-*" value="ms-css-color=&quot;{{'#000'}}&quot;" description="样式绑定" toReformat="false" toShortenFQNames="true">
+        <context />
+    </template>
+    <template name="ms-data-*" value="ms-data-name=&quot;&quot;" description="数据绑定" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-duplex" value="ms-duplex=&quot;&quot;" description="双向绑定（用于表单）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-hover" value="ms-hover=&quot;expr&quot;" description="鼠标经过（类名切换）" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-href" value="ms-href=&quot;&quot;" description="动态href" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-html" value="ms-html=&quot;&quot;" description="输出html" toReformat="false" toShortenFQNames="true">
+        <context />
+    </template>
+    <template name="ms-if" value="ms-if=&quot;&quot;" description="插入绑定,例数组过虑：&lt;li ms-repeat=&quot;array&quot; ms-if=&quot;$index%2==0&quot;&gt;el&lt;/li&gt;" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-important" value="ms-important=&quot;{{true}}&quot;" description="优先" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-include" value="ms-include=&quot;''&quot;" description="引入dom树中的模板(&lt;script type=&quot;avalon&quot; id=&quot;tempId&quot;&gt;contentOrExp&lt;/script&gt;)" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-include-src" value="ms-include-src=&quot;''&quot;" description="引入外部html" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-on-*" value="ms-on-click=&quot;&quot;" description="事件处理" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-repeat" value="ms-repeat=&quot;&quot;" description="循环绑定(支持对象和数组)，ms-repeat-xxx 是它的原形，xxx默认'el'. 其下可以调用el,$index,$outer,$first,$last,$remove.可以通过data-repeat-rendered指定回调。" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-skip" value="ms-skip" description="忽略扫描" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-src" value="ms-src=&quot;{{}}&quot;" description="动态src" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-text" value="ms-text=&quot;&quot;" description="原始文本" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-value" value="ms-value=&quot;{{}}&quot;" description="动态value" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-view" value="ms-view=&quot;" description="单页面视图" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-visible" value="ms-visible=&quot;&quot;" description="显示绑定" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="ms-widget" value="ms-widget=&quot;&quot;" shortcut="ENTER" description="格式ms-widget=&quot;uiName, id?, optsName?&quot;,其中id 可选 这表示新生成的VM的$id，方便我们从avalon.vmodels[id]中获取它操作它，如果它等于$，那么表示它是随机生成，与不写这个效果一样，框架会在uiName加上时间截，生成随机ID" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| camelize" value="| camelize" description="驼峰化处理" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| currency" value="| currency" description="对数字添加货币符号，以及千位符， currency(symbol)" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| date" value="| date(&quot;yyyy MM dd:HH:mm:ss&quot;)" description="对日期进行格式化，date(formats)" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| escape" value="| escape" description="对类似于HTML格式的字符串进行转义，把尖括号转换为&amp;gt; &amp;lt;" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| html" value="|html" description="将文本绑定转换为HTML绑定" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| lowercase" value="|lowercase" description="转化为小写" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| number" value="| number(2,&quot;.&quot;,&quot;,&quot;)" description="对数字进行各种格式化,number(decimals, dec_point, thousands_sep)decimals:可选，规定多少个小数位;dec_point:可选，规定用作小数点的字符串（默认为 . ）;thousands_sep&#9;可选，规定用作千位分隔符的字符串（默认为 , ），如果设置了该参数，那么所有其他参数都是必需的;" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| sanitize" value="|sanitize" description="去掉onclick, javascript:alert等可能引起注入攻击的代码" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| truncate" value="| truncate(20,&quot;...&quot;)" description="对长字符串进行截短，truncate(number, truncation), number默认为30，truncation为“...”" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+    <template name="| uppercase" value="|uppercase" description="转化为大写" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="HTML_TEXT" value="true" />
+            <option name="HTML" value="true" />
+        </context>
+    </template>
+</textarea>
+<h3 class="mtLg">JavaScript自动提示</h3>
+<div class="mt ml">Setting中增加通用库："avalon.oniui.fb.d.ts"</div>
+

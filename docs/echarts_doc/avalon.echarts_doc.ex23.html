@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>noDataLoadingOption</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4>noDataLoadingOption</h4>
+    <p>无数据提示，loading动画选项。</p>
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> text </td>
+            <td> '暂无数据' </td>
+            <td> 显示话术 ，'\n'指定换行</td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> x </td>
+            <td> 'center' </td>
+            <td> 水平安放位置，默认为全图居中，可选为：'center' | 'left' | 'right' | <b>{number}</b>（x坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> y </td>
+            <td> 'center' </td>
+            <td> 垂直安放位置，默认为全图居中，可选为：'center' | 'bottom' | 'top' | <b>{number}</b>（y坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> textStyle </td>
+            <td> null </td>
+            <td> 显示话术的文本样式（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>） </td>
+        </tr>
+        <tr>
+            <td> <b>{string | Function}</b> effect </td>
+            <td> 'bubble' </td>
+            <td> loading效果，可选为：'spin' | 'bar' | 'ring' | 'whirling' | 'dynamicLine' | 'bubble'，支持外部装载</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> effectOption </td>
+            <td> null </td>
+            <td> loading效果选项，详见zrender</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> progress </td>
+            <td> null </td>
+            <td> 指定当前进度[0~1]，个别效果有效。</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

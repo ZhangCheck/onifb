@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>饼图+柱状图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <style>
+        .clearfix:after{
+            content: " ";
+            display: block;
+            clear: both;
+            height: 0;
+        }
+    </style>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/pie","echarts/chart/bar","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                pieOptionsStr:function(){
+                    return JSON.stringify(vm.pieOptions);
+                },
+                barOptionsStr:function(){
+                    return JSON.stringify(vm.barOptions);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                pieOptions:{
+                    title : {
+                        text: '饼图'
+                    },
+                    legend:{
+                        data:[]
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c}%"
+                    },
+                    series:[]
+                },
+                barOptions:{
+                    title : {
+                        text: '柱状图'
+                    },
+                    legend:{
+                        data:[]
+                    },
+                    tooltip : {
+                        trigger: 'axis',
+                    },
+                    xAxis:{
+                        data:["周一","周二","周三","周四","周五","周六","周日"]
+                    },
+                    yAxis:{
+                    },
+                    series:[]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/mashup2.json",
+                localUrl:"./model/mashup2.json",
+                success:function(data){
+                    var pieOptions=vm.pieOptions;
+                    var barOptions=vm.barOptions;
+                    var result=data.rows;
+                    var json={};
+                    for(var i=0;i<result.length;i++){
+                        json={
+                            type:"pie",
+                            data:[]
+                        }
+                        if(result[i].type=="pie"){
+
+                            var pieData=result[i].data;
+                            json.data=pieData;
+                            for(var m=0;m<pieData.length;m++){//图例
+                                if(pieOptions.legend.data.indexOf(pieData[m].name)<0){
+                                    pieOptions.legend.data.push(pieData[m].name);
+                                }
+                            }
+
+                            pieOptions.series.push(json);
+                        }
+                        if(result[i].type=="bar"){
+                            var res=result[i].data;
+                            for(var j=0;j<res.length;j++){
+                                var da=[];
+                                json={
+                                    type:"bar",
+                                    data:[],
+                                    stack:"总量",//适用于折线图，柱状图。组合名称，双数值轴时无效，多组数据的堆积图时使用，eg：stack:'group1'，则series数组中stack值等于'group1'的数据做堆积计算
+                                    name:res[j].name
+                                }
+                                da.push(res[j].mon);
+                                da.push(res[j].thu);
+                                da.push(res[j].wen);
+                                da.push(res[j].thr);
+                                da.push(res[j].fri);
+                                da.push(res[j].sat);
+                                da.push(res[j].sun);
+                                json.data=da;
+                                if(barOptions.legend.data.indexOf(res[j].name)<0){//添加图例
+                                    barOptions.legend.data.push(res[j].name);
+                                }
+                                barOptions.series.push(json);
+                            }
+                        }
+
+                    }
+                    var myChart = echarts.init(document.getElementById('mashup1'));
+                    myChart.setOption(pieOptions);
+                    var myChart2 = echarts.init(document.getElementById('mashup2'));
+                    myChart2.setOption(barOptions);
+                    myChart.connect(myChart2);
+                    myChart2.connect(myChart);
+                }
+            });
+        });
+    </script>
+</head>
+<body ms-controller="demo">
+<div class="clearfix">
+    <button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例饼图options值</button>
+    <div ms-widget="dialog,ADialog">{{pieOptionsStr()}}</div>
+    <button ms-widget="button" ms-click="show('BDialog')">点击我获取echarts案例柱图options值</button>
+    <div ms-widget="dialog,BDialog">{{barOptionsStr()}}</div>
+    <div id="mashup1" style="height:300px;width:50%;float:left;"></div>
+    <div id="mashup2" style="height:300px;width:50%;float:left;"></div>
+</div>
+
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;仪表盘+漏斗图&lt;/title&gt;
+            &lt;style&gt;
+                .clearfix:after{
+                    content: " ";
+                    display: block;
+                    clear: both;
+                    height: 0;
+                }
+            &lt;/style&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body ms-controller="demo"&gt;
+           &lt;div class="clearfix"&gt;
+                &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例饼图options值&lt;/button&gt;
+                &lt;div ms-widget="dialog,ADialog"&gt;{{pieOptionsStr()}}&lt;/div&gt;
+                &lt;button ms-widget="button" ms-click="show('BDialog')"&gt;点击我获取echarts案例柱图options值&lt;/button&gt;
+                &lt;div ms-widget="dialog,BDialog"&gt;{{barOptionsStr()}}&lt;/div&gt;
+                &lt;div id="mashup1" style="height:300px;width:50%;float:left;"&gt;&lt;/div&gt;
+                &lt;div id="mashup2" style="height:300px;width:50%;float:left;"&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;script&gt;
+               require(["echarts.fb","echarts/chart/pie","echarts/chart/bar","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                    var vm=avalon.define({
+                        $id:"demo",
+                        show:function(dialog){
+                            avalon.vmodels[dialog].toggle = true;
+                        },
+                        pieOptionsStr:function(){
+                            return JSON.stringify(vm.pieOptions);
+                        },
+                        barOptionsStr:function(){
+                            return JSON.stringify(vm.barOptions);
+                        },
+                        dialog:{
+                            title:"options的json格式"
+                        },
+                        pieOptions:{
+                            title : {
+                                text: '饼图'
+                            },
+                            legend:{
+                                data:[]
+                            },
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c}%"
+                            },
+                            series:[]
+                        },
+                        barOptions:{
+                            title : {
+                                text: '柱状图'
+                            },
+                            legend:{
+                                data:[]
+                            },
+                            tooltip : {
+                                trigger: 'axis',
+                            },
+                            xAxis:{
+                                data:["周一","周二","周三","周四","周五","周六","周日"]
+                            },
+                            yAxis:{
+                            },
+                            series:[]
+                        }
+                    });
+                    avalon.scan();
+
+                    fb.requestJson({
+                        remoteUrl:"./model/mashup2.json",
+                        localUrl:"./model/mashup2.json",
+                        success:function(data){
+                            var pieOptions=vm.pieOptions;
+                            var barOptions=vm.barOptions;
+                            var result=data.rows;
+                            var json={};
+                            for(var i=0;i&lt;result.length;i++){
+                                json={
+                                    type:"pie",
+                                    data:[]
+                                }
+                                if(result[i].type=="pie"){
+
+                                    var pieData=result[i].data;
+                                    json.data=pieData;
+                                    for(var m=0;m&lt;pieData.length;m++){//图例
+                                        if(pieOptions.legend.data.indexOf(pieData[m].name)<0){
+                                            pieOptions.legend.data.push(pieData[m].name);
+                                        }
+                                    }
+
+                                    pieOptions.series.push(json);
+                                }
+                                if(result[i].type=="bar"){
+                                    var res=result[i].data;
+                                    for(var j=0;j&lt;res.length;j++){
+                                        var da=[];
+                                        json={
+                                            type:"bar",
+                                            data:[],
+                                            stack:"总量",//适用于折线图，柱状图。组合名称，双数值轴时无效，多组数据的堆积图时使用，eg：stack:'group1'，则series数组中stack值等于'group1'的数据做堆积计算
+                                            name:res[j].name
+                                        }
+                                        da.push(res[j].mon);
+                                        da.push(res[j].thu);
+                                        da.push(res[j].wen);
+                                        da.push(res[j].thr);
+                                        da.push(res[j].fri);
+                                        da.push(res[j].sat);
+                                        da.push(res[j].sun);
+                                        json.data=da;
+                                        if(barOptions.legend.data.indexOf(res[j].name)<0){//添加图例
+                                            barOptions.legend.data.push(res[j].name);
+                                        }
+                                        barOptions.series.push(json);
+                                    }
+                                }
+
+                            }
+                            var myChart = echarts.init(document.getElementById('mashup1'));
+                            myChart.setOption(pieOptions);
+                            var myChart2 = echarts.init(document.getElementById('mashup2'));
+                            myChart2.setOption(barOptions);
+                            myChart.connect(myChart2);
+                            myChart2.connect(myChart);
+                        }
+                    });
+                });
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+</body>
+</html>

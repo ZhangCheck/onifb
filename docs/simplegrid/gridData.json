@@ -1,0 +1,23 @@
+{
+  "total":100,
+  "cols":[
+    {"text":"紫薯","field":"aaa"},
+    {"text":"石榴","field":"bbb"},
+    {"text":"雪梨","field":"ccc"},
+    {"text":"苹果","field":"xxx"},
+    {"text":"紫薯","field":"yyy"},
+    {"text":"南瓜","field":"zzz"}
+  ],
+  "data":[
+      {"aaa":"1","bbb":"1","ccc":"1","xxx":"1","yyy":"1","zzz":"1"},
+      {"aaa":"1","bbb":"s1","ccc":"2","xxx":"1","yyy":"1","zzz":"1"},
+      {"aaa":"1","bbb":"1","ccc":"1","xxx":"1","yyy":"1","zzz":"1"},
+      {"aaa":"1","bbb":"1","ccc":"1","xxx":"1","yyy":"1","zzz":"1"},
+      {"aaa":"1","bbb":"1","ccc":"1","xxx":"1","yyy":"1","zzz":"1"},
+      {"aaa":"1","bbb":"1","ccc":"1","xxx":"1","yyy":"1","zzz":"1"},
+      {"aaa":"1","bbb":"1","ccc":"1","xxx":"1","yyy":"1","zzz":"1"},
+      {"aaa":"1","bbb":"1","ccc":"1","xxx":"1","yyy":"1","zzz":"1"},
+      {"aaa":"1","bbb":"1","ccc":"1","xxx":"1","yyy":"1","zzz":"1"},
+      {"aaa":"1","bbb":"1","ccc":"1","xxx":"1","yyy":"1","zzz":"1"}
+    ]
+}

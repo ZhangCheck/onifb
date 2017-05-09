@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>dataRange</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4> dataRange</h4>
+    <p>值域选择，每个图表最多仅有一个值域控件。</p>
+
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody><tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 显示策略，可选为：true（显示） | false（隐藏） </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> zlevel </td>
+            <td> 0 </td>
+            <td> 一级层叠控制。每一个不同的zlevel将产生一个独立的canvas，相同zlevel的组件或图标将在同一个canvas上渲染。zlevel越高越靠顶层，canvas对象增多会消耗更多的内存和性能，并不建议设置过多的zlevel，大部分情况可以通过二级层叠控制z实现层叠控制。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> z </td>
+            <td> 4 </td>
+            <td> 二级层叠控制，同一个canvas（相同zlevel）上z越高约靠顶层。 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> orient </td>
+            <td> 'vertical' </td>
+            <td> 布局方式，默认为垂直布局，可选为：'horizontal' | 'vertical' </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> x </td>
+            <td> 'left' </td>
+            <td> 水平安放位置，默认为全图左对齐，可选为：'center' | 'left' | 'right' | <b>{number}</b>（x坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> y </td>
+            <td> 'bottom' </td>
+            <td> 垂直安放位置，默认为全图底部，可选为：'top' | 'bottom' | 'center' | <b>{number}</b>（y坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{color}</b> backgroundColor </td>
+            <td> 'rgba(0,0,0,0)' </td>
+            <td> 值域控件背景颜色，默认透明 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> borderColor </td>
+            <td> '#ccc' </td>
+            <td> 值域控件边框颜色 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> borderWidth </td>
+            <td> 0 </td>
+            <td> 值域控件边框线宽，单位px，默认为0（无边框） </td>
+        </tr>
+        <tr>
+            <td> <b>{number | Array}</b> padding </td>
+            <td> 5 </td>
+            <td> 值域控件内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，同css，见下图 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> itemGap </td>
+            <td> 10 </td>
+            <td> 各个item之间的间隔，单位px，默认为10，横向布局时为水平间隔，纵向布局时为纵向间隔，见下图 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> itemWidth </td>
+            <td> 20 </td>
+            <td> 值域控件图形宽度 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> itemHeight </td>
+            <td> 14 </td>
+            <td> 值域控件图形高度 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> min </td>
+            <td> null </td>
+            <td> 指定的最小值，eg: 0，默认无，必须参数，唯有指定了splitList时可缺省min。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> max </td>
+            <td> null </td>
+            <td> 指定的最大值，eg: 100，默认无，必须参数，唯有指定了splitList时可缺省max</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> precision </td>
+            <td> 0 </td>
+            <td> 小数精度，默认为0，无小数点，当 min ~ max 间在当前精度下无法整除splitNumber份时，精度会自动提高以满足均分，不支持不等划分 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> splitNumber </td>
+            <td> 5 </td>
+            <td> 分割段数，默认为5，为0时为线性渐变，calculable为true是默认均分100份 </td>
+        </tr>
+        <tr>
+            <td> <b>{Array.&lt;Object&gt;}</b> splitList </td>
+            <td> null </td>
+            <td>
+                自定义分割方式，支持不等距分割。splitList被指定时，splitNumber将被忽略。<br>
+                splitList是一个（不可为空的）Array，Array的每一项为一个Object，含有如下属性：<br>
+                { <br>
+                &nbsp;&nbsp;start: 10 &nbsp;&nbsp;&nbsp; 本项的数据范围起点（&gt;=），如果不设置表示负无穷。<br>
+                &nbsp;&nbsp;end: 30 &nbsp;&nbsp;&nbsp; 本项的数据范围终点（&lt;=），如果不设置表示正无穷。<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果想本项只对应一个值，那么start和end设同样的数就可以了。<br>
+                &nbsp;&nbsp;label: '10 to 30' &nbsp;&nbsp;&nbsp; 本项的显示标签，缺省则自动生成label  <br>
+                &nbsp;&nbsp;color: '#333' &nbsp;&nbsp;&nbsp; 本项的颜色，缺省则自动计算color  <br>
+                } <br>
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> range </td>
+            <td> null </td>
+            <td>
+                用于设置dataRange的初始选中范围。calculable为true时有效。<br>
+                其值型如：{start: 10, end: 50}。
+            </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean | string}</b> selectedMode </td>
+            <td> true </td>
+            <td> 选择模式，默认开启值域开关，可选single，multiple </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> calculable </td>
+            <td> false </td>
+            <td> 是否启用值域漫游，启用后无视splitNumber和splitList，值域显示为线性渐变 </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> hoverLink </td>
+            <td> true </td>
+            <td> 是否启用地图hover时的联动响应（详情披露） </td>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> realtime </td>
+            <td> true </td>
+            <td> 值域漫游是否实时显示，在不支持Canvas的浏览器中该值自动强制置为false。 </td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> color </td>
+            <td> ['#1e90ff','#f0ffff'] </td>
+            <td> 值域颜色标识，颜色数组长度必须&gt;=2，颜色代表从数值高到低的变化，即颜色数组低位代表数值高的颜色标识 ，支持Alpha通道上的变化（rgba）</td>
+        </tr>
+        <tr>
+            <td> <b>{string | Function}</b> formatter </td>
+            <td> null </td>
+            <td> 内容格式器：<b>{string}</b>（Template） | <b>{Function}</b>，模板变量为'{value}'和'{value2}'，代表数值起始值和结束值，函数参数两个，含义同模板变量，当calculable为true时模板变量仅有'{value}'</td>
+        </tr>
+        <tr>
+            <td> <b>{Array}</b> text </td>
+            <td> null </td>
+            <td> 值域文字显示，splitNumber生效时默认以计算所得数值作为值域文字显示，可指定长度为2的文本数组显示简介的值域文本，如['高', '低']，'\n'指定换行</td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> textStyle </td>
+            <td> {color: '#333'} </td>
+            <td> 默认只设定了值域控件文字颜色（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>） </td>
+        </tr>
+        </tbody>
+    </table>
+    <img src="image/dataRange.png">
+</div>
+</body>
+</html>

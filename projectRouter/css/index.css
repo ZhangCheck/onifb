@@ -1,0 +1,74 @@
+body{
+    margin: 0 !important;
+}
+body[ms-controller="mainCtl"]{
+    display: none;
+}
+.m-top{
+    width: auto;
+    height: auto;
+    margin: 0 15%;
+}
+.m-head{
+    width: 100%;
+    height: 120px;
+    background: black;
+    color: #ffffff;
+}
+.m-photo{
+    margin-top: -5px;
+}
+.m-head-navigation{
+    width: 100%;
+    height: 50px;
+}
+.m-head-navigation ul{
+    width: 100%;
+    height: 50px;
+}
+.m-head-navigation ul li{
+    float: left;
+    width: 14.2852%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    text-align: center;
+    background: #54c1c8;
+    /* background: linear-gradient(#707883, #7d8790);
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#707883', endColorstr='#7d8790',GradientType=0 );*/
+}
+.m-head-navigation ul li:hover{
+    background: #3bb4bc;
+}
+.m-head-navigation ul li a{
+    color: #ffffff;
+    display: block;
+}
+.m-bottom{
+    float: none;
+    width: auto;
+    height: auto;
+    margin: 0 15%;
+    text-align: center;
+    background: #000000;
+    color: #ffffff;
+    padding-bottom: 10px;
+}
+.m-content{
+    width: auto;
+    height: auto;
+    margin: 0 15%;
+}
+.m-bottom p:first-child{
+    padding-top: 20px;
+    margin: 0;
+}
+.m-bottom p:last-child{
+    padding-bottom: 20px;
+}
+.m-head-navigation .firstPage{
+    background: #3bb4bc!important;
+}
+.oni-textbox{
+    background: #fff;
+}

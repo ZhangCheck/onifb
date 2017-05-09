@@ -1,0 +1,70 @@
+<link href="../../chameleon/fb.core.css">
+<style>
+    .api-content-wrap .api-content ol{
+        list-style-type: decimal;
+    }
+    .api-content-wrap .api-content ul > li, .api-content-wrap .api-content ol > li{
+        border:none;
+    }
+</style>
+<h1>OniFB概要</h1>
+<div class="mlLg" ms-skip>
+        <h3 class="mtLg">一、关于OniFB</h3>
+        <ol class="mlLg">
+            <li>OniFB是在基于Avalon框架构建的控件库和项目系统</li>
+            <li>
+                Avalon是一个简单易用迷你的MVVM框架，它最早发布于2012.09.15，为解决同一业务逻辑存在各种视图呈现而开发出来的。 事实上，这问题其实也可以简单地利用一般的前端模板加jQuery 事件委托 搞定，但随着业务的膨胀， 代码就充满了各种选择器与事件回调，难以维护。因此彻底的将业务与逻辑分离，就只能求助于架构。 最初想到的是MVC，尝试过backbone，但代码不降反升，很偶尔的机会，碰上微软的WPF， 优雅的MVVM架构立即吸引住我，觉得这就是作者一直追求的解决之道。
+                <div class="mtLg">
+                    MVVM将所有前端代码彻底分成两部分，视图的处理通过绑定实现（angular有个更炫酷的名词叫指令）， 业务逻辑则集中在一个个叫VM的对象中处理。我们只要操作VM的数据，它就自然而然地神奇地同步到视图。
+                </div>
+            </li>
+            <li>
+                <h4>优势</h4>
+                <ol class="mlLg">
+                    <li>使用简单，作者是吃透了knockout, angular,rivets API设计出来，没有太多复杂的概念， 指令数量控制得当，基本能覆盖所有jQuery操作， 确保中小型公司的菜鸟前端与刚转行过来的后端也能迅速上手</li>
+                    <li>兼容性好，支持IE6+，firefox3.5+, opera11+, safari5+, chrome4；飞博前端团队维护IE8+;</li>
+                    <li>性能不错，由于avalon一直在那些上千的大表格里打滚，经历长期的优化， 它能支撑14000以上绑定（相对而言，angular一个页面只能放2000个绑定）</li>
+                    <li>组件丰富，通过oniui的努力，加上飞博前端组的扩展，70多个控件可供选择使用，包含TreeGrid等复杂组件</li>
+                    <li>MVVM机制，DOM操作的代码近乎绝迹，因此实现一个功能，大致把比jQuery所写的还要少50%，对ViewModel的操作都会同步到View与Model中去</li>
+                    <li>易于维护，MVVM因其所有的Dom操作（属性，样式，事件）均绑定在Dom元素本身，非常容易定位问题所在，随着项目逐渐变大，这一点愈加明显，而Jquery对Dom的操作是游离的、无关联的，当一个Dom发生问题或者发生改变时，很难确定是由哪一段js操作的，即便在堪忧繁杂的js文件中找到一处，也很难确定是否还有另处操作同一个Dom。
+                </ol>
+            </li>
+            <li>
+                <h4>飞博作出的努力</h4>
+                <ol class="mlLg">
+                    <li>维护和扩展组件库（增加treeGrid等新控件，与echarts无缝整合等）</li>
+                    <li>前后端彻底分离，前端项目可在数据环境中运行，也可独立运行，通过即时的可视化的数据源配置完成两者间的切换</li>
+                    <li>一键初始化项目（支持多种项目类型）</li>
+                    <li>智能维护通用库（云端）和项目间代码一致性（开发时运行z2_coding.bat）</li>
+                    <li>一键压缩发布项目(发布时运行z4_publish.bat)</li>
+                </ol>
+            </li>
+        </ol>
+    <h3 class="mtLg">二，关于MVVM</h3>
+        <p class="mlLg">
+            一个项目是由许多人分工写的，因此必须要合理地拆散，于是有了模块化。体现在工作上，PM通常它这为某某版块，某某频道，某某页面。某一个模块，必须是包含其固有的数据，样式，HTML与处理逻辑。在jQuery时代，奉行的是“无侵入式javascript”，页面虽然是拆成一块块，但最后是通过PHP等后端模板合并起来，并且把第一屏的数据直接灌进去，接着是无尽的选择某些元素进行处理，选择某些元素进行处理。javascript里面是满屏的CSS表达式，如果不一一对着HTML页面，这是无法阅读的。换言之，jQuery很容易产生writeOnly的代码。
+        </p>
+
+        <p>
+            avalon是引入分层构架，视图就是视图，数据就是数据，JS里面是操作数据，不会再操作视图，泾渭分明。视图，换言之就是最初做好的那些HTML片段，只需要在里面添加上ms-controller指令（或叫绑定属性），指定其将要作用的ViewModel的ID，然后在它里面添加其他绑定就行了。数据，特指是ViewModel，avalon是通过define方法定义，目的是实现“操作数据即操作DOM”，从此我们再也用不上什么操作DOM的API，javascript代码量立即减少了一半以上，条理更清晰，更易维护。
+        </p>
+    <h3 class="mtLg">三，OniFB起步</h3>
+        <p>详见:<a href="index.html#!/doc?doc=OniFB%E8%B5%B7%E6%AD%A5">OniFB起步</a> </p>
+    <h3 class="mtLg">四，绑定</h3>
+        <ol class="mlLg">
+            <li>{{}}插值表达式， 这是开标签与闭标签间，换言之，也是位于文本节点中，innerText里。{{}}里面可以添加各种过滤器（以|进行标识）。值得注意的是{{}}实际是文本绑定(ms-text)的一种形式</li>
+            <li>ms-*绑定属性， 这是位于开标签的内部， 95%的绑定都以这种形式存在</li>
+            <li>data-xxx-yyy="xxx"，辅助指令，比如ms-duplex的某一个辅助指令为data-duplex-event="change"，ms-repeat的某一个辅助指令为data-repeat-rendered="yy”</li>
+        </ol>
+        <div class="mlLg">
+            常用绑定：ms-if,ms-attr,ms-on,ms-class,ms-repeat,ms-duplex,ms-widget
+        </div>
+    <h3 class="mtLg">五，作用域</h3>
+        <p class="mlLg">ms-controller 定义作用域，作用域可以嵌套，从当前作用域中没有找到的绑定值，将从它的上一级作用域查找，直到最外层作用域。</p>
+    <h3 class="mtLg">六，过滤器</h3>
+        <p class="mlLg">
+            avalon的过滤器是参考自angular与rivets。它也被称做管道文本过滤器，它的处理对象只能是文本（字符串），它只能用在文本绑定中，并且只能是双花括号形式
+            <div class="mlLg">例子：{{vmProp|html}}</div>
+        </p>
+
+</div>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>title</title>
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <link type="text/css" rel="stylesheet" href="avalon.echarts_doc.css">
+    <script src="../highlight/shCore.js"></script>
+</head>
+<body>
+<div class="warp">
+    <h4> title</h4>
+    <p>标题，每个图表最多仅有一个标题控件，每个标题控件可设主副标题。</p>
+
+    <table class="table-doc" border="1">
+        <colgroup>
+            <col width="200">
+            <col  width="200">
+            <col width="">
+        </colgroup>
+        <tbody>
+        <tr>
+            <th> 名称 </th>
+            <th> 默认值 </th>
+            <th> 描述 </th>
+        </tr>
+        <tr>
+            <td> <b>{boolean}</b> show </td>
+            <td> true </td>
+            <td> 显示策略，可选为：true（显示） | false（隐藏） </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> zlevel </td>
+            <td> 0 </td>
+            <td> 一级层叠控制。每一个不同的zlevel将产生一个独立的canvas，相同zlevel的组件或图标将在同一个canvas上渲染。zlevel越高越靠顶层，canvas对象增多会消耗更多的内存和性能，并不建议设置过多的zlevel，大部分情况可以通过二级层叠控制z实现层叠控制。</td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> z </td>
+            <td> 6 </td>
+            <td> 二级层叠控制，同一个canvas（相同zlevel）上z越高约靠顶层。 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> text </td>
+            <td> '' </td>
+            <td> 主标题文本，'\n'指定换行 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> link </td>
+            <td> '' </td>
+            <td> 主标题文本超链接 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> target </td>
+            <td> null </td>
+            <td> 指定窗口打开主标题超链接，支持'self' | 'blank'，不指定等同为'blank'（新窗口） </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> subtext </td>
+            <td> '' </td>
+            <td> 副标题文本，'\n'指定换行 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> sublink </td>
+            <td> '' </td>
+            <td> 副标题文本超链接 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> subtarget </td>
+            <td> null </td>
+            <td> 指定窗口打开副标题超链接，支持'self' | 'blank'，不指定等同为'blank'（新窗口） </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> x </td>
+            <td> 'left' </td>
+            <td> 水平安放位置，默认为左侧，可选为：'center' | 'left' | 'right' | <b>{number}</b>（x坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{string | number}</b> y </td>
+            <td> 'top' </td>
+            <td> 垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | <b>{number}</b>（y坐标，单位px） </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> textAlign </td>
+            <td> null </td>
+            <td> 水平对齐方式，默认根据x设置自动调整，可选为： left' | 'right' | 'center</td>
+        </tr>
+
+        <tr>
+            <td> <b>{color}</b> backgroundColor </td>
+            <td> 'rgba(0,0,0,0)' </td>
+            <td> 标题背景颜色，默认透明 </td>
+        </tr>
+        <tr>
+            <td> <b>{string}</b> borderColor </td>
+            <td> '#ccc' </td>
+            <td> 标题边框颜色 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> borderWidth </td>
+            <td> 0 </td>
+            <td> 标题边框线宽，单位px，默认为0（无边框） </td>
+        </tr>
+        <tr>
+            <td> <b>{number | Array}</b> padding </td>
+            <td> 5 </td>
+            <td> 标题内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，同css，见下图 </td>
+        </tr>
+        <tr>
+            <td> <b>{number}</b> itemGap </td>
+            <td> 5 </td>
+            <td> 主副标题纵向间隔，单位px，默认为10</td>
+        </tr>
+
+        <tr>
+            <td> <b>{Object}</b> textStyle </td>
+            <td><pre>{
+    fontSize: 18,
+    fontWeight: 'bolder',
+    color: '#333'
+}                           </pre></td>
+            <td> 主标题文本样式（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>） </td>
+        </tr>
+        <tr>
+            <td> <b>{Object}</b> subtextStyle </td>
+            <td><pre>{
+    color: '#aaa'
+}                           </pre> </td>
+            <td> 副标题文本样式（详见<a target="_blank" href="../index.html#!/widgets?widgetId=echarts_doc&ex=ex21" title="">textStyle</a>） </td>
+        </tr>
+
+        </tbody>
+    </table>
+<img src="image/title.png">
+</div>
+</body>
+</html>

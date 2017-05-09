@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>柱状图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/bar","dialog/avalon.dialog","button/avalon.button"],function(){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    title : {
+                        text: '',
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:[]
+                    },
+                    calculable : true,
+                    grid: {
+                        borderWidth: 0
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            splitLine: {
+                                show: false
+                            },
+                            data : []
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            splitLine: {
+                                show: false
+                            }
+                        }
+                    ],
+                    series : [
+                    ]
+                }
+
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/bar1.json",
+                localUrl:"./model/bar1.json",
+                data:{},
+                success:function(data){
+                    var options=vm.options;
+                    var legend=[];//图例
+                    var xAxis=[];//x轴数据
+                    var data1=[];//蒸发量
+                    var data2=[];//降水量
+                    var dataObj1={name:"蒸发量",type:"bar"};
+                    var dataObj2={name:"降水量",type:"bar"};
+                    var result=data.rows;
+                    //统计图标题
+                    var title=data.title;
+                    options.title.text=title;
+                    legend=[data.rows[0].data1.name,data.rows[0].data2.name];
+                    options.legend.data=legend;
+                    for(var i=0;i<result.length;i++){
+                        xAxis.push(result[i].xAxis);
+                        data1.push(result[i].data1.value);
+                        data2.push(result[i].data2.value);
+                    }
+                    options.xAxis[0].data=xAxis;
+                    dataObj1.data=data1;
+                    dataObj2.data=data2;
+                    options.series=[dataObj1,dataObj2];
+                    var myChart = echarts.init(document.getElementById('bar'));
+                    myChart.setOption(options);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="bar" style="width: 800px;height: 300px;"></div>
+<div ms-skip>
+        <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+            &lt;!DOCTYPE HTML&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;meta charset='utf-8'/&gt;
+                &lt;title&gt;柱状图&lt;/title&gt;
+                &lt;script src='../require.js'&gt;&lt;/script&gt;
+                &lt;script&gt;
+                    require.config({
+                        baseUrl:'../../oniui',
+                        paths:{
+                            avalon:'avalon.shim',
+                            echarts: 'echarts',
+                            domReady:'domReady'
+                        },
+                        map:{
+                            '*':{
+                                'css':'require.css',
+                                'text':'require.text'
+                            }
+                        },
+                        shim:{
+                            avalon: { exports: "avalon" },
+                            echarts:{exports:"echarts"}
+                        }
+                    });
+                &lt;/script&gt;
+            &lt;/head&gt;
+            &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="bar" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+                    &lt;script&gt;
+                        require(["project.core","echarts.fb","echarts/chart/bar","dialog/avalon.dialog","button/avalon.button"],function(){
+                            var vm=avalon.define({
+                                $id:"demo",
+                                show:function(dialog){
+                                    avalon.vmodels[dialog].toggle = true;
+                                },
+                                optionsStr:function(){
+                                    return JSON.stringify(vm.options);
+                                },
+                                dialog:{
+                                    title:"options的json格式"
+                                },
+                                options:{
+                                    title : {
+                                        text: '',
+                                    },
+                                    tooltip : {
+                                        trigger: 'axis'
+                                    },
+                                    legend: {
+                                        data:[]
+                                    },
+                                    calculable : true,
+                                    grid: {
+                                        borderWidth: 0
+                                    },
+                                    xAxis : [
+                                        {
+                                            type : 'category',
+                                            splitLine: {
+                                                show: false
+                                            },
+                                            data : []
+                                        }
+                                    ],
+                                    yAxis : [
+                                        {
+                                            type : 'value',
+                                            splitLine: {
+                                                show: false
+                                            }
+                                        }
+                                    ],
+                                    series : [
+                                    ]
+                                }
+
+                            });
+                            avalon.scan();
+
+                            fb.requestJson({
+                                remoteUrl:"./model/bar1.json",
+                                localUrl:"./model/bar1.json",
+                                data:{},
+                                success:function(data){
+                                    var options=vm.options;
+                                    var legend=[];//图例
+                                    var xAxis=[];//x轴数据
+                                    var data1=[];//蒸发量
+                                    var data2=[];//降水量
+                                    var dataObj1={name:"蒸发量",type:"bar"};
+                                    var dataObj2={name:"降水量",type:"bar"};
+                                    var result=data.rows;
+                                    //统计图标题
+                                    var title=data.title;
+                                    options.title.text=title;
+                                    legend=[data.rows[0].data1.name,data.rows[0].data2.name];
+                                    options.legend.data=legend;
+                                    for(var i=0;i&lt;result.length;i++){
+                                        xAxis.push(result[i].xAxis);
+                                        data1.push(result[i].data1.value);
+                                        data2.push(result[i].data2.value);
+                                    }
+                                    options.xAxis[0].data=xAxis;
+                                    dataObj1.data=data1;
+                                    dataObj2.data=data2;
+                                    options.series=[dataObj1,dataObj2];
+                                    var myChart = echarts.init(document.getElementById('bar'));
+                                    myChart.setOption(options);
+                                }
+                            });
+                        });
+                    &lt;/script&gt;
+                &lt;/div&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+        </pre>
+</div>
+</body>
+</html>

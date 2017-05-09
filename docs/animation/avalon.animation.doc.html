@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>动画引擎</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="descriptions" content="基于单时间轴的动画引擎
+使用方法
+ avalon(elem).animate(properties[, duration][, easing][, complete])
+ avalon(elem).animate(properties, options)
+ ">
+        <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+        <script src="../highlight/shCore.js"></script>
+    </head>
+    
+    <body>
+        <div class="wrapper">
+            <h2>mmAnimate</h2>
+            <fieldset>
+                <legend>动画引擎</legend>
+                <p>基于单时间轴的动画引擎</p>
+                <h3>使用方法</h3>
+                <pre class="brush:javascript;gutter:false;toolbar:false;"> avalon(elem).animate(properties[, duration][, easing][, complete])
+ avalon(elem).animate(properties, options)</pre>
+            </fieldset>
+            <fieldset>
+            <legend>Frame (关键帧)</legend>
+            <table class="table-doc" border="1">
+                <colgroup>
+                    <col width="180">
+                        <col width="80">
+                            <col width="120">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th>名字</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>elem</td>
+                        <td>Element</td>
+                        <td></td>
+                        <td>处于动画状态的元素节点</td>
+                    </tr>
+                    <tr>
+                        <td>$events</td>
+                        <td>Object</td>
+                        <td>{}</td>
+                        <td>放置各种回调</td>
+                    </tr>
+                    <tr>
+                        <td>troops</td>
+                        <td>Array</td>
+                        <td>[]</td>
+                        <td>当queue为true，同一个元素产生的帧对象会放在这里</td>
+                    </tr>
+                    <tr>
+                        <td>tweens</td>
+                        <td>Array</td>
+                        <td>[]</td>
+                        <td>放置各种补间动画Tween</td>
+                    </tr>
+                    <tr>
+                        <td>orig</td>
+                        <td>Object</td>
+                        <td>{}</td>
+                        <td>保存动画之前的样式，用于在隐藏后还原</td>
+                    </tr>
+                    <tr>
+                        <td>dataShow</td>
+                        <td>Object</td>
+                        <td>{}</td>
+                        <td>保存元素在显示时的各种尺寸，用于在显示前还原</td>
+                    </tr>
+                    <tr>
+                        <td>bind(type, fn, unshift)</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <table border="1">
+                                <tbody>
+                                    <tr>
+                                        <th style="width:100px">参数名/返回值</th>
+                                        <th style="width:70px">类型</th>
+                                        <th>说明</th>
+                                    </tr>
+                                    <tr>
+                                        <td>type</td>
+                                        <td>String</td>
+                                        <td>事件名</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fn</td>
+                                        <td>Function</td>
+                                        <td>回调，this为元素节点</td>
+                                    </tr>
+                                    <tr>
+                                        <td>unshift</td>
+                                        <td>Undefined|String</td>
+                                        <td>判定是插在最前还是最后</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>fire(type, [otherArgs..])</td>
+                        <td></td>
+                        <td></td>
+                        <td>触发回调，可以传N多参数</td>
+                    </tr>
+                    <tr>
+                        <td>build()</td>
+                        <td></td>
+                        <td></td>
+                        <td>控制样式，显示元素</td>
+                    </tr>
+                    <tr>
+                        <td>createTweens()</td>
+                        <td></td>
+                        <td></td>
+                        <td>创建补间动画</td>
+                    </tr>
+                    <tr>
+                        <td>revertTweens()</td>
+                        <td></td>
+                        <td></td>
+                        <td>反转补间动画数组</td>
+                    </tr>
+                </tbody>
+            </table>
+            </fieldset>
+            <fieldset>
+                <legend>Tween 补间动画 </legend>
+                <table class="table-doc" border="1">
+                    <colgroup>
+                        <col width="180">
+                        <col width="80">
+                        <col width="120">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th>名字</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>elem</td>
+                        <td>Element</td>
+                        <td></td>
+                        <td>处于动画状态的元素节点</td>
+                    </tr>
+                    <tr>
+                        <td>prop</td>
+                        <td>Object</td>
+                        <td>{}</td>
+                        <td>当前时间的css样式</td>
+                    </tr>
+                    <tr>
+                        <td>easing</td>
+                        <td>function</td>
+                        <td>avalon.easing["linear"]</td>
+                        <td>缓动公式</td>
+                    </tr>
+                    <tr>
+                        <td>run(per, end)</td>
+                        <td></td>
+                        <td></td>
+                        <td>更新元素的某一样式或属性，内部调用</td>
+                    </tr>
+                    <tr>
+                        <td>cur()</td>
+                        <td></td>
+                        <td></td>
+                        <td>取得当前值</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>原型方法</legend>
+                <table class="table-doc" border="1">
+                    <colgroup>
+                        <col width="180">
+                        <col width="80">
+                        <col width="120">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th>名字</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>delay()</td>
+                        <td></td>
+                        <td></td>
+                        <td>延时</td>
+                    </tr>
+                    <tr>
+                        <td>pause()</td>
+                        <td></td>
+                        <td></td>
+                        <td>暂停</td>
+                    </tr>
+                    <tr>
+                        <td>resume()</td>
+                        <td></td>
+                        <td></td>
+                        <td>继续</td>
+                    </tr>
+                    <tr>
+                        <td>stop(clearQueue,gotoEnd)</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <table border="1">
+                            <tbody>
+                            <tr>
+                                <th style="width:100px">参数名</th>
+                                <th style="width:70px">类型</th>
+                                <th>说明</th>
+                            </tr>
+                            <tr>
+                                <td>clearQueue</td>
+                                <td>boolean</td>
+                                <td>清除动画队列为true的话等待执行的帧都不会执行</td>
+                            </tr>
+                            <tr>
+                                <td>gotoEnd</td>
+                                <td>boolean</td>
+                                <td>是否跳跃到当前一帧的终结状态</td>
+                            </tr>
+                            </tbody>
+                            </table>
+                            <br/>
+                            <table border="1" >
+                                <tbody>
+                                <tr>
+                                    <th style="width:100px">clearQueue的值</th>
+                                    <th style="width:70px">gotoEnd的值</th>
+                                    <th>效果</th>
+                                </tr>
+                                <tr>
+                                    <td>true</td>
+                                    <td>true</td>
+                                    <td>立即完成该元素的所有动画</td>
+                                </tr>
+                                <tr>
+                                    <td>true</td>
+                                    <td>false</td>
+                                    <td>清空该元素的所有动画</td>
+                                </tr>
+                                <tr>
+                                    <td>false</td>
+                                    <td>true</td>
+                                    <td>立即跳到最后一帧，继续下一个动画</td>
+                                </tr>
+                                <tr>
+                                    <td>false</td>
+                                    <td>false</td>
+                                    <td>中断当前动画，继续下一个动画</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            <div class="others">
+                <p>一个时间轴
+                    <code>avalon.timeline</code>中包含许多帧, 一帧里面有各种渐变动画, 渐变的轨迹是由缓动公式所规定</p>
+            </div>
+            <fieldset>
+                <legend>绑定属性ms-animate 参数配置使用说明 </legend>
+                <table class="table-doc" border="1">
+                    <colgroup>
+                        <col width="180">
+                        <col width="80">
+                        <col width="120">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th>名字</th>
+                        <th>类型</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>options</td>
+                        <td>Object</td>
+                        <td>动画参数配置
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <th>名字</th>
+                                    <th>类型</th>
+                                    <th>说明</th>
+                                </tr>
+                                <tr>
+                                    <td>duration</td>
+                                    <td>number</td>
+                                    <td>动画持续时间</td>
+                                </tr>
+                                <tr>
+                                    <td>easing</td>
+                                    <td>array</td>
+                                    <td>缓动公示</td>
+                                </tr>
+                                <tr>
+                                    <td>fps</td>
+                                    <td>number</td>
+                                    <td>动画每秒帧数</td>
+                                </tr>
+                                <tr>
+                                    <td>before,step,after</td>
+                                    <td>function</td>
+                                    <td>在动画开始前、每一个动作后、完成后执行的方法</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>properties</td>
+                        <td>Object</td>
+                        <td>目标状态样式配置
+                            与css样式相同,目前支持数值渐变和颜色渐变
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+
+            <ul class="example-links">
+                <li>
+                    <a href="avalon.animation.ex.html"></a>
+                </li>
+                <li>
+                    <a href="avalon.animation.ex1.html">算子 &amp;&amp; fps 修改 with &amp;&amp; backgroundColor</a>
+                </li>
+                <li>
+                    <a href="avalon.animation.ex2.html">算子 &amp;&amp; fps slideToggle, slideUp, slideDown</a>
+                </li>
+                <li>
+                    <a href="avalon.animation.ex3.html">算子 &amp;&amp; fps fadeToggle, fadeIn, fadeOut</a>
+                </li>
+                <li>
+                    <a href="avalon.animation.ex4.html">算子 &amp;&amp; fps toggle, show, hide</a>
+                </li>
+                <li>
+                    <a href="avalon.animation.ex5.html">ms-animate属性绑定</a>
+                </li>
+                <li>
+                    <a href="avalon.animation.ex6.html">ms-animate与ms-if,ms-visible结合使用</a>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>

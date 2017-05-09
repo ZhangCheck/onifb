@@ -1,0 +1,65 @@
+@import "../chameleon/oniui-theme";
+$uiname: "oni-comboBox";
+.#{$uiname}{
+    display: inline-block;
+    position: relative;
+    .oni-comboBox-item-body{
+        position:absolute;
+        width:100%;
+        border:1px solid #dddddd;
+        background:#ffffff;
+        z-index:1001;
+    }
+    .hide{
+        display:none;
+    }
+    .show{
+        display:list-item;
+    }
+    .oni-comboBox-items{
+        list-style-type: none;
+        padding:0;
+        .oni-comboBox-item{
+            padding:4px 8px;
+            cursor: pointer;
+        }
+        .oni-comboBox-item.cur{
+            background:$ui-state-hover-background-color;
+        }
+        .oni-comboBox-item.selected{
+            background:$ui-state-focus-background-color;
+            @if($oinui-theme == FBBlack){
+                color: #fff;
+            }
+        }
+    }
+
+    .oni-comboBox-icon-wrap{
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        float: right;
+        height: 36px;
+        right: 1px;
+        line-height: 36px;
+        margin-top: -38px;
+        width: 36px;
+        text-align: center;
+        background: #FFFFFF;
+    }
+    .oni-comboBox-icon-wrap .oni-comboBox-icon{
+        color: $oni-icon-color;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .oni-textbox{
+        width:100%;
+        box-sizing: border-box;
+    }
+    .oni-textbox{
+        min-width:100px;
+
+    }
+
+}

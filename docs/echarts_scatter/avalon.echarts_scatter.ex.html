@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>标准散点图</title>
+    <script src="../require.js"></script>
+    <link type="text/css" rel="stylesheet"  href="../highlight/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css"/>
+    <link type="text/css" rel="stylesheet" href="../echarts_doc/avalon.echarts_doc.css"/>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../../oniui',
+            paths:{
+                avalon:'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady'
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+    </script>
+    <script>
+        require(["echarts.fb","echarts/chart/scatter","dialog/avalon.dialog","button/avalon.button"],function(fb){
+            var vm=avalon.define({
+                $id:"demo",
+                show:function(dialog){
+                    avalon.vmodels[dialog].toggle = true;
+                },
+                optionsStr:function(){
+                    return JSON.stringify(vm.options);
+                },
+                dialog:{
+                    title:"options的json格式"
+                },
+                options:{
+                    title : {
+                        text: '男性女性身高体重分布'
+                    },
+                    tooltip : {
+                        trigger: 'axis',
+                        showDelay : 0,
+                        formatter : function (params) {
+                            if (params.value.length > 1) {
+                                return params.seriesName + ' :<br/>'
+                                        + params.value[0] + 'cm '
+                                        + params.value[1] + 'kg ';
+                            }
+                            else {
+                                return params.seriesName + ' :<br/>'
+                                        + params.name + ' : '
+                                        + params.value + 'kg ';
+                            }
+                        },
+                        axisPointer:{
+                            show: true,
+                            type : 'cross',
+                            lineStyle: {
+                                type : 'dashed',
+                                width : 1
+                            }
+                        }
+                    },
+                    legend: {
+                        data:[]
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataZoom : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    xAxis : [
+                        {
+                            type : 'value',
+                            scale:true,
+                            axisLabel : {
+                                formatter: '{value} cm'
+                            }
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            scale:true,
+                            axisLabel : {
+                                formatter: '{value} kg'
+                            }
+                        }
+                    ],
+                    symbolList: ['circle'],//散点图的形状，默认是 [ 'circle', 'rectangle', 'triangle', 'diamond','emptyCircle', 'emptyRectangle', 'emptyTriangle', 'emptyDiamond]循环使用
+                    series:[]
+                }
+            });
+            avalon.scan();
+
+            fb.requestJson({
+                remoteUrl:"./model/scatter.json",
+                localUrl:"./model/scatter.json",
+                success:function(data){
+                    var options=vm.options;
+                    var legend=[];//图例
+                    var result=data.rows;
+                    for(var i=0;i<result.length;i++){//获取图例数据
+                        if(legend.indexOf(result[i].name)<0){
+                            legend.push(result[i].name);
+                        }
+                    }
+                    options.legend.data=legend;
+                    for(var j=0;j<legend.length;j++){//根据图例信息合并相应的数据
+                        var dataArr=[];
+                        var series={name:legend[j],type:"scatter",data:[]}
+                        for(var i=0;i<result.length;i++){//获取图例数据
+                            var simpleData=[];
+                            simpleData.push(result[i].height);
+                            simpleData.push(result[i].weight);
+                            if(result[i].name==legend[j]){
+                                dataArr.push(simpleData);
+                                series.data.push(simpleData);
+                            }
+                        }
+                        options.series.push(series);
+                    }
+                    var myChart = echarts.init(document.getElementById('scatter'));
+                    myChart.setOption(options);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body ms-controller="demo">
+<button ms-widget="button" ms-click="show('ADialog')">点击我获取echarts案例options值</button>
+<div ms-widget="dialog,ADialog">{{optionsStr()}}</div>
+<div id="scatter" style="width: 800px;height: 300px;"></div>
+
+<div ms-skip>
+    <pre class="brush: js; html-script: true; gutter: false; toolbar: false">
+        &lt;!DOCTYPE HTML&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;meta charset='utf-8'/&gt;
+            &lt;title&gt;标准散点图&lt;/title&gt;
+            &lt;script src='../require.js'&gt;&lt;/script&gt;
+            &lt;script&gt;
+                require.config({
+                    baseUrl:'../../oniui',
+                    paths:{
+                        avalon:'avalon.shim',
+                        echarts: 'echarts',
+                        domReady:'domReady'
+                    },
+                    map:{
+                        '*':{
+                            'css':'require.css',
+                            'text':'require.text'
+                        }
+                    },
+                    shim:{
+                        avalon: { exports: "avalon" },
+                        echarts:{exports:"echarts"}
+                    }
+                });
+            &lt;/script&gt;
+        &lt;/head&gt;
+       &lt;body ms-controller="demo"&gt;
+            &lt;button ms-widget="button" ms-click="show('ADialog')"&gt;点击我获取echarts案例options值&lt;/button&gt;
+            &lt;div ms-widget="dialog,ADialog"&gt;{{optionsStr()}}&lt;/div&gt;
+            &lt;div id="scatter" style="width: 800px;height: 300px;"&gt;&lt;/div&gt;
+            &lt;script&gt;
+                require(["echarts.fb","echarts/chart/scatter","dialog/avalon.dialog","button/avalon.button"],function(fb){
+                    var vm=avalon.define({
+                        $id:"demo",
+                        show:function(dialog){
+                            avalon.vmodels[dialog].toggle = true;
+                        },
+                        optionsStr:function(){
+                            return JSON.stringify(vm.options);
+                        },
+                        dialog:{
+                            title:"options的json格式"
+                        },
+                        options:{
+                            title : {
+                                text: '男性女性身高体重分布'
+                            },
+                            tooltip : {
+                                trigger: 'axis',
+                                showDelay : 0,
+                                formatter : function (params) {
+                                    if (params.value.length > 1) {
+                                        return params.seriesName + ' :<br/>'
+                                                + params.value[0] + 'cm '
+                                                + params.value[1] + 'kg ';
+                                    }
+                                    else {
+                                        return params.seriesName + ' :<br/>'
+                                                + params.name + ' : '
+                                                + params.value + 'kg ';
+                                    }
+                                },
+                                axisPointer:{
+                                    show: true,
+                                    type : 'cross',
+                                    lineStyle: {
+                                        type : 'dashed',
+                                        width : 1
+                                    }
+                                }
+                            },
+                            legend: {
+                                data:[]
+                            },
+                            toolbox: {
+                                show : true,
+                                feature : {
+                                    mark : {show: true},
+                                    dataZoom : {show: true},
+                                    dataView : {show: true, readOnly: false},
+                                    restore : {show: true},
+                                    saveAsImage : {show: true}
+                                }
+                            },
+                            xAxis : [
+                                {
+                                    type : 'value',
+                                    scale:true,
+                                    axisLabel : {
+                                        formatter: '{value} cm'
+                                    }
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value',
+                                    scale:true,
+                                    axisLabel : {
+                                        formatter: '{value} kg'
+                                    }
+                                }
+                            ],
+                            symbolList: ['circle'],//散点图的形状，默认是 [ 'circle', 'rectangle', 'triangle', 'diamond','emptyCircle', 'emptyRectangle', 'emptyTriangle', 'emptyDiamond]循环使用
+                            series:[]
+                        }
+                    });
+                    avalon.scan();
+
+                    fb.requestJson({
+                        remoteUrl:"./model/scatter.json",
+                        localUrl:"./model/scatter.json",
+                        success:function(data){
+                            var options=vm.options;
+                            var legend=[];//图例
+                            var result=data.rows;
+                            for(var i=0;i&lt;result.length;i++){//获取图例数据
+                                if(legend.indexOf(result[i].name)<0){
+                                    legend.push(result[i].name);
+                                }
+                            }
+                            options.legend.data=legend;
+                            for(var j=0;j&lt;legend.length;j++){//根据图例信息合并相应的数据
+                                var dataArr=[];
+                                var series={name:legend[j],type:"scatter",data:[]}
+                                for(var i=0;i&lt;result.length;i++){//获取图例数据
+                                    var simpleData=[];
+                                    simpleData.push(result[i].height);
+                                    simpleData.push(result[i].weight);
+                                    if(result[i].name==legend[j]){
+                                        dataArr.push(simpleData);
+                                        series.data.push(simpleData);
+                                    }
+                                }
+                                options.series.push(series);
+                            }
+                            var myChart = echarts.init(document.getElementById('scatter'));
+                            myChart.setOption(options);
+                        }
+                    });
+                });
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+</div>
+<!--<iframe src="http://echarts.baidu.com/echarts2/doc/example/scatter1.html" frameborder="0" style="width:100%;height:500px;"></iframe>-->
+</body>
+</html>

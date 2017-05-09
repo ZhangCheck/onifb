@@ -1,0 +1,125 @@
+
+    <style>
+		.here{
+			line-height:30px;
+		}
+        h3{
+            width:100%;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #d8d8d8;
+        }
+        .fontsizeTest16{
+            /*font-size: 1.6rem; rem不支持ie8，因此在这个项目里废止rem的使用*/
+            font-size:16px;
+        }
+        .fontsizeTest28{
+            /*font-size: 2.8rem; rem不支持ie8，因此在这个项目里废止rem的使用*/
+            font-size:28px;
+        }
+        .fixHeight{
+            width:100%;
+            height:400px;
+        }
+        .borderTb{
+            min-width:300px;
+        }
+        .borderTb td{
+            border:1px solid #BBBBBB;
+        }
+        .borderTb tr td:first-child{
+            text-align: right;
+        }
+    </style>
+	<style>
+    .api-content-wrap .api-content ol{
+        list-style-type: decimal;
+    }
+    .api-content-wrap .api-content ul > li, .api-content-wrap .api-content ol > li{
+        border:none;
+    }
+</style>
+
+<div class="here">
+<h1>CSS使用规范</h1>
+(本页面已经在模拟ie8下测试通过)
+    <h3 class="mt">一，css命名规范(css的面向对象)</h3>
+    <ul class="mlSuLg">
+        <li>驼峰命名：.cssSelectorExample</li>
+        <li>命名空间：.myComponent</li>
+        <li>命名空间的属性：.myComponent.s_active</li>
+        <li>命名空间的子选择器：.myComponent .s-childElement</li>
+    </ul>
+    <br/>
+
+    <h3>二，字体大小的使用</h3>
+    <div class="mlSuLg">
+        <span class="fontsizeTest16">16号文字</span>
+        <span class="fontsizeTest28">28号文字</span>
+    </div>
+    <br/>
+
+    <h3>三，常用边距</h3>
+    <table class="borderTb mlSuLg">
+        <tr><td>较小左边距</td><td><div class="mlSm">sample</div></td></tr>
+        <tr><td>常规左边距</td><td><div class="ml">sample</div></td></tr>
+        <tr><td>较大左边距</td><td><div class="mlLg">sample</div></td></tr>
+        <tr><td>超大左边距</td><td><div class="mlSuLg">sample</div></td></tr>
+        <tr><td>较小左边距组</td><td><div class="mlSms"><div>sample1</div><div>sample2</div></div></td></tr>
+        <tr><td>常规左边距组</td><td><div class="mls"><div>sample1</div><div>sample2</div></div></td></tr>
+        <tr><td>较大左边距组</td><td><div class="mlLgs"><div>sample1</div><div>sample2</div></div></td></tr>
+        <tr><td>超大左边距组</td><td><div class="mlSuLgs"><div>sample1</div><div>sample2</div></div></td></tr>
+        <tr><td>上边距使用方式同上...</td><td>mt,mts..</td></tr>
+    </table>
+    <br/>
+
+    <h3>四，居中对齐的行(ibs)</h3>
+    <div class="ibs mlSuLgs">
+        <i class="ib-height"></i> <span>行高40px</span><span>垂直居中对齐</span><span>元素</span>
+    </div>
+    <br/>
+
+    <h3>五，百分比布局</h3>
+    <h4 class="mlSuLg">水平布局：</h4>
+    <div class="justifies center">
+        <div class="j30">horizontal:30%</div><div class="j70">horizontal:70%</div>
+    </div>
+    <h4 class="mlSuLg">水平垂直双向布局：</h4>
+    <table class="fixHeight center">
+        <tr><td class="j100 v30">horizontal:100% vertical:30%</td></tr>
+        <tr><td class="j100 v70">horizontal:100% vertical:70%</td></tr>
+    </table>
+    <br/>
+
+    <h3>六，上下左右中（区域布局）</h3>
+    <a class="mlSuLg" href="template/oniui/index.html#!/widgets?widgetId=layout">见oniui layout</a>
+    <br/>
+
+    <h3>七，图片布局</h3>
+    <a class="mlSuLg" href="template/oniui/index.html#!/widgets?widgetId=imgCentral">见oniui imgCentral</a>
+    <br/>
+
+    <h3>八，字休图标</h3>
+        <span class="mlSuLg">项目中字体图标由杨颖提供，没有的图标告知杨颖输出，并在项目先使用这个图标代替：</span><span class="icon-tjfx"></span>
+    <br/>
+
+    <h3>九，其它工具类css</h3>
+    <table class="borderTb mlSuLg">
+        <tr><th>功能</th><th>css选择器</th></tr>
+        <tr><td>清理浮动：</td><td>.clearfix</td></tr>
+        <tr><td>右浮动：</td><td>.pull-right</td></tr>
+        <tr><td>左浮动：</td><td>.pull-left</td></tr>
+        <tr><td>隐藏：</td><td>.hide</td></tr>
+        <tr><td>显示：</td><td>.show</td></tr>
+        <tr><td>隐藏（并占位）：</td><td>.invisible</td></tr>
+    </table>
+<br/>
+
+    <h3>十，样式存放</h3>
+    <ul class="mlSuLgs">
+        <li>库通用css:onui/chameleon/fb.core.css</li>
+        <li>项目通用css:css/core.css</li>
+        <li>页面级css:css/{{pageName}}.css</li>
+    </ul>
+<br/>
+<br/>
+</div>

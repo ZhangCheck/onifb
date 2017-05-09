@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>treegrid</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../style/avalon.doc.css">
+    <script src="../require.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+        require.config({
+            baseUrl:'../',
+            paths:{
+                avalon: 'avalon.shim',
+                echarts: 'echarts',
+                domReady:'domReady',
+                fb:"avalon.fb"
+            },
+            map:{
+                '*':{
+                    'css':'require.css',
+                    'text':'require.text'
+                }
+            },
+            shim:{
+                avalon: { exports: "avalon" },
+                echarts:{exports:"echarts"}
+            }
+        });
+
+        require(["./treegrid/avalon.treegrid"], function() {
+            var testVM = avalon.define("test", function(vm) {
+                vm.$skipArray = ["pagerVM"]
+                vm.title=""
+                vm.$treegridAOpts = {
+                    columns: [
+                        {field:"city",text:"城市"},
+                        {field:"count",text:"数量"},
+                        {field:"name",text:"名字"},
+                        {field:"estimate",text:"总结"},
+                        {field:"star",text:"评价"}
+                    ],
+                    interface:{remoteUrl:"无",localUrl:"treegrid_model.json"}
+                }
+
+                vm.pagerVM = null;
+                vm.$skipArray = ["treegrid"]
+            })
+            avalon.scan()
+        })
+    </script>
+</head>
+<body ms-controller="test">
+    <div ms-widget="treegrid, treegridA, $treegridAOpts" style="width:99%">
+
+    </div>
+    <br />
+            <pre class="brush:html;gutter:false;toolbar:false;">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;treegrid&lt;/title&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;
+        &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;../style/avalon.doc.css&quot;&gt;
+        &lt;script src=&quot;../require.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;../highlight/shCore.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            require.config({
+                baseUrl:&#39;../&#39;,
+                paths:{
+                    avalon: &#39;avalon.shim&#39;,
+                    echarts: &#39;echarts&#39;,
+                    domReady:&#39;domReady&#39;,
+                    fb:&quot;avalon.fb&quot;
+                },
+                map:{
+                    &#39;*&#39;:{
+                        &#39;css&#39;:&#39;require.css&#39;,
+                        &#39;text&#39;:&#39;require.text&#39;
+                    }
+                },
+                shim:{
+                    avalon: { exports: &quot;avalon&quot; },
+                    echarts:{exports:&quot;echarts&quot;}
+                }
+            });
+
+           require([&quot;./simplegrid/avalon.simplegrid&quot;], function() {
+                var testVM = avalon.define(&quot;test&quot;, function(vm) {
+                    vm.$skipArray = [&quot;pagerVM&quot;]
+                    vm.$simplegridAOpts = {
+                        columns: [
+                        {field:&quot;city&quot;,text:&quot;城市&quot;},
+                        {field:&quot;count&quot;,text:&quot;数量&quot;},
+                        {field:&quot;name&quot;,text:&quot;名字&quot;},
+                        {field:&quot;estimate&quot;,text:&quot;总结&quot;},
+                        {field:&quot;star&quot;,text:&quot;评价&quot;}
+                    ],
+                        interface:{remoteUrl:&quot;无&quot;,localUrl:&quot;treegrid_model.json&quot;}
+                    }
+
+                    vm.pagerVM = null
+                    vm.$skipArray = [&quot;simplegrid&quot;]
+                })
+                avalon.scan()
+            })
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body &gt;
+        &lt;fieldset ms-controller=&quot;test&quot;&gt;
+
+            &lt;legend&gt;最简单的例子&lt;/legend&gt;
+
+            &lt;div ms-widget=&quot;simplegrid, treegridA, $simplegridAOpts&quot; style=&quot;width:99%&quot;&gt;&lt;/div&gt;
+
+        &lt;/fieldset&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+
+    --后台数据格式如下--
+    {"success":true,"data":{"total":3,"rows":[
+    {"city":"江苏","fid":"32","count":"100","name":"季建业","estimate":"非常好","star":"☆☆☆☆☆","parentid":"","children":[
+    {"city":"南京","fid":"01","count":"100","name":"撸啊撸","estimate":"很好","star":"☆☆☆☆☆","parentid":"32","children":[
+    {"city":"建邺区","fid":"66","count":"66","name":"顺顺","estimate":"完美","star":"☆☆☆☆☆","parentid":"01","children":[]}
+    ]},
+    {"city":"苏州","fid":"02","count":"90","name":"是哒哒","estimate":"很好","star":"☆☆☆☆☆","parentid":"32","children":[]}
+    ]},
+    {"city":"浙江","fid":"33","count":"80","name":"夜间机","estimate":"一般般","star":"☆☆☆☆","parentid":"","expand":"true","children":[
+    {"city":"杭州","fid":"04","count":"70","name":"萨答复","estimate":"不错","star":"☆☆☆☆","parentid":"33","children":[]},
+    {"city":"金华","fid":"05","count":"60","name":"李开复","estimate":"还行","star":"☆☆☆","parentid":"33","children":[]}
+    ]},
+    {"city":"蒙古","fid":"00","count":"10","name":"忽必烈","estimate":"不了解","star":"☆","parentid":"","children":[]}
+    ]}}
+            </pre>
+</body>
+</html>

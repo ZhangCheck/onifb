@@ -1,0 +1,36 @@
+<!--<div ms-controller="homeCtl" id="home">{{homeWord}}<div ms-click="onClick()" ms-widget="button">widget</div> </div>-->
+<link rel="stylesheet" href="css/home.css">
+<div ms-controller="homeCtl" id="home">
+    <div class="head">南通公安监督管理信息平台</div>
+
+    <div class="content">
+        <div ms-widget="carousel,carousel1,$opt1"></div>
+        {{homeWord}}
+        <a class="ml" href="#!/about">about page</a>
+    </div>
+
+
+    <div class="bottomfixed">
+        <a href="#!/newsList">通知公告 通知公告 通知公告</a>
+    </div>
+    <div class="bottom">
+        <div class="singleMenu">
+            <div class="oni-icon-home"></div>
+            <div class="words">首页</div>
+        </div>
+        <div class="singleMenu">
+            <div class="oni-icon-book"></div>
+            <div class="words">教育</div>
+        </div>
+        <div class="singleMenu">
+            <div class="oni-icon-search"></div>
+            <div class="words">搜索</div>
+        </div>
+        <div class="singleMenu">
+            <div class="oni-icon-user"></div>
+            <div class="words">我</div>
+        </div>
+    </div>
+</div>
+
+<script src="js/home.js"></script>
